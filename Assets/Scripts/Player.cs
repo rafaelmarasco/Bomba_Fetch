@@ -4,6 +4,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private float moveSpeed = 7f;
+    public Vector3 moveDir { get; private set; }
 
     private Rigidbody rb;
 
@@ -18,7 +19,7 @@ public class Player : MonoBehaviour
     private void BasicMove()
     {
         Vector2 playerInput = playerMovement.GetMovementVectorNormalized();
-        Vector3 moveDir = new Vector3(playerInput.x, 0f, playerInput.y);
+        moveDir = new Vector3(playerInput.x, 0f, playerInput.y);
         rb.MovePosition(rb.position + moveDir * moveSpeed * Time.fixedDeltaTime);
     }
 }
