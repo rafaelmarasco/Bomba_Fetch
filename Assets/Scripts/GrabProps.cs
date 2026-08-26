@@ -5,24 +5,60 @@ public class GrabProps : MonoBehaviour
     [SerializeField] private Player player;
     [SerializeField] private Transform propTestPos;
     private Vector3 lastMoveDir = Vector3.forward;
+    private bool hasItem = false;
+    private GameObject heldItem;
+
     private void Update()
     {
-        float maxDistance = 1f;
         lastMoveDir = player.moveDir != Vector3.zero ? player.moveDir : lastMoveDir;
 
-        //Check if theres an object in front of the player
-        bool canGrab = Physics.Raycast(transform.position, lastMoveDir, out RaycastHit hit, maxDistance);
+        // Drop the item if they have any item in hand
 
-        if (canGrab && hit.collider.gameObject.CompareTag("Prop"))
+        // Else if they dont have pick up an item
+        if (!hasItem && CheckForProps(out RaycastHit hit) && hit.collider.gameObject.CompareTag("Prop"))
+            PickUpProp(hit);
+
+        else if (hasItem)
+            DropProp();
+    }
+
+    private bool CheckForProps(out RaycastHit propHit) // Check if theres an object in front of the player
+    {
+        float maxDistance = 1f;
+        bool canGrab = Physics.Raycast(transform.position, lastMoveDir, out propHit, maxDistance);
+        return canGrab;
+    }
+
+    private void DropProp()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            GameObject prop = hit.collider.gameObject;
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                prop.transform.SetParent(propTestPos);
-                prop.transform.localPosition = Vector3.zero;
-            }
-        }
+            if (heldItem.TryGetComponent<Rigidbody>(out Rigidbody propRb))
+                propRb.isKinematic = false;
 
+            heldItem.transform.SetParent(null);
+            hasItem = false;
+            heldItem = null;
+        }
+    }
+
+    private void PickUpProp(RaycastHit hit)
+    {
+        GameObject prop = hit.collider.gameObject;
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            float offSet = .5f;
+
+            if (prop.TryGetComponent<Rigidbody>(out Rigidbody propRb))
+                propRb.isKinematic = true;
+
+            prop.transform.SetParent(propTestPos);
+            prop.transform.localPosition = new Vector3(0f, 0f, 0f + offSet);
+
+            heldItem = prop;
+            hasItem = true;
+        }
     }
 
     private void OnDrawGizmosSelected()
