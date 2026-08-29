@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 68d50888a6fa6c14a81e077a33f645f0
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 315595
+  packageName: Lowpoly Character - Chibi
+  packageVersion: 0.0.1
+  assetPath: Assets/PolyOne/Chibi Character/Animation/Controler/ChibiCharacter_Controler.controller
+  uploadId: 751650

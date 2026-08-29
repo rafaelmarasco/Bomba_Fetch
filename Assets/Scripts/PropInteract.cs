@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class GrabProps : MonoBehaviour
+public class PropInteract : MonoBehaviour 
 {
     [SerializeField] private Player player;
     [SerializeField] private Transform propTestPos;
