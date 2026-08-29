@@ -12,6 +12,6 @@ public class PlayerAnimator : MonoBehaviour
     {
         animator.SetBool(IS_WALKING, player.GetIsWalking());
 
-      //  animator.SetBool(IS_CARRYING, propInteract.hasItem);
+      //animator.SetBool(IS_CARRYING, propInteract.hasItem);
     }
 }
