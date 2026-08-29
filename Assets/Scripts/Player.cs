@@ -5,12 +5,11 @@ public class Player : MonoBehaviour
     [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private float moveSpeed = 7f;
     private Rigidbody rb;
-    private Vector3 upDir;
+    private bool isWalking => moveDir != Vector3.zero;
     public Vector3 moveDir { get; private set; }
 
     private void Awake()
     {
-        upDir = transform.up;
         rb = GetComponent<Rigidbody>();
     }
     private void FixedUpdate()
@@ -34,4 +33,11 @@ public class Player : MonoBehaviour
         if (moveDir != Vector3.zero)
             transform.rotation = Quaternion.LookRotation(moveDir, Vector3.up);
     }
+
+    public bool GetIsWalking()
+    {
+        return isWalking;
+    }
+
+
 }

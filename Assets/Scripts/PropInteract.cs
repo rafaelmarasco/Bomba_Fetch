@@ -5,12 +5,18 @@ public class PropInteract : MonoBehaviour
     [SerializeField] private Player player;
     [SerializeField] private Transform propTestPos;
     private Vector3 lastMoveDir = Vector3.forward;
-    private bool hasItem = false;
+    public bool hasItem { get; private set; }
     private GameObject heldItem;
+
+    private void Awake()
+    {
+        hasItem = false;
+    }
 
     private void Update()
     {
         lastMoveDir = player.moveDir != Vector3.zero ? player.moveDir : lastMoveDir;
+
         // If they dont have any item they pick up an item
         if (!hasItem && CheckForProps(out GameObject obj) && obj.CompareTag("Prop"))
         {
