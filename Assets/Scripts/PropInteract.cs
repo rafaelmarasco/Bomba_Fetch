@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PropInteract : MonoBehaviour 
+public class PropInteract : MonoBehaviour
 {
     [SerializeField] private Player player;
     [SerializeField] private Transform propTestPos;
@@ -30,7 +30,12 @@ public class PropInteract : MonoBehaviour
     {
         float maxDistance = 1f;
         bool canGrab = Physics.Raycast(transform.position, lastMoveDir, out RaycastHit hit, maxDistance);
-        obj = hit.collider.gameObject;
+
+        if (canGrab && hit.collider.gameObject.CompareTag("Prop"))
+            obj = hit.collider.gameObject;
+        else
+            obj = null;
+
         return canGrab;
     }
 
