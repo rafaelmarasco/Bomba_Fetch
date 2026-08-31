@@ -18,18 +18,12 @@ public class PropInteract : MonoBehaviour
         lastMoveDir = player.moveDir != Vector3.zero ? player.moveDir : lastMoveDir;
 
         // If they dont have any item they pick up an item
-        if (!hasItem && CheckForProps(out GameObject obj) && obj.CompareTag("Prop"))
-        {
-            if (Input.GetKeyDown(KeyCode.E))
-                PickUpProp(obj);
-        }
+        if (Input.GetKeyDown(KeyCode.E) && !hasItem && CheckForProps(out GameObject obj) && obj.CompareTag("Prop"))
+            PickUpProp(obj);
 
         // Drop the item if they have any item in hand
-        else if (hasItem)
-        {
-            if (Input.GetKeyDown(KeyCode.E))
-                DropProp();
-        }
+        else if (Input.GetKeyDown(KeyCode.E) && hasItem)
+            DropProp();
     }
 
     private bool CheckForProps(out GameObject obj) // Check if theres an object in front of the player
@@ -47,9 +41,13 @@ public class PropInteract : MonoBehaviour
 
     private void DropProp()
     {
+        float zOffset = 0.4f;
+        Vector3 offset = new Vector3(0f, 0f, zOffset);
+
         if (heldItem.TryGetComponent<Rigidbody>(out Rigidbody propRb))
             propRb.isKinematic = false;
 
+        heldItem.transform.localPosition += offset;
         heldItem.transform.SetParent(null);
         hasItem = false;
         heldItem = null;
