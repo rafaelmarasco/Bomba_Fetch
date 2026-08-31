@@ -405,7 +405,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70b342d8ce5c2fd48b8fa3147d48d1d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Animation.Rigging::UnityEngine.Animations.Rigging.Rig
-  m_Weight: 1
+  m_Weight: 0
   m_Effectors:
   - m_Transform: {fileID: 1528861873}
     m_Style:
@@ -937,6 +937,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   animator: {fileID: 1700911574}
   player: {fileID: 672574228}
+  propInteract: {fileID: 1701328899}
+  grabRig: {fileID: 392733710}
 --- !u!136 &1700911572
 CapsuleCollider:
   m_ObjectHideFlags: 0
