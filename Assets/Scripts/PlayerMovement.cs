@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         playerInputs = new InputSystem_Actions();
-        playerInputs.Player.Enable();
+        playerInputs.Player.Move.Enable();
     }
 
     public Vector2 GetMovementVectorNormalized()

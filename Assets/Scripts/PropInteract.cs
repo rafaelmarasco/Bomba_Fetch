@@ -1,42 +1,50 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PropInteract : MonoBehaviour
 {
     [SerializeField] private Player player;
-    [SerializeField] private Transform propTestPos;
+    [SerializeField] private Transform handsPos;
+    private InputSystem_Actions inputActions;
     private Vector3 lastMoveDir = Vector3.forward;
     public bool hasItem { get; private set; }
     private GameObject heldItem;
 
     private void Awake()
     {
+        inputActions = new InputSystem_Actions();
+        inputActions.Player.Enable();
+        inputActions.Player.Interact.performed += Interact_performed;
         hasItem = false;
+    }
+
+    private void Interact_performed(InputAction.CallbackContext obj)
+    {
+        // If they dont have any item they pick up an item
+        if (!hasItem && CheckForProps(out GameObject prop))
+            PickUpProp(prop);
+        // Drop the item if they have any item in hand
+        else if (hasItem)
+            DropProp();
     }
 
     private void Update()
     {
         lastMoveDir = player.moveDir != Vector3.zero ? player.moveDir : lastMoveDir;
-
-        // If they dont have any item they pick up an item
-        if (Input.GetKeyDown(KeyCode.E) && !hasItem && CheckForProps(out GameObject obj) && obj.CompareTag("Prop"))
-            PickUpProp(obj);
-
-        // Drop the item if they have any item in hand
-        else if (Input.GetKeyDown(KeyCode.E) && hasItem)
-            DropProp();
     }
 
-    private bool CheckForProps(out GameObject obj) // Check if theres an object in front of the player
+    private bool CheckForProps(out GameObject prop) // Check if theres an object in front of the player
     {
-        float maxDistance = 1f;
-        bool canGrab = Physics.Raycast(transform.position, lastMoveDir, out RaycastHit hit, maxDistance);
+        float grabDistance = 1f;
+        bool canGrab = Physics.Raycast(handsPos.position, lastMoveDir, out RaycastHit hit, grabDistance);
+        bool isProp = canGrab && hit.collider.gameObject.CompareTag("Prop");
 
-        if (canGrab && hit.collider.gameObject.CompareTag("Prop"))
-            obj = hit.collider.gameObject;
+        if (canGrab && isProp)
+            prop = hit.collider.gameObject;
         else
-            obj = null;
+            prop = null;
 
-        return canGrab;
+        return isProp;
     }
 
     private void DropProp()
@@ -60,7 +68,7 @@ public class PropInteract : MonoBehaviour
         if (prop.TryGetComponent<Rigidbody>(out Rigidbody propRb))
             propRb.isKinematic = true;
 
-        prop.transform.SetParent(propTestPos);
+        prop.transform.SetParent(handsPos);
         prop.transform.localPosition = new Vector3(0f, 0f, 0f + offSet);
 
         heldItem = prop;
