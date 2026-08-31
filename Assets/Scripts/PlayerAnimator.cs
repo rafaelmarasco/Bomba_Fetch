@@ -14,7 +14,7 @@ public class PlayerAnimator : MonoBehaviour
     private void Awake()
     {
         inputActions = new InputSystem_Actions();
-        inputActions.Player.Interact.Enable();
+        inputActions.Player.Enable();
         inputActions.Player.Interact.performed += Interact_performed;
     }
     private void Interact_performed(InputAction.CallbackContext obj)
