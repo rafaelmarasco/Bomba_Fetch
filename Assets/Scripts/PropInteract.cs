@@ -13,19 +13,18 @@ public class PropInteract : MonoBehaviour
     private void Awake()
     {
         inputActions = new InputSystem_Actions();
-        inputActions.Player.Enable();
+        inputActions.Player.Interact.Enable();
         inputActions.Player.Interact.performed += Interact_performed;
         hasItem = false;
     }
 
     private void Interact_performed(InputAction.CallbackContext obj)
     {
-        // If they dont have any item they pick up an item
-        if (!hasItem && CheckForProps(out GameObject prop))
+        if (!hasItem && CheckForProps(out GameObject prop)) // If they dont have any item they pick up an item
             PickUpProp(prop);
-        // Drop the item if they have any item in hand
-        else if (hasItem)
+        else if (hasItem) // Drop the item if they have any item in hand
             DropProp();
+
     }
 
     private void Update()
