@@ -605,6 +605,7 @@ GameObject:
   - component: {fileID: 672574230}
   - component: {fileID: 672574232}
   - component: {fileID: 672574228}
+  - component: {fileID: 672574233}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -682,6 +683,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f842d127aa9316a42b1a953cbc08d07d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
+--- !u!114 &672574233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 672574227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd9cb806a83d5cd42b559d81166775d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PropInteract
+  player: {fileID: 672574228}
+  handsPos: {fileID: 1701328898}
+  pushForce: 5
 --- !u!4 &729900724 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -2075029008026963085, guid: efd331d4b11709f40b82377af7a18459, type: 3}
@@ -937,7 +953,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   animator: {fileID: 1700911574}
   player: {fileID: 672574228}
-  propInteract: {fileID: 1701328899}
+  propInteract: {fileID: 672574233}
   grabRig: {fileID: 392733710}
 --- !u!136 &1700911572
 CapsuleCollider:
@@ -958,10 +974,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.10920932
+  m_Radius: 0.1326711
   m_Height: 0.48441255
   m_Direction: 1
-  m_Center: {x: 0.0032439432, y: 0.2431749, z: 0}
+  m_Center: {x: 0.0032439432, y: 0.2431749, z: 0.0057197614}
 --- !u!114 &1700911573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -992,7 +1008,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1701328898}
-  - component: {fileID: 1701328899}
   m_Layer: 0
   m_Name: Hands
   m_TagString: Untagged
@@ -1009,26 +1024,12 @@ Transform:
   m_GameObject: {fileID: 1701328897}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.684, z: 0.481}
+  m_LocalPosition: {x: 0, y: 0.684, z: 0.395}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 672574231}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1701328899
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1701328897}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd9cb806a83d5cd42b559d81166775d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GrabProps
-  player: {fileID: 672574228}
-  propTestPos: {fileID: 1701328898}
 --- !u!1 &1777912872
 GameObject:
   m_ObjectHideFlags: 0

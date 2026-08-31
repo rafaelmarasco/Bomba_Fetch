@@ -5,6 +5,7 @@ public class PropInteract : MonoBehaviour
 {
     [SerializeField] private Player player;
     [SerializeField] private Transform handsPos;
+    [SerializeField] private float pushForce;
     private InputSystem_Actions inputActions;
     private Vector3 lastMoveDir = Vector3.forward;
     public bool hasItem { get; private set; }
@@ -13,12 +14,19 @@ public class PropInteract : MonoBehaviour
     private void Awake()
     {
         inputActions = new InputSystem_Actions();
-        inputActions.Player.Interact.Enable();
-        inputActions.Player.Interact.performed += Interact_performed;
+        inputActions.Player.Grab.Enable();
+        inputActions.Player.Push.Enable();
+        inputActions.Player.Grab.performed += Grab_performed;
+        inputActions.Player.Push.performed += Push_performed;
         hasItem = false;
     }
 
-    private void Interact_performed(InputAction.CallbackContext obj)
+    private void Push_performed(InputAction.CallbackContext obj)
+    {
+        PushProp();
+    }
+
+    private void Grab_performed(InputAction.CallbackContext obj)
     {
         if (!hasItem && CheckForProps(out GameObject prop)) // If they dont have any item they pick up an item
             PickUpProp(prop);
@@ -32,10 +40,24 @@ public class PropInteract : MonoBehaviour
         lastMoveDir = player.moveDir != Vector3.zero ? player.moveDir : lastMoveDir;
     }
 
+    private void PushProp()
+    {
+        if (!hasItem && CheckForProps(out GameObject prop))
+        {
+            prop.TryGetComponent<Rigidbody>(out Rigidbody propRb);
+            propRb.linearVelocity = lastMoveDir * pushForce;
+        }
+        else if (hasItem)
+        {
+            heldItem.TryGetComponent<Rigidbody>(out Rigidbody propRb);
+            DropProp();
+            propRb.linearVelocity = lastMoveDir * pushForce;
+        }
+    }
     private bool CheckForProps(out GameObject prop) // Check if theres an object in front of the player
     {
-        float grabDistance = 1f;
-        bool canGrab = Physics.Raycast(handsPos.position, lastMoveDir, out RaycastHit hit, grabDistance);
+        float interactDistance = .8f;
+        bool canGrab = Physics.Raycast(handsPos.position, lastMoveDir, out RaycastHit hit, interactDistance);
         bool isProp = canGrab && hit.collider.gameObject.CompareTag("Prop");
 
         if (canGrab && isProp)
@@ -77,6 +99,6 @@ public class PropInteract : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawRay(transform.position, lastMoveDir);
+        Gizmos.DrawRay(handsPos.position, lastMoveDir);
     }
 }

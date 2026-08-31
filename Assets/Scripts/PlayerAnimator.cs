@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.InputSystem;
@@ -15,9 +16,16 @@ public class PlayerAnimator : MonoBehaviour
     {
         inputActions = new InputSystem_Actions();
         inputActions.Player.Enable();
-        inputActions.Player.Interact.performed += Interact_performed;
+        inputActions.Player.Grab.performed += Grab_performed;
+        inputActions.Player.Push.performed += Push_performed;
     }
-    private void Interact_performed(InputAction.CallbackContext obj)
+
+    private void Push_performed(InputAction.CallbackContext context)
+    {
+        UpdateHands();
+    }
+
+    private void Grab_performed(InputAction.CallbackContext obj)
     {
         UpdateHands();
     }
