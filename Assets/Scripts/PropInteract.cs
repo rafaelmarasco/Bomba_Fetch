@@ -84,13 +84,14 @@ public class PropInteract : MonoBehaviour
 
     private void PickUpProp(GameObject prop)
     {
-        float offSet = .6f;
+        float zOffSet = .6f;
+        float yOffSet = .8f;
 
         if (prop.TryGetComponent<Rigidbody>(out Rigidbody propRb))
             propRb.isKinematic = true;
 
         prop.transform.SetParent(handsPos);
-        prop.transform.localPosition = new Vector3(0f, 0f, 0f + offSet);
+        prop.transform.localPosition = new Vector3(0f, yOffSet, zOffSet);
 
         heldItem = prop;
         hasItem = true;
