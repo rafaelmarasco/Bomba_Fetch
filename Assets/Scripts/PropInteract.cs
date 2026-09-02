@@ -84,7 +84,7 @@ public class PropInteract : MonoBehaviour
 
     private void PickUpProp(GameObject prop)
     {
-        float offSet = .5f;
+        float offSet = .6f;
 
         if (prop.TryGetComponent<Rigidbody>(out Rigidbody propRb))
             propRb.isKinematic = true;
