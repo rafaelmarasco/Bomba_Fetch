@@ -7,9 +7,9 @@ public class PropInteract : MonoBehaviour
     [SerializeField] private Transform handsPos;
     [SerializeField] private float pushForce;
     private InputSystem_Actions inputActions;
-    private Vector3 lastMoveDir = Vector3.forward;
+    private Vector3 lastMoveDir;
     public bool hasItem { get; private set; }
-    private GameObject heldItem;
+    public GameObject heldItem {  get; private set; }
 
     private void Awake()
     {
@@ -37,7 +37,7 @@ public class PropInteract : MonoBehaviour
 
     private void Update()
     {
-        lastMoveDir = player.moveDir != Vector3.zero ? player.moveDir : lastMoveDir;
+        lastMoveDir = player.GetLastMoveDirection();
     }
 
     private void PushProp()
