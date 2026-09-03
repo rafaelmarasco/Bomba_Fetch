@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Player : MonoBehaviour
 {
@@ -16,20 +17,39 @@ public class Player : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        RotateOnMove();
         BasicMove();
     }
 
     private void Update()
     {
         lastMoveDir = moveDir != Vector3.zero ? moveDir : lastMoveDir;
-        RotateOnMove();
+
     }
     private void BasicMove()
     {
         Vector2 playerInput = playerMovement.GetMovementVectorNormalized();
         moveDir = new Vector3(playerInput.x, 0f, playerInput.y);
 
-        if (CanMove())
+        if (!CanMove(moveDir))
+        {
+            Vector3 moveDirecetionX = new Vector3(moveDir.x, 0f, 0f);
+
+            if (CanMove(moveDirecetionX))
+            {
+                moveDir = moveDirecetionX;
+            }
+            else
+            {
+                Vector3 moveDirecetionZ = new Vector3(0f, 0f, moveDir.z);
+                if (CanMove(moveDirecetionZ))
+                {
+                    moveDir = moveDirecetionZ;
+                }
+            }
+        }
+
+        if (CanMove(moveDir))
             rb.MovePosition(rb.position + moveDir * moveSpeed * Time.fixedDeltaTime);
     }
 
@@ -50,18 +70,25 @@ public class Player : MonoBehaviour
     }
 
 
-    private bool CanMove()
+    private bool CanMove(Vector3 moveDirection)
     {
+        bool canMove;
         float checkDistance = .8f;
-        Vector3 rayCastOrigin = transform.position;
+        Vector3 checkOrigin = transform.position;
+        Quaternion targetRotation = moveDirection != Vector3.zero ? Quaternion.LookRotation(moveDirection) : transform.rotation;
 
         if (propInteract.hasItem)
         {
-            rayCastOrigin = propInteract.heldItem.transform.position;
-            rayCastOrigin.y = transform.position.y;
+            checkOrigin = propInteract.heldItem.transform.position + moveDirection * moveSpeed * Time.fixedDeltaTime;
+            checkOrigin.y = transform.position.y;
+            float propReach = Vector3.Distance(transform.position, checkOrigin);
+            Vector3 halfExtends = new Vector3(.25f, .25f, .25f + propReach);
+
+            canMove = !Physics.CheckBox(checkOrigin, halfExtends, targetRotation, LayerMask.GetMask("Walls"));
         }
-        
-        bool canMove = !Physics.Raycast(rayCastOrigin, moveDir, checkDistance, LayerMask.GetMask("Walls"));
+        else
+            canMove = !Physics.Raycast(checkOrigin, moveDirection, checkDistance, LayerMask.GetMask("Walls"));
+
         return canMove;
     }
     private void OnDrawGizmosSelected()
@@ -69,6 +96,9 @@ public class Player : MonoBehaviour
         Gizmos.color = Color.yellow;
 
         Gizmos.DrawRay(transform.position, lastMoveDir);
+
+        if (propInteract.hasItem)
+            Gizmos.DrawCube(transform.position, new Vector3(4f, 4f, 4f));
     }
 
 }
