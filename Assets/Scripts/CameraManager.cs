@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 
 public class CameraManager : MonoBehaviour
@@ -15,20 +16,21 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private Cameras activeCamera = Cameras.main;
     [SerializeField] private CinemachineCamera mainCamera;
     [SerializeField] private CinemachineCamera bombCamera;
+    [SerializeField] private PropInteract propInteract;
     private CinemachineSplineDolly bombSplineDolly;
+    private InputSystem_Actions inputActions;
 
     private void Awake()
     {
         bombSplineDolly = bombCamera.GetComponent<CinemachineSplineDolly>();
+        inputActions = new InputSystem_Actions();
+        inputActions.Player.Enable();
+        inputActions.Player.Grab.performed += Grab_performed;
     }
 
-    private void Update()
+    private void Grab_performed(InputAction.CallbackContext context)
     {
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            activeCamera = Cameras.bomb;
-            UpdateCamera();
-        }
+        UpdateCamera();
     }
 
     private IEnumerator MoveAlongSpline()
@@ -40,22 +42,24 @@ public class CameraManager : MonoBehaviour
         while (timePassed < duration)
         {
             timePassed += Time.deltaTime;
-            bombSplineDolly.CameraPosition = Mathf.Lerp(0f, 1f, timePassed/duration);
+            bombSplineDolly.CameraPosition = Mathf.Lerp(0f, 1f, timePassed / duration);
             yield return null;
         }
     }
 
     private void UpdateCamera()
     {
+        activeCamera = propInteract.hasBomb == true ? Cameras.bomb : Cameras.main;
+
         switch (activeCamera)
         {
             case Cameras.main:
-                bombCamera.Priority = 0;
-                mainCamera.Priority = 10;
+                bombCamera.gameObject.SetActive(false);
+                mainCamera.gameObject.SetActive(true);
                 break;
             case Cameras.bomb:
-                mainCamera.Priority = 0;
-                bombCamera.Priority = 10;
+                mainCamera.gameObject.SetActive(false);
+                bombCamera.gameObject.SetActive(true);
                 StartCoroutine(MoveAlongSpline());
                 break;
         }

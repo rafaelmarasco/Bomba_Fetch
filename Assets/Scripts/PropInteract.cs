@@ -9,6 +9,7 @@ public class PropInteract : MonoBehaviour
     private InputSystem_Actions inputActions;
     private Vector3 lastMoveDir;
     public bool hasItem { get; private set; }
+    public bool hasBomb { get; private set; }
     public GameObject heldItem {  get; private set; }
 
     private void Awake()
@@ -32,7 +33,8 @@ public class PropInteract : MonoBehaviour
             PickUpProp(prop);
         else if (hasItem) // Drop the item if they have any item in hand
             DropProp();
-
+        if (heldItem != null && heldItem.name == "bomb")
+            hasBomb = true;
     }
 
     private void Update()
