@@ -8,8 +8,9 @@ public class Player : MonoBehaviour
     [SerializeField] private float moveSpeed = 7f;
     private Rigidbody rb;
     private bool isWalking => moveDir != Vector3.zero;
-    public Vector3 moveDir { get; private set; }
     private Vector3 lastMoveDir = Vector3.forward;
+    private Vector3 rawInput;
+    public Vector3 moveDir { get; private set; }
 
     private void Awake()
     {
@@ -17,19 +18,24 @@ public class Player : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        ReadInput();
         RotateOnMove();
         BasicMove();
     }
-
     private void Update()
     {
         lastMoveDir = moveDir != Vector3.zero ? moveDir : lastMoveDir;
 
     }
-    private void BasicMove()
+    private void ReadInput()
     {
         Vector2 playerInput = playerMovement.GetMovementVectorNormalized();
-        moveDir = new Vector3(playerInput.x, 0f, playerInput.y);
+        rawInput = new Vector3(playerInput.x, 0f, playerInput.y);
+
+    }
+    private void BasicMove()
+    {
+        moveDir = rawInput;
 
         if (!CanMove(moveDir))
         {
@@ -52,24 +58,11 @@ public class Player : MonoBehaviour
         if (CanMove(moveDir))
             rb.MovePosition(rb.position + moveDir * moveSpeed * Time.fixedDeltaTime);
     }
-
     private void RotateOnMove()
     {
-        if (moveDir != Vector3.zero)
-            transform.rotation = Quaternion.LookRotation(moveDir, Vector3.up);
+        if (rawInput != Vector3.zero)
+            transform.rotation = Quaternion.LookRotation(rawInput, Vector3.up);
     }
-
-    public bool GetIsWalking()
-    {
-        return isWalking;
-    }
-
-    public Vector3 GetLastMoveDirection()
-    {
-        return lastMoveDir;
-    }
-
-
     private bool CanMove(Vector3 moveDirection)
     {
         bool canMove;
@@ -99,6 +92,14 @@ public class Player : MonoBehaviour
 
         if (propInteract.hasItem)
             Gizmos.DrawCube(transform.position, new Vector3(4f, 4f, 4f));
+    }
+    public bool GetIsWalking()
+    {
+        return isWalking;
+    }
+    public Vector3 GetLastMoveDirection()
+    {
+        return lastMoveDir;
     }
 
 }
