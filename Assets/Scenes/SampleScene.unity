@@ -427,6 +427,50 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!1 &447946646
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 447946648}
+  - component: {fileID: 447946647}
+  m_Layer: 0
+  m_Name: Game Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &447946647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 447946646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 320ceab896daead4b9ded89a784fbf77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EventManager
+--- !u!4 &447946648
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 447946646}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -9.55289, y: -3.10578, z: -3.50782}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &672574231 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8330579805403462866, guid: 10e39fceb3a0b4d40ad4fff7fa876380, type: 3}
@@ -613,7 +657,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 874b6661f3ed89145bf420efed59a646, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.5280013
+      value: 0.763
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 874b6661f3ed89145bf420efed59a646, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1052,8 +1096,8 @@ MonoBehaviour:
           w: 1
     - Position:
         x: 0.027893588
-        y: -0.6452349
-        z: 8.10797
+        y: -0.64584816
+        z: 8.12141
       TangentIn:
         x: 0
         y: 0
@@ -1689,6 +1733,8 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 447946648}
+  - {fileID: 1305363816}
   - {fileID: 330585546}
   - {fileID: 410087041}
   - {fileID: 832575519}
@@ -1700,6 +1746,5 @@ SceneRoots:
   - {fileID: 1872131859}
   - {fileID: 1961804790}
   - {fileID: 1811062616}
-  - {fileID: 1305363816}
   - {fileID: 757053829832456115}
   - {fileID: 6903762484181531381}

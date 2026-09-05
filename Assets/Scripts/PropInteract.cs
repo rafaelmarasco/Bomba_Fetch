@@ -10,55 +10,52 @@ public class PropInteract : MonoBehaviour
     private Vector3 lastMoveDir;
     public bool hasItem { get; private set; }
     public bool hasBomb { get; private set; }
-    public GameObject heldItem {  get; private set; }
+    private bool isBombInteracting = false;
+    public GameObject heldItem { get; private set; }
 
     private void Awake()
     {
+        hasItem = false;
         inputActions = new InputSystem_Actions();
-        inputActions.Player.Grab.Enable();
-        inputActions.Player.Push.Enable();
+        inputActions.Player.Enable();
         inputActions.Player.Grab.performed += Grab_performed;
         inputActions.Player.Push.performed += Push_performed;
-        hasItem = false;
+        inputActions.Player.Interact.performed += Interact_performed;
     }
 
+    private void Interact_performed(InputAction.CallbackContext obj)
+    {
+        if (hasBomb && !isBombInteracting)
+        {
+            isBombInteracting = true;
+            EventManager.Instance.BombInteracted();
+        }
+    }
     private void Push_performed(InputAction.CallbackContext obj)
     {
         PushProp();
     }
-
     private void Grab_performed(InputAction.CallbackContext obj)
     {
         if (!hasItem && CheckForProps(out GameObject prop))
         {
+            Debug.Log("Pegou");
             PickUpProp(prop);
-            hasBomb = prop.name == "bomb"; // Trocar para script quando a bomba tiver um script
-        } 
+            hasBomb = prop.name == "Bomb"; // Trocar para script quando a bomba tiver um script
+        }
         else if (hasItem)
         {
             DropProp();
-            hasBomb = false;
+            if (hasBomb)
+            {
+                hasBomb = false;
+                EventManager.Instance.BombInteracted();
+            }
         }
     }
-
     private void Update()
     {
         lastMoveDir = player.GetLastMoveDirection();
-    }
-
-    private void PushProp()
-    {
-        if (!hasItem && CheckForProps(out GameObject prop))
-        {
-            prop.TryGetComponent<Rigidbody>(out Rigidbody propRb);
-            propRb.linearVelocity = lastMoveDir * pushForce;
-        }
-        else if (hasItem)
-        {
-            heldItem.TryGetComponent<Rigidbody>(out Rigidbody propRb);
-            DropProp();
-            propRb.linearVelocity = lastMoveDir * pushForce;
-        }
     }
     private bool CheckForProps(out GameObject prop) // Check if theres an object in front of the player
     {
@@ -73,7 +70,23 @@ public class PropInteract : MonoBehaviour
 
         return isProp;
     }
-
+    private void PushProp()
+    {
+        if (!isBombInteracting)
+        {
+            if (!hasItem && CheckForProps(out GameObject prop))
+            {
+                prop.TryGetComponent<Rigidbody>(out Rigidbody propRb);
+                propRb.linearVelocity = lastMoveDir * pushForce;
+            }
+            else if (hasItem)
+            {
+                heldItem.TryGetComponent<Rigidbody>(out Rigidbody propRb);
+                DropProp();
+                propRb.linearVelocity = lastMoveDir * pushForce;
+            }
+        }
+    }
     private void DropProp()
     {
         float zOffset = 0.4f;
@@ -84,10 +97,15 @@ public class PropInteract : MonoBehaviour
 
         heldItem.transform.localPosition += offset;
         heldItem.transform.SetParent(null);
-        hasItem = false;
         heldItem = null;
-    }
 
+        hasItem = false;
+
+        if (isBombInteracting)
+            isBombInteracting = false;
+
+        EventManager.Instance.ItemDroped();
+    }
     private void PickUpProp(GameObject prop)
     {
         float zOffSet = .6f;
@@ -101,8 +119,9 @@ public class PropInteract : MonoBehaviour
 
         heldItem = prop;
         hasItem = true;
-    }
 
+        EventManager.Instance.ItemPickedUp();
+    }
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;

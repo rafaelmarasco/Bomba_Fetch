@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Threading;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.InputSystem;
@@ -15,6 +14,8 @@ public class PlayerAnimator : MonoBehaviour
     [SerializeField] private Rig grabRig;
     [SerializeField] private Rig pushRig;
 
+    Coroutine pushCoroutine;
+
     private InputSystem_Actions inputActions;
 
     private const string IS_WALKING = "isWalking";
@@ -23,20 +24,27 @@ public class PlayerAnimator : MonoBehaviour
     {
         inputActions = new InputSystem_Actions();
         inputActions.Player.Enable();
-        inputActions.Player.Grab.performed += Grab_performed;
         inputActions.Player.Push.performed += Push_performed;
+    }
+
+    private void OnEnable()
+    {
+        EventManager.Instance.OnItemPickedUp += UpdateHands;
+        EventManager.Instance.OnItemDroped += UpdateHands;
+        EventManager.Instance.OnPropPush += HandlePropPush;
+    }
+
+    private void HandlePropPush()
+    {
+        if (pushCoroutine != null)
+            StopCoroutine(pushCoroutine);
+        pushCoroutine = StartCoroutine(AnimatePush());
     }
 
     private void Push_performed(InputAction.CallbackContext context)
     {
-        StartCoroutine(AnimatePush());
-        UpdateHands();
     }
 
-    private void Grab_performed(InputAction.CallbackContext obj)
-    {
-        UpdateHands();
-    }
     private void Update()
     {
         animator.SetBool(IS_WALKING, player.GetIsWalking());
@@ -44,31 +52,33 @@ public class PlayerAnimator : MonoBehaviour
 
     private void UpdateHands()
     {
-        if (propInteract.hasItem)
-            grabRig.weight = 1f;
-        else
-            grabRig.weight = 0f;
+        grabRig.weight = propInteract.hasItem ? 1 : 0;
     }
 
     private IEnumerator AnimatePush()
     {
         float duration = 0.15f;
-        float timePassed = 0;
+        float timePassed = 0f;
 
-        while(timePassed <= duration)
+        float animEnd = 1f;
+        float animBegin = 0f;
+
+        while (timePassed <= duration)
         {
-            pushRig.weight = Mathf.Lerp(0f, 1f, timePassed / duration);
+            pushRig.weight = Mathf.Lerp(animBegin, animEnd, timePassed / duration);
             timePassed += Time.deltaTime;
             yield return null;
         }
+        pushRig.weight = animEnd;
 
         timePassed = 0;
 
-        while(timePassed <= duration)
+        while (timePassed <= duration)
         {
-            pushRig.weight = Mathf.Lerp(1f, 0f, timePassed / duration);
+            pushRig.weight = Mathf.Lerp(animEnd, animBegin, timePassed / duration);
             timePassed += Time.deltaTime;
             yield return null;
         }
+        pushRig.weight = animBegin;
     }
 }

@@ -16,40 +16,40 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private Cameras activeCamera = Cameras.main;
     [SerializeField] private CinemachineCamera mainCamera;
     [SerializeField] private CinemachineCamera bombCamera;
+    [SerializeField] private Transform bomb;
+
     [SerializeField] private PropInteract propInteract;
-    private CinemachineSplineDolly bombSplineDolly;
-    private InputSystem_Actions inputActions;
 
-    private void Awake()
+    private void OnEnable()
     {
-        bombSplineDolly = bombCamera.GetComponent<CinemachineSplineDolly>();
-        inputActions = new InputSystem_Actions();
-        inputActions.Player.Enable();
-        inputActions.Player.Grab.performed += Grab_performed;
+        EventManager.Instance.OnBombInteracted += UpdateCamera;
+        EventManager.Instance.OnItemDroped += UpdateCamera;
     }
 
-    private void Grab_performed(InputAction.CallbackContext context)
+    private IEnumerator MoveCameraToBomb()
     {
-        UpdateCamera();
-    }
+        float offSet = 1f;
 
-    private IEnumerator MoveAlongSpline()
-    {
-        bombSplineDolly.CameraPosition = 0f;
+        Vector3 startPos = mainCamera.transform.position;
+        Vector3 finalPos = bomb.position + Vector3.up * offSet;
+
         float timePassed = 0f;
         float duration = .2f;
 
         while (timePassed < duration)
         {
             timePassed += Time.deltaTime;
-            bombSplineDolly.CameraPosition = Mathf.Lerp(0f, 1f, timePassed / duration);
+            bombCamera.transform.position = Vector3.Lerp(startPos, finalPos, timePassed / duration);
+            bombCamera.transform.LookAt(bomb.position);
             yield return null;
         }
+        bombCamera.transform.position = finalPos;
+        bombCamera.transform.LookAt(bomb.position);
     }
 
     private void UpdateCamera()
     {
-        activeCamera = propInteract.hasBomb == true ? Cameras.bomb : Cameras.main;
+        activeCamera = propInteract.hasBomb ? Cameras.bomb : Cameras.main;
 
         switch (activeCamera)
         {
@@ -60,7 +60,7 @@ public class CameraManager : MonoBehaviour
             case Cameras.bomb:
                 mainCamera.gameObject.SetActive(false);
                 bombCamera.gameObject.SetActive(true);
-                StartCoroutine(MoveAlongSpline());
+                StartCoroutine(MoveCameraToBomb());
                 break;
         }
     }

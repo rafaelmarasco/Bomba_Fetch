@@ -8,8 +8,6 @@ public class Player : MonoBehaviour
     [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private PropInteract propInteract;
     [SerializeField] private float moveSpeed = 7f;
-
-    private InputSystem_Actions inputSystem;
     private bool isWalking => moveDir != Vector3.zero;
 
     public Vector3 moveDir { get; private set; }
@@ -19,16 +17,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        inputSystem = new();
-        inputSystem.Player.Interact.Enable();
-        inputSystem.Player.Interact.performed += Interact_performed;
     }
-
-    private void Interact_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
-    {
-        if (propInteract.hasBomb) { EventManager.Instance.BombInteracted(); }
-    }
-
     private void FixedUpdate()
     {
         ReadInput();
