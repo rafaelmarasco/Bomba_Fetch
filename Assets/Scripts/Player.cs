@@ -3,19 +3,32 @@ using UnityEngine.EventSystems;
 
 public class Player : MonoBehaviour
 {
+    private Rigidbody rb;
+
     [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private PropInteract propInteract;
     [SerializeField] private float moveSpeed = 7f;
-    private Rigidbody rb;
+
+    private InputSystem_Actions inputSystem;
     private bool isWalking => moveDir != Vector3.zero;
+
+    public Vector3 moveDir { get; private set; }
     private Vector3 lastMoveDir = Vector3.forward;
     private Vector3 rawInput;
-    public Vector3 moveDir { get; private set; }
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        inputSystem = new();
+        inputSystem.Player.Interact.Enable();
+        inputSystem.Player.Interact.performed += Interact_performed;
     }
+
+    private void Interact_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        if (propInteract.hasBomb) { EventManager.Instance.BombInteracted(); }
+    }
+
     private void FixedUpdate()
     {
         ReadInput();
@@ -93,13 +106,7 @@ public class Player : MonoBehaviour
         if (propInteract.hasItem)
             Gizmos.DrawCube(transform.position, new Vector3(4f, 4f, 4f));
     }
-    public bool GetIsWalking()
-    {
-        return isWalking;
-    }
-    public Vector3 GetLastMoveDirection()
-    {
-        return lastMoveDir;
-    }
+    public bool GetIsWalking() { return isWalking; }
+    public Vector3 GetLastMoveDirection() { return lastMoveDir; }
 
 }

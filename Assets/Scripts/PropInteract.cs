@@ -29,12 +29,16 @@ public class PropInteract : MonoBehaviour
 
     private void Grab_performed(InputAction.CallbackContext obj)
     {
-        if (!hasItem && CheckForProps(out GameObject prop)) // If they dont have any item they pick up an item
+        if (!hasItem && CheckForProps(out GameObject prop))
+        {
             PickUpProp(prop);
-        else if (hasItem) // Drop the item if they have any item in hand
+            hasBomb = prop.name == "bomb"; // Trocar para script quando a bomba tiver um script
+        } 
+        else if (hasItem)
+        {
             DropProp();
-        if (heldItem != null && heldItem.name == "bomb")
-            hasBomb = true;
+            hasBomb = false;
+        }
     }
 
     private void Update()
