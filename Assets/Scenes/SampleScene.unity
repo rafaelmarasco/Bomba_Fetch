@@ -835,6 +835,7 @@ MonoBehaviour:
   activeCamera: 0
   mainCamera: {fileID: 314042606}
   bombCamera: {fileID: 2105651237}
+  bomb: {fileID: 1692862511}
   propInteract: {fileID: 672574233}
 --- !u!4 &1305363816
 Transform:
@@ -904,6 +905,11 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!4 &1692862511 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 874b6661f3ed89145bf420efed59a646, type: 3}
+  m_PrefabInstance: {fileID: 827719721}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1777912872
 GameObject:
   m_ObjectHideFlags: 0
@@ -1017,132 +1023,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1811062613
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1811062616}
-  - component: {fileID: 1811062615}
-  - component: {fileID: 1811062614}
-  m_Layer: 0
-  m_Name: Dolly Spline
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1811062614
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1811062613}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5342500578afb24a9b83d6343d32a0f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineSplineSmoother
-  AutoSmooth: 1
---- !u!114 &1811062615
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1811062613}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dab5c7d4c32e743048dfca98e2d5914f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.Splines::UnityEngine.Splines.SplineContainer
-  m_Spline:
-    m_EditModeType: 1
-    m_Knots: []
-    m_MetaData: []
-    m_Closed: 0
-    m_IntData:
-      m_Data: []
-    m_FloatData:
-      m_Data: []
-    m_Float4Data:
-      m_Data: []
-    m_ObjectData:
-      m_Data: []
-  m_Splines:
-  - m_EditModeType: 1
-    m_Knots:
-    - Position:
-        x: 0
-        y: 0
-        z: 0
-      TangentIn:
-        x: 0
-        y: 0
-        z: 0
-      TangentOut:
-        x: 0
-        y: 0
-        z: 0
-      Rotation:
-        value:
-          x: 0
-          y: 0
-          z: 0
-          w: 1
-    - Position:
-        x: 0.027893588
-        y: -0.64584816
-        z: 8.12141
-      TangentIn:
-        x: 0
-        y: 0
-        z: 0
-      TangentOut:
-        x: 0
-        y: 0
-        z: 0
-      Rotation:
-        value:
-          x: 0
-          y: 0
-          z: 0
-          w: 1
-    m_MetaData:
-    - Mode: 4
-      Tension: 0.5
-    - Mode: 4
-      Tension: 0.5
-    m_Closed: 0
-    m_IntData:
-      m_Data: []
-    m_FloatData:
-      m_Data: []
-    m_Float4Data:
-      m_Data: []
-    m_ObjectData:
-      m_Data: []
-  m_Knots:
-    m_KnotsLink: []
---- !u!4 &1811062616
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1811062613}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.38590598, y: 0, z: 0, w: 0.92253816}
-  m_LocalPosition: {x: 0.017106414, y: 6.669139, z: -4.6306124}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 45.4, y: 0, z: 0}
 --- !u!1 &1872131854
 GameObject:
   m_ObjectHideFlags: 0
@@ -1719,11 +1599,7 @@ PrefabInstance:
     - target: {fileID: 5250326518140069164, guid: 62831564f39ab2e43895d4e7e535127e, type: 3}
       propertyPath: Target.TrackingTarget
       value: 
-      objectReference: {fileID: 672574231}
-    - target: {fileID: 8480387142560254971, guid: 62831564f39ab2e43895d4e7e535127e, type: 3}
-      propertyPath: m_SplineSettings.Spline
-      value: 
-      objectReference: {fileID: 1811062615}
+      objectReference: {fileID: 1692862511}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1745,6 +1621,5 @@ SceneRoots:
   - {fileID: 683481923}
   - {fileID: 1872131859}
   - {fileID: 1961804790}
-  - {fileID: 1811062616}
   - {fileID: 757053829832456115}
   - {fileID: 6903762484181531381}

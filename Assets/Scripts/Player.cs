@@ -97,5 +97,4 @@ public class Player : MonoBehaviour
     }
     public bool GetIsWalking() { return isWalking; }
     public Vector3 GetLastMoveDirection() { return lastMoveDir; }
-
 }
