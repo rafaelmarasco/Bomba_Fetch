@@ -34,7 +34,7 @@ public class PlayerAnimator : MonoBehaviour
     }
     private IEnumerator HandsAnimation()
     {
-        float animDuration = 0.33f;
+        float animDuration = 0.35f;
         
         animator.SetTrigger(IS_PUSHING);
         pushRig.weight = 1f;
