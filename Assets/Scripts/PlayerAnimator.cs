@@ -40,20 +40,10 @@ public class PlayerAnimator : MonoBehaviour
         pushRig.weight = 1f;
         animator.SetLayerWeight(upperBody, 1f);
 
-
         yield return new WaitForSeconds(animDuration);
 
         pushRig.weight = 0f;
         animator.SetLayerWeight(upperBody, 0f);
-        
-        Debug.Log("parou");
-    }
-
-    public void StartPushingAnimation()
-    {
-    }
-    public void EndPushingAnimation()
-    {
     }
     private void UpdateHands()
     {

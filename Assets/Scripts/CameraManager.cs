@@ -14,6 +14,7 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private CinemachineCamera mainCamera;
     [SerializeField] private CinemachineCamera bombCamera;
     [SerializeField] private Transform bomb;
+    [SerializeField] private GameObject head;
 
     [SerializeField] private PropInteract propInteract;
 
@@ -25,10 +26,15 @@ public class CameraManager : MonoBehaviour
 
     private IEnumerator MoveCameraToBomb()
     {
-        float offSet = 1f;
+        Debug.Log("Começou a mover a camera");
+
+        Vector3 bombFowardOffSet = bomb.forward * .8f;
+        Vector3 downOffSet = Vector3.down * .25f;
+        //Vector3 fwdOffSet = bomb.right * -.3f;
 
         Vector3 startPos = mainCamera.transform.position;
-        Vector3 finalPos = bomb.position + Vector3.up * offSet;
+        Vector3 finalPos = bomb.position + bombFowardOffSet + downOffSet; //+ fwdOffSet;
+
 
         float timePassed = 0f;
         float duration = .2f;
@@ -36,12 +42,16 @@ public class CameraManager : MonoBehaviour
         while (timePassed < duration)
         {
             timePassed += Time.deltaTime;
+
             bombCamera.transform.position = Vector3.Lerp(startPos, finalPos, timePassed / duration);
-            bombCamera.transform.LookAt(bomb.position);
+
+            Vector3 bombDir = bomb.position - bombCamera.transform.position;
+            bombCamera.transform.rotation = Quaternion.LookRotation(bombDir, bomb.up);
             yield return null;
         }
         bombCamera.transform.position = finalPos;
-        bombCamera.transform.LookAt(bomb.position);
+        bombCamera.transform.rotation = Quaternion.LookRotation(bomb.position - finalPos, bomb.up);
+        head.SetActive(false);
     }
 
     private void UpdateCamera()

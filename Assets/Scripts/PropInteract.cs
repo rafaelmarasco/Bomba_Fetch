@@ -5,17 +5,17 @@ public class PropInteract : MonoBehaviour
 {
     [SerializeField] private Player player;
     [SerializeField] private Transform handsPos;
+    [SerializeField] private Transform headPos;
     [SerializeField] private float pushForce;
     private InputSystem_Actions inputActions;
     private Vector3 lastMoveDir;
-    public bool hasItem { get; private set; }
-    public bool hasBomb { get; private set; }
-    private bool isBombInteracting = false;
+    public bool hasItem { get; private set; } = false;
+    public bool hasBomb { get; private set; } = false;
+    public bool isBombInteracting { get; private set; } = false;
     public GameObject heldItem { get; private set; }
 
     private void Awake()
     {
-        hasItem = false;
         inputActions = new InputSystem_Actions();
         inputActions.Player.Enable();
         inputActions.Player.Grab.performed += Grab_performed;
@@ -41,7 +41,6 @@ public class PropInteract : MonoBehaviour
         {
             Debug.Log("Pegou");
             PickUpProp(prop);
-            hasBomb = prop.name == "Bomb"; // Trocar para script quando a bomba tiver um script
         }
         else if (hasItem)
         {
@@ -112,11 +111,27 @@ public class PropInteract : MonoBehaviour
         float zOffSet = .6f;
         float yOffSet = .8f;
 
+        hasBomb = prop.name == "Bomb"; // Trocar para script quando a bomba tiver um script
+
         if (prop.TryGetComponent<Rigidbody>(out Rigidbody propRb))
             propRb.isKinematic = true;
 
         prop.transform.SetParent(handsPos);
-        prop.transform.localPosition = new Vector3(0f, yOffSet, zOffSet);
+
+        if (hasBomb)
+        {
+            float yBombOffSet = .3f;
+            float zBombOffSet = .15f;
+
+            Vector3 playerDir = headPos.position - prop.transform.position;
+
+            prop.transform.localPosition = new Vector3(0f, yBombOffSet, zBombOffSet);
+            //prop.transform.rotation = Quaternion.Euler(-30f, 180f, 2f);
+            prop.transform.rotation = Quaternion.LookRotation(playerDir, Vector3.up);
+
+        }
+        else
+            prop.transform.localPosition = new Vector3(0f, yOffSet, zOffSet);
 
         heldItem = prop;
         hasItem = true;

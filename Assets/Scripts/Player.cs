@@ -20,9 +20,12 @@ public class Player : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        ReadInput();
-        RotateOnMove();
-        BasicMove();
+        if (!propInteract.isBombInteracting)
+        {
+            ReadInput();
+            RotateOnMove();
+            BasicMove();
+        }
     }
     private void Update()
     {
