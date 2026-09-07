@@ -74,6 +74,7 @@ public class PropInteract : MonoBehaviour
     {
         if (!isBombInteracting)
         {
+            EventManager.Instance.PropPush();
             if (!hasItem && CheckForProps(out GameObject prop))
             {
                 prop.TryGetComponent<Rigidbody>(out Rigidbody propRb);
