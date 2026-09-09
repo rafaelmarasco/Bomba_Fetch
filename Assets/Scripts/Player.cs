@@ -88,15 +88,6 @@ public class Player : MonoBehaviour
 
         return canMove;
     }
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.yellow;
-
-        Gizmos.DrawRay(transform.position, lastMoveDir);
-
-        if (propInteract.hasItem)
-            Gizmos.DrawCube(transform.position, new Vector3(4f, 4f, 4f));
-    }
     public bool GetIsWalking() { return isWalking; }
     public Vector3 GetLastMoveDirection() { return lastMoveDir; }
 }

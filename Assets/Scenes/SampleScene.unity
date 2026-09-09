@@ -1944,6 +1944,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: CheckPosition
       objectReference: {fileID: 0}
+    - target: {fileID: 3664144837459909734, guid: 10e39fceb3a0b4d40ad4fff7fa876380, type: 3}
+      propertyPath: m_Radius
+      value: 0.108403124
+      objectReference: {fileID: 0}
+    - target: {fileID: 3664144837459909734, guid: 10e39fceb3a0b4d40ad4fff7fa876380, type: 3}
+      propertyPath: m_Center.y
+      value: 0.24317488
+      objectReference: {fileID: 0}
+    - target: {fileID: 3664144837459909734, guid: 10e39fceb3a0b4d40ad4fff7fa876380, type: 3}
+      propertyPath: m_Center.z
+      value: 0.005871813
+      objectReference: {fileID: 0}
     - target: {fileID: 4041650901238054236, guid: 10e39fceb3a0b4d40ad4fff7fa876380, type: 3}
       propertyPath: leftHandGrabTarget
       value: 
@@ -1964,6 +1976,14 @@ PrefabInstance:
       propertyPath: m_RigLayers.Array.data[1].m_Active
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6898398441086987612, guid: 10e39fceb3a0b4d40ad4fff7fa876380, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6898398441086987612, guid: 10e39fceb3a0b4d40ad4fff7fa876380, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.026
+      objectReference: {fileID: 0}
     - target: {fileID: 7330877714380932613, guid: 10e39fceb3a0b4d40ad4fff7fa876380, type: 3}
       propertyPath: CheckPos
       value: 
@@ -1971,6 +1991,14 @@ PrefabInstance:
     - target: {fileID: 7330877714380932613, guid: 10e39fceb3a0b4d40ad4fff7fa876380, type: 3}
       propertyPath: pushForce
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7330877714380932613, guid: 10e39fceb3a0b4d40ad4fff7fa876380, type: 3}
+      propertyPath: halfExtends.x
+      value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 7330877714380932613, guid: 10e39fceb3a0b4d40ad4fff7fa876380, type: 3}
+      propertyPath: halfExtends.z
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 7330877714380932613, guid: 10e39fceb3a0b4d40ad4fff7fa876380, type: 3}
       propertyPath: holdPointSmall

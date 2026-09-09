@@ -18,6 +18,8 @@ public class PropInteract : MonoBehaviour
     [SerializeField] private Transform holdPointMedium;
     [SerializeField] private Transform holdPointLarge;
 
+    public Vector3 halfExtends = new Vector3(.5f, 0.1f, .4f);
+
     private void Awake()
     {
         inputActions = new InputSystem_Actions();
@@ -63,8 +65,9 @@ public class PropInteract : MonoBehaviour
 
     private bool CheckForProps(out GameObject prop) // Check if theres an object in front of the player
     {
-        float interactDistance = .8f;
-        bool canGrab = Physics.Raycast(CheckPos.position, lastMoveDir, out RaycastHit hit, interactDistance);
+        float interactDistance = .5f;
+        //Vector3 halfExtends = new Vector3(.5f, 0.1f, .4f);
+        bool canGrab = Physics.BoxCast(transform.position, halfExtends, lastMoveDir, out RaycastHit hit, CheckPos.rotation, interactDistance);
         bool isProp = canGrab && hit.collider.gameObject.TryGetComponent<Prop>(out Prop propComponent);
 
         if (isProp)
@@ -176,6 +179,7 @@ public class PropInteract : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawRay(CheckPos.position, lastMoveDir);
+        //Gizmos.DrawRay(CheckPos.position, lastMoveDir);
+        Gizmos.DrawCube(transform.position + lastMoveDir * .8f , halfExtends * 2);
     }
 }
