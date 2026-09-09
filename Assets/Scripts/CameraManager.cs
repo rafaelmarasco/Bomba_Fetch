@@ -18,25 +18,22 @@ public class CameraManager : MonoBehaviour
 
     [SerializeField] private PropInteract propInteract;
 
-    private float fwdOffset = .7f;
-    private float downOffset = .2f;
-
     private void OnEnable()
     {
         EventManager.Instance.OnBombInteracted += UpdateCamera;
-        EventManager.Instance.OnItemDroped += UpdateCamera;
+        EventManager.Instance.OnBombDroped += UpdateCamera;
     }
 
     private IEnumerator MoveCameraToBomb()
     {
         Debug.Log("Começou a mover a camera");
 
-        Vector3 bombFowardOffSet = bomb.forward * fwdOffset;
-        Vector3 wordDownOffSet = Vector3.down * downOffset;
+        Vector3 bombFowardOffSet = bomb.forward * .8f;
+        Vector3 downOffSet = Vector3.down * .25f;
         //Vector3 fwdOffSet = bomb.right * -.3f;
 
         Vector3 startPos = mainCamera.transform.position;
-        Vector3 finalPos = bomb.position + bombFowardOffSet + wordDownOffSet; //+ fwdOffSet;
+        Vector3 finalPos = bomb.position + bombFowardOffSet + downOffSet; //+ fwdOffSet;
 
 
         float timePassed = 0f;

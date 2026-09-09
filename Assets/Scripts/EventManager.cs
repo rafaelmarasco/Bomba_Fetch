@@ -21,11 +21,14 @@ public class EventManager : MonoBehaviour
     public event Action OnBombInteracted;
     public void BombInteracted() => OnBombInteracted?.Invoke();
 
-    public event Action OnItemPickedUp;
-    public void ItemPickedUp() => OnItemPickedUp?.Invoke();
+    public event Action<Prop> OnItemPickedUp;
+    public void ItemPickedUp(Prop prop) => OnItemPickedUp?.Invoke(prop);
 
-    public event Action OnItemDroped;
-    public void ItemDroped() => OnItemDroped?.Invoke();
+    public event Action<Prop> OnItemDroped;
+    public void ItemDroped(Prop prop) => OnItemDroped?.Invoke(prop);
+
+    public event Action OnBombDroped;
+    public void BombDroped() => OnBombDroped?.Invoke();
 
     public event Action OnPropPush;
     public void PropPush() => OnPropPush?.Invoke();

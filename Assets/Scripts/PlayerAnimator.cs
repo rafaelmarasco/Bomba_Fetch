@@ -16,26 +16,25 @@ public class PlayerAnimator : MonoBehaviour
 
     private const string IS_WALKING = "isWalking";
     private const string IS_PUSHING = "IsPushing";
-    
+
     private void OnEnable()
     {
-        EventManager.Instance.OnItemPickedUp += UpdateHands;
-        EventManager.Instance.OnItemDroped += UpdateHands;
-        EventManager.Instance.OnPropPush += AnimateHands;
+        EventManager.Instance.OnItemPickedUp += UpdateGrabWeigth;
+        EventManager.Instance.OnItemDroped += UpdateGrabWeigth;
+        EventManager.Instance.OnPropPush += AnimatePush;
     }
     private void Update()
     {
         animator.SetBool(IS_WALKING, player.GetIsWalking());
     }
-
-    private void AnimateHands()
+    private void AnimatePush()
     {
-        StartCoroutine(HandsAnimation());
+        StartCoroutine(PushAnimation());
     }
-    private IEnumerator HandsAnimation()
+    private IEnumerator PushAnimation()
     {
         float animDuration = 0.35f;
-        
+
         animator.SetTrigger(IS_PUSHING);
         pushRig.weight = 1f;
         animator.SetLayerWeight(upperBody, 1f);
@@ -45,9 +44,13 @@ public class PlayerAnimator : MonoBehaviour
         pushRig.weight = 0f;
         animator.SetLayerWeight(upperBody, 0f);
     }
-    private void UpdateHands()
+    private void UpdateGrabWeigth(Prop propInfo)
     {
-        grabRig.weight = propInteract.hasItem ? 1 : 0;
+        Size propSize = propInfo.PropSize;
+
+        if (propSize == Size.medium || propSize == Size.large)
+            grabRig.weight = propInteract.hasItem ? 1 : 0;
+
     }
 
 }
