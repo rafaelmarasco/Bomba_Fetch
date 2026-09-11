@@ -201,7 +201,7 @@ Transform:
   m_GameObject: {fileID: 125833223}
   serializedVersion: 2
   m_LocalRotation: {x: 0.00000013685816, y: -0.9238797, z: -0.38268322, w: -0.00000033040507}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0.4}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0.45}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2020,6 +2020,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 742497228}
     - target: {fileID: 7330877714380932613, guid: 10e39fceb3a0b4d40ad4fff7fa876380, type: 3}
+      propertyPath: checkPos
+      value: 
+      objectReference: {fileID: 742497228}
+    - target: {fileID: 7330877714380932613, guid: 10e39fceb3a0b4d40ad4fff7fa876380, type: 3}
       propertyPath: pushForce
       value: 7
       objectReference: {fileID: 0}
@@ -2029,7 +2033,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7330877714380932613, guid: 10e39fceb3a0b4d40ad4fff7fa876380, type: 3}
       propertyPath: halfExtends.z
-      value: 0.6
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 7330877714380932613, guid: 10e39fceb3a0b4d40ad4fff7fa876380, type: 3}
       propertyPath: holdPointSmall
@@ -2039,6 +2043,10 @@ PrefabInstance:
       propertyPath: holdPointMedium
       value: 
       objectReference: {fileID: 1817685861}
+    - target: {fileID: 7330877714380932613, guid: 10e39fceb3a0b4d40ad4fff7fa876380, type: 3}
+      propertyPath: interactDistance
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7330877714380932613, guid: 10e39fceb3a0b4d40ad4fff7fa876380, type: 3}
       propertyPath: holdPointInteract
       value: 

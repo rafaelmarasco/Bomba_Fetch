@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 public class PropInteract : MonoBehaviour
 {
     [SerializeField] private Player player;
-    [SerializeField] private Transform CheckPos;
+    [SerializeField] private Transform checkPos;
     [SerializeField] private Transform headPos;
     [SerializeField] private float pushForce;
     private InputSystem_Actions inputActions;
@@ -20,7 +20,10 @@ public class PropInteract : MonoBehaviour
     [SerializeField] private Transform holdPointLarge;
     [SerializeField] private Transform holdPointInteract;
 
-    public Vector3 halfExtends = new Vector3(.5f, 0.1f, .4f);
+    [Header("BoxCastConfigs")]
+    [SerializeField] private Vector3 halfExtends = new Vector3(.5f, 0.1f, .4f);
+    [SerializeField] private float interactDistance = .8f;
+
 
     private void Awake()
     {
@@ -33,6 +36,7 @@ public class PropInteract : MonoBehaviour
     private void Update()
     {
         lastMoveDir = player.GetLastMoveDirection();
+        BoxCastDebug(checkPos.position - lastMoveDir * .2f, halfExtends, checkPos.rotation);
     }
 
     private void Interact_performed(InputAction.CallbackContext obj)
@@ -69,9 +73,7 @@ public class PropInteract : MonoBehaviour
 
     private bool CheckForProps(out GameObject prop) // Check if theres an object in front of the player
     {
-        float interactDistance = .5f;
-        //Vector3 halfExtends = new Vector3(.5f, 0.1f, .4f);
-        bool canGrab = Physics.BoxCast(CheckPos.position - lastMoveDir * .2f, halfExtends, lastMoveDir, out RaycastHit hit, CheckPos.rotation, interactDistance);
+        bool canGrab = Physics.BoxCast(checkPos.position - lastMoveDir * .2f, halfExtends, lastMoveDir, out RaycastHit hit, checkPos.rotation, interactDistance);
         bool isProp = canGrab && hit.collider.gameObject.TryGetComponent<Prop>(out Prop propComponent);
 
         if (isProp)
@@ -119,10 +121,10 @@ public class PropInteract : MonoBehaviour
     }
     private void DropProp()
     {
+        Prop propInfo = heldItem.GetComponent<Prop>();
         float zOffset = .2f;
         float yOffset = .3f;
         Vector3 offset = new Vector3(0f, yOffset, zOffset);
-        GameObject droppedProp = heldItem;
 
         if (heldItem.TryGetComponent<Rigidbody>(out Rigidbody propRb))
             propRb.isKinematic = false;
@@ -137,7 +139,7 @@ public class PropInteract : MonoBehaviour
             isBombInteracting = false;
         }
 
-        EventManager.Instance.ItemDroped(droppedProp.GetComponent<Prop>());
+        EventManager.Instance.ItemDroped(propInfo);
     }
     public void PickUpReposition(Prop propInfo, Transform propPos)
     { 
@@ -161,10 +163,8 @@ public class PropInteract : MonoBehaviour
         }
 
     }
-    private void OnDrawGizmosSelected()
+    private void BoxCastDebug(Vector3 origin, Vector3 halfExtends, Quaternion orientation)
     {
-        Gizmos.color = Color.red;
-        //Gizmos.DrawRay(CheckPos.position, lastMoveDir);
-        Gizmos.DrawCube(transform.position + lastMoveDir * .8f , halfExtends * 2);
+        DebugBoxCast.SimpleDrawBoxCast(origin, halfExtends, orientation, lastMoveDir, interactDistance, Color.aliceBlue);
     }
 }
