@@ -36,7 +36,7 @@ public class PropInteract : MonoBehaviour
     private void Update()
     {
         lastMoveDir = player.GetLastMoveDirection();
-        BoxCastDebug(checkPos.position - lastMoveDir * .2f, halfExtends, checkPos.rotation);
+        //BoxCastDebug(checkPos.position - lastMoveDir * .2f, halfExtends, checkPos.rotation);
     }
 
     private void Interact_performed(InputAction.CallbackContext obj)

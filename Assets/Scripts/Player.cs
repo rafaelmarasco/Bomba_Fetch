@@ -25,6 +25,8 @@ public class Player : MonoBehaviour
             RotateOnMove();
             BasicMove();
         }
+
+
     }
     private void Update()
     {
@@ -60,7 +62,7 @@ public class Player : MonoBehaviour
         }
 
         if (CanMove(moveDir))
-            rb.MovePosition(rb.position + moveDir * moveSpeed * Time.fixedDeltaTime);
+            rb.MovePosition(rb.position + moveSpeed * Time.fixedDeltaTime * moveDir);
     }
     private void RotateOnMove()
     {
@@ -73,21 +75,30 @@ public class Player : MonoBehaviour
         float checkDistance = .8f;
         Vector3 checkOrigin = transform.position;
         Quaternion targetRotation = moveDirection != Vector3.zero ? Quaternion.LookRotation(moveDirection) : transform.rotation;
+        GameObject heldItem = propInteract.heldItem;
 
-        if (propInteract.hasItem)
+        if (propInteract.hasItem && heldItem.GetComponent<Prop>().PropSize != Size.small)
         {
-            checkOrigin = propInteract.heldItem.transform.position + moveDirection * moveSpeed * Time.fixedDeltaTime;
-            checkOrigin.y = transform.position.y;
-            float propReach = Vector3.Distance(transform.position, checkOrigin);
-            Vector3 halfExtends = new Vector3(.25f, .25f, .25f + propReach);
+            checkOrigin = heldItem.transform.position + moveSpeed * Time.fixedDeltaTime * moveDirection;
+            float propReach = Vector3.Distance(transform.position, heldItem.transform.position) / 2;
+            Vector3 halfExtends = new(.1f, .25f, .1f + propReach);
 
+            DebugCheckBox(checkOrigin, halfExtends, targetRotation);
             canMove = !Physics.CheckBox(checkOrigin, halfExtends, targetRotation, LayerMask.GetMask("Walls"));
         }
+
+        //-----------------------------------------------------------------------------------------------------------//
         else
             canMove = !Physics.Raycast(checkOrigin, moveDirection, checkDistance, LayerMask.GetMask("Walls"));
 
         return canMove;
     }
+    private void DebugCheckBox(Vector3 checkOrigin, Vector3 halfExtends, Quaternion targetRotation)
+    {
+
+        DebugBoxCast.SimpleDrawBox(checkOrigin, halfExtends, targetRotation, Color.antiqueWhite);
+    }
+
     public bool GetIsWalking() { return isWalking; }
     public Vector3 GetLastMoveDirection() { return lastMoveDir; }
 }
