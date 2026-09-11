@@ -20,7 +20,7 @@ public class CameraManager : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.Instance.OnBombInteracted += UpdateCamera;
+        EventManager.Instance.OnBombRepositioned += UpdateCamera;
         EventManager.Instance.OnBombDroped += UpdateCamera;
     }
 
@@ -28,7 +28,7 @@ public class CameraManager : MonoBehaviour
     {
         Debug.Log("Começou a mover a camera");
 
-        Vector3 bombFowardOffSet = bomb.forward * .8f;
+        Vector3 bombFowardOffSet = bomb.forward * .65f;
         Vector3 downOffSet = Vector3.down * .25f;
         //Vector3 fwdOffSet = bomb.right * -.3f;
 

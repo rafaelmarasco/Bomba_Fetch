@@ -22,6 +22,7 @@ public class PlayerAnimator : MonoBehaviour
         EventManager.Instance.OnItemPickedUp += UpdateGrabWeigth;
         EventManager.Instance.OnItemDroped += UpdateGrabWeigth;
         EventManager.Instance.OnPropPush += AnimatePush;
+        EventManager.Instance.OnBombInteracted += BringBombUp;
     }
     private void Update()
     {
@@ -49,8 +50,21 @@ public class PlayerAnimator : MonoBehaviour
         Size propSize = propInfo.PropSize;
 
         if (propSize == Size.medium || propSize == Size.large)
-            grabRig.weight = propInteract.hasItem ? 1 : 0;
+            grabRig.weight = propInteract.hasItem ? 1f : 0f;
+        else
+            grabRig.weight = 0f;
 
+    }
+    private void BringBombUp(Transform cameraPos, GameObject bomb)
+    {
+        grabRig.weight = 1f;
+
+        Vector3 playerDir = cameraPos.position - bomb.transform.position;
+
+        bomb.transform.localPosition = Vector3.zero;
+        bomb.transform.localRotation = Quaternion.identity;
+
+        EventManager.Instance.BombRepositionated();
     }
 
 }

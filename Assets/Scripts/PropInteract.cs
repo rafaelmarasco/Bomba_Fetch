@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 using UnityEngine.InputSystem;
 
 public class PropInteract : MonoBehaviour
@@ -9,7 +10,7 @@ public class PropInteract : MonoBehaviour
     [SerializeField] private float pushForce;
     private InputSystem_Actions inputActions;
     private Vector3 lastMoveDir;
-    public bool hasItem { get; private set; } = false;
+    public bool hasItem => heldItem != null;
     public bool hasBomb { get; private set; } = false;
     public bool isBombInteracting { get; private set; } = false;
     public GameObject heldItem { get; private set; }
@@ -17,6 +18,7 @@ public class PropInteract : MonoBehaviour
     [SerializeField] private Transform holdPointSmall;
     [SerializeField] private Transform holdPointMedium;
     [SerializeField] private Transform holdPointLarge;
+    [SerializeField] private Transform holdPointInteract;
 
     public Vector3 halfExtends = new Vector3(.5f, 0.1f, .4f);
 
@@ -37,8 +39,10 @@ public class PropInteract : MonoBehaviour
     {
         if (hasBomb && !isBombInteracting)
         {
+            heldItem.transform.SetParent(holdPointInteract);
+
             isBombInteracting = true;
-            EventManager.Instance.BombInteracted();
+            EventManager.Instance.BombInteracted(headPos, heldItem);
         }
     }
     private void Push_performed(InputAction.CallbackContext obj)
@@ -58,7 +62,7 @@ public class PropInteract : MonoBehaviour
             if (hasBomb)
             {
                 hasBomb = false;
-                EventManager.Instance.BombInteracted();
+                EventManager.Instance.BombDroped();
             }
         }
     }
@@ -67,7 +71,7 @@ public class PropInteract : MonoBehaviour
     {
         float interactDistance = .5f;
         //Vector3 halfExtends = new Vector3(.5f, 0.1f, .4f);
-        bool canGrab = Physics.BoxCast(transform.position, halfExtends, lastMoveDir, out RaycastHit hit, CheckPos.rotation, interactDistance);
+        bool canGrab = Physics.BoxCast(CheckPos.position - lastMoveDir * .2f, halfExtends, lastMoveDir, out RaycastHit hit, CheckPos.rotation, interactDistance);
         bool isProp = canGrab && hit.collider.gameObject.TryGetComponent<Prop>(out Prop propComponent);
 
         if (isProp)
@@ -110,32 +114,15 @@ public class PropInteract : MonoBehaviour
             propRb.isKinematic = true;
 
         PickUpReposition(propInfo, prop.transform);
-        //prop.transform.SetParent(handsPos);
-        
-        /*
-        if (hasBomb)
-        {
-            float yBombOffSet = .3f;
-            float zBombOffSet = .15f;
-
-            Vector3 playerDir = headPos.position - prop.transform.position;
-
-            prop.transform.localPosition = new Vector3(0f, yBombOffSet, zBombOffSet);
-            prop.transform.rotation = Quaternion.LookRotation(playerDir, Vector3.up);
-        }
-        else
-            prop.transform.localPosition = new Vector3(0f, yOffSet, zOffSet);
-        */
-        hasItem = true;
 
         EventManager.Instance.ItemPickedUp(propInfo);
     }
     private void DropProp()
     {
         float zOffset = .2f;
-        float yOffset = .2f;
+        float yOffset = .3f;
         Vector3 offset = new Vector3(0f, yOffset, zOffset);
-        GameObject dropedProp = heldItem;
+        GameObject droppedProp = heldItem;
 
         if (heldItem.TryGetComponent<Rigidbody>(out Rigidbody propRb))
             propRb.isKinematic = false;
@@ -144,15 +131,13 @@ public class PropInteract : MonoBehaviour
         heldItem.transform.SetParent(null);
         heldItem = null;
 
-        hasItem = false;
-
         if (isBombInteracting)
         {
             EventManager.Instance.BombDroped();
             isBombInteracting = false;
         }
 
-        EventManager.Instance.ItemDroped(dropedProp.GetComponent<Prop>());
+        EventManager.Instance.ItemDroped(droppedProp.GetComponent<Prop>());
     }
     public void PickUpReposition(Prop propInfo, Transform propPos)
     { 
