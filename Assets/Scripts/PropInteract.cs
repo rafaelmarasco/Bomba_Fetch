@@ -8,7 +8,9 @@ public class PropInteract : MonoBehaviour
     [SerializeField] private Transform checkPos;
     [SerializeField] private Transform headPos;
     [SerializeField] private float pushForce;
-    private InputSystem_Actions inputActions;
+
+    private PlayerInput playerInput;
+
     private Vector3 lastMoveDir;
     public bool hasItem => heldItem != null;
     public bool hasBomb { get; private set; } = false;
@@ -27,16 +29,15 @@ public class PropInteract : MonoBehaviour
 
     private void Awake()
     {
-        inputActions = new InputSystem_Actions();
-        inputActions.Player.Enable();
-        inputActions.Player.Grab.performed += Grab_performed;
-        inputActions.Player.Push.performed += Push_performed;
-        inputActions.Player.Interact.performed += Interact_performed;
+        playerInput = GetComponent<PlayerInput>();
+
+        playerInput.actions["Grab"].performed += Grab_performed;
+        playerInput.actions["Push"].performed += Push_performed;
+        playerInput.actions["Interact"].performed += Interact_performed;
     }
     private void Update()
     {
         lastMoveDir = player.GetLastMoveDirection();
-        //BoxCastDebug(checkPos.position - lastMoveDir * .2f, halfExtends, checkPos.rotation);
     }
 
     private void Interact_performed(InputAction.CallbackContext obj)
@@ -142,7 +143,7 @@ public class PropInteract : MonoBehaviour
         EventManager.Instance.ItemDroped(propInfo);
     }
     public void PickUpReposition(Prop propInfo, Transform propPos)
-    { 
+    {
         Size propSize = propInfo.PropSize;
 
         switch (propSize)
