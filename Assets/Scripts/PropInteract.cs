@@ -121,7 +121,7 @@ public class PropInteract : MonoBehaviour
 
         EventManager.Instance.ItemPickedUp(propInfo);
     }
-    private void DropProp()
+    public void DropProp()
     {
         Prop propInfo = heldItem.GetComponent<Prop>();
         float zOffset = .2f;

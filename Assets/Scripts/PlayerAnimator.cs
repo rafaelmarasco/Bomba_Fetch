@@ -78,16 +78,19 @@ public class PlayerAnimator : MonoBehaviour
     }
     private void EnableRagDoll()
     {
+        if (propInteract.heldItem  != null) 
+            propInteract.DropProp();
+
         animator.enabled = false;
-        isRagDoll = true;
         EventManager.Instance.StopMoving(true);
+        isRagDoll = true;
     }
     private void DisableRagDoll()
     {
         playerTransform.position = 
             new Vector3(playerRagDollTransform.position.x, playerTransform.position.y, playerRagDollTransform.position.z);
         animator.enabled = true;
-        isRagDoll = false;
         EventManager.Instance.StopMoving(false);
+        isRagDoll = false;
     }
 }
