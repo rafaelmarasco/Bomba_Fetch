@@ -8,6 +8,9 @@ public class PlayerAnimator : MonoBehaviour
     [SerializeField] private Player player;
     [SerializeField] private PropInteract propInteract;
 
+    [SerializeField] private Transform playerTransform;
+    [SerializeField] private Transform playerRagDollTransform;
+
     [Header("Rig Field")]
     [SerializeField] private Rig grabRig;
     [SerializeField] private Rig pushRig;
@@ -77,9 +80,9 @@ public class PlayerAnimator : MonoBehaviour
         animator.enabled = false;
         isRagDoll = true;
     }
-
     private void DisableRagDoll()
     {
+        playerTransform.position = playerRagDollTransform.position;
         animator.enabled = true;
         isRagDoll = false;
     }
