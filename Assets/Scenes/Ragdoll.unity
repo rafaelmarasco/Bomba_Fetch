@@ -1710,7 +1710,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.0063286736
+  m_Radius: 0.02
   m_Height: 0.021095578
   m_Direction: 0
   m_Center: {x: 0.010547789, y: 0, z: 0}
@@ -1886,7 +1886,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3664144837459909734, guid: 10e39fceb3a0b4d40ad4fff7fa876380, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3664144837459909734, guid: 10e39fceb3a0b4d40ad4fff7fa876380, type: 3}
+      propertyPath: m_Center.x
+      value: 0.57
+      objectReference: {fileID: 0}
+    - target: {fileID: 3664144837459909734, guid: 10e39fceb3a0b4d40ad4fff7fa876380, type: 3}
+      propertyPath: m_Center.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3664144837459909734, guid: 10e39fceb3a0b4d40ad4fff7fa876380, type: 3}
+      propertyPath: m_Center.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4041650901238054236, guid: 10e39fceb3a0b4d40ad4fff7fa876380, type: 3}
       propertyPath: playerTransform
@@ -2470,7 +2482,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.006328668
+  m_Radius: 0.02
   m_Height: 0.021095559
   m_Direction: 0
   m_Center: {x: 0.0105477795, y: 0, z: 0}
@@ -2571,8 +2583,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.092422
-  m_Center: {x: -0.092422, y: 0, z: 0}
+  m_Radius: 0.12
+  m_Center: {x: -0.13, y: 0, z: 0}
 --- !u!1 &1590367520 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1881258833396754564, guid: 10e39fceb3a0b4d40ad4fff7fa876380, type: 3}
@@ -2670,7 +2682,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.007584193
+  m_Radius: 0.02
   m_Height: 0.030336771
   m_Direction: 0
   m_Center: {x: 0.015168386, y: 0, z: 0}
@@ -3426,7 +3438,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.0075841877
+  m_Radius: 0.02
   m_Height: 0.03033675
   m_Direction: 0
   m_Center: {x: 0.015168375, y: 0, z: 0}
