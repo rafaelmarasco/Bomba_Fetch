@@ -48,6 +48,7 @@ public class PropInteract : MonoBehaviour
 
             isBombInteracting = true;
             EventManager.Instance.BombInteracted(headPos, heldItem);
+            EventManager.Instance.StopMoving(true);
         }
     }
     private void Push_performed(InputAction.CallbackContext obj)

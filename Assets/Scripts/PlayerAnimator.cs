@@ -80,6 +80,7 @@ public class PlayerAnimator : MonoBehaviour
     {
         animator.enabled = false;
         isRagDoll = true;
+        EventManager.Instance.StopMoving(true);
     }
     private void DisableRagDoll()
     {
@@ -87,5 +88,6 @@ public class PlayerAnimator : MonoBehaviour
             new Vector3(playerRagDollTransform.position.x, playerTransform.position.y, playerRagDollTransform.position.z);
         animator.enabled = true;
         isRagDoll = false;
+        EventManager.Instance.StopMoving(false);
     }
 }

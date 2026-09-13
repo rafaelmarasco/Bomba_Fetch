@@ -13,13 +13,21 @@ public class Player : MonoBehaviour
     private Vector3 lastMoveDir = Vector3.forward;
     private Vector3 rawInput;
 
+    bool stopMoving;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
     }
+
+    private void OnEnable()
+    {
+        EventManager.Instance.OnStopMoving += StopMoving;
+    }
+
     private void FixedUpdate()
     {
-        if (!propInteract.isBombInteracting)
+        if (!stopMoving)
         {
             ReadInput();
             RotateOnMove();
@@ -98,7 +106,10 @@ public class Player : MonoBehaviour
 
         DebugBoxCast.SimpleDrawBox(checkOrigin, halfExtends, targetRotation, Color.antiqueWhite);
     }
-
+    private void StopMoving(bool stopMoving)
+    {
+        this.stopMoving = stopMoving;
+    }
     public bool GetIsWalking() { return isWalking; }
     public Vector3 GetLastMoveDirection() { return lastMoveDir; }
 }
