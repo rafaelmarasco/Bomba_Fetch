@@ -16,7 +16,7 @@ public class PlayerAnimator : MonoBehaviour
     [SerializeField] private Rig grabRig;
     [SerializeField] private Rig pushRig;
 
-    private int upperBody = 1;
+    private readonly int upperBody = 1;
 
     private const string IS_WALKING = "isWalking";
     private const string IS_PUSHING = "IsPushing";
