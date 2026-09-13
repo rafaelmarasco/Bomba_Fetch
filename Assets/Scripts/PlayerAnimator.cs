@@ -17,6 +17,8 @@ public class PlayerAnimator : MonoBehaviour
     private const string IS_WALKING = "isWalking";
     private const string IS_PUSHING = "IsPushing";
 
+    private bool isRagDoll;
+
     private void OnEnable()
     {
         EventManager.Instance.OnItemPickedUp += UpdateGrabWeigth;
@@ -27,6 +29,10 @@ public class PlayerAnimator : MonoBehaviour
     private void Update()
     {
         animator.SetBool(IS_WALKING, player.GetIsWalking());
+        if (Input.GetKeyDown(KeyCode.T) && !isRagDoll)
+            EnableRagDoll();
+        else if (Input.GetKeyDown(KeyCode.T) && isRagDoll)
+            DisableRagDoll();
     }
     private void AnimatePush()
     {
@@ -66,5 +72,15 @@ public class PlayerAnimator : MonoBehaviour
 
         EventManager.Instance.BombRepositionated();
     }
+    private void EnableRagDoll()
+    {
+        animator.enabled = false;
+        isRagDoll = true;
+    }
 
+    private void DisableRagDoll()
+    {
+        animator.enabled = true;
+        isRagDoll = false;
+    }
 }
