@@ -1,26 +1,26 @@
 using UnityEngine;
 
-// Vai no objeto PAI (vazio, posicionado na dobradica).
+// Vai no objeto PAI 
 // O PAI gira; o FILHO (mesh) so acompanha.
 public class Porta : MonoBehaviour
 {
-    [SerializeField] Transform filho;            // a mesh da porta
-    [SerializeField] float maxAngle = 90f;       // quanto abre
-    [SerializeField] float openSpeed = 360f;     // graus/s ao empurrar
-    [SerializeField] float closeSpeed = 180f;    // graus/s ao voltar
-    [SerializeField] float alcanceFrente = 1.2f; // distancia em que comeca a empurrar
-    [SerializeField] float alcanceLado = 1.0f;   // meia largura da passagem
-    [SerializeField] Vector3 ajusteCentro;       // empurra a area de deteccao, se precisar
+    [SerializeField] Transform filho;            
+    [SerializeField] float maxAngle = 90f;      
+    [SerializeField] float openSpeed = 360f;     
+    [SerializeField] float closeSpeed = 180f;   
+    [SerializeField] float alcanceFrente = 1.2f;
+    [SerializeField] float alcanceLado = 1.0f;   
+    [SerializeField] Vector3 ajusteCentro;       
     [SerializeField] bool bloquearQuandoFechada = true;
-    [SerializeField] Collider colisor;           // collider do filho (nao trigger)
+    [SerializeField] Collider colisor;         
 
     Transform player;
-    Vector3 centro;         // centro da passagem, capturado com a porta fechada
-    Vector3 frenteFechada;  // eixo que atravessa a passagem, nao gira junto
-    Vector3 ladoFechado;    // eixo da largura da passagem, idem
-    Quaternion rotFechada;  // rotacao original do Pai, definida no editor
+    Vector3 centro;         
+    Vector3 frenteFechada;  
+    Vector3 ladoFechado;   
+    Quaternion rotFechada;  
     float currentAngle;
-    float sinal;            // +1 ou -1, travado enquanto o jogador esta perto
+    float sinal;            
     bool jogadorPerto;
 
     void Awake()
