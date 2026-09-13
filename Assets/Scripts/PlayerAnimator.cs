@@ -8,6 +8,7 @@ public class PlayerAnimator : MonoBehaviour
     [SerializeField] private Player player;
     [SerializeField] private PropInteract propInteract;
 
+    [Header("Ragdoll Field")]
     [SerializeField] private Transform playerTransform;
     [SerializeField] private Transform playerRagDollTransform;
 
