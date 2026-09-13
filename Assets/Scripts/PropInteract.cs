@@ -44,10 +44,10 @@ public class PropInteract : MonoBehaviour
     {
         if (hasBomb && !isBombInteracting)
         {
-            heldItem.transform.SetParent(holdPointInteract);
+            //heldItem.transform.SetParent(holdPointInteract);
 
             isBombInteracting = true;
-            EventManager.Instance.BombInteracted(headPos, heldItem);
+            //EventManager.Instance.BombInteracted(headPos, heldItem);
         }
     }
     private void Push_performed(InputAction.CallbackContext obj)
