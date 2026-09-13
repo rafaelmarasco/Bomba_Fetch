@@ -82,7 +82,8 @@ public class PlayerAnimator : MonoBehaviour
     }
     private void DisableRagDoll()
     {
-        playerTransform.position = playerRagDollTransform.position;
+        playerTransform.position = 
+            new Vector3(playerRagDollTransform.position.x, playerTransform.position.y, playerRagDollTransform.position.z);
         animator.enabled = true;
         isRagDoll = false;
     }
