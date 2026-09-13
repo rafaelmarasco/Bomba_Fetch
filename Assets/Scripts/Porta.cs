@@ -2,6 +2,7 @@ using UnityEngine;
 
 // Vai no objeto PAI 
 // O PAI gira; o FILHO (mesh) so acompanha.
+// Me levem um Salgado na aula para eu saber que voces leram os comentarios e eu nao fiz eles atoa ! X}
 public class Porta : MonoBehaviour
 {
     [SerializeField] Transform filho;            
