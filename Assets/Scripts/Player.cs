@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -22,7 +23,7 @@ public class Player : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.Instance.OnStopMoving += StopMoving;
+        EventManager.Instance.OnStopedMoving += StopMoving;
     }
 
     private void FixedUpdate()
@@ -109,6 +110,11 @@ public class Player : MonoBehaviour
     private void StopMoving(bool stopMoving)
     {
         this.stopMoving = stopMoving;
+    }
+    public void GetYonked(Vector3 flyDirection, float flyForce)
+    {
+        //rb.MovePosition(Vector3.Lerp(transform.localPosition, flyDirection * flyForce, 1f));
+        //rb.AddForce(flyDirection * flyForce, ForceMode.Impulse);
     }
     public bool GetIsWalking() { return isWalking; }
     public Vector3 GetLastMoveDirection() { return lastMoveDir; }

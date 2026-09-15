@@ -11,6 +11,7 @@ public class PlayerAnimator : MonoBehaviour
     [Header("Ragdoll Field")]
     [SerializeField] private Transform playerTransform;
     [SerializeField] private Transform playerRagDollTransform;
+    [SerializeField] private float knockdownTime;
 
     [Header("Rig Field")]
     [SerializeField] private Rig grabRig;
@@ -23,16 +24,20 @@ public class PlayerAnimator : MonoBehaviour
 
     private bool isRagDoll;
 
+    public GameObject Hazzard;
+
     private void OnEnable()
     {
         EventManager.Instance.OnItemPickedUp += UpdateGrabWeigth;
         EventManager.Instance.OnItemDroped += UpdateGrabWeigth;
         EventManager.Instance.OnPropPush += AnimatePush;
         EventManager.Instance.OnBombInteracted += BringBombUp;
+        EventManager.Instance.OnEletrocuted += AnimateKnockdown;
     }
     private void Update()
     {
         animator.SetBool(IS_WALKING, player.GetIsWalking());
+
         if (Input.GetKeyDown(KeyCode.T) && !isRagDoll)
             EnableRagDoll();
         else if (Input.GetKeyDown(KeyCode.T) && isRagDoll)
@@ -74,7 +79,7 @@ public class PlayerAnimator : MonoBehaviour
         bomb.transform.localPosition = Vector3.zero;
         bomb.transform.localRotation = Quaternion.identity;
 
-        EventManager.Instance.BombRepositionated();
+        EventManager.Instance.BombReposition();
     }
     private void EnableRagDoll()
     {
@@ -92,5 +97,19 @@ public class PlayerAnimator : MonoBehaviour
         animator.enabled = true;
         EventManager.Instance.StopMoving(false);
         isRagDoll = false;
+    }
+    private void AnimateKnockdown()
+    {
+        EventManager.Instance.StopMoving(true);
+        player.GetYonked(Vector3.right, 4f);
+        StartCoroutine(KnockdownAnimation());   
+    }
+
+    private IEnumerator KnockdownAnimation()
+    {
+        yield return new WaitForSeconds(.3f);
+        EnableRagDoll();
+        yield return new WaitForSeconds(knockdownTime);
+        DisableRagDoll();
     }
 }
