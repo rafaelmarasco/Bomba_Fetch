@@ -1,29 +1,26 @@
+using System;
 using System.Collections;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CameraManager : MonoBehaviour
 {
-    private enum Cameras
+    private enum Cameras // REMOVER ???????????????
     {
         main,
         bomb
     }
 
-    [SerializeField] private Cameras activeCamera = Cameras.main;
     [SerializeField] private CinemachineCamera mainCamera;
-    [SerializeField] private CinemachineCamera bombCamera;
-    [SerializeField] private Transform bomb;
-    [SerializeField] private GameObject head;
 
-    [SerializeField] private PropInteract propInteract;
-
-    private void OnEnable()
+    public void MakeCameraFollow(PlayerInput input)
     {
-        EventManager.Instance.OnBombRepositioned += UpdateCamera;
-        EventManager.Instance.OnBombDroped += UpdateCamera;
+        if (mainCamera.Target.TrackingTarget == null)
+            mainCamera.Target.TrackingTarget = input.gameObject.transform;
     }
 
+    /*
     private IEnumerator MoveCameraToBomb()
     {
         Debug.Log("Começou a mover a camera");
@@ -53,22 +50,5 @@ public class CameraManager : MonoBehaviour
         bombCamera.transform.rotation = Quaternion.LookRotation(bomb.position - finalPos, bomb.up);
         head.SetActive(false);
     }
-
-    private void UpdateCamera()
-    {
-        activeCamera = propInteract.hasBomb ? Cameras.bomb : Cameras.main;
-
-        switch (activeCamera)
-        {
-            case Cameras.main:
-                bombCamera.gameObject.SetActive(false);
-                mainCamera.gameObject.SetActive(true);
-                break;
-            case Cameras.bomb:
-                mainCamera.gameObject.SetActive(false);
-                bombCamera.gameObject.SetActive(true);
-                StartCoroutine(MoveCameraToBomb());
-                break;
-        }
-    }
+    */
 }
