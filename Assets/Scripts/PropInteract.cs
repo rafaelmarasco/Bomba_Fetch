@@ -9,6 +9,8 @@ public class PropInteract : MonoBehaviour
     [SerializeField] private Transform headPos;
     [SerializeField] private float pushForce;
 
+    private PlayerEventManager playerEventManager;
+
     private PlayerInput playerInput;
 
     private Vector3 lastMoveDir;
@@ -30,6 +32,7 @@ public class PropInteract : MonoBehaviour
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
+        playerEventManager = GetComponent<PlayerEventManager>();
 
         playerInput.actions["Grab"].performed += Grab_performed;
         playerInput.actions["Push"].performed += Push_performed;
@@ -47,8 +50,7 @@ public class PropInteract : MonoBehaviour
             heldItem.transform.SetParent(holdPointInteract);
 
             isBombInteracting = true;
-            EventManager.Instance.BombInteracted(headPos, heldItem);
-            EventManager.Instance.StopMoving(true);
+            playerEventManager.BombInteracted(headPos, heldItem);
         }
     }
     private void Push_performed(InputAction.CallbackContext obj)
@@ -68,7 +70,7 @@ public class PropInteract : MonoBehaviour
             if (hasBomb)
             {
                 hasBomb = false;
-                EventManager.Instance.BombDroped();
+                playerEventManager.BombDroped();
             }
         }
     }
@@ -89,7 +91,7 @@ public class PropInteract : MonoBehaviour
     {
         if (!isBombInteracting)
         {
-            EventManager.Instance.PropPush();
+            playerEventManager.PropPush();
 
             if (!hasItem && CheckForProps(out GameObject prop))
             {
@@ -119,7 +121,7 @@ public class PropInteract : MonoBehaviour
 
         PickUpReposition(propInfo, prop.transform);
 
-        EventManager.Instance.ItemPickedUp(propInfo);
+        playerEventManager.ItemPickedUp(propInfo);
     }
     public void DropProp()
     {
@@ -137,11 +139,11 @@ public class PropInteract : MonoBehaviour
 
         if (isBombInteracting)
         {
-            EventManager.Instance.BombDroped();
+            playerEventManager.BombDroped();
             isBombInteracting = false;
         }
 
-        EventManager.Instance.ItemDroped(propInfo);
+        playerEventManager.ItemDroped(propInfo);
     }
     public void PickUpReposition(Prop propInfo, Transform propPos)
     {
@@ -158,7 +160,6 @@ public class PropInteract : MonoBehaviour
                 propPos.SetParent(holdPointMedium);
                 propPos.localPosition = Vector3.zero;
                 propPos.rotation = holdPointMedium.rotation;
-                EventManager.Instance.ItemPickedUp(propInfo);
                 break;
             case Size.large:
                 break;

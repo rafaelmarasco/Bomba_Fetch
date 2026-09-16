@@ -17,7 +17,9 @@ public class PlayerAnimator : MonoBehaviour
     [SerializeField] private Rig grabRig;
     [SerializeField] private Rig pushRig;
 
-    private readonly int upperBody = 1;
+    private PlayerEventManager playerEventManager;
+
+    private int upperBody = 1;
 
     private const string IS_WALKING = "isWalking";
     private const string IS_PUSHING = "IsPushing";
@@ -28,11 +30,11 @@ public class PlayerAnimator : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.Instance.OnItemPickedUp += UpdateGrabWeigth;
-        EventManager.Instance.OnItemDroped += UpdateGrabWeigth;
-        EventManager.Instance.OnPropPush += AnimatePush;
-        EventManager.Instance.OnBombInteracted += BringBombUp;
-        EventManager.Instance.OnEletrocuted += AnimateKnockdown;
+        playerEventManager = GetComponentInParent<PlayerEventManager>();
+        playerEventManager.OnItemPickedUp += UpdateGrabWeigth;
+        playerEventManager.OnItemDroped += UpdateGrabWeigth;
+        playerEventManager.OnPropPush += AnimatePush;
+        playerEventManager.OnBombInteracted += BringBombUp;
     }
     private void Update()
     {
@@ -79,7 +81,7 @@ public class PlayerAnimator : MonoBehaviour
         bomb.transform.localPosition = Vector3.zero;
         bomb.transform.localRotation = Quaternion.identity;
 
-        EventManager.Instance.BombReposition();
+        //EventManager.Instance.BombRepositionated();
     }
     private void EnableRagDoll()
     {
