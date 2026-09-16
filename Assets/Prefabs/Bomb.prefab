@@ -498,7 +498,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 800588077453680491}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: BombaScriptMath, Assembly-CSharp
         m_MethodName: DisarmBomb
         m_Mode: 1
@@ -642,9 +642,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 874b6661f3ed89145bf420efed59a646, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3524329707742552693}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 874b6661f3ed89145bf420efed59a646, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 800588077453680491}
   m_SourcePrefab: {fileID: 100100000, guid: 874b6661f3ed89145bf420efed59a646, type: 3}
 --- !u!4 &4827291267416197577 stripped
 Transform:
@@ -717,19 +714,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 0
---- !u!114 &800588077453680491
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5311480607056876403}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5d62de3ce201d444a3dbe36d32b3480, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BombaScriptMath
-  disarmText: {fileID: 1353794175483408537}
-  disarmBtn: {fileID: 941023463512371753}
-  propInteract: {fileID: 0}
-  bombInterface: {fileID: 7921330189577072139}
