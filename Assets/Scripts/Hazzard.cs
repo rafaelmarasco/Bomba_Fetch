@@ -6,9 +6,9 @@ public class Hazzard : MonoBehaviour
     {
         if (other.gameObject.name == "GFX")
         {
-            Debug.Log("O player Colidiu");
-            EventManager.Instance.Eletrocute();
-         
+            PlayerEventManager playerEventManager = other.GetComponentInParent<PlayerEventManager>();
+            playerEventManager.Eletrocute();
+
         }
     }
 }

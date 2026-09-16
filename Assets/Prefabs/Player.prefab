@@ -734,8 +734,8 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
@@ -1214,7 +1214,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.108403124
+  m_Radius: 0.13
   m_Height: 0.5
   m_Direction: 1
   m_Center: {x: 0.0032439432, y: 0.24317488, z: 0.005871813}
@@ -1233,8 +1233,12 @@ MonoBehaviour:
   animator: {fileID: 2258011675586492718}
   player: {fileID: 891634052499106268}
   propInteract: {fileID: 7330877714380932613}
+  playerTransform: {fileID: 8330579805403462866}
+  playerRagDollTransform: {fileID: 5311500375926874964}
+  knockdownTime: 2
   grabRig: {fileID: 1373606130983098565}
   pushRig: {fileID: 6979180523339886510}
+  Hazzard: {fileID: 0}
 --- !u!114 &4325470239247425070
 MonoBehaviour:
   m_ObjectHideFlags: 0

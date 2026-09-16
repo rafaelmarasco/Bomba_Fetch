@@ -17,4 +17,10 @@ public class PlayerEventManager : MonoBehaviour
 
     public event Action OnPropPush;
     public void PropPush() => OnPropPush?.Invoke();
+
+    public event Action OnEletrocuted;
+    public void Eletrocute() => OnEletrocuted?.Invoke();
+
+    public event Action<bool> OnStopedMoving;
+    public void StopMoving(bool stopMoving) => OnStopedMoving?.Invoke(stopMoving);
 }
