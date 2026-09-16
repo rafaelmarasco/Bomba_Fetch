@@ -123,7 +123,7 @@ public class PropInteract : MonoBehaviour
 
         playerEventManager.ItemPickedUp(propInfo);
     }
-    private void DropProp()
+    public void DropProp()
     {
         Prop propInfo = heldItem.GetComponent<Prop>();
         float zOffset = .2f;

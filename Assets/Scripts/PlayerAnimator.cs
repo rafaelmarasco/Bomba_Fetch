@@ -8,6 +8,11 @@ public class PlayerAnimator : MonoBehaviour
     [SerializeField] private Player player;
     [SerializeField] private PropInteract propInteract;
 
+    [Header("Ragdoll Field")]
+    [SerializeField] private Transform playerTransform;
+    [SerializeField] private Transform playerRagDollTransform;
+    [SerializeField] private float knockdownTime;
+
     [Header("Rig Field")]
     [SerializeField] private Rig grabRig;
     [SerializeField] private Rig pushRig;
@@ -18,6 +23,10 @@ public class PlayerAnimator : MonoBehaviour
 
     private const string IS_WALKING = "isWalking";
     private const string IS_PUSHING = "IsPushing";
+
+    private bool isRagDoll;
+
+    public GameObject Hazzard;
 
     private void OnEnable()
     {
@@ -30,6 +39,11 @@ public class PlayerAnimator : MonoBehaviour
     private void Update()
     {
         animator.SetBool(IS_WALKING, player.GetIsWalking());
+
+        if (Input.GetKeyDown(KeyCode.T) && !isRagDoll)
+            EnableRagDoll();
+        else if (Input.GetKeyDown(KeyCode.T) && isRagDoll)
+            DisableRagDoll();
     }
     private void AnimatePush()
     {
@@ -69,5 +83,35 @@ public class PlayerAnimator : MonoBehaviour
 
         //EventManager.Instance.BombRepositionated();
     }
+    private void EnableRagDoll()
+    {
+        if (propInteract.heldItem  != null) 
+            propInteract.DropProp();
 
+        animator.enabled = false;
+        EventManager.Instance.StopMoving(true);
+        isRagDoll = true;
+    }
+    private void DisableRagDoll()
+    {
+        playerTransform.position = 
+            new Vector3(playerRagDollTransform.position.x, playerTransform.position.y, playerRagDollTransform.position.z);
+        animator.enabled = true;
+        EventManager.Instance.StopMoving(false);
+        isRagDoll = false;
+    }
+    private void AnimateKnockdown()
+    {
+        EventManager.Instance.StopMoving(true);
+        player.GetYonked(Vector3.right, 4f);
+        StartCoroutine(KnockdownAnimation());   
+    }
+
+    private IEnumerator KnockdownAnimation()
+    {
+        yield return new WaitForSeconds(.3f);
+        EnableRagDoll();
+        yield return new WaitForSeconds(knockdownTime);
+        DisableRagDoll();
+    }
 }

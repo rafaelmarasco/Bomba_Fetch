@@ -34,5 +34,11 @@ public class EventManager : MonoBehaviour
     public void PropPush() => OnPropPush?.Invoke();
 
     public event Action OnBombRepositioned;
-    public void BombRepositionated() => OnBombRepositioned?.Invoke();
+    public void BombReposition() => OnBombRepositioned?.Invoke();
+
+    public event Action<bool> OnStopedMoving;
+    public void StopMoving(bool stopMoving) => OnStopedMoving?.Invoke(stopMoving);
+
+    public event Action OnEletrocuted;
+    public void Eletrocute() => OnEletrocuted?.Invoke();
 }
