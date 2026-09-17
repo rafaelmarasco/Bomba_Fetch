@@ -11,7 +11,6 @@ public class Hazzard : MonoBehaviour
         {
             PlayerEventManager playerEventManager = other.GetComponentInParent<PlayerEventManager>();
             playerEventManager.Eletrocute(flyDirection, flyForce , stunTime);
-
         }
     }
 }

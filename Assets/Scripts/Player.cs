@@ -162,7 +162,7 @@ public class Player : MonoBehaviour
         playerEventManager.StopMoving(false);
         isRagDoll = false;
     }
-    private void UntangleBones()
+    private void UntangleBones() // Makes de player collider and bone colliders ignore each other
     {
         Collider playerCollider = GetComponentInChildren<Collider>();
 

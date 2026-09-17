@@ -1572,6 +1572,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58244bdf63d3f7f488b928d75473eeba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Hazzard
+  flyDirection: {x: 1, y: 2, z: 0}
+  flyForce: 50
+  stunTime: 2
 --- !u!1001 &1281020051
 PrefabInstance:
   m_ObjectHideFlags: 0
