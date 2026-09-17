@@ -15,7 +15,7 @@ public class CameraManager : MonoBehaviour
     public void MakeCameraFollow(PlayerInput input)
     {
         if (mainCamera.Target.TrackingTarget == null)
-            mainCamera.Target.TrackingTarget = input.gameObject.transform;
+            mainCamera.Target.TrackingTarget = input.gameObject.GetComponentInChildren<Transform>();
     }
 
     /*

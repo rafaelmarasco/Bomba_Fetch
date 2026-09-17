@@ -11,7 +11,6 @@ public class PlayerAnimator : MonoBehaviour
     [Header("Ragdoll Field")]
     [SerializeField] private Transform playerTransform;
     [SerializeField] private Transform playerRagDollTransform;
-    [SerializeField] private float knockdownTime;
 
     [Header("Rig Field")]
     [SerializeField] private Rig grabRig;
@@ -19,31 +18,34 @@ public class PlayerAnimator : MonoBehaviour
 
     private PlayerEventManager playerEventManager;
 
-    private int upperBody = 1;
+    private Rigidbody playerRb;
+
+    private readonly int upperBody = 1;
 
     private const string IS_WALKING = "isWalking";
     private const string IS_PUSHING = "IsPushing";
 
     private bool isRagDoll;
 
-    public GameObject Hazzard;
-
     private void OnEnable()
     {
         playerEventManager = GetComponentInParent<PlayerEventManager>();
+        playerRb = GetComponentInParent<Rigidbody>();
+
         playerEventManager.OnItemPickedUp += UpdateGrabWeigth;
         playerEventManager.OnItemDroped += UpdateGrabWeigth;
         playerEventManager.OnPropPush += AnimatePush;
         playerEventManager.OnBombInteracted += BringBombUp;
+        playerEventManager.OnKnockDown += AnimateKnockdown;
     }
     private void Update()
     {
         animator.SetBool(IS_WALKING, player.GetIsWalking());
 
         if (Input.GetKeyDown(KeyCode.T) && !isRagDoll)
-            EnableRagDoll();
+            player.EnableRagDoll();
         else if (Input.GetKeyDown(KeyCode.T) && isRagDoll)
-            DisableRagDoll();
+            player.DisableRagDoll();
     }
     private void AnimatePush()
     {
@@ -76,42 +78,21 @@ public class PlayerAnimator : MonoBehaviour
     {
         grabRig.weight = 1f;
 
-        Vector3 playerDir = cameraPos.position - bomb.transform.position;
+        //Vector3 playerDir = cameraPos.position - bomb.transform.position;
 
-        bomb.transform.localPosition = Vector3.zero;
-        bomb.transform.localRotation = Quaternion.identity;
-
-        //EventManager.Instance.BombRepositionated();
+        bomb.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
     }
-    private void EnableRagDoll()
+    private void AnimateKnockdown(float stunTime)
     {
-        if (propInteract.heldItem  != null) 
-            propInteract.DropProp();
-
-        animator.enabled = false;
-        EventManager.Instance.StopMoving(true);
-        isRagDoll = true;
-    }
-    private void DisableRagDoll()
-    {
-        playerTransform.position = 
-            new Vector3(playerRagDollTransform.position.x, playerTransform.position.y, playerRagDollTransform.position.z);
-        animator.enabled = true;
-        EventManager.Instance.StopMoving(false);
-        isRagDoll = false;
-    }
-    private void AnimateKnockdown()
-    {
-        EventManager.Instance.StopMoving(true);
-        player.GetYonked(Vector3.right, 4f);
-        StartCoroutine(KnockdownAnimation());   
+        playerEventManager.StopMoving(true);
+        StartCoroutine(KnockdownAnimation(stunTime));   
     }
 
-    private IEnumerator KnockdownAnimation()
+    private IEnumerator KnockdownAnimation(float knockdownTime)
     {
-        yield return new WaitForSeconds(.3f);
-        EnableRagDoll();
+        yield return new WaitForSeconds(.2f);
+        player.EnableRagDoll();
         yield return new WaitForSeconds(knockdownTime);
-        DisableRagDoll();
+        player.DisableRagDoll();
     }
 }
