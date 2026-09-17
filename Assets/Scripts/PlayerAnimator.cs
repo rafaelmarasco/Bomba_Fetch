@@ -28,8 +28,6 @@ public class PlayerAnimator : MonoBehaviour
 
     private bool isRagDoll;
 
-    //public GameObject Hazzard;
-
     private void OnEnable()
     {
         playerEventManager = GetComponentInParent<PlayerEventManager>();
@@ -39,7 +37,7 @@ public class PlayerAnimator : MonoBehaviour
         playerEventManager.OnItemDroped += UpdateGrabWeigth;
         playerEventManager.OnPropPush += AnimatePush;
         playerEventManager.OnBombInteracted += BringBombUp;
-        playerEventManager.OnEletrocuted += AnimateKnockdown;
+        playerEventManager.OnKnockDown += AnimateKnockdown;
     }
     private void Update()
     {
@@ -85,30 +83,9 @@ public class PlayerAnimator : MonoBehaviour
 
         bomb.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
     }
-    /*private void EnableRagDoll()
-    {
-        if (propInteract.heldItem  != null) 
-            propInteract.DropProp();
-
-        animator.enabled = false;
-        playerRb.constraints = RigidbodyConstraints.FreezePositionY;
-        playerEventManager.StopMoving(true);
-        isRagDoll = true;
-    }
-    private void DisableRagDoll()
-    {
-        playerTransform.position = 
-            new Vector3(playerRagDollTransform.position.x, playerTransform.position.y, playerRagDollTransform.position.z);
-
-        animator.enabled = true;
-        playerRb.constraints = RigidbodyConstraints.FreezePositionY;
-        playerEventManager.StopMoving(false);
-        isRagDoll = false;
-    }*/
     private void AnimateKnockdown()
     {
         playerEventManager.StopMoving(true);
-        player.GetYonked(Vector3.right, 4f);
         StartCoroutine(KnockdownAnimation());   
     }
 

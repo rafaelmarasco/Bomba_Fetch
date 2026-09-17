@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     private Rigidbody[] bonesRb;
     [SerializeField] private GameObject GFX;
     [SerializeField] private Animator animator;
+    [SerializeField] private Rigidbody hipsRb;
     public bool isRagDoll { get; private set; } = false;
     private bool isWalking => moveDir != Vector3.zero;
 
@@ -35,6 +36,7 @@ public class Player : MonoBehaviour
     private void OnEnable()
     {
         playerEventManager.OnStopedMoving += StopMoving;
+        playerEventManager.OnEletrocuted += GetYonked;
     }
     private void FixedUpdate()
     {
@@ -124,8 +126,9 @@ public class Player : MonoBehaviour
     }
     public void GetYonked(Vector3 flyDirection, float flyForce)
     {
-        //rb.MovePosition(Vector3.Lerp(transform.localPosition, flyDirection * flyForce, 1f));
-        playerRb.AddForce(flyDirection * flyForce, ForceMode.Impulse);
+        EnableRagDoll();
+        hipsRb.AddForce(flyDirection * flyForce, ForceMode.Impulse);
+        playerEventManager.KnockedDown();
     }
     public void EnableRagDoll()
     {
@@ -139,13 +142,16 @@ public class Player : MonoBehaviour
         }
 
         animator.enabled = false;
-        //playerRb.constraints = RigidbodyConstraints.FreezePositionY;
+        playerRb.constraints = RigidbodyConstraints.FreezePositionY;
         playerEventManager.StopMoving(true);
         isRagDoll = true;
     }
     public void DisableRagDoll()
     {
-        Transform playerRagDollTransform = GFX.transform;
+        Transform playerRagDollTransform = hipsRb.gameObject.transform;
+
+        transform.position =
+            new Vector3(playerRagDollTransform.position.x, transform.position.y, playerRagDollTransform.position.z);
 
         foreach (Rigidbody bone in bonesRb)
         {
@@ -153,15 +159,10 @@ public class Player : MonoBehaviour
             bone.useGravity = false;
         }
 
-        transform.position =
-            new Vector3(playerRagDollTransform.position.x, transform.position.y, playerRagDollTransform.position.z);
-
         animator.enabled = true;
-        //playerRb.constraints = RigidbodyConstraints.FreezePositionY;
+        playerRb.constraints = RigidbodyConstraints.FreezePositionY;
         playerEventManager.StopMoving(false);
         isRagDoll = false;
-        playerRb.linearVelocity = Vector3.zero;
-        playerRb.angularVelocity = Vector3.zero;
     }
     private void UntangleBones()
     {
