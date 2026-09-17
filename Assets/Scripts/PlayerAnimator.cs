@@ -11,7 +11,6 @@ public class PlayerAnimator : MonoBehaviour
     [Header("Ragdoll Field")]
     [SerializeField] private Transform playerTransform;
     [SerializeField] private Transform playerRagDollTransform;
-    [SerializeField] private float knockdownTime;
 
     [Header("Rig Field")]
     [SerializeField] private Rig grabRig;
@@ -83,13 +82,13 @@ public class PlayerAnimator : MonoBehaviour
 
         bomb.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
     }
-    private void AnimateKnockdown()
+    private void AnimateKnockdown(float stunTime)
     {
         playerEventManager.StopMoving(true);
-        StartCoroutine(KnockdownAnimation());   
+        StartCoroutine(KnockdownAnimation(stunTime));   
     }
 
-    private IEnumerator KnockdownAnimation()
+    private IEnumerator KnockdownAnimation(float knockdownTime)
     {
         yield return new WaitForSeconds(.2f);
         player.EnableRagDoll();

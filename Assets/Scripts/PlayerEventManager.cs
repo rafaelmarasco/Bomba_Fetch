@@ -18,11 +18,12 @@ public class PlayerEventManager : MonoBehaviour
     public event Action OnPropPush;
     public void PropPush() => OnPropPush?.Invoke();
 
-    public event Action<Vector3, float> OnEletrocuted;
-    public void Eletrocute(Vector3 flyDirection, float flyForce) => OnEletrocuted?.Invoke(flyDirection,flyForce);
+    public event Action<Vector3, float, float> OnEletrocuted;
+    public void Eletrocute(Vector3 flyDirection, float flyForce, float stunTime) 
+        => OnEletrocuted?.Invoke(flyDirection, flyForce, stunTime);
 
-    public event Action OnKnockDown;
-    public void KnockedDown() => OnKnockDown?.Invoke();
+    public event Action<float> OnKnockDown;
+    public void KnockedDown(float stunTime) => OnKnockDown?.Invoke(stunTime);
 
     public event Action<bool> OnStopedMoving;
     public void StopMoving(bool stopMoving) => OnStopedMoving?.Invoke(stopMoving);

@@ -124,11 +124,11 @@ public class Player : MonoBehaviour
     {
         this.stopMoving = stopMoving;
     }
-    public void GetYonked(Vector3 flyDirection, float flyForce)
+    public void GetYonked(Vector3 flyDirection, float flyForce, float stunTime)
     {
         EnableRagDoll();
         hipsRb.AddForce(flyDirection * flyForce, ForceMode.Impulse);
-        playerEventManager.KnockedDown();
+        playerEventManager.KnockedDown(stunTime);
     }
     public void EnableRagDoll()
     {
@@ -142,7 +142,6 @@ public class Player : MonoBehaviour
         }
 
         animator.enabled = false;
-        playerRb.constraints = RigidbodyConstraints.FreezePositionY;
         playerEventManager.StopMoving(true);
         isRagDoll = true;
     }
@@ -160,7 +159,6 @@ public class Player : MonoBehaviour
         }
 
         animator.enabled = true;
-        playerRb.constraints = RigidbodyConstraints.FreezePositionY;
         playerEventManager.StopMoving(false);
         isRagDoll = false;
     }
