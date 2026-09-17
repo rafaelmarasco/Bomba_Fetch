@@ -46,9 +46,9 @@ public class PlayerAnimator : MonoBehaviour
         animator.SetBool(IS_WALKING, player.GetIsWalking());
 
         if (Input.GetKeyDown(KeyCode.T) && !isRagDoll)
-            EnableRagDoll();
+            player.EnableRagDoll();
         else if (Input.GetKeyDown(KeyCode.T) && isRagDoll)
-            DisableRagDoll();
+            player.DisableRagDoll();
     }
     private void AnimatePush()
     {
@@ -85,14 +85,13 @@ public class PlayerAnimator : MonoBehaviour
 
         bomb.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
     }
-    private void EnableRagDoll()
+    /*private void EnableRagDoll()
     {
         if (propInteract.heldItem  != null) 
             propInteract.DropProp();
 
         animator.enabled = false;
         playerRb.constraints = RigidbodyConstraints.FreezePositionY;
-        playerRb.isKinematic = true;
         playerEventManager.StopMoving(true);
         isRagDoll = true;
     }
@@ -103,10 +102,9 @@ public class PlayerAnimator : MonoBehaviour
 
         animator.enabled = true;
         playerRb.constraints = RigidbodyConstraints.FreezePositionY;
-        playerRb.isKinematic = false;
         playerEventManager.StopMoving(false);
         isRagDoll = false;
-    }
+    }*/
     private void AnimateKnockdown()
     {
         playerEventManager.StopMoving(true);
@@ -117,8 +115,8 @@ public class PlayerAnimator : MonoBehaviour
     private IEnumerator KnockdownAnimation()
     {
         yield return new WaitForSeconds(.2f);
-        EnableRagDoll();
+        player.EnableRagDoll();
         yield return new WaitForSeconds(knockdownTime);
-        DisableRagDoll();
+        player.DisableRagDoll();
     }
 }

@@ -3,11 +3,16 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    private Rigidbody rb;
+    private Rigidbody playerRb;
 
     [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private PropInteract propInteract;
     [SerializeField] private float moveSpeed = 7f;
+
+    private Rigidbody[] bonesRb;
+    [SerializeField] private GameObject GFX;
+    [SerializeField] private Animator animator;
+    public bool isRagDoll { get; private set; } = false;
     private bool isWalking => moveDir != Vector3.zero;
 
     private PlayerEventManager playerEventManager;
@@ -19,15 +24,18 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody>();
+        bonesRb = GFX.GetComponentsInChildren<Rigidbody>();
+        playerRb = GetComponent<Rigidbody>();
+
         playerEventManager = GetComponent<PlayerEventManager>();
+
+        UntangleBones();
     }
 
     private void OnEnable()
     {
-       playerEventManager.OnStopedMoving += StopMoving;
+        playerEventManager.OnStopedMoving += StopMoving;
     }
-
     private void FixedUpdate()
     {
         if (!stopMoving)
@@ -74,7 +82,7 @@ public class Player : MonoBehaviour
         }
         */
         //if (CanMove(moveDir))
-            rb.MovePosition(rb.position + moveSpeed * Time.fixedDeltaTime * moveDir);
+        playerRb.MovePosition(playerRb.position + moveSpeed * Time.fixedDeltaTime * moveDir);
     }
     private void RotateOnMove()
     {
@@ -117,7 +125,55 @@ public class Player : MonoBehaviour
     public void GetYonked(Vector3 flyDirection, float flyForce)
     {
         //rb.MovePosition(Vector3.Lerp(transform.localPosition, flyDirection * flyForce, 1f));
-        rb.AddForce(flyDirection * flyForce, ForceMode.Impulse);
+        playerRb.AddForce(flyDirection * flyForce, ForceMode.Impulse);
+    }
+    public void EnableRagDoll()
+    {
+        if (propInteract.heldItem != null)
+            propInteract.DropProp();
+
+        foreach (Rigidbody bone in bonesRb)
+        {
+            bone.isKinematic = false;
+            bone.useGravity = true;
+        }
+
+        animator.enabled = false;
+        //playerRb.constraints = RigidbodyConstraints.FreezePositionY;
+        playerEventManager.StopMoving(true);
+        isRagDoll = true;
+    }
+    public void DisableRagDoll()
+    {
+        Transform playerRagDollTransform = GFX.transform;
+
+        foreach (Rigidbody bone in bonesRb)
+        {
+            bone.isKinematic = true;
+            bone.useGravity = false;
+        }
+
+        transform.position =
+            new Vector3(playerRagDollTransform.position.x, transform.position.y, playerRagDollTransform.position.z);
+
+        animator.enabled = true;
+        //playerRb.constraints = RigidbodyConstraints.FreezePositionY;
+        playerEventManager.StopMoving(false);
+        isRagDoll = false;
+        playerRb.linearVelocity = Vector3.zero;
+        playerRb.angularVelocity = Vector3.zero;
+    }
+    private void UntangleBones()
+    {
+        Collider playerCollider = GetComponentInChildren<Collider>();
+
+        foreach (Rigidbody bone in bonesRb)
+        {
+            if (bone.TryGetComponent<Collider>(out Collider boneCollider))
+                Physics.IgnoreCollision(playerCollider, boneCollider);
+        }
+
+        DisableRagDoll();
     }
     public bool GetIsWalking() { return isWalking; }
     public Vector3 GetLastMoveDirection() { return lastMoveDir; }
