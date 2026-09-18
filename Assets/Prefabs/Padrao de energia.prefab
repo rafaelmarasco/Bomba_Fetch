@@ -195,3 +195,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   hazzard: {fileID: 0}
+  radius: 0.5
