@@ -4,6 +4,7 @@ using UnityEngine;
 public class Hazzard : MonoBehaviour
 {
     [SerializeField] private Vector3 flyDirection;
+    [SerializeField] private Vector3 propFlyDirection;
     [SerializeField] private float flyForce;
     [SerializeField] private float stunTime;
     [SerializeField] private float cooldown;
@@ -35,6 +36,6 @@ public class Hazzard : MonoBehaviour
             return;
 
         player.StartColldownTimer(cooldown);
-        playerEventManager.Eletrocute(flyDirection, flyForce, stunTime);
+        playerEventManager.Eletrocute(flyDirection, propFlyDirection, flyForce, stunTime);
     }
 }

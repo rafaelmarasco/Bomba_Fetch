@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     private Rigidbody[] bonesRb;
 
     [SerializeField] private GameObject GFX;
+    private CapsuleCollider gfxCapsuCollider;
     [SerializeField] private Animator animator;
     [SerializeField] private Rigidbody hipsRb;
     public bool isRagDoll { get; private set; } = false;
@@ -28,7 +29,7 @@ public class Player : MonoBehaviour
     {
         bonesRb = GFX.GetComponentsInChildren<Rigidbody>();
         playerRb = GetComponent<Rigidbody>();
-
+        gfxCapsuCollider = GFX.GetComponent<CapsuleCollider>();
         playerEventManager = GetComponent<PlayerEventManager>();
 
         UntangleBones();
@@ -124,15 +125,13 @@ public class Player : MonoBehaviour
     {
         this.stopMoving = stopMoving;
     }
-    public void GetYonked(Vector3 flyDirection, float flyForce, float stunTime)
+    public void GetYonked(Vector3 flyDirection, Vector3 propFlyDirection, float flyForce, float stunTime)
     {
         EnableRagDoll(out Rigidbody heldItem);
 
         if (heldItem != null)
         {
-            Vector3 propFlyDirection = new(4f, 3f, 0f);
             float propFlyForce = heldItem.gameObject.GetComponent<Prop>().throwForce;
-
             heldItem.AddForce(propFlyDirection * propFlyForce, ForceMode.Impulse);
         }
 
@@ -154,6 +153,7 @@ public class Player : MonoBehaviour
             bone.useGravity = true;
         }
 
+        gfxCapsuCollider.enabled = false;
         animator.enabled = false;
         playerEventManager.StopMoving(true);
         isRagDoll = true;
@@ -171,6 +171,7 @@ public class Player : MonoBehaviour
             bone.useGravity = false;
         }
 
+        gfxCapsuCollider.enabled = true;
         animator.enabled = true;
         playerEventManager.StopMoving(false);
         isRagDoll = false;

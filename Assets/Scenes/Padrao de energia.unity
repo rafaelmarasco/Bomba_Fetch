@@ -1572,7 +1572,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58244bdf63d3f7f488b928d75473eeba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Hazzard
-  flyDirection: {x: 1, y: 5, z: 0}
+  flyDirection: {x: 4, y: 5, z: 0}
+  propFlyDirection: {x: 4, y: 3, z: 0}
   flyForce: 15
   stunTime: 2.5
   cooldown: 1

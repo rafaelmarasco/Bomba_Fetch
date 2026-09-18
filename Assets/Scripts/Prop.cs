@@ -22,7 +22,7 @@ public class Prop : MonoBehaviour
             {
                 Size.small => 8f,
                 Size.medium => 10f,
-                Size.large => 18f,
+                Size.large => 15f,
                 _ => throwForce,
             };
         }
