@@ -769,6 +769,7 @@ MonoBehaviour:
   GFX: {fileID: 4827275921164204526}
   animator: {fileID: 2258011675586492718}
   hipsRb: {fileID: 7304537807111367421}
+  canGetPushed: 1
 --- !u!114 &7330877714380932613
 MonoBehaviour:
   m_ObjectHideFlags: 0
