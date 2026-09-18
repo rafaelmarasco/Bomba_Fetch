@@ -166,7 +166,10 @@ public class PropInteract : MonoBehaviour
                 propPos.localPosition = Vector3.zero;
                 propPos.rotation = holdPointMedium.rotation;
                 break;
-            case Size.large:
+            case Size.large: // Mudar logica no futuro
+                propPos.SetParent(holdPointMedium);
+                propPos.localPosition = Vector3.zero;
+                propPos.rotation = holdPointMedium.rotation;
                 break;
         }
 

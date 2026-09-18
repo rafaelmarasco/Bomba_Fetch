@@ -41,11 +41,6 @@ public class PlayerAnimator : MonoBehaviour
     private void Update()
     {
         animator.SetBool(IS_WALKING, player.GetIsWalking());
-
-        if (Input.GetKeyDown(KeyCode.T) && !isRagDoll)
-            player.EnableRagDoll();
-        else if (Input.GetKeyDown(KeyCode.T) && isRagDoll)
-            player.DisableRagDoll();
     }
     private void AnimatePush()
     {
@@ -91,7 +86,7 @@ public class PlayerAnimator : MonoBehaviour
     private IEnumerator KnockdownAnimation(float knockdownTime)
     {
         yield return new WaitForSeconds(.2f);
-        player.EnableRagDoll();
+        //player.EnableRagDoll();
         yield return new WaitForSeconds(knockdownTime);
         player.DisableRagDoll();
     }

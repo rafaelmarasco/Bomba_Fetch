@@ -1,6 +1,5 @@
 using UnityEngine;
-using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
     private Rigidbody playerRb;
@@ -10,10 +9,13 @@ public class Player : MonoBehaviour
     [SerializeField] private float moveSpeed = 7f;
 
     private Rigidbody[] bonesRb;
+
     [SerializeField] private GameObject GFX;
+    private CapsuleCollider gfxCapsuCollider;
     [SerializeField] private Animator animator;
     [SerializeField] private Rigidbody hipsRb;
     public bool isRagDoll { get; private set; } = false;
+    public bool canGetPushed = true;
     private bool isWalking => moveDir != Vector3.zero;
 
     private PlayerEventManager playerEventManager;
@@ -27,7 +29,7 @@ public class Player : MonoBehaviour
     {
         bonesRb = GFX.GetComponentsInChildren<Rigidbody>();
         playerRb = GetComponent<Rigidbody>();
-
+        gfxCapsuCollider = GFX.GetComponent<CapsuleCollider>();
         playerEventManager = GetComponent<PlayerEventManager>();
 
         UntangleBones();
@@ -46,19 +48,19 @@ public class Player : MonoBehaviour
             RotateOnMove();
             BasicMove();
         }
-
-
     }
     private void Update()
     {
         lastMoveDir = moveDir != Vector3.zero ? moveDir : lastMoveDir;
-
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            ResetScene();
+        }
     }
     private void ReadInput()
     {
         Vector2 playerInput = playerMovement.GetMovementVectorNormalized();
         rawInput = new Vector3(playerInput.x, 0f, playerInput.y);
-
     }
     private void BasicMove()
     {
@@ -117,22 +119,32 @@ public class Player : MonoBehaviour
     }
     private void DebugCheckBox(Vector3 checkOrigin, Vector3 halfExtends, Quaternion targetRotation)
     {
-
         DebugBoxCast.SimpleDrawBox(checkOrigin, halfExtends, targetRotation, Color.antiqueWhite);
     }
     private void StopMoving(bool stopMoving)
     {
         this.stopMoving = stopMoving;
     }
-    public void GetYonked(Vector3 flyDirection, float flyForce, float stunTime)
+    public void GetYonked(Vector3 flyDirection, Vector3 propFlyDirection, float flyForce, float stunTime)
     {
-        EnableRagDoll();
+        EnableRagDoll(out Rigidbody heldItem);
+
+        if (heldItem != null)
+        {
+            float propFlyForce = heldItem.gameObject.GetComponent<Prop>().throwForce;
+            heldItem.AddForce(propFlyDirection * propFlyForce, ForceMode.Impulse);
+        }
+
         hipsRb.AddForce(flyDirection * flyForce, ForceMode.Impulse);
         playerEventManager.KnockedDown(stunTime);
     }
-    public void EnableRagDoll()
+    public void EnableRagDoll(out Rigidbody heldItemRb)
     {
-        if (propInteract.heldItem != null)
+        GameObject heldItem = propInteract.heldItem;
+
+        heldItemRb = null;
+
+        if (heldItem != null && heldItem.TryGetComponent(out heldItemRb))
             propInteract.DropProp();
 
         foreach (Rigidbody bone in bonesRb)
@@ -141,6 +153,7 @@ public class Player : MonoBehaviour
             bone.useGravity = true;
         }
 
+        gfxCapsuCollider.enabled = false;
         animator.enabled = false;
         playerEventManager.StopMoving(true);
         isRagDoll = true;
@@ -158,11 +171,12 @@ public class Player : MonoBehaviour
             bone.useGravity = false;
         }
 
+        gfxCapsuCollider.enabled = true;
         animator.enabled = true;
         playerEventManager.StopMoving(false);
         isRagDoll = false;
     }
-    private void UntangleBones() // Makes de player collider and bone colliders ignore each other
+    private void UntangleBones() // Makes the player collider and bone colliders ignore each other
     {
         Collider playerCollider = GetComponentInChildren<Collider>();
 
@@ -173,6 +187,21 @@ public class Player : MonoBehaviour
         }
 
         DisableRagDoll();
+    }
+    public void StartColldownTimer(float duration)
+    {
+        canGetPushed = false;
+        CancelInvoke(nameof(ResetColldown));
+        Invoke(nameof(ResetColldown), duration);
+    }
+    private void ResetColldown()
+    {
+        canGetPushed = true;
+    }
+    private void ResetScene()
+    {
+        Scene currentScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(currentScene.name);
     }
     public bool GetIsWalking() { return isWalking; }
     public Vector3 GetLastMoveDirection() { return lastMoveDir; }
