@@ -720,8 +720,8 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8453428288632691985}
   serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
+  m_Mass: 15
+  m_LinearDamping: 999999
   m_AngularDamping: 3.4028235e+38
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -2090,7 +2090,6 @@ MonoBehaviour:
   propInteract: {fileID: 7330877714380932613}
   playerTransform: {fileID: 8330579805403462866}
   playerRagDollTransform: {fileID: 5311500375926874964}
-  knockdownTime: 2
   grabRig: {fileID: 1373606130983098565}
   pushRig: {fileID: 6979180523339886510}
 --- !u!114 &4325470239247425070
