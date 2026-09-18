@@ -44,9 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f3902a42eec28b4abd0b5574a4f8197, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  activeCamera: 0
   mainCamera: {fileID: 0}
-  bombCamera: {fileID: 0}
-  bomb: {fileID: 0}
-  head: {fileID: 0}
-  propInteract: {fileID: 0}
