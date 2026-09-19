@@ -40,7 +40,7 @@ public class PropInteract : MonoBehaviour
     }
     private void Update()
     {
-        lastMoveDir = player.GetLastMoveDirection();
+        lastMoveDir = player.LastMoveDir;
     }
 
     private void Interact_performed(InputAction.CallbackContext obj)

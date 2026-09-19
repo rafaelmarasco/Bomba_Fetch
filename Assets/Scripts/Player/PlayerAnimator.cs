@@ -11,6 +11,7 @@ public class PlayerAnimator : MonoBehaviour
     [Header("Ragdoll Field")]
     [SerializeField] private Transform playerTransform;
     [SerializeField] private Transform playerRagDollTransform;
+    [SerializeField] private Ragdoll ragdoll;
 
     [Header("Rig Field")]
     [SerializeField] private Rig grabRig;
@@ -18,19 +19,14 @@ public class PlayerAnimator : MonoBehaviour
 
     private PlayerEventManager playerEventManager;
 
-    private Rigidbody playerRb;
-
     private readonly int upperBody = 1;
 
     private const string IS_WALKING = "isWalking";
     private const string IS_PUSHING = "IsPushing";
 
-    private bool isRagDoll;
-
     private void OnEnable()
     {
         playerEventManager = GetComponentInParent<PlayerEventManager>();
-        playerRb = GetComponentInParent<Rigidbody>();
 
         playerEventManager.OnItemPickedUp += UpdateGrabWeigth;
         playerEventManager.OnItemDroped += UpdateGrabWeigth;
@@ -40,7 +36,7 @@ public class PlayerAnimator : MonoBehaviour
     }
     private void Update()
     {
-        animator.SetBool(IS_WALKING, player.GetIsWalking());
+        animator.SetBool(IS_WALKING, player.IsMoving);
     }
     private void AnimatePush()
     {
@@ -65,29 +61,23 @@ public class PlayerAnimator : MonoBehaviour
 
         if (propSize == Size.medium || propSize == Size.large)
             grabRig.weight = propInteract.hasItem ? 1f : 0f;
+
         else
             grabRig.weight = 0f;
-
     }
     private void BringBombUp(Transform cameraPos, GameObject bomb)
     {
         grabRig.weight = 1f;
-
-        //Vector3 playerDir = cameraPos.position - bomb.transform.position;
-
         bomb.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
     }
     private void AnimateKnockdown(float stunTime)
     {
-        playerEventManager.StopMoving(true);
+        playerEventManager.StopInputingMovement(true);
         StartCoroutine(KnockdownAnimation(stunTime));   
     }
-
     private IEnumerator KnockdownAnimation(float knockdownTime)
     {
-        yield return new WaitForSeconds(.2f);
-        //player.EnableRagDoll();
         yield return new WaitForSeconds(knockdownTime);
-        player.DisableRagDoll();
+        ragdoll.DisableRagDoll();
     }
 }
