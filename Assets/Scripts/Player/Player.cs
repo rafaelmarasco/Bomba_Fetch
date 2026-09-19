@@ -58,10 +58,6 @@ public class Player : MonoBehaviour
     private void Update()
     {
         LastMoveDir = MoveDir != Vector3.zero ? MoveDir : LastMoveDir;
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            ResetScene();
-        }
     }
     private void ReadInput()
     {
@@ -112,11 +108,9 @@ public class Player : MonoBehaviour
 
         playerEventManager.StopInputingMovement(true);
 
+        Debug.Log($"isKinematic: {playerRb.isKinematic}, mass: {playerRb.mass}, drag: {playerRb.linearDamping}, constraints: {playerRb.constraints}, useGravity: {playerRb.useGravity}");
+
         playerRb.AddForce(jumpDirection * jumpForce, ForceMode.Impulse);
-
-        yield return new WaitForFixedUpdate();
-
-        //Debug.Log($"Velocidade após 1 passo de física: {playerRb.linearVelocity}");
 
         yield return new WaitForSeconds(jumpTime);
 
@@ -146,9 +140,4 @@ public class Player : MonoBehaviour
         Invoke(nameof(ResetKnockableColldown), duration);
     }
     private void ResetKnockableColldown() => canGetPushed = true;
-    private void ResetScene()
-    {
-        Scene currentScene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(currentScene.name);
-    }
 }

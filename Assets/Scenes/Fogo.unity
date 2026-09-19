@@ -281,7 +281,7 @@ Transform:
   m_GameObject: {fileID: 323224128}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -6.263}
+  m_LocalPosition: {x: 0, y: 0, z: -4.21}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2072,9 +2072,9 @@ MonoBehaviour:
   cooldown: 0
   onFireMaterial: {fileID: 2100000, guid: 6c1b20046920c3f43925f149ca187db1, type: 2}
   onFireRunDirection: {fileID: 323224129}
-  jumpDirection: {x: 0, y: 5, z: -2}
+  jumpDirection: {x: 0, y: 3, z: -3}
   jumpForce: 50
-  onFireTime: 3
+  onFireTime: 2
   isOn: 1
 --- !u!65 &1600491236
 BoxCollider:
@@ -2898,7 +2898,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8361708609832705581, guid: 275bdce0c5a85f44496a4c893626c908, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
