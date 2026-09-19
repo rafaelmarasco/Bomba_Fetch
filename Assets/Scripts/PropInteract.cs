@@ -28,6 +28,9 @@ public class PropInteract : MonoBehaviour
     [SerializeField] private Vector3 halfExtends = new Vector3(.5f, 0.1f, .4f);
     [SerializeField] private float interactDistance = .8f;
 
+    [Header("Minigame")]
+    [SerializeField] private Canvas minigameCanvas;
+
 
     private void Awake()
     {
@@ -47,8 +50,9 @@ public class PropInteract : MonoBehaviour
     {
         if (hasBomb && !isBombInteracting)
         {
-            heldItem.transform.SetParent(holdPointInteract);
-
+            //heldItem.transform.SetParent(holdPointInteract);
+            // In this function mean that player has bomb and he is holding it
+            minigameCanvas.gameObject.SetActive(true);
             isBombInteracting = true;
             playerEventManager.BombInteracted(headPos, heldItem);
         }
@@ -144,6 +148,7 @@ public class PropInteract : MonoBehaviour
 
         if (isBombInteracting)
         {
+            minigameCanvas.gameObject.SetActive(false);
             playerEventManager.BombDroped();
             isBombInteracting = false;
         }
