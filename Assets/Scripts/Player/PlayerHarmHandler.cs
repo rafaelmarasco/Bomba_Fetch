@@ -1,78 +1,57 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
-public class Player : MonoBehaviour
+using System.Collections;
+
+public class PlayerHarmHandler : MonoBehaviour
 {
-    [Header("Scripts")]
-    [SerializeField] private PlayerMovement playerMovement;
-    [SerializeField] private PropInteract propInteract;
-    [SerializeField] private Ragdoll ragdoll;
+    private Ragdoll ragdoll;
+    private Rigidbody hipsRb;
+    private Rigidbody playerRb;
     private PlayerEventManager playerEventManager;
 
-    [SerializeField] private Animator animator;
+    public bool canGetPushed = true;
+    public bool isOnFire = false;
+    private bool isOnFireSequence = false;
 
-    private Rigidbody playerRb;
+    private Vector3 runTarget;
 
-    [SerializeField] private Rigidbody hipsRb;
-
-    [SerializeField] private float moveSpeed = 7f;
-
-    private Vector3 rawInput;
-
-    public Vector3 MoveDir { get; private set; }
-    public Vector3 LastMoveDir { get; private set; } = Vector3.forward;
-
-    public bool IsMoving => MoveDir != Vector3.zero;
-    private bool stopMoving;
-
+    private void FixedUpdate()
+    {
+        if (isOnFire)
+            RunOnFire();
+    }
     private void Awake()
     {
+        ragdoll = GetComponent<Ragdoll>();
+        hipsRb = GetComponentInChildren<Rigidbody>();
         playerRb = GetComponent<Rigidbody>();
         playerEventManager = GetComponent<PlayerEventManager>();
     }
 
     private void OnEnable()
     {
-        playerEventManager.OnStopedMoving += StopMoving;
-        playerEventManager.OnBurned += GetBurned;
+        playerEventManager.OnEletrocuted += GetYonked;
     }
-    private void FixedUpdate()
+    private void GetYonked(Vector3 flyDirection, Vector3 propFlyDirection, float flyForce, float stunTime)
     {
-        if (!stopMoving)
+        ragdoll.EnableRagDoll(out Rigidbody heldItem);
+
+        if (heldItem != null)
         {
-            ReadInput();
-            RotateOnMove();
-            BasicMove();
+            float propFlyForce = heldItem.gameObject.GetComponent<Prop>().ThrowForce;
+            heldItem.AddForce(propFlyDirection * propFlyForce, ForceMode.Impulse);
         }
 
-        if (isOnFire)
-            RunOnFire();
+        hipsRb.AddForce(flyDirection * flyForce, ForceMode.Impulse);
+        playerEventManager.KnockedDown(stunTime);
+    }
+    public void StartKnockableColldownTimer(float duration)
+    {
+        canGetPushed = false;
+        CancelInvoke(nameof(ResetKnockableColldown));
+        Invoke(nameof(ResetKnockableColldown), duration);
+    }
+    private void ResetKnockableColldown() => canGetPushed = true;
 
-    }
-    private void Update()
-    {
-        LastMoveDir = MoveDir != Vector3.zero ? MoveDir : LastMoveDir;
-    }
-    private void ReadInput()
-    {
-        Vector2 playerInput = playerMovement.GetMovementVectorNormalized();
-        rawInput = new Vector3(playerInput.x, 0f, playerInput.y);
-    }
-    private void BasicMove()
-    {
-        MoveDir = rawInput;
-        playerRb.MovePosition(playerRb.position + moveSpeed * Time.fixedDeltaTime * MoveDir);
-    }
-    private void RotateOnMove()
-    {
-        if (rawInput != Vector3.zero)
-            transform.rotation = Quaternion.LookRotation(rawInput, Vector3.up);
-    }
-    private void StopMoving(bool stopMoving)
-    {
-        this.stopMoving = stopMoving;
-    }
     private void GetBurned(Vector3 jumpDirection, Vector3 runTarget, float jumpForce, float runningTime)
     {
         Debug.Log($"jumpDirection: {jumpDirection}, jumpForce: {jumpForce}, runTarget: {runTarget}");

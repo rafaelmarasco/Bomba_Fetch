@@ -65,9 +65,9 @@ public class Hazzard : MonoBehaviour
         if (!isOn || !other.gameObject.GetComponent<PlayerAnimator>())
             return;
 
-        Player player = other.gameObject.GetComponentInParent<Player>();
+        PlayerHarmHandler playerHarmHandler = other.gameObject.GetComponentInParent<PlayerHarmHandler>();
 
-        if (player == null || !player.canGetPushed)
+        if (playerHarmHandler == null || !playerHarmHandler.canGetPushed)
             return;
 
         PlayerEventManager playerEventManager = other.GetComponentInParent<PlayerEventManager>();
@@ -75,7 +75,7 @@ public class Hazzard : MonoBehaviour
         if (playerEventManager == null)
             return;
 
-        player.StartKnockableColldownTimer(cooldown);
+        playerHarmHandler.StartKnockableColldownTimer(cooldown);
         playerEventManager.Eletrocute(flyDirection, propFlyDirection, flyForce, stunTime);
     }
 
