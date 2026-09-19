@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8678020681170746213}
   - component: {fileID: 9003208957500983127}
-  - component: {fileID: 8361708609832705581}
   - component: {fileID: 7474738964020847209}
   m_Layer: 0
   m_Name: Game Manager
@@ -46,18 +45,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 320ceab896daead4b9ded89a784fbf77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EventManager
---- !u!114 &8361708609832705581
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1969801659941127974}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e7c1ba0be0ce594f8ceb8e7e41f2d5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InputTesting
 --- !u!114 &7474738964020847209
 MonoBehaviour:
   m_ObjectHideFlags: 0

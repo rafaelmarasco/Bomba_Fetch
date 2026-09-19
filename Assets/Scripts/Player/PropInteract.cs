@@ -43,7 +43,7 @@ public class PropInteract : MonoBehaviour
     }
     private void Update()
     {
-        lastMoveDir = player.GetLastMoveDirection();
+        lastMoveDir = player.LastMoveDir;
     }
 
     private void Interact_performed(InputAction.CallbackContext obj)
@@ -91,7 +91,7 @@ public class PropInteract : MonoBehaviour
 
         return isProp;
     }
-    private void PushProp()
+    public void PushProp()
     {
         if (!isBombInteracting)
         {
