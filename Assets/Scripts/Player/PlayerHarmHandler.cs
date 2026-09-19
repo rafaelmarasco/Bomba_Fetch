@@ -5,26 +5,30 @@ public class PlayerHarmHandler : MonoBehaviour
 {
     private Player player;
     private Ragdoll ragdoll;
-    private Rigidbody hipsRb;
-    private Rigidbody playerRb;
     private PlayerEventManager playerEventManager;
+    private PropInteract propInteract;
+
+    private Rigidbody HipsRb => player.HipsRb;
+    private Rigidbody playerRb;
 
     private bool isOnFireSequence = false;
     public bool CanGetPushed { get; private set; } = true;
     public bool IsOnFire { get; private set; } = false;
 
-    private Vector3 runTarget;
+    private Vector3 initialRunTarget;
+    private Vector3 dangerPos;
 
     [SerializeField] private float jumpTime;
     [SerializeField] private float onFireMoveSpeed;
+
 
     private void Awake()
     {
         player = gameObject.GetComponent<Player>();
         playerEventManager = GetComponent<PlayerEventManager>();
+        propInteract = GetComponent<PropInteract>();
 
         ragdoll = GetComponent<Ragdoll>();
-        hipsRb = GetComponentInChildren<Rigidbody>();
         playerRb = GetComponent<Rigidbody>();
     }
 
@@ -36,7 +40,7 @@ public class PlayerHarmHandler : MonoBehaviour
     private void FixedUpdate()
     {
         if (IsOnFire)
-            RunOnFire();
+            RunOnFire(dangerPos);
     }
     private void GetYonked(Vector3 flyDirection, Vector3 propFlyDirection, float flyForce, float stunTime)
     {
@@ -48,7 +52,7 @@ public class PlayerHarmHandler : MonoBehaviour
             heldItem.AddForce(propFlyDirection * propFlyForce, ForceMode.Impulse);
         }
 
-        hipsRb.AddForce(flyDirection * flyForce, ForceMode.Impulse);
+        HipsRb.AddForce(flyDirection * flyForce, ForceMode.Impulse);
         playerEventManager.KnockedDown(stunTime);
     }
     public void StartKnockableColldownTimer(float duration)
@@ -58,24 +62,28 @@ public class PlayerHarmHandler : MonoBehaviour
         Invoke(nameof(ResetKnockableColldown), duration);
     }
     private void ResetKnockableColldown() => CanGetPushed = true;
-    private void GetBurned(Vector3 jumpDirection, Vector3 runTarget, float jumpForce, float runningTime)
+    private void GetBurned(Vector3 jumpDirection, Vector3 runTarget, float jumpForce, float runningTime, Vector3 firePos, float stunTime)
     {
-        Debug.Log($"jumpDirection: {jumpDirection}, jumpForce: {jumpForce}, runTarget: {runTarget}");
+        dangerPos = firePos;
+
         if (isOnFireSequence)
             return;
 
         isOnFireSequence = true;
-        StartCoroutine(OnFireSequence(jumpDirection, runTarget, jumpForce, runningTime));
+        StartCoroutine(OnFireSequence(jumpDirection, runTarget, jumpForce, runningTime, stunTime));
     }
-    private IEnumerator OnFireSequence(Vector3 jumpDirection, Vector3 runTarget, float jumpForce, float runningTime)
+    private IEnumerator OnFireSequence(Vector3 jumpDirection, Vector3 runTarget, float jumpForce, float runningTime, float stunTime)
     {
-        this.runTarget = runTarget;
+        this.initialRunTarget = runTarget;
         Vector3 directionToTarget = runTarget - playerRb.position;
 
         playerEventManager.StopInputingMovement(true);
 
         player.RotateOnMove(directionToTarget);
         playerRb.AddForce(jumpDirection * jumpForce, ForceMode.Impulse);
+
+        if (propInteract.heldItem != null)
+            propInteract.PushProp();
 
         yield return new WaitForSeconds(jumpTime);
 
@@ -85,15 +93,44 @@ public class PlayerHarmHandler : MonoBehaviour
 
         IsOnFire = false;
         isOnFireSequence = false;
-        playerEventManager.StopInputingMovement(false);
+        playerEventManager.KnockedDown(stunTime);
     }
-    private void RunOnFire()
+    private void RunOnFire(Vector3 dangerPos)
     {
-        Vector3 directionToTarget = runTarget - playerRb.position;
-
+        Vector3 directionToTarget = initialRunTarget - playerRb.position;
         directionToTarget.y = 0f;
+
+        float distanceFromTarget = directionToTarget.magnitude;
+
+        if (distanceFromTarget <= .2f)
+        {
+            initialRunTarget = SelectRandonDirection();
+            directionToTarget = initialRunTarget - playerRb.position;
+            directionToTarget.y = 0f;
+        }
+
         directionToTarget.Normalize();
 
+        player.RotateOnMove(directionToTarget);
         playerRb.MovePosition(playerRb.position + onFireMoveSpeed * Time.fixedDeltaTime * directionToTarget);
+    }
+
+    private Vector3 SelectRandonDirection()
+    {
+        Vector3 randonDirection;
+        Vector3 directionToDanger = (dangerPos - playerRb.position).normalized;
+        float dot;
+
+        do
+        {
+            float randonAngle = Random.Range(0f, 360f);
+            randonDirection = Quaternion.Euler(0f, randonAngle, 0f) * Vector3.forward;
+
+            dot = Vector3.Dot(randonDirection, directionToDanger);
+        } while (dot > -.4f);
+
+        float randonDistance = Random.Range(3f, 5f);
+
+        return playerRb.position + randonDirection * randonDistance;
     }
 }

@@ -7,21 +7,22 @@ public class Hazzard : MonoBehaviour
         fire,
         eletricity,
     }
-
     [SerializeField] private Type hazzardType;
+
+    [Header("Eletricity Hazzard")]
     [SerializeField] private Vector3 flyDirection;
     [SerializeField] private Vector3 propFlyDirection;
     [SerializeField] private float flyForce;
-    [SerializeField] private float stunTime;
     [SerializeField] private float cooldown;
 
     [Header("Fire Hazzard")]
-    [SerializeField] private Material onFireMaterial;
     [SerializeField] private Transform onFireRunDirection;
-    [SerializeField] private Vector3 jumpDirection;
+    private Vector3 jumpDirection => onFireRunDirection.position.normalized + Vector3.up;
     [SerializeField] private float jumpForce;
     [SerializeField] private float onFireTime;
 
+    [Header("Hazzard Field")]
+    [SerializeField] private float stunTime;
     public bool isOn;
 
     private void OnTriggerEnter(Collider other)
@@ -93,17 +94,7 @@ public class Hazzard : MonoBehaviour
         if (playerEventManager == null)
             return;
 
-        playerEventManager.SetOnFire(jumpDirection, onFireRunDirection.position, jumpForce, onFireTime);
-    }
-    private void FireTest(Collider other)
-    {
-        SkinnedMeshRenderer skinnedMeshRenderer = other.gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
-        Material[] mats = skinnedMeshRenderer.materials;
-        mats[0] = onFireMaterial;
-
-        Material[] originalMat = skinnedMeshRenderer.materials;
-
-        skinnedMeshRenderer.materials = mats;
+        playerEventManager.SetOnFire(jumpDirection, onFireRunDirection.position, jumpForce * 10, onFireTime, transform.position, stunTime);
     }
 
     private void OnDrawGizmosSelected()

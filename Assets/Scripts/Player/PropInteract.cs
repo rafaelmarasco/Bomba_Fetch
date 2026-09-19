@@ -87,7 +87,7 @@ public class PropInteract : MonoBehaviour
 
         return isProp;
     }
-    private void PushProp()
+    public void PushProp()
     {
         if (!isBombInteracting)
         {

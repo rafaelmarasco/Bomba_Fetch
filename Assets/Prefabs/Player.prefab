@@ -836,7 +836,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ReciveHarm
   jumpTime: 1.25
-  onFireMoveSpeed: 5
+  onFireMoveSpeed: 4
 --- !u!114 &1866220012186243286
 MonoBehaviour:
   m_ObjectHideFlags: 0

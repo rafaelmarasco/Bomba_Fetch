@@ -77,6 +77,7 @@ public class PlayerAnimator : MonoBehaviour
     }
     private IEnumerator KnockdownAnimation(float knockdownTime)
     {
+        ragdoll.EnableRagDoll(out _);
         yield return new WaitForSeconds(knockdownTime);
         ragdoll.DisableRagDoll();
     }

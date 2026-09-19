@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     private Rigidbody playerRb;
 
     [SerializeField] private Rigidbody hipsRb;
+    public Rigidbody HipsRb => hipsRb;
 
     [SerializeField] private float moveSpeed = 7f;
 

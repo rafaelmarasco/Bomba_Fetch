@@ -1638,11 +1638,13 @@ MonoBehaviour:
   flyDirection: {x: 4, y: 5, z: 0}
   propFlyDirection: {x: 4, y: 3, z: 0}
   flyForce: 15
+  stunTime: 2.5
   cooldown: 1
+  onFireMaterial: {fileID: 2100000, guid: 6c1b20046920c3f43925f149ca187db1, type: 2}
   onFireRunDirection: {fileID: 0}
+  jumpDirection: {x: 0, y: 0, z: 0}
   jumpForce: 0
   onFireTime: 0
-  stunTime: 2.5
   isOn: 1
 --- !u!1001 &1274459445
 PrefabInstance:
@@ -2066,11 +2068,13 @@ MonoBehaviour:
   flyDirection: {x: 4, y: 5, z: 0}
   propFlyDirection: {x: 0, y: 0, z: 0}
   flyForce: 0
+  stunTime: 0
   cooldown: 0
+  onFireMaterial: {fileID: 2100000, guid: 6c1b20046920c3f43925f149ca187db1, type: 2}
   onFireRunDirection: {fileID: 323224129}
-  jumpForce: 15
-  onFireTime: 2
-  stunTime: 3
+  jumpDirection: {x: 0, y: 3, z: -3}
+  jumpForce: 40
+  onFireTime: 3
   isOn: 1
 --- !u!65 &1600491236
 BoxCollider:
