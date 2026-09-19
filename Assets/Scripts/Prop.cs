@@ -14,4 +14,17 @@ public class Prop : MonoBehaviour
 {
     [SerializeField] private Size propSize;
     public Size PropSize => propSize;
+    public float ThrowForce
+    {
+        get
+        {
+            return PropSize switch
+            {
+                Size.small => 8f,
+                Size.medium => 10f,
+                Size.large => 15f,
+                _ => ThrowForce,
+            };
+        }
+    }
 }

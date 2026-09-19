@@ -8,25 +8,35 @@ public class PlayerAnimator : MonoBehaviour
     [SerializeField] private Player player;
     [SerializeField] private PropInteract propInteract;
 
+    [Header("Ragdoll Field")]
+    [SerializeField] private Transform playerTransform;
+    [SerializeField] private Transform playerRagDollTransform;
+    [SerializeField] private Ragdoll ragdoll;
+
     [Header("Rig Field")]
     [SerializeField] private Rig grabRig;
     [SerializeField] private Rig pushRig;
 
-    private int upperBody = 1;
+    private PlayerEventManager playerEventManager;
+
+    private readonly int upperBody = 1;
 
     private const string IS_WALKING = "isWalking";
     private const string IS_PUSHING = "IsPushing";
 
     private void OnEnable()
     {
-        EventManager.Instance.OnItemPickedUp += UpdateGrabWeigth;
-        EventManager.Instance.OnItemDroped += UpdateGrabWeigth;
-        EventManager.Instance.OnPropPush += AnimatePush;
-        EventManager.Instance.OnBombInteracted += BringBombUp;
+        playerEventManager = GetComponentInParent<PlayerEventManager>();
+
+        playerEventManager.OnItemPickedUp += UpdateGrabWeigth;
+        playerEventManager.OnItemDroped += UpdateGrabWeigth;
+        playerEventManager.OnPropPush += AnimatePush;
+        playerEventManager.OnBombInteracted += BringBombUp;
+        playerEventManager.OnKnockDown += AnimateKnockdown;
     }
     private void Update()
     {
-        animator.SetBool(IS_WALKING, player.GetIsWalking());
+        animator.SetBool(IS_WALKING, player.IsMoving);
     }
     private void AnimatePush()
     {
@@ -51,20 +61,24 @@ public class PlayerAnimator : MonoBehaviour
 
         if (propSize == Size.medium || propSize == Size.large)
             grabRig.weight = propInteract.hasItem ? 1f : 0f;
+
         else
             grabRig.weight = 0f;
-
     }
     private void BringBombUp(Transform cameraPos, GameObject bomb)
     {
         grabRig.weight = 1f;
-
-        Vector3 playerDir = cameraPos.position - bomb.transform.position;
-
-        bomb.transform.localPosition = Vector3.zero;
-        bomb.transform.localRotation = Quaternion.identity;
-
-        EventManager.Instance.BombRepositionated();
+        bomb.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
     }
-
+    private void AnimateKnockdown(float stunTime)
+    {
+        playerEventManager.StopInputingMovement(true);
+        StartCoroutine(KnockdownAnimation(stunTime));   
+    }
+    private IEnumerator KnockdownAnimation(float knockdownTime)
+    {
+        ragdoll.EnableRagDoll(out _);
+        yield return new WaitForSeconds(knockdownTime);
+        ragdoll.DisableRagDoll();
+    }
 }

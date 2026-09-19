@@ -8,7 +8,11 @@ public class PropInteract : MonoBehaviour
     [SerializeField] private Transform checkPos;
     [SerializeField] private Transform headPos;
     [SerializeField] private float pushForce;
-    private InputSystem_Actions inputActions;
+
+    private PlayerEventManager playerEventManager;
+
+    private PlayerInput playerInput;
+
     private Vector3 lastMoveDir;
     public bool hasItem => heldItem != null;
     public bool hasBomb { get; private set; } = false;
@@ -24,29 +28,33 @@ public class PropInteract : MonoBehaviour
     [SerializeField] private Vector3 halfExtends = new Vector3(.5f, 0.1f, .4f);
     [SerializeField] private float interactDistance = .8f;
 
+    [Header("Minigame")]
+    [SerializeField] private Canvas minigameCanvas;
+
 
     private void Awake()
     {
-        inputActions = new InputSystem_Actions();
-        inputActions.Player.Enable();
-        inputActions.Player.Grab.performed += Grab_performed;
-        inputActions.Player.Push.performed += Push_performed;
-        inputActions.Player.Interact.performed += Interact_performed;
+        playerInput = GetComponent<PlayerInput>();
+        playerEventManager = GetComponent<PlayerEventManager>();
+
+        playerInput.actions["Grab"].performed += Grab_performed;
+        playerInput.actions["Push"].performed += Push_performed;
+        playerInput.actions["Interact"].performed += Interact_performed;
     }
     private void Update()
     {
-        lastMoveDir = player.GetLastMoveDirection();
-        //BoxCastDebug(checkPos.position - lastMoveDir * .2f, halfExtends, checkPos.rotation);
+        lastMoveDir = player.LastMoveDir;
     }
 
     private void Interact_performed(InputAction.CallbackContext obj)
     {
         if (hasBomb && !isBombInteracting)
         {
-            heldItem.transform.SetParent(holdPointInteract);
-
+            //heldItem.transform.SetParent(holdPointInteract);
+            // In this function mean that player has bomb and he is holding it
+            minigameCanvas.gameObject.SetActive(true);
             isBombInteracting = true;
-            EventManager.Instance.BombInteracted(headPos, heldItem);
+            playerEventManager.BombInteracted(headPos, heldItem);
         }
     }
     private void Push_performed(InputAction.CallbackContext obj)
@@ -66,7 +74,7 @@ public class PropInteract : MonoBehaviour
             if (hasBomb)
             {
                 hasBomb = false;
-                EventManager.Instance.BombDroped();
+                playerEventManager.BombDroped();
             }
         }
     }
@@ -83,11 +91,11 @@ public class PropInteract : MonoBehaviour
 
         return isProp;
     }
-    private void PushProp()
+    public void PushProp()
     {
         if (!isBombInteracting)
         {
-            EventManager.Instance.PropPush();
+            playerEventManager.PropPush();
 
             if (!hasItem && CheckForProps(out GameObject prop))
             {
@@ -104,8 +112,7 @@ public class PropInteract : MonoBehaviour
     }
     private void PickUpProp(GameObject prop)
     {
-        //float zOffSet = .6f;
-        //float yOffSet = .8f;
+        const int PROP_IN_HAND_LAYER = 7;
 
         heldItem = prop;
         prop.TryGetComponent<Prop>(out Prop propInfo);
@@ -115,12 +122,16 @@ public class PropInteract : MonoBehaviour
         if (prop.TryGetComponent<Rigidbody>(out Rigidbody propRb))
             propRb.isKinematic = true;
 
+        prop.layer = PROP_IN_HAND_LAYER;
+
         PickUpReposition(propInfo, prop.transform);
 
-        EventManager.Instance.ItemPickedUp(propInfo);
+        playerEventManager.ItemPickedUp(propInfo);
     }
-    private void DropProp()
+    public void DropProp()
     {
+        const int DEFAULT_LAYER = 0;
+
         Prop propInfo = heldItem.GetComponent<Prop>();
         float zOffset = .2f;
         float yOffset = .3f;
@@ -129,20 +140,23 @@ public class PropInteract : MonoBehaviour
         if (heldItem.TryGetComponent<Rigidbody>(out Rigidbody propRb))
             propRb.isKinematic = false;
 
+        heldItem.layer = DEFAULT_LAYER;
+
         heldItem.transform.localPosition += offset;
         heldItem.transform.SetParent(null);
         heldItem = null;
 
         if (isBombInteracting)
         {
-            EventManager.Instance.BombDroped();
+            minigameCanvas.gameObject.SetActive(false);
+            playerEventManager.BombDroped();
             isBombInteracting = false;
         }
 
-        EventManager.Instance.ItemDroped(propInfo);
+        playerEventManager.ItemDroped(propInfo);
     }
     public void PickUpReposition(Prop propInfo, Transform propPos)
-    { 
+    {
         Size propSize = propInfo.PropSize;
 
         switch (propSize)
@@ -156,9 +170,11 @@ public class PropInteract : MonoBehaviour
                 propPos.SetParent(holdPointMedium);
                 propPos.localPosition = Vector3.zero;
                 propPos.rotation = holdPointMedium.rotation;
-                EventManager.Instance.ItemPickedUp(propInfo);
                 break;
-            case Size.large:
+            case Size.large: // Mudar logica no futuro
+                propPos.SetParent(holdPointMedium);
+                propPos.localPosition = Vector3.zero;
+                propPos.rotation = holdPointMedium.rotation;
                 break;
         }
 
