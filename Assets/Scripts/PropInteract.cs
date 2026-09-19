@@ -28,6 +28,9 @@ public class PropInteract : MonoBehaviour
     [SerializeField] private Vector3 halfExtends = new Vector3(.5f, 0.1f, .4f);
     [SerializeField] private float interactDistance = .8f;
 
+    [Header("Minigame")]
+    [SerializeField] private Canvas minigameCanvas;
+
 
     private void Awake()
     {
@@ -48,7 +51,8 @@ public class PropInteract : MonoBehaviour
         if (hasBomb && !isBombInteracting)
         {
             //heldItem.transform.SetParent(holdPointInteract);
-            heldItem.GetComponentInChildren<Canvas>(true).gameObject.SetActive(true); // Ativa o canvas da bomba
+            // In this function mean that player has bomb and he is holding it
+            minigameCanvas.gameObject.SetActive(true);
             isBombInteracting = true;
             playerEventManager.BombInteracted(headPos, heldItem);
         }
@@ -125,10 +129,9 @@ public class PropInteract : MonoBehaviour
     }
     private void DropProp()
     {
-        if (isBombInteracting)
-        {
-            heldItem.GetComponentInChildren<Canvas>(true).gameObject.SetActive(false); // Desativa o canvas da bomba
-        }
+        
+        //if (isBombInteracting)
+        //    minigameCanvas.gameObject.SetActive(false);
 
         Prop propInfo = heldItem.GetComponent<Prop>();
         float zOffset = .2f;
@@ -143,7 +146,8 @@ public class PropInteract : MonoBehaviour
         heldItem = null;
 
         if (isBombInteracting)
-        { 
+        {
+            minigameCanvas.gameObject.SetActive(false);
             playerEventManager.BombDroped();
             isBombInteracting = false;
         }
