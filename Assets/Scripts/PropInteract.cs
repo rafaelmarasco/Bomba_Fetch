@@ -48,7 +48,7 @@ public class PropInteract : MonoBehaviour
         if (hasBomb && !isBombInteracting)
         {
             //heldItem.transform.SetParent(holdPointInteract);
-
+            heldItem.GetComponentInChildren<Canvas>(true).gameObject.SetActive(true); // Ativa o canvas da bomba
             isBombInteracting = true;
             playerEventManager.BombInteracted(headPos, heldItem);
         }
@@ -125,6 +125,11 @@ public class PropInteract : MonoBehaviour
     }
     private void DropProp()
     {
+        if (isBombInteracting)
+        {
+            heldItem.GetComponentInChildren<Canvas>(true).gameObject.SetActive(false); // Desativa o canvas da bomba
+        }
+
         Prop propInfo = heldItem.GetComponent<Prop>();
         float zOffset = .2f;
         float yOffset = .3f;
@@ -138,7 +143,7 @@ public class PropInteract : MonoBehaviour
         heldItem = null;
 
         if (isBombInteracting)
-        {
+        { 
             playerEventManager.BombDroped();
             isBombInteracting = false;
         }
