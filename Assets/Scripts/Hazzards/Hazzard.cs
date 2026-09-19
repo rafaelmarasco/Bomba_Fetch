@@ -62,28 +62,21 @@ public class Hazzard : MonoBehaviour
 
     private void TryToEletrocute(Collider other)
     {
-        Debug.Log("Tentando eletrocutar");
-
         if (!isOn || !other.gameObject.GetComponent<PlayerAnimator>())
             return;
-
-        Debug.Log("Esta ligado e com player animator");
 
         Player player = other.gameObject.GetComponentInParent<Player>();
 
         if (player == null || !player.canGetPushed)
             return;
-        Debug.Log("Tem um player e ele pode ser empurrado");
 
         PlayerEventManager playerEventManager = other.GetComponentInParent<PlayerEventManager>();
 
         if (playerEventManager == null)
             return;
-        Debug.Log("Ativando Event manager");
 
         player.StartKnockableColldownTimer(cooldown);
-        playerEventManager.Eletrocute(flyDirection, propFlyDirection, flyForce, onFireTime);
-        Debug.Log("metodo finalizado");
+        playerEventManager.Eletrocute(flyDirection, propFlyDirection, flyForce, stunTime);
     }
 
     private void SetOnFire(Collider other)

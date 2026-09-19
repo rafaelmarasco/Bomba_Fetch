@@ -685,6 +685,7 @@ GameObject:
   - component: {fileID: 891634052499106268}
   - component: {fileID: 7330877714380932613}
   - component: {fileID: 6126682385651391774}
+  - component: {fileID: 3644667998650854834}
   - component: {fileID: 1866220012186243286}
   m_Layer: 3
   m_Name: Player
@@ -723,7 +724,7 @@ Rigidbody:
   serializedVersion: 5
   m_Mass: 15
   m_LinearDamping: 5
-  m_AngularDamping: 3.4028235e+38
+  m_AngularDamping: 9999
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -823,6 +824,19 @@ MonoBehaviour:
   animator: {fileID: 2258011675586492718}
   GFX: {fileID: 4827275921164204526}
   hipsRb: {fileID: 7304537807111367421}
+  playerRb: {fileID: 7772503601804982951}
+--- !u!114 &3644667998650854834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8453428288632691985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb4162f96c334cd4f94a7ea538c93f2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ReciveHarm
 --- !u!114 &1866220012186243286
 MonoBehaviour:
   m_ObjectHideFlags: 0

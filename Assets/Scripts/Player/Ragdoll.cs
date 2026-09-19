@@ -10,6 +10,7 @@ public class Ragdoll : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private GameObject GFX;
     [SerializeField] private Rigidbody hipsRb;
+    [SerializeField] private Rigidbody playerRb;
     public bool IsRagDoll { get; private set; } = false;
 
     private Rigidbody[] bonesRb;
@@ -40,8 +41,12 @@ public class Ragdoll : MonoBehaviour
         }
 
         gfxCapsuCollider.enabled = false;
+        playerRb.useGravity = false;
+
         animator.enabled = false;
+
         playerEventManager.StopInputingMovement(true);
+
         IsRagDoll = true;
     }
     public void DisableRagDoll()
@@ -58,6 +63,7 @@ public class Ragdoll : MonoBehaviour
         }
 
         gfxCapsuCollider.enabled = true;
+        playerRb.useGravity = true;
         animator.enabled = true;
         playerEventManager.StopInputingMovement(false);
         IsRagDoll = false;
