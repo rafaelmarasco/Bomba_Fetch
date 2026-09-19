@@ -33,7 +33,6 @@ public class Hazzard : MonoBehaviour
                 break;
 
             case Type.eletricity:
-                Debug.Log("Algo detectado");
                 TryToEletrocute(other);
                 break;
 
@@ -67,7 +66,7 @@ public class Hazzard : MonoBehaviour
 
         PlayerHarmHandler playerHarmHandler = other.gameObject.GetComponentInParent<PlayerHarmHandler>();
 
-        if (playerHarmHandler == null || !playerHarmHandler.canGetPushed)
+        if (playerHarmHandler == null || !playerHarmHandler.CanGetPushed)
             return;
 
         PlayerEventManager playerEventManager = other.GetComponentInParent<PlayerEventManager>();
@@ -84,9 +83,9 @@ public class Hazzard : MonoBehaviour
         if (!isOn || !other.gameObject.GetComponent<PlayerAnimator>())
             return;
 
-        Player player = other.GetComponentInParent<Player>();
+        PlayerHarmHandler playerHarmHandler = other.gameObject.GetComponentInParent<PlayerHarmHandler>();
 
-        if (player == null || player.isOnFire)
+        if (playerHarmHandler == null || playerHarmHandler.IsOnFire)
             return;
 
         PlayerEventManager playerEventManager = other.GetComponentInParent<PlayerEventManager>();

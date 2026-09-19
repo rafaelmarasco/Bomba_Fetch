@@ -3,33 +3,40 @@ using System.Collections;
 
 public class PlayerHarmHandler : MonoBehaviour
 {
+    private Player player;
     private Ragdoll ragdoll;
     private Rigidbody hipsRb;
     private Rigidbody playerRb;
     private PlayerEventManager playerEventManager;
 
-    public bool canGetPushed = true;
-    public bool isOnFire = false;
     private bool isOnFireSequence = false;
+    public bool CanGetPushed { get; private set; } = true;
+    public bool IsOnFire { get; private set; } = false;
 
     private Vector3 runTarget;
 
-    private void FixedUpdate()
-    {
-        if (isOnFire)
-            RunOnFire();
-    }
+    [SerializeField] private float jumpTime;
+    [SerializeField] private float onFireMoveSpeed;
+
     private void Awake()
     {
+        player = gameObject.GetComponent<Player>();
+        playerEventManager = GetComponent<PlayerEventManager>();
+
         ragdoll = GetComponent<Ragdoll>();
         hipsRb = GetComponentInChildren<Rigidbody>();
         playerRb = GetComponent<Rigidbody>();
-        playerEventManager = GetComponent<PlayerEventManager>();
     }
 
     private void OnEnable()
     {
         playerEventManager.OnEletrocuted += GetYonked;
+        playerEventManager.OnBurned += GetBurned;
+    }
+    private void FixedUpdate()
+    {
+        if (IsOnFire)
+            RunOnFire();
     }
     private void GetYonked(Vector3 flyDirection, Vector3 propFlyDirection, float flyForce, float stunTime)
     {
@@ -46,12 +53,11 @@ public class PlayerHarmHandler : MonoBehaviour
     }
     public void StartKnockableColldownTimer(float duration)
     {
-        canGetPushed = false;
+        CanGetPushed = false;
         CancelInvoke(nameof(ResetKnockableColldown));
         Invoke(nameof(ResetKnockableColldown), duration);
     }
-    private void ResetKnockableColldown() => canGetPushed = true;
-
+    private void ResetKnockableColldown() => CanGetPushed = true;
     private void GetBurned(Vector3 jumpDirection, Vector3 runTarget, float jumpForce, float runningTime)
     {
         Debug.Log($"jumpDirection: {jumpDirection}, jumpForce: {jumpForce}, runTarget: {runTarget}");
@@ -61,33 +67,30 @@ public class PlayerHarmHandler : MonoBehaviour
         isOnFireSequence = true;
         StartCoroutine(OnFireSequence(jumpDirection, runTarget, jumpForce, runningTime));
     }
-
     private IEnumerator OnFireSequence(Vector3 jumpDirection, Vector3 runTarget, float jumpForce, float runningTime)
     {
-        float jumpTime = 1f;
         this.runTarget = runTarget;
+        Vector3 directionToTarget = runTarget - playerRb.position;
 
         playerEventManager.StopInputingMovement(true);
 
-        Debug.Log($"isKinematic: {playerRb.isKinematic}, mass: {playerRb.mass}, drag: {playerRb.linearDamping}, constraints: {playerRb.constraints}, useGravity: {playerRb.useGravity}");
-
+        player.RotateOnMove(directionToTarget);
         playerRb.AddForce(jumpDirection * jumpForce, ForceMode.Impulse);
 
         yield return new WaitForSeconds(jumpTime);
 
-        isOnFire = true;
+        IsOnFire = true;
 
         yield return new WaitForSeconds(runningTime);
 
-        isOnFire = false;
+        IsOnFire = false;
         isOnFireSequence = false;
         playerEventManager.StopInputingMovement(false);
     }
-
     private void RunOnFire()
     {
-        float onFireMoveSpeed = 7f;
         Vector3 directionToTarget = runTarget - playerRb.position;
+
         directionToTarget.y = 0f;
         directionToTarget.Normalize();
 

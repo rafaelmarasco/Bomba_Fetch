@@ -783,8 +783,6 @@ MonoBehaviour:
   animator: {fileID: 2258011675586492718}
   hipsRb: {fileID: 7304537807111367421}
   moveSpeed: 7
-  canGetPushed: 1
-  isOnFire: 0
 --- !u!114 &7330877714380932613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -837,6 +835,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb4162f96c334cd4f94a7ea538c93f2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ReciveHarm
+  jumpTime: 1.25
+  onFireMoveSpeed: 5
 --- !u!114 &1866220012186243286
 MonoBehaviour:
   m_ObjectHideFlags: 0

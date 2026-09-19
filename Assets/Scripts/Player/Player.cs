@@ -35,20 +35,15 @@ public class Player : MonoBehaviour
     private void OnEnable()
     {
         playerEventManager.OnStopedMoving += StopMoving;
-        playerEventManager.OnBurned += GetBurned;
     }
     private void FixedUpdate()
     {
         if (!stopMoving)
         {
             ReadInput();
-            RotateOnMove();
+            RotateOnMove(rawInput);
             BasicMove();
         }
-
-        if (isOnFire)
-            RunOnFire();
-
     }
     private void Update()
     {
@@ -64,54 +59,13 @@ public class Player : MonoBehaviour
         MoveDir = rawInput;
         playerRb.MovePosition(playerRb.position + moveSpeed * Time.fixedDeltaTime * MoveDir);
     }
-    private void RotateOnMove()
+    public void RotateOnMove(Vector3 input)
     {
-        if (rawInput != Vector3.zero)
-            transform.rotation = Quaternion.LookRotation(rawInput, Vector3.up);
+        if (input != Vector3.zero)
+            transform.rotation = Quaternion.LookRotation(input, Vector3.up);
     }
     private void StopMoving(bool stopMoving)
     {
         this.stopMoving = stopMoving;
-    }
-    private void GetBurned(Vector3 jumpDirection, Vector3 runTarget, float jumpForce, float runningTime)
-    {
-        Debug.Log($"jumpDirection: {jumpDirection}, jumpForce: {jumpForce}, runTarget: {runTarget}");
-        if (isOnFireSequence)
-            return;
-
-        isOnFireSequence = true;
-        StartCoroutine(OnFireSequence(jumpDirection, runTarget, jumpForce, runningTime));
-    }
-
-    private IEnumerator OnFireSequence(Vector3 jumpDirection, Vector3 runTarget, float jumpForce, float runningTime)
-    {
-        float jumpTime = 1f;
-        this.runTarget = runTarget;
-
-        playerEventManager.StopInputingMovement(true);
-
-        Debug.Log($"isKinematic: {playerRb.isKinematic}, mass: {playerRb.mass}, drag: {playerRb.linearDamping}, constraints: {playerRb.constraints}, useGravity: {playerRb.useGravity}");
-
-        playerRb.AddForce(jumpDirection * jumpForce, ForceMode.Impulse);
-
-        yield return new WaitForSeconds(jumpTime);
-
-        isOnFire = true;
-
-        yield return new WaitForSeconds(runningTime);
-
-        isOnFire = false;
-        isOnFireSequence = false;
-        playerEventManager.StopInputingMovement(false);
-    }
-
-    private void RunOnFire()
-    {
-        float onFireMoveSpeed = 7f;
-        Vector3 directionToTarget = runTarget - playerRb.position;
-        directionToTarget.y = 0f;
-        directionToTarget.Normalize();
-
-        playerRb.MovePosition(playerRb.position + onFireMoveSpeed * Time.fixedDeltaTime * directionToTarget);
     }
 }
