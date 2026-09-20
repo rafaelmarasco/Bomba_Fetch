@@ -2,9 +2,8 @@ using UnityEngine;
 
 public class Ragdoll : MonoBehaviour
 {
-    [Header("Scripts")]
-    [SerializeField] private PropInteract propInteract;
-    [SerializeField] private PlayerEventManager playerEventManager;
+    private PropPickupHandler propPickupHandler;
+    private PlayerEventManager playerEventManager;
 
     [Header("Player Model")]
     [SerializeField] private Animator animator;
@@ -17,8 +16,10 @@ public class Ragdoll : MonoBehaviour
 
     private void Awake()
     {
-        bonesRb = GFX.GetComponentsInChildren<Rigidbody>();
         playerEventManager = GetComponent<PlayerEventManager>();
+        propPickupHandler = GetComponent<PropPickupHandler>();
+
+        bonesRb = GFX.GetComponentsInChildren<Rigidbody>();
 
         UntangleBones();
     }
@@ -26,12 +27,12 @@ public class Ragdoll : MonoBehaviour
     {
         const int RAGDOLL_LAYER = 8;
 
-        GameObject heldItem = propInteract.HeldItem;
+        GameObject heldItem = propPickupHandler.HeldItem;
 
         heldItemRb = null;
 
         if (heldItem != null && heldItem.TryGetComponent(out heldItemRb))
-            propInteract.DropProp();
+            propPickupHandler.DropProp();
 
         foreach (Rigidbody bone in bonesRb)
         {
@@ -50,7 +51,7 @@ public class Ragdoll : MonoBehaviour
     }
     public void DisableRagDoll()
     {
-        const int DEFAULT_LAYER = 0;
+        const int PLAYER_LAYER = 3;
         Transform playerRagDollTransform = hipsRb.gameObject.transform;
 
         transform.position =
@@ -62,7 +63,7 @@ public class Ragdoll : MonoBehaviour
             bone.useGravity = false;
         }
 
-        GFX.layer = DEFAULT_LAYER;
+        GFX.layer = PLAYER_LAYER;
         playerRb.useGravity = true;
         animator.enabled = true;
         playerEventManager.StopInputingMovement(false);

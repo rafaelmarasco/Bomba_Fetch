@@ -4,9 +4,11 @@ using UnityEngine.Animations.Rigging;
 
 public class PlayerAnimator : MonoBehaviour
 {
-    [SerializeField] private Animator animator;
+    [Header("Scripts")]
+    [SerializeField] private PlayerEventManager playerEventManager;
+    [SerializeField] private PropPickupHandler propPickupHandler;
     [SerializeField] private Player player;
-    [SerializeField] private PropInteract propInteract;
+    private Animator animator;
 
     [Header("Ragdoll Field")]
     [SerializeField] private Transform playerTransform;
@@ -17,17 +19,19 @@ public class PlayerAnimator : MonoBehaviour
     [SerializeField] private Rig grabRig;
     [SerializeField] private Rig pushRig;
 
-    private PlayerEventManager playerEventManager;
 
     private readonly int upperBody = 1;
 
     private const string IS_WALKING = "isWalking";
     private const string IS_PUSHING = "IsPushing";
 
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
+
     private void OnEnable()
     {
-        playerEventManager = GetComponentInParent<PlayerEventManager>();
-
         playerEventManager.OnItemPickedUp += UpdateGrabWeigth;
         playerEventManager.OnItemDroped += UpdateGrabWeigth;
         playerEventManager.OnPropPush += AnimatePush;
@@ -60,7 +64,7 @@ public class PlayerAnimator : MonoBehaviour
         Size propSize = propInfo.PropSize;
 
         if (propSize == Size.medium || propSize == Size.large)
-            grabRig.weight = propInteract.HasItem ? 1f : 0f;
+            grabRig.weight = propPickupHandler.HasItem ? 1f : 0f;
 
         else
             grabRig.weight = 0f;
@@ -73,7 +77,7 @@ public class PlayerAnimator : MonoBehaviour
     private void AnimateKnockdown(float stunTime)
     {
         playerEventManager.StopInputingMovement(true);
-        StartCoroutine(KnockdownAnimation(stunTime));   
+        StartCoroutine(KnockdownAnimation(stunTime));
     }
     private IEnumerator KnockdownAnimation(float knockdownTime)
     {

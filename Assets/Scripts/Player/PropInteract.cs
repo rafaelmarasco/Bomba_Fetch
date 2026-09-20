@@ -1,21 +1,22 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PropInteract : MonoBehaviour
 {
     private PlayerEventManager playerEventManager;
+    private PropPickupHandler propPickupHandler;
     private PlayerInput playerInput;
     private Player player;
 
     [SerializeField] private Transform checkPos;
     [SerializeField] private Transform headPos;
     [SerializeField] private float pushForce;
+    public bool IsBombInteracting { get; private set; } = false;
 
     private Vector3 lastMoveDir;
-    public bool HasItem => HeldItem != null;
-    public bool HasBomb { get; private set; } = false;
-    public bool IsBombInteracting { get; private set; } = false;
-    public GameObject HeldItem { get; private set; }
+    private GameObject HeldItem => propPickupHandler.HeldItem;
+    private bool HasItem => HeldItem != null;
 
     [Header("Prop Holding Points")]
     [SerializeField] private Transform holdPointSmall;
@@ -24,17 +25,20 @@ public class PropInteract : MonoBehaviour
     [SerializeField] private Transform holdPointInteract;
 
     [Header("BoxCastConfigs")]
-    [SerializeField] private Vector3 halfExtends = new Vector3(.5f, 0.1f, .4f);
+    [SerializeField] private Vector3 halfExtends = new(.5f, 0.1f, .4f);
     [SerializeField] private float interactDistance = .8f;
 
     [Header("Minigame")]
-    [SerializeField] private Canvas minigameCanvas;
+    public Canvas minigameCanvas { get; private set; }
+
+    public event Action OnPropDropped;
 
 
     private void Awake()
     {
         player = GetComponent<Player>();
         playerInput = GetComponent<PlayerInput>();
+        propPickupHandler = GetComponent<PropPickupHandler>();
         playerEventManager = GetComponent<PlayerEventManager>();
 
         playerInput.actions["Grab"].performed += Grab_performed;
@@ -45,12 +49,11 @@ public class PropInteract : MonoBehaviour
     {
         lastMoveDir = player.LastMoveDir;
     }
-
     private void Interact_performed(InputAction.CallbackContext obj)
     {
-        if (HasBomb && !IsBombInteracting)
+        if (propPickupHandler.HasBomb && !IsBombInteracting)
         {
-            //heldItem.transform.SetParent(holdPointInteract);
+            // heldItem.transform.SetParent(holdPointInteract);
             // In this function mean that player has bomb and he is holding it
             minigameCanvas.gameObject.SetActive(true);
             IsBombInteracting = true;
@@ -66,16 +69,12 @@ public class PropInteract : MonoBehaviour
         if (!HasItem && CheckForProps(out GameObject prop))
         {
             Debug.Log("Pegou");
-            PickUpProp(prop);
+            propPickupHandler.PickUpProp(prop);
         }
         else if (HasItem)
         {
-            DropProp();
-            if (HasBomb)
-            {
-                HasBomb = false;
-                playerEventManager.BombDroped();
-            }
+            propPickupHandler.DropProp();
+            OnPropDropped?.Invoke();
         }
     }
 
@@ -138,11 +137,12 @@ public class PropInteract : MonoBehaviour
             else if (HasItem)
             {
                 HeldItem.TryGetComponent<Rigidbody>(out Rigidbody propRb);
-                DropProp();
+                propPickupHandler.DropProp();
                 propRb.linearVelocity = lastMoveDir * pushForce;
             }
         }
     }
+    /*
     private void PickUpProp(GameObject prop)
     {
         const int PROP_IN_HAND_LAYER = 7;
@@ -188,6 +188,7 @@ public class PropInteract : MonoBehaviour
 
         playerEventManager.ItemDroped(propInfo);
     }
+    */
     public void PickUpReposition(Prop propInfo, Transform propPos)
     {
         Size propSize = propInfo.PropSize;

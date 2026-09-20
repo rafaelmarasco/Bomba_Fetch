@@ -5,8 +5,9 @@ public class PlayerHarmHandler : MonoBehaviour
 {
     private Player player;
     private Ragdoll ragdoll;
-    private PlayerEventManager playerEventManager;
     private PropInteract propInteract;
+    private PlayerEventManager playerEventManager;
+    private PropPickupHandler propPickupHandler;
 
     private Rigidbody HipsRb => player.HipsRb;
     private Rigidbody playerRb;
@@ -24,9 +25,10 @@ public class PlayerHarmHandler : MonoBehaviour
 
     private void Awake()
     {
-        player = gameObject.GetComponent<Player>();
         playerEventManager = GetComponent<PlayerEventManager>();
+        propPickupHandler = GetComponent<PropPickupHandler>();
         propInteract = GetComponent<PropInteract>();
+        player = GetComponent<Player>();
 
         ragdoll = GetComponent<Ragdoll>();
         playerRb = GetComponent<Rigidbody>();
@@ -82,7 +84,7 @@ public class PlayerHarmHandler : MonoBehaviour
         player.RotateOnMove(directionToTarget);
         playerRb.AddForce(jumpDirection * jumpForce, ForceMode.Impulse);
 
-        if (propInteract.HeldItem != null)
+        if (propPickupHandler.HeldItem != null)
             propInteract.Push();
 
         yield return new WaitForSeconds(jumpTime);

@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6898398441086987612}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CheckPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -682,6 +682,7 @@ GameObject:
   - component: {fileID: 7772503601804982951}
   - component: {fileID: 8924093834654390410}
   - component: {fileID: -1590304100679889594}
+  - component: {fileID: -4724053277055469795}
   - component: {fileID: 891634052499106268}
   - component: {fileID: 7330877714380932613}
   - component: {fileID: 6126682385651391774}
@@ -765,6 +766,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a58939d388f8004a8c6b8e49143f0a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerEventManager
+--- !u!114 &-4724053277055469795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8453428288632691985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01ca4778b636509478ddee55a67b0637, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PropPickupHandler
 --- !u!114 &891634052499106268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -777,9 +790,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e5d0c591d2fd874d8604b2a5b52e97c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  playerMovement: {fileID: 8924093834654390410}
-  propInteract: {fileID: 7330877714380932613}
-  ragdoll: {fileID: 6126682385651391774}
   animator: {fileID: 2258011675586492718}
   hipsRb: {fileID: 7304537807111367421}
   moveSpeed: 7
@@ -795,7 +805,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd9cb806a83d5cd42b559d81166775d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PropInteract
-  player: {fileID: 891634052499106268}
   checkPos: {fileID: 6898398441086987612}
   headPos: {fileID: 812812312897300744}
   pushForce: 7
@@ -817,8 +826,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4958600f3747e0478dd5e419131ba91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ragdoll
-  propInteract: {fileID: 7330877714380932613}
-  playerEventManager: {fileID: -1590304100679889594}
   animator: {fileID: 2258011675586492718}
   GFX: {fileID: 4827275921164204526}
   hipsRb: {fileID: 7304537807111367421}
@@ -2119,9 +2126,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 873fef2a78721f74582f73b6aec44d2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  animator: {fileID: 2258011675586492718}
+  playerEventManager: {fileID: -1590304100679889594}
+  propPickupHandler: {fileID: -4724053277055469795}
   player: {fileID: 891634052499106268}
-  propInteract: {fileID: 7330877714380932613}
   playerTransform: {fileID: 8330579805403462866}
   playerRagDollTransform: {fileID: 5311500375926874964}
   ragdoll: {fileID: 6126682385651391774}
