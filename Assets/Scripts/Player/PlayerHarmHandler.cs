@@ -83,7 +83,7 @@ public class PlayerHarmHandler : MonoBehaviour
         playerRb.AddForce(jumpDirection * jumpForce, ForceMode.Impulse);
 
         if (propInteract.heldItem != null)
-            propInteract.PushProp();
+            propInteract.Push();
 
         yield return new WaitForSeconds(jumpTime);
 

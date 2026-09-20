@@ -59,7 +59,7 @@ public class PropInteract : MonoBehaviour
     }
     private void Push_performed(InputAction.CallbackContext obj)
     {
-        PushProp();
+        Push();
     }
     private void Grab_performed(InputAction.CallbackContext obj)
     {
@@ -79,28 +79,59 @@ public class PropInteract : MonoBehaviour
         }
     }
 
+    public bool CheckForPlayer(out GameObject player)
+    {
+        player = null;
+
+        bool foundAnyObject = Physics.BoxCast
+            (checkPos.position - lastMoveDir * .2f, halfExtends, lastMoveDir, out RaycastHit hit, checkPos.rotation, interactDistance);
+
+        if (!foundAnyObject) return false;
+
+        Player playerFound = hit.collider.gameObject.GetComponentInParent<Player>();
+
+        if (playerFound == null)
+            return false;
+
+        player = playerFound.gameObject;
+
+        return true;
+    }
     private bool CheckForProps(out GameObject prop) // Check if theres an object in front of the player
     {
-        bool canGrab = Physics.BoxCast(checkPos.position - lastMoveDir * .2f, halfExtends, lastMoveDir, out RaycastHit hit, checkPos.rotation, interactDistance);
-        bool isProp = canGrab && hit.collider.gameObject.TryGetComponent<Prop>(out Prop propComponent);
+        GameObject objectInRange = null;
+
+        bool findAnyObject = Physics.BoxCast
+            (checkPos.position - lastMoveDir * .2f, halfExtends, lastMoveDir, out RaycastHit hit, checkPos.rotation, interactDistance);
+
+        bool isProp = findAnyObject && hit.collider.gameObject.TryGetComponent<Prop>(out _);
 
         if (isProp)
-            prop = hit.collider.gameObject;
-        else
-            prop = null;
+            objectInRange = hit.collider.gameObject;
+
+        prop = objectInRange;
 
         return isProp;
     }
-    public void PushProp()
+    public void Push()
     {
-        if (!isBombInteracting)
+        if (!isBombInteracting) //REMOVER????
         {
             playerEventManager.PropPush();
 
-            if (!hasItem && CheckForProps(out GameObject prop))
+            GameObject prop = null;
+            GameObject player = null;
+
+            if (!hasItem && (CheckForProps(out prop) || CheckForPlayer(out player)))
             {
-                prop.TryGetComponent<Rigidbody>(out Rigidbody propRb);
-                propRb.linearVelocity = lastMoveDir * pushForce;
+                if (prop != null && prop.TryGetComponent<Rigidbody>(out Rigidbody propRb))
+                    propRb.linearVelocity = lastMoveDir * pushForce;
+
+                else if (player != null && player.TryGetComponent<Rigidbody>(out Rigidbody playerRb))
+                {
+                    player.GetComponent<Ragdoll>().EnableRagDoll(out _);
+                    playerRb.linearVelocity = lastMoveDir * pushForce;
+                }
             }
             else if (hasItem)
             {
