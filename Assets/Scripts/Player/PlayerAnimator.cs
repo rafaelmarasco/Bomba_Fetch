@@ -60,7 +60,7 @@ public class PlayerAnimator : MonoBehaviour
         Size propSize = propInfo.PropSize;
 
         if (propSize == Size.medium || propSize == Size.large)
-            grabRig.weight = propInteract.hasItem ? 1f : 0f;
+            grabRig.weight = propInteract.HasItem ? 1f : 0f;
 
         else
             grabRig.weight = 0f;

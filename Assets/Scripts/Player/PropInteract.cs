@@ -1,24 +1,23 @@
 using UnityEngine;
-using UnityEngine.Animations.Rigging;
 using UnityEngine.InputSystem;
 
 public class PropInteract : MonoBehaviour
 {
-    [SerializeField] private Player player;
+    private PlayerEventManager playerEventManager;
+    private PlayerInput playerInput;
+    private Player player;
+
     [SerializeField] private Transform checkPos;
     [SerializeField] private Transform headPos;
     [SerializeField] private float pushForce;
 
-    private PlayerEventManager playerEventManager;
-
-    private PlayerInput playerInput;
-
     private Vector3 lastMoveDir;
-    public bool hasItem => heldItem != null;
-    public bool hasBomb { get; private set; } = false;
-    public bool isBombInteracting { get; private set; } = false;
-    public GameObject heldItem { get; private set; }
+    public bool HasItem => HeldItem != null;
+    public bool HasBomb { get; private set; } = false;
+    public bool IsBombInteracting { get; private set; } = false;
+    public GameObject HeldItem { get; private set; }
 
+    [Header("Prop Holding Points")]
     [SerializeField] private Transform holdPointSmall;
     [SerializeField] private Transform holdPointMedium;
     [SerializeField] private Transform holdPointLarge;
@@ -34,6 +33,7 @@ public class PropInteract : MonoBehaviour
 
     private void Awake()
     {
+        player = GetComponent<Player>();
         playerInput = GetComponent<PlayerInput>();
         playerEventManager = GetComponent<PlayerEventManager>();
 
@@ -48,13 +48,13 @@ public class PropInteract : MonoBehaviour
 
     private void Interact_performed(InputAction.CallbackContext obj)
     {
-        if (hasBomb && !isBombInteracting)
+        if (HasBomb && !IsBombInteracting)
         {
             //heldItem.transform.SetParent(holdPointInteract);
             // In this function mean that player has bomb and he is holding it
             minigameCanvas.gameObject.SetActive(true);
-            isBombInteracting = true;
-            playerEventManager.BombInteracted(headPos, heldItem);
+            IsBombInteracting = true;
+            playerEventManager.BombInteracted(headPos, HeldItem);
         }
     }
     private void Push_performed(InputAction.CallbackContext obj)
@@ -63,17 +63,17 @@ public class PropInteract : MonoBehaviour
     }
     private void Grab_performed(InputAction.CallbackContext obj)
     {
-        if (!hasItem && CheckForProps(out GameObject prop))
+        if (!HasItem && CheckForProps(out GameObject prop))
         {
             Debug.Log("Pegou");
             PickUpProp(prop);
         }
-        else if (hasItem)
+        else if (HasItem)
         {
             DropProp();
-            if (hasBomb)
+            if (HasBomb)
             {
-                hasBomb = false;
+                HasBomb = false;
                 playerEventManager.BombDroped();
             }
         }
@@ -115,27 +115,29 @@ public class PropInteract : MonoBehaviour
     }
     public void Push()
     {
-        if (!isBombInteracting) //REMOVER????
+        if (!IsBombInteracting) //REMOVER????
         {
             playerEventManager.PropPush();
 
             GameObject prop = null;
             GameObject player = null;
 
-            if (!hasItem && (CheckForProps(out prop) || CheckForPlayer(out player)))
+            if (!HasItem && (CheckForProps(out prop) || CheckForPlayer(out player)))
             {
                 if (prop != null && prop.TryGetComponent<Rigidbody>(out Rigidbody propRb))
                     propRb.linearVelocity = lastMoveDir * pushForce;
 
-                else if (player != null && player.TryGetComponent<Rigidbody>(out Rigidbody playerRb))
+                else if (player != null)
                 {
+                    float againstPlayerMutiplier = 20;
+                    Rigidbody hipsRb = player.GetComponent<Player>().HipsRb;
                     player.GetComponent<Ragdoll>().EnableRagDoll(out _);
-                    playerRb.linearVelocity = lastMoveDir * pushForce;
+                    hipsRb.AddForce(againstPlayerMutiplier * pushForce * lastMoveDir, ForceMode.Impulse);
                 }
             }
-            else if (hasItem)
+            else if (HasItem)
             {
-                heldItem.TryGetComponent<Rigidbody>(out Rigidbody propRb);
+                HeldItem.TryGetComponent<Rigidbody>(out Rigidbody propRb);
                 DropProp();
                 propRb.linearVelocity = lastMoveDir * pushForce;
             }
@@ -145,10 +147,10 @@ public class PropInteract : MonoBehaviour
     {
         const int PROP_IN_HAND_LAYER = 7;
 
-        heldItem = prop;
+        HeldItem = prop;
         prop.TryGetComponent<Prop>(out Prop propInfo);
 
-        hasBomb = prop.name == "Bomb"; // Trocar para script quando a bomba tiver um script
+        HasBomb = prop.name == "Bomb"; // Trocar para script quando a bomba tiver um script
 
         if (prop.TryGetComponent<Rigidbody>(out Rigidbody propRb))
             propRb.isKinematic = true;
@@ -163,25 +165,25 @@ public class PropInteract : MonoBehaviour
     {
         const int DEFAULT_LAYER = 0;
 
-        Prop propInfo = heldItem.GetComponent<Prop>();
+        Prop propInfo = HeldItem.GetComponent<Prop>();
         float zOffset = .2f;
         float yOffset = .3f;
         Vector3 offset = new Vector3(0f, yOffset, zOffset);
 
-        if (heldItem.TryGetComponent<Rigidbody>(out Rigidbody propRb))
+        if (HeldItem.TryGetComponent<Rigidbody>(out Rigidbody propRb))
             propRb.isKinematic = false;
 
-        heldItem.layer = DEFAULT_LAYER;
+        HeldItem.layer = DEFAULT_LAYER;
 
-        heldItem.transform.localPosition += offset;
-        heldItem.transform.SetParent(null);
-        heldItem = null;
+        HeldItem.transform.localPosition += offset;
+        HeldItem.transform.SetParent(null);
+        HeldItem = null;
 
-        if (isBombInteracting)
+        if (IsBombInteracting)
         {
             minigameCanvas.gameObject.SetActive(false);
             playerEventManager.BombDroped();
-            isBombInteracting = false;
+            IsBombInteracting = false;
         }
 
         playerEventManager.ItemDroped(propInfo);

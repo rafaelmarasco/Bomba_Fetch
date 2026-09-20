@@ -1,13 +1,9 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
 public class Player : MonoBehaviour
 {
-    [Header("Scripts")]
-    [SerializeField] private PlayerMovement playerMovement;
-    [SerializeField] private PropInteract propInteract;
-    [SerializeField] private Ragdoll ragdoll;
+
+    private PlayerMovement playerMovement;
+
     private PlayerEventManager playerEventManager;
 
     [SerializeField] private Animator animator;
@@ -29,8 +25,10 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        playerRb = GetComponent<Rigidbody>();
         playerEventManager = GetComponent<PlayerEventManager>();
+        playerMovement = GetComponent<PlayerMovement>();
+
+        playerRb = GetComponent<Rigidbody>();
     }
 
     private void OnEnable()

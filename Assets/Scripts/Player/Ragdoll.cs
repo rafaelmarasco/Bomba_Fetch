@@ -15,11 +15,8 @@ public class Ragdoll : MonoBehaviour
 
     private Rigidbody[] bonesRb;
 
-    private CapsuleCollider gfxCapsuCollider;
-
     private void Awake()
     {
-        gfxCapsuCollider = GFX.GetComponent<CapsuleCollider>();
         bonesRb = GFX.GetComponentsInChildren<Rigidbody>();
         playerEventManager = GetComponent<PlayerEventManager>();
 
@@ -27,7 +24,9 @@ public class Ragdoll : MonoBehaviour
     }
     public void EnableRagDoll(out Rigidbody heldItemRb)
     {
-        GameObject heldItem = propInteract.heldItem;
+        const int RAGDOLL_LAYER = 8;
+
+        GameObject heldItem = propInteract.HeldItem;
 
         heldItemRb = null;
 
@@ -40,7 +39,7 @@ public class Ragdoll : MonoBehaviour
             bone.useGravity = true;
         }
 
-        gfxCapsuCollider.enabled = false;
+        GFX.layer = RAGDOLL_LAYER;
         playerRb.useGravity = false;
 
         animator.enabled = false;
@@ -51,6 +50,7 @@ public class Ragdoll : MonoBehaviour
     }
     public void DisableRagDoll()
     {
+        const int DEFAULT_LAYER = 0;
         Transform playerRagDollTransform = hipsRb.gameObject.transform;
 
         transform.position =
@@ -62,7 +62,7 @@ public class Ragdoll : MonoBehaviour
             bone.useGravity = false;
         }
 
-        gfxCapsuCollider.enabled = true;
+        GFX.layer = DEFAULT_LAYER;
         playerRb.useGravity = true;
         animator.enabled = true;
         playerEventManager.StopInputingMovement(false);
