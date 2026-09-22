@@ -27,4 +27,9 @@ public class Prop : MonoBehaviour
             };
         }
     }
+
+    private void Reposition(Transform holdPoint)
+    {
+        transform.SetParent(holdPoint);
+    }
 }

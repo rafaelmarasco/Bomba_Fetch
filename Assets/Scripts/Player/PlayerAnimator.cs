@@ -42,7 +42,7 @@ public class PlayerAnimator : MonoBehaviour
     {
         animator.SetBool(IS_WALKING, player.IsMoving);
     }
-    private void AnimatePush()
+    public void AnimatePush()
     {
         StartCoroutine(PushAnimation());
     }

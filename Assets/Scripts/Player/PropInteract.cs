@@ -128,9 +128,11 @@ public class PropInteract : MonoBehaviour
 
                 else if (player != null)
                 {
+                    float knockdownTime = 2f;
                     float againstPlayerMutiplier = 20;
                     Rigidbody hipsRb = player.GetComponent<Player>().HipsRb;
-                    player.GetComponent<Ragdoll>().EnableRagDoll(out _);
+                    //player.GetComponent<Ragdoll>().EnableRagDoll(out _);
+                    player.GetComponent<PlayerEventManager>().KnockedDown(knockdownTime);
                     hipsRb.AddForce(againstPlayerMutiplier * pushForce * lastMoveDir, ForceMode.Impulse);
                 }
             }
