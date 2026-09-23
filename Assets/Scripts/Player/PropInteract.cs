@@ -19,8 +19,8 @@ public class PropInteract : MonoBehaviour
     private bool HasItem => HeldItem != null;
 
     [Header("Prop Holding Points")]
-    [SerializeField] private Transform holdPointSmall;
-    [SerializeField] private Transform holdPointMedium;
+    [SerializeField] public Transform holdPointSmall;
+    [SerializeField] public Transform holdPointMedium;
     [SerializeField] private Transform holdPointLarge;
     [SerializeField] private Transform holdPointInteract;
 
@@ -124,23 +124,23 @@ public class PropInteract : MonoBehaviour
             if (!HasItem && (CheckForProps(out prop) || CheckForPlayer(out player)))
             {
                 if (prop != null && prop.TryGetComponent<Rigidbody>(out Rigidbody propRb))
-                    propRb.linearVelocity = lastMoveDir * pushForce;
+                    propRb.AddForce(pushForce * transform.forward, ForceMode.Impulse);
 
                 else if (player != null)
                 {
                     float knockdownTime = 2f;
-                    float againstPlayerMutiplier = 20;
+
                     Rigidbody hipsRb = player.GetComponent<Player>().HipsRb;
-                    //player.GetComponent<Ragdoll>().EnableRagDoll(out _);
+
                     player.GetComponent<PlayerEventManager>().KnockedDown(knockdownTime);
-                    hipsRb.AddForce(againstPlayerMutiplier * pushForce * lastMoveDir, ForceMode.Impulse);
+                    hipsRb.AddForce(pushForce * transform.forward, ForceMode.Impulse);
                 }
             }
             else if (HasItem)
             {
                 HeldItem.TryGetComponent<Rigidbody>(out Rigidbody propRb);
                 propPickupHandler.DropProp();
-                propRb.linearVelocity = lastMoveDir * pushForce;
+                propRb.AddForce(pushForce * transform.forward, ForceMode.Impulse);
             }
         }
     }
