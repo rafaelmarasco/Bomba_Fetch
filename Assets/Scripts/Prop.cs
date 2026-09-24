@@ -13,6 +13,7 @@ public enum Size
 public class Prop : MonoBehaviour
 {
     [SerializeField] private Size propSize;
+    [SerializeField] private PropInteract playerInteracting;
     public Size PropSize => propSize;
     public float ThrowForce
     {
@@ -28,42 +29,27 @@ public class Prop : MonoBehaviour
         }
     }
 
-    private Transform holdPoint;
 
     private FixedJoint joint;
 
-    public void EnableReposition(Transform holdPointSmall, Transform holdPointMedium)
-    {
+    private bool isBeingHeld;
 
-        /*
-        switch (propSize)
-        {
-            case Size.small:
-                transform.SetParent(holdPointSmall);
-                transform.localPosition = Vector3.zero;
-                transform.rotation = holdPointSmall.rotation;
-                break;
-            case Size.medium:
-                transform.SetParent(holdPointMedium);
-                transform.localPosition = Vector3.zero;
-                transform.rotation = holdPointMedium.rotation;
-                break;
-            case Size.large: // Mudar logica no futuro
-                transform.SetParent(holdPointMedium);
-                transform.localPosition = Vector3.zero;
-                transform.rotation = holdPointMedium.rotation;
-                break;
-        }
-        */
+    private const int WALL_LAYER = 6;
+
+    public void EnableReposition(PropInteract playerInteracting)
+    {
+        this.playerInteracting = playerInteracting;
+
+        Transform holdPoint;
 
         DestroyJoints();
 
         holdPoint = PropSize switch
         {
-            Size.small => holdPointSmall,
-            Size.medium => holdPointMedium,
-            Size.large => holdPointMedium,
-            _ => holdPointMedium
+            Size.small => playerInteracting.holdPointSmall,
+            Size.medium => playerInteracting.holdPointMedium,
+            Size.large => playerInteracting.holdPointMedium,
+            _ => playerInteracting.holdPointMedium
         };
 
         transform.SetPositionAndRotation(holdPoint.position, holdPoint.rotation);
@@ -72,16 +58,15 @@ public class Prop : MonoBehaviour
 
         joint = gameObject.AddComponent<FixedJoint>();
         joint.connectedBody = holdPointRb;
-        
-        //isBeingHeld = true;
+
+        isBeingHeld = true;
     }
 
     public void DisableReposition()
     {
         DestroyJoints();
-
-        holdPoint = null;
-        //isBeingHeld = false;
+        playerInteracting = null;
+        isBeingHeld = false;
     }
 
     private void DestroyJoints()
@@ -91,5 +76,11 @@ public class Prop : MonoBehaviour
             Destroy(joint);
             joint = null;
         }
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (isBeingHeld && collision.gameObject.layer == WALL_LAYER)
+            Debug.Log($"Tamo na parede {gameObject.name}");
     }
 }

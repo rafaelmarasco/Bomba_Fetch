@@ -72,7 +72,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4112657178339876039}
   - component: {fileID: 3576220598704888845}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: LArmPushIk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -187,7 +187,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1399098261987605407}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RArmPushIK_target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -266,7 +266,7 @@ Transform:
   m_GameObject: {fileID: 1404169327958329805}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.405, z: 0.914}
+  m_LocalPosition: {x: -0, y: 0.405, z: 1.172}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -387,7 +387,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4082550785998979580}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: LArmPushIk_hint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -539,7 +539,7 @@ GameObject:
   m_Component:
   - component: {fileID: 941298761346371559}
   - component: {fileID: 6979180523339886510}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RigPus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -618,7 +618,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8833722885260317479}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RArmPushIK_hint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -650,7 +650,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2845262517065690801}
   - component: {fileID: 5143891059580904626}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RArmPushIK
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -929,7 +929,7 @@ Transform:
   m_GameObject: {fileID: 8571362815078099395}
   serializedVersion: 2
   m_LocalRotation: {x: 0.18904597, y: 0.8720523, z: -0.43838862, w: -0.107711725}
-  m_LocalPosition: {x: -0.058, y: -0.011, z: 0.005}
+  m_LocalPosition: {x: -0.032, y: 0.002, z: 0.005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1002,7 +1002,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8347656613208207924}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: LArmPushIk_target
   m_TagString: Untagged
   m_Icon: {fileID: 0}

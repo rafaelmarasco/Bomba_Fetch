@@ -22,7 +22,7 @@ public class PropPickupHandler : MonoBehaviour
 
     public void PickUpProp(GameObject prop)
     {
-        const int PROP_IN_HAND_LAYER = 7;
+        //const int PROP_IN_HAND_LAYER = 7;
 
         HeldItem = prop;
 
@@ -36,16 +36,16 @@ public class PropPickupHandler : MonoBehaviour
         // if (prop.TryGetComponent<Rigidbody>(out Rigidbody propRb))
         //    propRb.isKinematic = true;
 
-        prop.layer = PROP_IN_HAND_LAYER;
+        //prop.layer = PROP_IN_HAND_LAYER;
 
         //Physics.IgnoreCollision(gfxCollider, propCollider);
 
-        propInfo.EnableReposition(propInteract.holdPointSmall, propInteract.holdPointMedium);
+        propInfo.EnableReposition(propInteract);
         playerEventManager.ItemPickedUp(propInfo);
     }
     public void DropProp()
     {
-        const int DEFAULT_LAYER = 0;
+        //const int DEFAULT_LAYER = 0;
 
         Collider gfxCollider = GetComponentInChildren<Collider>();
         Collider propCollider = HeldItem.GetComponent<Collider>();
@@ -60,7 +60,7 @@ public class PropPickupHandler : MonoBehaviour
         // if (HeldItem.TryGetComponent<Rigidbody>(out Rigidbody propRb))
         //    propRb.isKinematic = false;
 
-        HeldItem.layer = DEFAULT_LAYER;
+        //HeldItem.layer = DEFAULT_LAYER;
 
         HeldItem.transform.localPosition += offset;
         HeldItem.transform.SetParent(null);

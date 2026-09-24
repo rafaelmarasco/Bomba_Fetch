@@ -64,8 +64,6 @@ public class Player : MonoBehaviour
         if (input == Vector3.zero)
             return;
 
-        //float rotationSpeed = 20f;
-
         Quaternion targetRotation = Quaternion.LookRotation(input, Vector3.up);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime);
     }
