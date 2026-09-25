@@ -197,7 +197,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 225851689}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 753c16668c7e0f84c9f57554d6f1a02b, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -209,8 +209,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.8000008, y: 1.2240597, z: 1.6000007}
-  m_Center: {x: 0, y: 0.61202985, z: 0.05}
+  m_Size: {x: 1.8000008, y: 1.2240597, z: 1.3996315}
+  m_Center: {x: 4.2476955e-10, y: 0.61202985, z: 0.028811188}
 --- !u!54 &225851692
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -256,6 +256,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 0
+  playerInteracting: {fileID: 0}
 --- !u!1 &323224128
 GameObject:
   m_ObjectHideFlags: 0
@@ -471,8 +472,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.0000002, y: 1.2240597, z: 1.6000001}
-  m_Center: {x: 0, y: 0.61202985, z: 0.049999982}
+  m_Size: {x: 3.0000002, y: 1.2240597, z: 1.3859944}
+  m_Center: {x: 0, y: 0.61202985, z: 0.019169688}
 --- !u!54 &401603039
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -518,6 +519,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 1
+  playerInteracting: {fileID: 0}
 --- !u!1001 &460204065
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -784,7 +786,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5311480607056876403, guid: 071f4fd6438687e46a76b494a77234bc, type: 3}
       propertyPath: m_Layer
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -928,6 +930,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 0
+  playerInteracting: {fileID: 0}
 --- !u!1 &800627825
 GameObject:
   m_ObjectHideFlags: 0
@@ -1419,6 +1422,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 0
+  playerInteracting: {fileID: 0}
 --- !u!1001 &978874384
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1951,6 +1955,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 0
+  playerInteracting: {fileID: 0}
 --- !u!1001 &1344820861
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2088,6 +2093,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 0
+  playerInteracting: {fileID: 0}
 --- !u!4 &1394359267 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6360208117214285635, guid: 51f73729398da6140b90046856c71575, type: 3}
@@ -2412,6 +2418,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 0
+  playerInteracting: {fileID: 0}
 --- !u!1001 &1794138762
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2622,6 +2629,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 0
+  playerInteracting: {fileID: 0}
 --- !u!1001 &1951259686
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2821,6 +2829,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 0
+  playerInteracting: {fileID: 0}
 --- !u!1001 &1990296146
 PrefabInstance:
   m_ObjectHideFlags: 0

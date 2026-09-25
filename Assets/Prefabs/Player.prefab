@@ -711,6 +711,7 @@ GameObject:
   - component: {fileID: 8924093834654390410}
   - component: {fileID: -1590304100679889594}
   - component: {fileID: -4724053277055469795}
+  - component: {fileID: 4305581562573399872}
   - component: {fileID: 891634052499106268}
   - component: {fileID: 7330877714380932613}
   - component: {fileID: 6126682385651391774}
@@ -806,6 +807,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01ca4778b636509478ddee55a67b0637, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PropPickupHandler
+--- !u!114 &4305581562573399872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8453428288632691985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2757ed990ca731c47b45c0f5a830f4b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerPushHandler
+  pushForce: 70
 --- !u!114 &891634052499106268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -836,7 +850,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PropInteract
   checkPos: {fileID: 6898398441086987612}
   headPos: {fileID: 812812312897300744}
-  pushForce: 140
   holdPointSmall: {fileID: 976878721399896485}
   holdPointMedium: {fileID: 1446536034587759466}
   holdPointLarge: {fileID: 0}
@@ -2155,7 +2168,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4827275921164204526}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 753c16668c7e0f84c9f57554d6f1a02b, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
