@@ -29,28 +29,48 @@ public class Prop : MonoBehaviour
         }
     }
 
-
     private FixedJoint joint;
 
     private bool isBeingHeld;
 
-    private const int WALL_LAYER = 6;
+    private const int PROP_IN_HAND_LAYER = 7;
+    private const int DEFAULT_LAYER = 0;
 
     public void EnableReposition(PropInteract playerInteracting)
     {
         this.playerInteracting = playerInteracting;
 
+        switch (PropSize)
+        {
+            case Size.small:
+                RepositionSmallProp();
+                break;
+            case Size.medium:
+                DestroyJoints();
+                RepositionMediumProp();
+                break;
+        }
+        isBeingHeld = true;
+    }
+    private void RepositionSmallProp()
+    {
         Transform holdPoint;
 
-        DestroyJoints();
+        holdPoint = playerInteracting.holdPointSmall;
 
-        holdPoint = PropSize switch
-        {
-            Size.small => playerInteracting.holdPointSmall,
-            Size.medium => playerInteracting.holdPointMedium,
-            Size.large => playerInteracting.holdPointMedium,
-            _ => playerInteracting.holdPointMedium
-        };
+        GetComponent<Rigidbody>().isKinematic = true;
+
+        gameObject.layer = PROP_IN_HAND_LAYER;
+
+        transform.SetParent(holdPoint);
+        transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+    }
+
+    private void RepositionMediumProp()
+    {
+        Transform holdPoint;
+
+        holdPoint = playerInteracting.holdPointMedium;
 
         transform.SetPositionAndRotation(holdPoint.position, holdPoint.rotation);
 
@@ -58,12 +78,13 @@ public class Prop : MonoBehaviour
 
         joint = gameObject.AddComponent<FixedJoint>();
         joint.connectedBody = holdPointRb;
-
-        isBeingHeld = true;
     }
-
     public void DisableReposition()
     {
+        gameObject.layer = DEFAULT_LAYER;
+
+        GetComponent<Rigidbody>().isKinematic = false;
+
         DestroyJoints();
         playerInteracting = null;
         isBeingHeld = false;
@@ -76,11 +97,5 @@ public class Prop : MonoBehaviour
             Destroy(joint);
             joint = null;
         }
-    }
-
-    private void OnCollisionStay(Collision collision)
-    {
-        if (isBeingHeld && collision.gameObject.layer == WALL_LAYER)
-            Debug.Log($"Tamo na parede {gameObject.name}");
     }
 }

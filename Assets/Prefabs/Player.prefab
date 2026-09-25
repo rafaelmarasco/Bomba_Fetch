@@ -708,14 +708,14 @@ GameObject:
   m_Component:
   - component: {fileID: 8330579805403462866}
   - component: {fileID: 7772503601804982951}
-  - component: {fileID: 8924093834654390410}
   - component: {fileID: -1590304100679889594}
-  - component: {fileID: -4724053277055469795}
-  - component: {fileID: 4305581562573399872}
+  - component: {fileID: 8924093834654390410}
   - component: {fileID: 891634052499106268}
   - component: {fileID: 7330877714380932613}
-  - component: {fileID: 6126682385651391774}
+  - component: {fileID: -4724053277055469795}
+  - component: {fileID: 4305581562573399872}
   - component: {fileID: 3644667998650854834}
+  - component: {fileID: 6126682385651391774}
   - component: {fileID: 1866220012186243286}
   m_Layer: 3
   m_Name: Player
@@ -771,18 +771,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!114 &8924093834654390410
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8453428288632691985}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f842d127aa9316a42b1a953cbc08d07d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
 --- !u!114 &-1590304100679889594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -795,7 +783,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a58939d388f8004a8c6b8e49143f0a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerEventManager
---- !u!114 &-4724053277055469795
+--- !u!114 &8924093834654390410
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -804,22 +792,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8453428288632691985}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01ca4778b636509478ddee55a67b0637, type: 3}
+  m_Script: {fileID: 11500000, guid: f842d127aa9316a42b1a953cbc08d07d, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PropPickupHandler
---- !u!114 &4305581562573399872
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8453428288632691985}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2757ed990ca731c47b45c0f5a830f4b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerPushHandler
-  pushForce: 70
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
 --- !u!114 &891634052499106268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -856,6 +831,45 @@ MonoBehaviour:
   holdPointInteract: {fileID: 3738903463864646001}
   halfExtends: {x: 0.45, y: 0.1, z: 0.4}
   interactDistance: 1
+--- !u!114 &-4724053277055469795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8453428288632691985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01ca4778b636509478ddee55a67b0637, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PropPickupHandler
+--- !u!114 &4305581562573399872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8453428288632691985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2757ed990ca731c47b45c0f5a830f4b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerPushHandler
+  pushForce: 70
+--- !u!114 &3644667998650854834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8453428288632691985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb4162f96c334cd4f94a7ea538c93f2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ReciveHarm
+  jumpTime: 1.25
+  onFireMoveSpeed: 4
 --- !u!114 &6126682385651391774
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -872,20 +886,6 @@ MonoBehaviour:
   GFX: {fileID: 4827275921164204526}
   hipsRb: {fileID: 7304537807111367421}
   playerRb: {fileID: 7772503601804982951}
---- !u!114 &3644667998650854834
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8453428288632691985}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb4162f96c334cd4f94a7ea538c93f2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ReciveHarm
-  jumpTime: 1.25
-  onFireMoveSpeed: 4
 --- !u!114 &1866220012186243286
 MonoBehaviour:
   m_ObjectHideFlags: 0

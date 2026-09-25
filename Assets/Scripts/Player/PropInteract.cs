@@ -54,7 +54,7 @@ public class PropInteract : MonoBehaviour
     {
         if (propPickupHandler.HasBomb && !IsBombInteracting)
         {
-            HeldItem.transform.SetParent(holdPointInteract);
+            //HeldItem.transform.SetParent(holdPointInteract);
             // In this function mean that player has bomb and he is holding it
             minigameCanvas.gameObject.SetActive(true);
             IsBombInteracting = true;
