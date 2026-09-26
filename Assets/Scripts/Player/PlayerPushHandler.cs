@@ -15,6 +15,9 @@ public class PlayerPushHandler : MonoBehaviour
     private PropPickupHandler propPickupHandler;
     private PropInteract propInteract;
 
+    private Coroutine firstPushState;
+    private Coroutine secondPushState;
+
     private bool IsHoldingItem => propInteract.HasItem;
 
     private void Awake()
@@ -64,12 +67,12 @@ public class PlayerPushHandler : MonoBehaviour
     private void PushPlayer(GameObject player)
     {
         Rigidbody hipsRb = player.GetComponent<Player>().HipsRb;
-        PlayerEventManager playerEventManager = player.GetComponent<PlayerEventManager>();
+        PlayerEventManager targetPlayerEventManager = player.GetComponent<PlayerEventManager>();
 
         if (player.GetComponent<PlayerPushHandler>().instantPlayerPushMode) // TROCAR SE FOR PERMANENTE
         {
             float knockdownTime = 2f;
-            playerEventManager.KnockedDown(knockdownTime);
+            targetPlayerEventManager.KnockedDown(knockdownTime);
             hipsRb.AddForce(pushForce * transform.forward, ForceMode.Impulse);
         }
 
@@ -77,28 +80,32 @@ public class PlayerPushHandler : MonoBehaviour
         {
             float knockdownTime = 3f;
             Rigidbody playerRb = player.GetComponent<Rigidbody>();
+
             if (!firstPush)
             {
                 playerRb.AddForce((pushForce) * transform.forward, ForceMode.Impulse);
 
                 firstPush = true;
-                StartCoroutine(ResetPushState(nameof(firstPush)));
+                firstPushState = StartCoroutine(ResetPushState(nameof(firstPush)));
             }
             else if (!secondPush)
             {
                 playerRb.AddForce((pushForce * 1.5f) * transform.forward, ForceMode.Impulse);
 
                 secondPush = true;
-                StartCoroutine(ResetPushState(nameof(secondPush)));
+                secondPushState = StartCoroutine(ResetPushState(nameof(secondPush)));
             }
             else if (!finalPush)
             {
-                playerEventManager.KnockedDown(knockdownTime);
+                targetPlayerEventManager.KnockedDown(knockdownTime);
 
                 hipsRb.AddForce(pushForce * transform.forward, ForceMode.Impulse);
 
                 finalPush = true;
-                StartCoroutine(ResetPushState(nameof(finalPush)));
+                if (firstPushState != null) StopCoroutine(firstPushState);
+                if (secondPushState != null) StopCoroutine(secondPushState);
+                ResetPushStates();
+
             }
         }
     }
@@ -108,9 +115,8 @@ public class PlayerPushHandler : MonoBehaviour
 
         float cooldownTime = stateName switch
         {
-            nameof(firstPush) => 6f,
-            nameof(secondPush) => 4f,
-            nameof(finalPush) => 3f,
+            nameof(firstPush) => 4f,
+            nameof(secondPush) => 4.2f,
             _ => 0f
         };
 
@@ -125,33 +131,13 @@ public class PlayerPushHandler : MonoBehaviour
             case nameof(secondPush):
                 secondPush = false;
                 break;
-
-            case nameof(finalPush):
-                finalPush = false;
-                break;
         }
-        /*float cooldownTime;
+    }
 
-        switch (stateName)
-        {
-            case nameof(firstPush):
-                cooldownTime = 4f;
-                break;
-
-            case nameof(secondPush):
-                cooldownTime = 5f;
-                break; 
-            
-            case nameof(finalPush):
-                cooldownTime = 6f;
-                break;
-
-            default:
-                cooldownTime = 0f;
-                break;
-        }
-
-        yield return new WaitForSeconds(cooldownTime);
-        */
+    private void ResetPushStates()
+    {
+        firstPush = false;
+        secondPush = false;
+        finalPush = false;
     }
 }
