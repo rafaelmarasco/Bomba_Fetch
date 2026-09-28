@@ -2,9 +2,8 @@ using UnityEngine;
 
 public class Ragdoll : MonoBehaviour
 {
-    [Header("Scripts")]
-    [SerializeField] private PropInteract propInteract;
-    [SerializeField] private PlayerEventManager playerEventManager;
+    private PropPickupHandler propPickupHandler;
+    private PlayerEventManager playerEventManager;
 
     [Header("Player Model")]
     [SerializeField] private Animator animator;
@@ -15,24 +14,25 @@ public class Ragdoll : MonoBehaviour
 
     private Rigidbody[] bonesRb;
 
-    private CapsuleCollider gfxCapsuCollider;
-
     private void Awake()
     {
-        gfxCapsuCollider = GFX.GetComponent<CapsuleCollider>();
-        bonesRb = GFX.GetComponentsInChildren<Rigidbody>();
         playerEventManager = GetComponent<PlayerEventManager>();
+        propPickupHandler = GetComponent<PropPickupHandler>();
+
+        bonesRb = GFX.GetComponentsInChildren<Rigidbody>();
 
         UntangleBones();
     }
     public void EnableRagDoll(out Rigidbody heldItemRb)
     {
-        GameObject heldItem = propInteract.heldItem;
+        const int RAGDOLL_LAYER = 8;
+
+        GameObject heldItem = propPickupHandler.HeldItem;
 
         heldItemRb = null;
 
         if (heldItem != null && heldItem.TryGetComponent(out heldItemRb))
-            propInteract.DropProp();
+            propPickupHandler.DropProp();
 
         foreach (Rigidbody bone in bonesRb)
         {
@@ -40,7 +40,7 @@ public class Ragdoll : MonoBehaviour
             bone.useGravity = true;
         }
 
-        gfxCapsuCollider.enabled = false;
+        GFX.layer = RAGDOLL_LAYER;
         playerRb.useGravity = false;
 
         animator.enabled = false;
@@ -51,6 +51,7 @@ public class Ragdoll : MonoBehaviour
     }
     public void DisableRagDoll()
     {
+        const int PLAYER_LAYER = 3;
         Transform playerRagDollTransform = hipsRb.gameObject.transform;
 
         transform.position =
@@ -62,7 +63,7 @@ public class Ragdoll : MonoBehaviour
             bone.useGravity = false;
         }
 
-        gfxCapsuCollider.enabled = true;
+        GFX.layer = PLAYER_LAYER;
         playerRb.useGravity = true;
         animator.enabled = true;
         playerEventManager.StopInputingMovement(false);

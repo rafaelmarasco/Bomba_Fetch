@@ -265,7 +265,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 323224129}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Run Direction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1619,7 +1619,7 @@ GameObject:
   - component: {fileID: 1246228919}
   - component: {fileID: 1246228918}
   - component: {fileID: 1246228922}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Area de choque
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2140,7 +2140,7 @@ GameObject:
   - component: {fileID: 1600491237}
   - component: {fileID: 1600491236}
   - component: {fileID: 1600491235}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Fire Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
