@@ -31,4 +31,5 @@ public class PlayerEventManager : MonoBehaviour
 
     public event Action<bool> OnStopedMoving;
     public void StopInputingMovement(bool stopMoving) => OnStopedMoving?.Invoke(stopMoving);
+
 }

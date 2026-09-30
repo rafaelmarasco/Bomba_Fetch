@@ -13,7 +13,7 @@ public enum Size
 public class Prop : MonoBehaviour
 {
     [SerializeField] private Size propSize;
-    [SerializeField] private PropInteract playerInteracting;
+    public PropInteract PlayerInteracting {  get; private set; }
     public Size PropSize => propSize;
     public float ThrowForce
     {
@@ -31,14 +31,12 @@ public class Prop : MonoBehaviour
 
     private FixedJoint joint;
 
-    private bool isBeingHeld;
-
     private const int PROP_IN_HAND_LAYER = 7;
     private const int DEFAULT_LAYER = 0;
 
     public void EnableReposition(PropInteract playerInteracting)
     {
-        this.playerInteracting = playerInteracting;
+        this.PlayerInteracting = playerInteracting;
 
         switch (PropSize)
         {
@@ -50,13 +48,12 @@ public class Prop : MonoBehaviour
                 RepositionMediumProp();
                 break;
         }
-        isBeingHeld = true;
     }
     private void RepositionSmallProp()
     {
         Transform holdPoint;
 
-        holdPoint = playerInteracting.holdPointSmall;
+        holdPoint = PlayerInteracting.holdPointSmall;
 
         GetComponent<Rigidbody>().isKinematic = true;
 
@@ -70,7 +67,7 @@ public class Prop : MonoBehaviour
     {
         Transform holdPoint;
 
-        holdPoint = playerInteracting.holdPointMedium;
+        holdPoint = PlayerInteracting.holdPointMedium;
 
         transform.SetPositionAndRotation(holdPoint.position, holdPoint.rotation);
 
@@ -86,8 +83,7 @@ public class Prop : MonoBehaviour
         GetComponent<Rigidbody>().isKinematic = false;
 
         DestroyJoints();
-        playerInteracting = null;
-        isBeingHeld = false;
+        PlayerInteracting = null;
     }
 
     private void DestroyJoints()

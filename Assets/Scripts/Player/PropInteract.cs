@@ -22,7 +22,7 @@ public class PropInteract : MonoBehaviour
     [SerializeField] public Transform holdPointSmall;
     [SerializeField] public Transform holdPointMedium;
     [SerializeField] private Transform holdPointLarge;
-    [SerializeField] private Transform holdPointInteract;
+    [SerializeField] public Transform holdPointInteract;
 
     [Header("BoxCastConfigs")]
     [SerializeField] private Vector3 halfExtends = new(.5f, 0.1f, .4f);
@@ -52,6 +52,8 @@ public class PropInteract : MonoBehaviour
     }
     private void Interact_performed(InputAction.CallbackContext obj)
     {
+        if (HeldItem == null) return;
+
         if (propPickupHandler.HasBomb && !IsBombInteracting)
         {
             //HeldItem.transform.SetParent(holdPointInteract);
@@ -71,6 +73,7 @@ public class PropInteract : MonoBehaviour
         {
             Debug.Log("Pegou");
             propPickupHandler.PickUpProp(prop);
+            HandleInteractableProps(prop);
         }
         else if (HasItem)
         {
@@ -78,7 +81,11 @@ public class PropInteract : MonoBehaviour
             OnPropDropped?.Invoke();
         }
     }
-
+    private void HandleInteractableProps(GameObject prop)
+    {
+        if (prop.TryGetComponent(out Extinguisher extinguisher))
+            extinguisher.SetEquipedState(true);
+    }
     public bool CheckForPlayer(out GameObject player)
     {
         player = null;
