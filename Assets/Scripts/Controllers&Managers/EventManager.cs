@@ -41,4 +41,7 @@ public class EventManager : MonoBehaviour
 
     public event Action OnEletrocuted;
     public void Eletrocute() => OnEletrocuted?.Invoke();
+
+    public event Action OnReadPassword;
+    public void ReadPassword() => OnReadPassword?.Invoke();
 }
