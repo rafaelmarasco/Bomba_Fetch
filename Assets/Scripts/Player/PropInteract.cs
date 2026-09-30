@@ -31,6 +31,10 @@ public class PropInteract : MonoBehaviour
     [Header("Minigame")]
     [SerializeField] private Canvas minigameCanvas;
 
+    [Header("Password")]
+    [SerializeField] private Canvas passwordCanvas;
+    private bool isPasswordInteracting = false;
+
 
     private void Awake()
     {
@@ -41,6 +45,13 @@ public class PropInteract : MonoBehaviour
         playerInput.actions["Push"].performed += Push_performed;
         playerInput.actions["Interact"].performed += Interact_performed;
     }
+
+    private void Start()
+    {
+        minigameCanvas.gameObject.SetActive(false);
+        passwordCanvas.gameObject.SetActive(false);
+    }
+
     private void Update()
     {
         lastMoveDir = player.LastMoveDir;
@@ -50,11 +61,14 @@ public class PropInteract : MonoBehaviour
     {
         if (hasBomb && !isBombInteracting)
         {
-            //heldItem.transform.SetParent(holdPointInteract);
             // In this function mean that player has bomb and he is holding it
             minigameCanvas.gameObject.SetActive(true);
             isBombInteracting = true;
             playerEventManager.BombInteracted(headPos, heldItem);
+        }
+        else if (isPasswordInteracting)
+        {
+            passwordCanvas.gameObject.SetActive(true);
         }
     }
     private void Push_performed(InputAction.CallbackContext obj)
@@ -118,6 +132,7 @@ public class PropInteract : MonoBehaviour
         prop.TryGetComponent<Prop>(out Prop propInfo);
 
         hasBomb = prop.name == "Bomb"; // Trocar para script quando a bomba tiver um script
+        isPasswordInteracting = prop.name == "Password"; 
 
         if (prop.TryGetComponent<Rigidbody>(out Rigidbody propRb))
             propRb.isKinematic = true;
@@ -151,6 +166,11 @@ public class PropInteract : MonoBehaviour
             minigameCanvas.gameObject.SetActive(false);
             playerEventManager.BombDroped();
             isBombInteracting = false;
+        }
+        else if (isPasswordInteracting)
+        {
+            passwordCanvas.gameObject.SetActive(false);
+            isPasswordInteracting = false;
         }
 
         playerEventManager.ItemDroped(propInfo);

@@ -3,7 +3,7 @@ using TMPro;
 
 public class RandomPassword : MonoBehaviour
 {
-    [SerializeField] private TMP_Text passwordText;
+    [SerializeField] private TMP_Text passwordText; 
 
     private int[] password;
     private int passwordLength = 4;
@@ -11,7 +11,7 @@ public class RandomPassword : MonoBehaviour
     private int finalRangeNumber = 9;
 
 
-    void Start()
+    private void OnEnable()
     {
         password = new int[passwordLength];
         GeneratePassword();
@@ -26,6 +26,6 @@ public class RandomPassword : MonoBehaviour
         }
 
         passwordText.text = string.Join("", password);
-        //passwordText.text = password.ToString();
     }
+    
 }
