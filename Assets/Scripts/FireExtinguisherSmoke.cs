@@ -19,13 +19,13 @@ public class FireExtinguisherSmoke : MonoBehaviour
         Destroy(hazard.gameObject);
     }
 
-    public void StartSmoke()
+    public void StartSpewing()
     {
         smokeArea.enabled = true;
         Debug.Log($"Estado da fumaçao {smokeArea.enabled}");
     }
 
-    public void StopSmoke()
+    public void StopSpewing()
     {
         smokeArea.enabled = false;
     }

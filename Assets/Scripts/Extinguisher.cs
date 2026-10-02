@@ -1,55 +1,57 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Extinguisher : MonoBehaviour
+public class Extinguisher : MonoBehaviour, IHeldTool
 {
     private Prop extinguisherProp;
-    private PropInteract PlayerEquiped => extinguisherProp.PlayerInteracting;
+    private PropInteract Holder => extinguisherProp.PlayerInteracting;
 
-    private PlayerInput playerInput;
+    private PlayerInput HolderInput;
 
-    private FireExtinguisherSmoke fireExtinguisherSmoke;
+    private FireExtinguisherSmoke smoke;
 
-    [SerializeField] private bool isEquiped;
+    private bool isEquipped;
+
+    private Vector3 rotationOffset = new(0f, -90f, -10f);
+
     private void Awake()
     {
         extinguisherProp = GetComponent<Prop>();
-        fireExtinguisherSmoke = GetComponentInChildren<FireExtinguisherSmoke>();
+        smoke = GetComponentInChildren<FireExtinguisherSmoke>();
     }
-
-    private void Update()
+    public void Use()
     {
-        if (!isEquiped)
+        if (!isEquipped || smoke.IsSpewing) return;
+
+        smoke.StartSpewing();
+        transform.SetParent(Holder.holdPointInteract);
+        transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(rotationOffset));
+    }
+    public void StopUsing()
+    {
+        if (!smoke.IsSpewing) return;
+
+        smoke.StopSpewing();
+        extinguisherProp.EnableReposition(Holder);
+    }
+    public void Pickup()
+    {
+        isEquipped = true;
+
+        if (HolderInput != null)
         {
-            playerInput = null;
-
-            if (fireExtinguisherSmoke.IsSpewing)
-                fireExtinguisherSmoke.StopSmoke();
-
+            Debug.LogWarning($"O player: {Holder.name} já esta equipado com esse item");
             return;
         }
 
-        if (playerInput == null) 
-            playerInput = PlayerEquiped.GetComponent<PlayerInput>();
-
-        HandleSmokeState();
+        HolderInput = Holder.GetComponent<PlayerInput>();
     }
-
-    private void HandleSmokeState()
+    public void Drop()
     {
+        if (smoke.IsSpewing)
+            smoke.StopSpewing();
 
-        if (playerInput.actions["interact"].IsPressed() && !fireExtinguisherSmoke.IsSpewing)
-        {
-            fireExtinguisherSmoke.StartSmoke();
-            transform.SetParent(PlayerEquiped.holdPointInteract);
-            transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.LookRotation(-PlayerEquiped.transform.forward));
-        }
-        else if (playerInput.actions["interact"].WasReleasedThisFrame())
-        {
-            fireExtinguisherSmoke.StopSmoke();
-            extinguisherProp.EnableReposition(PlayerEquiped);
-        }
+        isEquipped = false;
+        HolderInput = null;
     }
-
-    public void SetEquipedState(bool state) => isEquiped = state;
 }
