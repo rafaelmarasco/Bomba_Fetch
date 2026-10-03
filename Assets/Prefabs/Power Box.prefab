@@ -82,7 +82,7 @@ GameObject:
   - component: {fileID: 4737813123349708306}
   - component: {fileID: 5271454683328066642}
   m_Layer: 0
-  m_Name: Padrao de energia
+  m_Name: Power Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
