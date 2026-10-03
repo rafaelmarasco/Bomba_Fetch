@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class HazzardInterface : MonoBehaviour
+public class HazardInterface : MonoBehaviour
 {
-    [SerializeField] private Hazzard hazzard;
+    [SerializeField] private Hazard hazard;
 
     public float radius;
 
@@ -28,12 +28,12 @@ public class HazzardInterface : MonoBehaviour
 
     private void TurnHazzardOff(InputAction.CallbackContext obj)
     {
-        hazzard.isOn = !hazzard.isOn;
+        hazard.isOn = !hazard.isOn;
     }
 
     private void OnDrawGizmosSelected()
     {
-        Transform hazzardTarget = hazzard.gameObject.transform;
+        Transform hazzardTarget = hazard.gameObject.transform;
 
         Gizmos.color = Color.red;
 

@@ -856,6 +856,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerPushHandler
   pushForce: 70
+  instantPlayerPushMode: 0
 --- !u!114 &3644667998650854834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -999,13 +1000,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8613230953075802679}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.00000013685816, y: -0.9238797, z: -0.38268322, w: -0.00000033040507}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0.657}
+  m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0.55}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8330579805403462866}
-  m_LocalEulerAnglesHint: {x: -45, y: -180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
 --- !u!1 &8768707195246150121
 GameObject:
   m_ObjectHideFlags: 0
