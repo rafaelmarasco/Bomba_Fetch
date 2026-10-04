@@ -1,13 +1,9 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
 public class Player : MonoBehaviour
 {
-    [Header("Scripts")]
-    [SerializeField] private PlayerMovement playerMovement;
-    [SerializeField] private PropInteract propInteract;
-    [SerializeField] private Ragdoll ragdoll;
+
+    private PlayerMovement playerMovement;
+
     private PlayerEventManager playerEventManager;
 
     [SerializeField] private Animator animator;
@@ -20,17 +16,20 @@ public class Player : MonoBehaviour
     [SerializeField] private float moveSpeed = 7f;
 
     private Vector3 rawInput;
-
     public Vector3 MoveDir { get; private set; }
     public Vector3 LastMoveDir { get; private set; } = Vector3.forward;
 
     public bool IsMoving => MoveDir != Vector3.zero;
     private bool stopMoving;
 
+    [SerializeField] private float rotationSpeed;
+
     private void Awake()
     {
-        playerRb = GetComponent<Rigidbody>();
         playerEventManager = GetComponent<PlayerEventManager>();
+        playerMovement = GetComponent<PlayerMovement>();
+
+        playerRb = GetComponent<Rigidbody>();
     }
 
     private void OnEnable()
@@ -62,8 +61,11 @@ public class Player : MonoBehaviour
     }
     public void RotateOnMove(Vector3 input)
     {
-        if (input != Vector3.zero)
-            transform.rotation = Quaternion.LookRotation(input, Vector3.up);
+        if (input == Vector3.zero)
+            return;
+
+        Quaternion targetRotation = Quaternion.LookRotation(input, Vector3.up);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime);
     }
     private void StopMoving(bool stopMoving)
     {

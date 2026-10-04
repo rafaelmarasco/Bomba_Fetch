@@ -1,54 +1,60 @@
+using System;
 using UnityEngine;
-using UnityEngine.Animations.Rigging;
 using UnityEngine.InputSystem;
 
 public class PropInteract : MonoBehaviour
 {
-    [SerializeField] private Player player;
+    private PlayerEventManager playerEventManager;
+    private PropPickupHandler propPickupHandler;
+    private PlayerPushHandler playerPushHandler;
+    private PlayerInput playerInput;
+    private Player player;
+
     [SerializeField] private Transform checkPos;
     [SerializeField] private Transform headPos;
-    [SerializeField] private float pushForce;
-
-    private PlayerEventManager playerEventManager;
-
-    private PlayerInput playerInput;
+    public bool IsBombInteracting { get; private set; } = false;
 
     private Vector3 lastMoveDir;
-    public bool hasItem => heldItem != null;
-    public bool hasBomb { get; private set; } = false;
-    public bool isBombInteracting { get; private set; } = false;
-    public GameObject heldItem { get; private set; }
+    private GameObject HeldItem => propPickupHandler.HeldItem;
 
-    [SerializeField] private Transform holdPointSmall;
-    [SerializeField] private Transform holdPointMedium;
+    private IHeldTool toolInHand;
+    public bool HasItem => HeldItem != null;
+
+    [Header("Prop Holding Points")]
+    [SerializeField] public Transform holdPointSmall;
+    [SerializeField] public Transform holdPointMedium;
     [SerializeField] private Transform holdPointLarge;
-    [SerializeField] private Transform holdPointInteract;
+    [SerializeField] public Transform holdPointInteract;
 
     [Header("BoxCastConfigs")]
-    [SerializeField] private Vector3 halfExtends = new Vector3(.5f, 0.1f, .4f);
+    [SerializeField] private Vector3 halfExtends = new(.5f, 0.1f, .4f);
     [SerializeField] private float interactDistance = .8f;
 
     [Header("Minigame")]
-    [SerializeField] private Canvas minigameCanvas;
+    public Canvas minigameCanvas { get; private set; }
+
+    public event Action OnPropDropped;
 
     [Header("Password")]
     [SerializeField] private Canvas passwordCanvas;
     private bool isPasswordInteracting = false;
 
-
     private void Awake()
     {
+        player = GetComponent<Player>();
         playerInput = GetComponent<PlayerInput>();
+        propPickupHandler = GetComponent<PropPickupHandler>();
+        playerPushHandler = GetComponent<PlayerPushHandler>();
         playerEventManager = GetComponent<PlayerEventManager>();
 
         playerInput.actions["Grab"].performed += Grab_performed;
         playerInput.actions["Push"].performed += Push_performed;
         playerInput.actions["Interact"].performed += Interact_performed;
+        playerInput.actions["Interact"].canceled += Interact_canceled;
     }
 
     private void Start()
     {
-        minigameCanvas.gameObject.SetActive(false);
         passwordCanvas.gameObject.SetActive(false);
     }
 
@@ -59,148 +65,95 @@ public class PropInteract : MonoBehaviour
 
     private void Interact_performed(InputAction.CallbackContext obj)
     {
-        if (hasBomb && !isBombInteracting)
-        {
-            // In this function mean that player has bomb and he is holding it
-            minigameCanvas.gameObject.SetActive(true);
-            isBombInteracting = true;
-            playerEventManager.BombInteracted(headPos, heldItem);
-        }
-        else if (isPasswordInteracting)
+        if (isPasswordInteracting)
         {
             passwordCanvas.gameObject.SetActive(true);
+            return;
         }
+
+        toolInHand?.Use();
     }
-    private void Push_performed(InputAction.CallbackContext obj)
-    {
-        PushProp();
-    }
+
+    private void Interact_canceled(InputAction.CallbackContext context) => toolInHand?.StopUsing();
+
+    private void Push_performed(InputAction.CallbackContext obj) => playerPushHandler.Push();
+
     private void Grab_performed(InputAction.CallbackContext obj)
     {
-        if (!hasItem && CheckForProps(out GameObject prop))
+        if (!HasItem && CheckForProps(out GameObject prop))
         {
             Debug.Log("Pegou");
-            PickUpProp(prop);
+            propPickupHandler.PickUpProp(prop);
+            SetToolInHand(prop);
+            isPasswordInteracting = prop.name == "Password";
         }
-        else if (hasItem)
+        else if (HasItem)
         {
-            DropProp();
-            if (hasBomb)
+            toolInHand?.Drop();
+            toolInHand = null;
+
+            if (isPasswordInteracting)
             {
-                hasBomb = false;
-                playerEventManager.BombDroped();
+                passwordCanvas.gameObject.SetActive(false);
+                isPasswordInteracting = false;
             }
+
+            propPickupHandler.DropProp();
+            OnPropDropped?.Invoke();
         }
     }
 
-    private bool CheckForProps(out GameObject prop) // Check if theres an object in front of the player
+    private void SetToolInHand(GameObject prop)
     {
-        bool canGrab = Physics.BoxCast(checkPos.position - lastMoveDir * .2f, halfExtends, lastMoveDir, out RaycastHit hit, checkPos.rotation, interactDistance);
-        bool isProp = canGrab && hit.collider.gameObject.TryGetComponent<Prop>(out Prop propComponent);
+        if (!prop.TryGetComponent(out IHeldTool tool)) return;
+
+        Debug.Log("Item pego!!");
+
+        toolInHand = tool;
+        toolInHand.Pickup();
+    }
+
+    public bool CheckForPlayer(out GameObject player)
+    {
+        player = null;
+
+        bool foundAnyObject = Physics.BoxCast
+            (checkPos.position - lastMoveDir * .2f, halfExtends, lastMoveDir, out RaycastHit hit, checkPos.rotation, interactDistance);
+
+        if (!foundAnyObject) return false;
+
+        Player playerFound = hit.collider.gameObject.GetComponentInParent<Player>();
+
+        if (playerFound == null)
+            return false;
+
+        player = playerFound.gameObject;
+
+        return true;
+    }
+
+    public bool CheckForProps(out GameObject prop) // Check if theres an object in front of the player
+    {
+        GameObject objectInRange = null;
+
+        bool findAnyObject = Physics.BoxCast
+            (checkPos.position - lastMoveDir * .2f, halfExtends, lastMoveDir, out RaycastHit hit, checkPos.rotation, interactDistance);
+
+        bool isProp = findAnyObject && hit.collider.gameObject.TryGetComponent<Prop>(out _);
 
         if (isProp)
-            prop = hit.collider.gameObject;
-        else
-            prop = null;
+            objectInRange = hit.collider.gameObject;
+
+        prop = objectInRange;
 
         return isProp;
     }
-    public void PushProp()
+
+    private void OnDestroy()
     {
-        if (!isBombInteracting)
-        {
-            playerEventManager.PropPush();
-
-            if (!hasItem && CheckForProps(out GameObject prop))
-            {
-                prop.TryGetComponent<Rigidbody>(out Rigidbody propRb);
-                propRb.linearVelocity = lastMoveDir * pushForce;
-            }
-            else if (hasItem)
-            {
-                heldItem.TryGetComponent<Rigidbody>(out Rigidbody propRb);
-                DropProp();
-                propRb.linearVelocity = lastMoveDir * pushForce;
-            }
-        }
-    }
-    private void PickUpProp(GameObject prop)
-    {
-        const int PROP_IN_HAND_LAYER = 7;
-
-        heldItem = prop;
-        prop.TryGetComponent<Prop>(out Prop propInfo);
-
-        hasBomb = prop.name == "Bomb"; // Trocar para script quando a bomba tiver um script
-        isPasswordInteracting = prop.name == "Password"; 
-
-        if (prop.TryGetComponent<Rigidbody>(out Rigidbody propRb))
-            propRb.isKinematic = true;
-
-        prop.layer = PROP_IN_HAND_LAYER;
-
-        PickUpReposition(propInfo, prop.transform);
-
-        playerEventManager.ItemPickedUp(propInfo);
-    }
-    public void DropProp()
-    {
-        const int DEFAULT_LAYER = 0;
-
-        Prop propInfo = heldItem.GetComponent<Prop>();
-        float zOffset = .2f;
-        float yOffset = .3f;
-        Vector3 offset = new Vector3(0f, yOffset, zOffset);
-
-        if (heldItem.TryGetComponent<Rigidbody>(out Rigidbody propRb))
-            propRb.isKinematic = false;
-
-        heldItem.layer = DEFAULT_LAYER;
-
-        heldItem.transform.localPosition += offset;
-        heldItem.transform.SetParent(null);
-        heldItem = null;
-
-        if (isBombInteracting)
-        {
-            minigameCanvas.gameObject.SetActive(false);
-            playerEventManager.BombDroped();
-            isBombInteracting = false;
-        }
-        else if (isPasswordInteracting)
-        {
-            passwordCanvas.gameObject.SetActive(false);
-            isPasswordInteracting = false;
-        }
-
-        playerEventManager.ItemDroped(propInfo);
-    }
-    public void PickUpReposition(Prop propInfo, Transform propPos)
-    {
-        Size propSize = propInfo.PropSize;
-
-        switch (propSize)
-        {
-            case Size.small:
-                propPos.SetParent(holdPointSmall);
-                propPos.localPosition = Vector3.zero;
-                propPos.rotation = holdPointSmall.rotation;
-                break;
-            case Size.medium:
-                propPos.SetParent(holdPointMedium);
-                propPos.localPosition = Vector3.zero;
-                propPos.rotation = holdPointMedium.rotation;
-                break;
-            case Size.large: // Mudar logica no futuro
-                propPos.SetParent(holdPointMedium);
-                propPos.localPosition = Vector3.zero;
-                propPos.rotation = holdPointMedium.rotation;
-                break;
-        }
-
-    }
-    private void BoxCastDebug(Vector3 origin, Vector3 halfExtends, Quaternion orientation)
-    {
-        DebugBoxCast.SimpleDrawBoxCast(origin, halfExtends, orientation, lastMoveDir, interactDistance, Color.aliceBlue);
+        playerInput.actions["Grab"].performed -= Grab_performed;
+        playerInput.actions["Push"].performed -= Push_performed;
+        playerInput.actions["Interact"].performed -= Interact_performed;
+        playerInput.actions["Interact"].canceled -= Interact_canceled;
     }
 }

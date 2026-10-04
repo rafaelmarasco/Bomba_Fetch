@@ -16,8 +16,6 @@ public class EventManager : MonoBehaviour
 
     private void Awake() => _instance = this;
 
-
-
     public event Action<Transform, GameObject> OnBombInteracted;
     //public void BombInteracted(Transform cameraPos, GameObject prop) => OnBombInteracted?.Invoke(cameraPos, prop);
 
