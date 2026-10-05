@@ -116,7 +116,6 @@ public class PlayerHarmHandler : MonoBehaviour
         player.RotateOnMove(directionToTarget);
         playerRb.MovePosition(playerRb.position + onFireMoveSpeed * Time.fixedDeltaTime * directionToTarget);
     }
-
     private Vector3 SelectRandonDirection()
     {
         Vector3 randonDirection;

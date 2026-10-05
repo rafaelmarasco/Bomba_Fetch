@@ -13,8 +13,8 @@ public enum Size
 public class Prop : MonoBehaviour
 {
     [SerializeField] private Size propSize;
-    public PropInteract PlayerInteracting {  get; private set; }
     public Size PropSize => propSize;
+    public PropInteract PlayerInteracting { get; private set; }
     public float ThrowForce
     {
         get
@@ -30,6 +30,8 @@ public class Prop : MonoBehaviour
     }
 
     private FixedJoint joint;
+
+    private bool isFlying = false;
 
     private const int PROP_IN_HAND_LAYER = 7;
     private const int DEFAULT_LAYER = 0;
@@ -48,6 +50,8 @@ public class Prop : MonoBehaviour
                 RepositionMediumProp();
                 break;
         }
+
+        Physics.IgnoreCollision(GetComponent<Collider>(), PlayerInteracting.GetComponentInChildren<Collider>());
     }
     private void RepositionSmallProp()
     {
@@ -62,7 +66,6 @@ public class Prop : MonoBehaviour
         transform.SetParent(holdPoint);
         transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
     }
-
     private void RepositionMediumProp()
     {
         Transform holdPoint;
@@ -78,6 +81,8 @@ public class Prop : MonoBehaviour
     }
     public void DisableReposition()
     {
+        Physics.IgnoreCollision(GetComponent<Collider>(), PlayerInteracting.GetComponentInChildren<Collider>(), false);
+
         gameObject.layer = DEFAULT_LAYER;
 
         GetComponent<Rigidbody>().isKinematic = false;
@@ -85,7 +90,6 @@ public class Prop : MonoBehaviour
         DestroyJoints();
         PlayerInteracting = null;
     }
-
     private void DestroyJoints()
     {
         if (joint != null)
@@ -93,5 +97,23 @@ public class Prop : MonoBehaviour
             Destroy(joint);
             joint = null;
         }
+    }
+    public void SetFlyingState(bool state) => isFlying = state;
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (!isFlying) return;
+
+        Debug.Log("Esta voando");
+
+        if (!collision.gameObject.GetComponent<Player>()) return;
+
+        Debug.Log(collision.gameObject.name);
+
+        PlayerHarmHandler target = collision.gameObject.GetComponentInParent<PlayerHarmHandler>();
+
+        if (target == null) Debug.Log("Target is null");
+
+        target.StartKnockableColldownTimer(.8f);
+
     }
 }
