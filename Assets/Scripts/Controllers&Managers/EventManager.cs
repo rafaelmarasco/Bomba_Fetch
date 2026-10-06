@@ -42,4 +42,7 @@ public class EventManager : MonoBehaviour
 
     public event Action OnReadPassword;
     public void ReadPassword() => OnReadPassword?.Invoke();
+
+    public event Action OnBombExploded;
+    public void BombExploded() => OnBombExploded?.Invoke();
 }
