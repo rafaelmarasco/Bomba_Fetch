@@ -10,6 +10,8 @@ public class RandomPassword : MonoBehaviour
     private int inicialRangeNumber = 0;
     private int finalRangeNumber = 9;
 
+    private bool isPasswordGenerated = false;
+
 
     private void OnEnable()
     {
@@ -19,13 +21,19 @@ public class RandomPassword : MonoBehaviour
 
     private void GeneratePassword()
     {
-        for (int i = 0; i < passwordLength; i++)
+        if (!isPasswordGenerated)
         {
-            int number = Random.Range(inicialRangeNumber, finalRangeNumber);
-            password[i] = number;
-        }
+            for (int i = 0; i < passwordLength; i++)
+            {
+                int number = Random.Range(inicialRangeNumber, finalRangeNumber);
+                password[i] = number;
+            }
 
-        passwordText.text = string.Join("", password);
+            passwordText.text = string.Join("", password);
+
+            isPasswordGenerated = true;
+        }
+        
     }
     
 }
