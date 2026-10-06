@@ -181,7 +181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12b30360897edba4b80569c85bc1983e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BombExplosion
-  eventManager: {fileID: 0}
+  eventManager: {fileID: 9003208957500983127, guid: 275bdce0c5a85f44496a4c893626c908, type: 3}
   radiusExplosion: 0
   explosionForce: 0
   upwardsModifier: 0
