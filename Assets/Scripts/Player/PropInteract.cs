@@ -16,13 +16,15 @@ public class PropInteract : MonoBehaviour
 
     private Vector3 lastMoveDir;
     private GameObject HeldItem => propPickupHandler.HeldItem;
+
+    private IHeldTool toolInHand;
     public bool HasItem => HeldItem != null;
 
     [Header("Prop Holding Points")]
     [SerializeField] public Transform holdPointSmall;
     [SerializeField] public Transform holdPointMedium;
     [SerializeField] private Transform holdPointLarge;
-    [SerializeField] private Transform holdPointInteract;
+    [SerializeField] public Transform holdPointInteract;
 
     [Header("BoxCastConfigs")]
     [SerializeField] private Vector3 halfExtends = new(.5f, 0.1f, .4f);
@@ -33,6 +35,9 @@ public class PropInteract : MonoBehaviour
 
     public event Action OnPropDropped;
 
+    [Header("Password")]
+    [SerializeField] private Canvas passwordCanvas;
+    private bool isPasswordInteracting = false;
 
     private void Awake()
     {
@@ -45,38 +50,67 @@ public class PropInteract : MonoBehaviour
         playerInput.actions["Grab"].performed += Grab_performed;
         playerInput.actions["Push"].performed += Push_performed;
         playerInput.actions["Interact"].performed += Interact_performed;
+        playerInput.actions["Interact"].canceled += Interact_canceled;
     }
+
+    private void Start()
+    {
+        passwordCanvas.gameObject.SetActive(false);
+    }
+
     private void Update()
     {
         lastMoveDir = player.LastMoveDir;
     }
+
     private void Interact_performed(InputAction.CallbackContext obj)
     {
-        if (propPickupHandler.HasBomb && !IsBombInteracting)
+        if (isPasswordInteracting)
         {
-            //HeldItem.transform.SetParent(holdPointInteract);
-            // In this function mean that player has bomb and he is holding it
-            minigameCanvas.gameObject.SetActive(true);
-            IsBombInteracting = true;
-            playerEventManager.BombInteracted(headPos, HeldItem);
+            passwordCanvas.gameObject.SetActive(true);
+            return;
         }
+
+        toolInHand?.Use();
     }
-    private void Push_performed(InputAction.CallbackContext obj)
-    {
-        playerPushHandler.Push();
-    }
+
+    private void Interact_canceled(InputAction.CallbackContext context) => toolInHand?.StopUsing();
+
+    private void Push_performed(InputAction.CallbackContext obj) => playerPushHandler.Push();
+
     private void Grab_performed(InputAction.CallbackContext obj)
     {
         if (!HasItem && CheckForProps(out GameObject prop))
         {
             Debug.Log("Pegou");
             propPickupHandler.PickUpProp(prop);
+            SetToolInHand(prop);
+            isPasswordInteracting = prop.name == "Password";
         }
         else if (HasItem)
         {
+            toolInHand?.Drop();
+            toolInHand = null;
+
+            if (isPasswordInteracting)
+            {
+                passwordCanvas.gameObject.SetActive(false);
+                isPasswordInteracting = false;
+            }
+
             propPickupHandler.DropProp();
             OnPropDropped?.Invoke();
         }
+    }
+
+    private void SetToolInHand(GameObject prop)
+    {
+        if (!prop.TryGetComponent(out IHeldTool tool)) return;
+
+        Debug.Log("Item pego!!");
+
+        toolInHand = tool;
+        toolInHand.Pickup();
     }
 
     public bool CheckForPlayer(out GameObject player)
@@ -97,6 +131,7 @@ public class PropInteract : MonoBehaviour
 
         return true;
     }
+
     public bool CheckForProps(out GameObject prop) // Check if theres an object in front of the player
     {
         GameObject objectInRange = null;
@@ -112,5 +147,13 @@ public class PropInteract : MonoBehaviour
         prop = objectInRange;
 
         return isProp;
+    }
+
+    private void OnDestroy()
+    {
+        playerInput.actions["Grab"].performed -= Grab_performed;
+        playerInput.actions["Push"].performed -= Push_performed;
+        playerInput.actions["Interact"].performed -= Interact_performed;
+        playerInput.actions["Interact"].canceled -= Interact_canceled;
     }
 }

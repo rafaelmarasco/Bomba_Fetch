@@ -13,8 +13,8 @@ public enum Size
 public class Prop : MonoBehaviour
 {
     [SerializeField] private Size propSize;
-    [SerializeField] private PropInteract playerInteracting;
     public Size PropSize => propSize;
+    public PropInteract PlayerInteracting { get; private set; }
     public float ThrowForce
     {
         get
@@ -31,14 +31,15 @@ public class Prop : MonoBehaviour
 
     private FixedJoint joint;
 
-    private bool isBeingHeld;
+    private bool isFlying = false;
 
     private const int PROP_IN_HAND_LAYER = 7;
     private const int DEFAULT_LAYER = 0;
+    private const int FLOOR_LAYER = 10;
 
     public void EnableReposition(PropInteract playerInteracting)
     {
-        this.playerInteracting = playerInteracting;
+        this.PlayerInteracting = playerInteracting;
 
         switch (PropSize)
         {
@@ -50,13 +51,14 @@ public class Prop : MonoBehaviour
                 RepositionMediumProp();
                 break;
         }
-        isBeingHeld = true;
+
+        Physics.IgnoreCollision(GetComponent<Collider>(), PlayerInteracting.GetComponentInChildren<Collider>());
     }
     private void RepositionSmallProp()
     {
         Transform holdPoint;
 
-        holdPoint = playerInteracting.holdPointSmall;
+        holdPoint = PlayerInteracting.holdPointSmall;
 
         GetComponent<Rigidbody>().isKinematic = true;
 
@@ -65,12 +67,11 @@ public class Prop : MonoBehaviour
         transform.SetParent(holdPoint);
         transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
     }
-
     private void RepositionMediumProp()
     {
         Transform holdPoint;
 
-        holdPoint = playerInteracting.holdPointMedium;
+        holdPoint = PlayerInteracting.holdPointMedium;
 
         transform.SetPositionAndRotation(holdPoint.position, holdPoint.rotation);
 
@@ -86,10 +87,9 @@ public class Prop : MonoBehaviour
         GetComponent<Rigidbody>().isKinematic = false;
 
         DestroyJoints();
-        playerInteracting = null;
-        isBeingHeld = false;
+        Physics.IgnoreCollision(GetComponent<Collider>(), PlayerInteracting.GetComponentInChildren<Collider>(), false);
+        PlayerInteracting = null;
     }
-
     private void DestroyJoints()
     {
         if (joint != null)
@@ -97,5 +97,26 @@ public class Prop : MonoBehaviour
             Destroy(joint);
             joint = null;
         }
+    }
+    public void SetFlyingState(bool state) => isFlying = state;
+    private void HandlePropToPlayerContact(Collision collision)
+    {
+        if (collision.gameObject.layer == FLOOR_LAYER)
+            SetFlyingState(false);
+
+        if (!collision.gameObject.GetComponent<Player>()) return;
+
+        float stunTime = 2f;
+        PlayerEventManager targetEventManager = collision.gameObject.GetComponentInParent<PlayerEventManager>();
+        //PlayerHarmHandler target = collision.gameObject.GetComponentInParent<PlayerHarmHandler>();
+
+        targetEventManager.KnockedDown(stunTime);
+        SetFlyingState(false);
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (isFlying)
+            HandlePropToPlayerContact(collision);
+        else return;
     }
 }

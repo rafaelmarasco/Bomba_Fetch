@@ -123,19 +123,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 3481203709008427183}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58244bdf63d3f7f488b928d75473eeba, type: 3}
+  m_Script: {fileID: 11500000, guid: ee41940832a7e2947af213daeb38c07f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Hazzard
   hazzardType: 0
-  flyDirection: {x: 4, y: 5, z: 0}
+  flyDirection: {x: 0, y: 0, z: 0}
   propFlyDirection: {x: 0, y: 0, z: 0}
   flyForce: 0
   cooldown: 0
-  onFireRunDirection: {fileID: 4468470570266524412}
-  jumpForce: 15
-  onFireTime: 2
-  stunTime: 3
-  isOn: 1
+  onFireRunDirection: {fileID: 0}
+  jumpForce: 0
+  onFireTime: 0
+  stunTime: 0
+  isOn: 0
 --- !u!1 &6436325260643002631
 GameObject:
   m_ObjectHideFlags: 0

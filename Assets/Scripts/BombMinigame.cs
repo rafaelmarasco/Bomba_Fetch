@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using TMPro;
-using JetBrains.Annotations;
 
 
 public class BombMinigame : MonoBehaviour
@@ -30,15 +29,11 @@ public class BombMinigame : MonoBehaviour
     private int position = 0;
     //private int valueButton = 1;
 
-    private void Awake()
-    {
-        CleanDisplay();
-        SetInputs();
-        SetButtons();   
-    }
 
     private void OnEnable()
     {
+        SetConfig();
+
         inputMap.Enable();
 
         navigateAction.performed += OnNavigate;
@@ -55,6 +50,13 @@ public class BombMinigame : MonoBehaviour
         navigateAction.performed -= OnNavigate;
         submitAction.performed -= OnSubmit;
         cancelAction.performed -= OnCancel;
+    }
+
+    private void SetConfig()
+    {
+        CleanDisplay();
+        SetInputs();
+        SetButtons();
     }
 
     private void SetInputs()

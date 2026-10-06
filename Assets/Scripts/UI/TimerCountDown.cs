@@ -4,6 +4,10 @@ using TMPro;
 
 public class TimerCountDown : MonoBehaviour
 {
+    [Header("Event Manager")]
+    [SerializeField] private EventManager eventManager;
+
+
     [Header("Timer Count Down Start")]
     [SerializeField] private GameObject timerScreenStarter;
     [SerializeField] private TextMeshProUGUI timerTextStart;
@@ -20,6 +24,8 @@ public class TimerCountDown : MonoBehaviour
 
     [Header("Controllers")]
     [SerializeField] private SceneController sceneController = new();
+
+    private bool isExploded = false;
 
 
     private float timer;
@@ -65,6 +71,11 @@ public class TimerCountDown : MonoBehaviour
         }
         else
         {
+            if (!isExploded)
+            {
+                eventManager.BombExploded();
+                isExploded = true;
+            }
             timerScreenFinal.SetActive(false);
             gameOverScreen.SetActive(true);
             restartButton.onClick.RemoveAllListeners();

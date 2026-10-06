@@ -1,13 +1,15 @@
 using UnityEngine;
-
-public class Hazzard : MonoBehaviour
+public enum HazardType
 {
-    private enum Type
-    {
-        fire,
-        eletricity,
-    }
-    [SerializeField] private Type hazzardType;
+    fire,
+    eletricity,
+}
+public class Hazard : MonoBehaviour
+{
+
+
+    [SerializeField] private HazardType hazzardType;
+    public HazardType Type => hazzardType;
 
     [Header("Eletricity Hazzard")]
     [SerializeField] private Vector3 flyDirection;
@@ -29,11 +31,11 @@ public class Hazzard : MonoBehaviour
     {
         switch (hazzardType)
         {
-            case Type.fire:
+            case HazardType.fire:
                 SetOnFire(other);
                 break;
 
-            case Type.eletricity:
+            case HazardType.eletricity:
                 TryToEletrocute(other);
                 break;
 
@@ -47,10 +49,10 @@ public class Hazzard : MonoBehaviour
     {
         switch (hazzardType)
         {
-            case Type.fire:
+            case HazardType.fire:
                 return;
 
-            case Type.eletricity:
+            case HazardType.eletricity:
                 TryToEletrocute(other);
                 break;
 
@@ -99,7 +101,7 @@ public class Hazzard : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        if (hazzardType == Type.fire)
+        if (hazzardType == HazardType.fire)
         {
             Gizmos.color = Color.orangeRed;
 

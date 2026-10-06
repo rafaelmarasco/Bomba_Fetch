@@ -38,7 +38,10 @@ public class PlayerPushHandler : MonoBehaviour
 
         if ((hasPropInRange || IsHoldingItem) || (!isInteractingWithBomb && hasPlayerInRange))
         {
-            if (prop != null || IsHoldingItem)
+            if (IsHoldingItem)
+                PushProp(propPickupHandler.HeldItem);
+            
+            else if (prop != null)
                 PushProp(prop);
 
             else if (player != null)
@@ -48,20 +51,33 @@ public class PlayerPushHandler : MonoBehaviour
 
     private void PushProp(GameObject propInRange)
     {
-        Debug.Log(IsHoldingItem);
+        Debug.Log(propInRange.name);
+
+        Prop propBeingThrown;
+
+        propInRange.TryGetComponent(out propBeingThrown);
+
+        if (propBeingThrown == null) Debug.LogWarning($"somehow {propBeingThrown.name} is not a prop!");
+
         if (!IsHoldingItem)
         {
             propInRange.TryGetComponent<Rigidbody>(out Rigidbody propRb);
             if (propRb == null) return;
+
+            propBeingThrown.SetFlyingState(true);
 
             propRb.AddForce(pushForce * transform.forward, ForceMode.Impulse);
         }
         else
         {
             propPickupHandler.HeldItem.TryGetComponent<Rigidbody>(out Rigidbody propRb);
+
+            propBeingThrown.SetFlyingState(true);
+
             propPickupHandler.DropProp();
             propRb.AddForce(pushForce * transform.forward, ForceMode.Impulse);
         }
+
     }
 
     private void PushPlayer(GameObject player)
