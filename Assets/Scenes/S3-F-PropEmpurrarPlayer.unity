@@ -450,7 +450,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 401603036}
   serializedVersion: 5
-  m_Mass: 10
+  m_Mass: 50
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -2758,7 +2758,7 @@ GameObject:
   - component: {fileID: 2142576296}
   - component: {fileID: 2142576295}
   - component: {fileID: 2142576294}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}

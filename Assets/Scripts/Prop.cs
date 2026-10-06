@@ -35,6 +35,7 @@ public class Prop : MonoBehaviour
 
     private const int PROP_IN_HAND_LAYER = 7;
     private const int DEFAULT_LAYER = 0;
+    private const int FLOOR_LAYER = 10;
 
     public void EnableReposition(PropInteract playerInteracting)
     {
@@ -81,13 +82,12 @@ public class Prop : MonoBehaviour
     }
     public void DisableReposition()
     {
-        Physics.IgnoreCollision(GetComponent<Collider>(), PlayerInteracting.GetComponentInChildren<Collider>(), false);
-
         gameObject.layer = DEFAULT_LAYER;
 
         GetComponent<Rigidbody>().isKinematic = false;
 
         DestroyJoints();
+        Physics.IgnoreCollision(GetComponent<Collider>(), PlayerInteracting.GetComponentInChildren<Collider>(), false);
         PlayerInteracting = null;
     }
     private void DestroyJoints()
@@ -99,21 +99,24 @@ public class Prop : MonoBehaviour
         }
     }
     public void SetFlyingState(bool state) => isFlying = state;
-    private void OnCollisionEnter(Collision collision)
+    private void HandlePropToPlayerContact(Collision collision)
     {
-        if (!isFlying) return;
-
-        Debug.Log("Esta voando");
+        if (collision.gameObject.layer == FLOOR_LAYER)
+            SetFlyingState(false);
 
         if (!collision.gameObject.GetComponent<Player>()) return;
 
-        Debug.Log(collision.gameObject.name);
+        float stunTime = 2f;
+        PlayerEventManager targetEventManager = collision.gameObject.GetComponentInParent<PlayerEventManager>();
+        //PlayerHarmHandler target = collision.gameObject.GetComponentInParent<PlayerHarmHandler>();
 
-        PlayerHarmHandler target = collision.gameObject.GetComponentInParent<PlayerHarmHandler>();
-
-        if (target == null) Debug.Log("Target is null");
-
-        target.StartKnockableColldownTimer(.8f);
-
+        targetEventManager.KnockedDown(stunTime);
+        SetFlyingState(false);
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (isFlying)
+            HandlePropToPlayerContact(collision);
+        else return;
     }
 }
