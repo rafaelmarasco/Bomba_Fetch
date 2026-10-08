@@ -2919,6 +2919,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shock Area
       objectReference: {fileID: 0}
+    - target: {fileID: 6411258455831879795, guid: f82a8046ab76aea4ba2652ff0d807ef0, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 7102277424411974625, guid: f82a8046ab76aea4ba2652ff0d807ef0, type: 3}
       propertyPath: isOn
       value: 1
@@ -2977,6 +2981,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 649121479518005211, guid: dcebde3fbe3fe24478ac4e740128598c, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 4607353391296474770, guid: dcebde3fbe3fe24478ac4e740128598c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 9.326
