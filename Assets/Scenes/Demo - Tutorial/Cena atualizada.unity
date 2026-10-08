@@ -340,9 +340,9 @@ MonoBehaviour:
   m_XRTrackingOrigin: {fileID: 0}
   m_ActionsAsset: {fileID: -944628639613478452, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
   m_PointAction: {fileID: -1654692200621890270, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_MoveAction: {fileID: -8784545083839296357, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_SubmitAction: {fileID: 392368643174621059, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_CancelAction: {fileID: 7727032971491509709, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_MoveAction: {fileID: 0}
+  m_SubmitAction: {fileID: 0}
+  m_CancelAction: {fileID: 0}
   m_LeftClickAction: {fileID: 3001919216989983466, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
   m_MiddleClickAction: {fileID: -2185481485913320682, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
   m_RightClickAction: {fileID: -4090225696740746782, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
@@ -1430,33 +1430,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51f73729398da6140b90046856c71575, type: 3}
---- !u!1 &1097739705 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3481203709008427183, guid: 9c291e4d86921f342a793fe737ae5495, type: 3}
-  m_PrefabInstance: {fileID: 1353106695364162611}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1097739711
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1097739705}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee41940832a7e2947af213daeb38c07f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Hazard
-  hazzardType: 0
-  flyDirection: {x: 0, y: 0, z: 0}
-  propFlyDirection: {x: 0, y: 0, z: 0}
-  flyForce: 0
-  cooldown: 0
-  onFireRunDirection: {fileID: 1904539097}
-  jumpForce: 4
-  onFireTime: 2
-  stunTime: 2
-  isOn: 1
 --- !u!114 &1120325542 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6419024030440223505, guid: f810943df83349d4eb55b3df1efd910c, type: 3}
@@ -2340,11 +2313,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 0
---- !u!4 &1904539097 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4468470570266524412, guid: 9c291e4d86921f342a793fe737ae5495, type: 3}
-  m_PrefabInstance: {fileID: 1353106695364162611}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1951259686
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2889,14 +2857,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2510181248105898370, guid: 9c291e4d86921f342a793fe737ae5495, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3481203709008427183, guid: 9c291e4d86921f342a793fe737ae5495, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1097739711}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c291e4d86921f342a793fe737ae5495, type: 3}
 --- !u!4 &1353106695364162612 stripped
 Transform:
@@ -2958,6 +2922,30 @@ PrefabInstance:
     - target: {fileID: 7102277424411974625, guid: f82a8046ab76aea4ba2652ff0d807ef0, type: 3}
       propertyPath: isOn
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7102277424411974625, guid: f82a8046ab76aea4ba2652ff0d807ef0, type: 3}
+      propertyPath: cooldown
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7102277424411974625, guid: f82a8046ab76aea4ba2652ff0d807ef0, type: 3}
+      propertyPath: flyForce
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7102277424411974625, guid: f82a8046ab76aea4ba2652ff0d807ef0, type: 3}
+      propertyPath: flyDirection.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7102277424411974625, guid: f82a8046ab76aea4ba2652ff0d807ef0, type: 3}
+      propertyPath: flyDirection.z
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7102277424411974625, guid: f82a8046ab76aea4ba2652ff0d807ef0, type: 3}
+      propertyPath: propFlyDirection.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7102277424411974625, guid: f82a8046ab76aea4ba2652ff0d807ef0, type: 3}
+      propertyPath: propFlyDirection.z
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
