@@ -2929,7 +2929,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7102277424411974625, guid: f82a8046ab76aea4ba2652ff0d807ef0, type: 3}
       propertyPath: flyForce
-      value: 100
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7102277424411974625, guid: f82a8046ab76aea4ba2652ff0d807ef0, type: 3}
+      propertyPath: stunTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7102277424411974625, guid: f82a8046ab76aea4ba2652ff0d807ef0, type: 3}
+      propertyPath: flyDirection.x
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7102277424411974625, guid: f82a8046ab76aea4ba2652ff0d807ef0, type: 3}
       propertyPath: flyDirection.y
@@ -2937,7 +2945,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7102277424411974625, guid: f82a8046ab76aea4ba2652ff0d807ef0, type: 3}
       propertyPath: flyDirection.z
-      value: 3
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7102277424411974625, guid: f82a8046ab76aea4ba2652ff0d807ef0, type: 3}
+      propertyPath: propFlyDirection.x
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7102277424411974625, guid: f82a8046ab76aea4ba2652ff0d807ef0, type: 3}
       propertyPath: propFlyDirection.y
@@ -2945,7 +2957,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7102277424411974625, guid: f82a8046ab76aea4ba2652ff0d807ef0, type: 3}
       propertyPath: propFlyDirection.z
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

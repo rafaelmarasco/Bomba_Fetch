@@ -25,6 +25,7 @@ public class Ragdoll : MonoBehaviour
     }
     public void EnableRagDoll(out Rigidbody heldItemRb)
     {
+        Debug.Log("Ragdoll ativado");
         const int RAGDOLL_LAYER = 8;
 
         GameObject heldItem = propPickupHandler.HeldItem;
@@ -41,16 +42,16 @@ public class Ragdoll : MonoBehaviour
         }
 
         GFX.layer = RAGDOLL_LAYER;
-        playerRb.useGravity = false;
 
+        playerRb.useGravity = false;
         animator.enabled = false;
 
         playerEventManager.StopInputingMovement(true);
-
         IsRagDoll = true;
     }
     public void DisableRagDoll()
     {
+        Debug.Log("Ragdoll desativado");
         const int PLAYER_LAYER = 3;
         Transform playerRagDollTransform = hipsRb.gameObject.transform;
 
