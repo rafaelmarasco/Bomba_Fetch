@@ -519,7 +519,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af112e46b6135ab4e8cc4f7e50bf009e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
-  propSize: 1
+  propSize: 2
 --- !u!1001 &460204065
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -645,6 +645,10 @@ PrefabInstance:
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 1120325542}
+    - target: {fileID: 9167809991006219780, guid: cf7f4b029667da54fa189238ac47e8d8, type: 3}
+      propertyPath: outputCamera
+      value: 
+      objectReference: {fileID: 951038692}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3097,10 +3101,10 @@ SceneRoots:
   m_Roots:
   - {fileID: 2105937938}
   - {fileID: 389786786}
-  - {fileID: 2004803770}
   - {fileID: 512408737}
-  - {fileID: 951038693}
+  - {fileID: 2004803770}
   - {fileID: 800627827}
+  - {fileID: 951038693}
   - {fileID: 2142576297}
   - {fileID: 625287908}
   - {fileID: 6434605071617283446}

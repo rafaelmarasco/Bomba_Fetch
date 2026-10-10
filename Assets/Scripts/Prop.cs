@@ -50,6 +50,10 @@ public class Prop : MonoBehaviour
                 DestroyJoints();
                 RepositionMediumProp();
                 break;
+            case Size.large:
+                DestroyJoints();
+                RepositionLargeProp();
+                break;
         }
 
         Physics.IgnoreCollision(GetComponent<Collider>(), PlayerInteracting.GetComponentInChildren<Collider>());
@@ -80,6 +84,20 @@ public class Prop : MonoBehaviour
         joint = gameObject.AddComponent<FixedJoint>();
         joint.connectedBody = holdPointRb;
     }
+    private void RepositionLargeProp()
+    {/*
+        Vector3 playerToPropDirection = transform.position - PlayerInteracting.transform.position;
+        playerToPropDirection.Normalize();
+
+        float offSet = 1.5f;
+        PlayerInteracting.transform.position = playerToPropDirection * offSet;
+        */
+        Rigidbody playerRb = PlayerInteracting.GetComponent<Rigidbody>();
+
+        joint = gameObject.AddComponent<FixedJoint>();
+        joint.connectedBody = playerRb;
+    }
+
     public void DisableReposition()
     {
         gameObject.layer = DEFAULT_LAYER;

@@ -1161,7 +1161,7 @@ MonoBehaviour:
   holdPointLarge: {fileID: 0}
   holdPointInteract: {fileID: 3738903463864646001}
   halfExtends: {x: 0.45, y: 0.1, z: 0.4}
-  interactDistance: 1
+  interactDistance: 0.5
   passwordCanvas: {fileID: 425406252008715958}
 --- !u!114 &-4724053277055469795
 MonoBehaviour:
