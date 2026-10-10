@@ -240,6 +240,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8330579805403462866}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1121024422679778631
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8439575008664142805}
+  m_Layer: 3
+  m_Name: DropPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8439575008664142805
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1121024422679778631}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.4, z: 0.7}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8330579805403462866}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1404169327958329805
 GameObject:
   m_ObjectHideFlags: 0
@@ -1071,6 +1102,7 @@ Transform:
   - {fileID: 812812312897300744}
   - {fileID: 1446536034587759466}
   - {fileID: 3738903463864646001}
+  - {fileID: 8439575008664142805}
   - {fileID: 8696893303422060385}
   - {fileID: 4073491926273667057}
   m_Father: {fileID: 0}
@@ -1158,7 +1190,6 @@ MonoBehaviour:
   headPos: {fileID: 812812312897300744}
   holdPointSmall: {fileID: 976878721399896485}
   holdPointMedium: {fileID: 1446536034587759466}
-  holdPointLarge: {fileID: 0}
   holdPointInteract: {fileID: 3738903463864646001}
   halfExtends: {x: 0.45, y: 0.1, z: 0.4}
   interactDistance: 0.5
@@ -1175,6 +1206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01ca4778b636509478ddee55a67b0637, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PropPickupHandler
+  dropPoint: {fileID: 8439575008664142805}
 --- !u!114 &4305581562573399872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1258,7 +1290,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 976878721399896485}
-  - component: {fileID: 275287782173115993}
   m_Layer: 3
   m_Name: holdPointSmall
   m_TagString: Untagged
@@ -1281,33 +1312,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2922959147756366546}
   m_LocalEulerAnglesHint: {x: 133.625, y: 30.832, z: -142.064}
---- !u!54 &275287782173115993
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8571362815078099395}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &8613230953075802679
 GameObject:
   m_ObjectHideFlags: 0

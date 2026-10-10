@@ -4,6 +4,8 @@ public class PropPickupHandler : MonoBehaviour
 {
     private PropInteract propInteract;
     private PlayerEventManager playerEventManager;
+
+    [SerializeField] private Transform dropPoint;
     public GameObject HeldItem { get; private set; } = null;
     public bool HasItem => HeldItem != null;
     public bool HasBomb { get; private set; } = false;
@@ -12,6 +14,10 @@ public class PropPickupHandler : MonoBehaviour
     private void OnEnable()
     {
         propInteract.OnPropDropped += SetBombState;
+    }
+    private void OnDisable()
+    {
+        propInteract.OnPropDropped -= SetBombState;
     }
 
     private void Awake()
@@ -22,8 +28,6 @@ public class PropPickupHandler : MonoBehaviour
 
     public void PickUpProp(GameObject prop)
     {
-        //const int PROP_IN_HAND_LAYER = 7;
-
         HeldItem = prop;
 
         Collider gfxCollider = GetComponentInChildren<Collider>();
@@ -33,36 +37,18 @@ public class PropPickupHandler : MonoBehaviour
 
         HasBomb = prop.name == "Bomb"; // Trocar para script quando a bomba tiver um script
 
-        // if (prop.TryGetComponent<Rigidbody>(out Rigidbody propRb))
-        //    propRb.isKinematic = true;
-
-        //prop.layer = PROP_IN_HAND_LAYER;
-
-        //Physics.IgnoreCollision(gfxCollider, propCollider);
-
         propInfo.EnableReposition(propInteract);
         playerEventManager.ItemPickedUp(propInfo);
     }
     public void DropProp()
     {
-        //const int DEFAULT_LAYER = 0;
-
-        Collider gfxCollider = GetComponentInChildren<Collider>();
-        Collider propCollider = HeldItem.GetComponent<Collider>();
-
         Prop propInfo = HeldItem.GetComponent<Prop>();
-
-        float zOffset = 0f;
-        float yOffset = .3f;
-
-        Vector3 offset = new Vector3(0f, yOffset, zOffset);
-
-        // if (HeldItem.TryGetComponent<Rigidbody>(out Rigidbody propRb))
-        //    propRb.isKinematic = false;
-
-        //HeldItem.layer = DEFAULT_LAYER;
-        if (propInfo.PropSize != Size.large)
-            HeldItem.transform.localPosition += offset;
+        
+        if (propInfo.PropSize == Size.small)
+        {
+            HeldItem.transform.SetParent(dropPoint);
+            HeldItem.transform.SetLocalPositionAndRotation(Vector3.zero, HeldItem.transform.rotation);
+        }
 
         HeldItem.transform.SetParent(null);
         HeldItem = null;
@@ -73,8 +59,6 @@ public class PropPickupHandler : MonoBehaviour
             playerEventManager.BombDroped();
             IsBombInteracting = false;
         }
-
-        //Physics.IgnoreCollision(gfxCollider, propCollider, false);
 
         propInfo.DisableReposition();
         playerEventManager.ItemDroped(propInfo);
