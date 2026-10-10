@@ -52,7 +52,7 @@ public class PropPickupHandler : MonoBehaviour
 
         Prop propInfo = HeldItem.GetComponent<Prop>();
 
-        float zOffset = .2f;
+        float zOffset = 0f;
         float yOffset = .3f;
 
         Vector3 offset = new Vector3(0f, yOffset, zOffset);
