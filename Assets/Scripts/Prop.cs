@@ -85,13 +85,7 @@ public class Prop : MonoBehaviour
         joint.connectedBody = holdPointRb;
     }
     private void RepositionLargeProp()
-    {/*
-        Vector3 playerToPropDirection = transform.position - PlayerInteracting.transform.position;
-        playerToPropDirection.Normalize();
-
-        float offSet = 1.5f;
-        PlayerInteracting.transform.position = playerToPropDirection * offSet;
-        */
+    {
         Rigidbody playerRb = PlayerInteracting.GetComponent<Rigidbody>();
 
         joint = gameObject.AddComponent<FixedJoint>();

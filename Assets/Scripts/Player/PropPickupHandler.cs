@@ -61,8 +61,9 @@ public class PropPickupHandler : MonoBehaviour
         //    propRb.isKinematic = false;
 
         //HeldItem.layer = DEFAULT_LAYER;
+        if (propInfo.PropSize != Size.large)
+            HeldItem.transform.localPosition += offset;
 
-        HeldItem.transform.localPosition += offset;
         HeldItem.transform.SetParent(null);
         HeldItem = null;
 
