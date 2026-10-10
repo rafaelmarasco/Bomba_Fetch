@@ -327,4 +327,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee0ec2b8f629f08459ae4a45e45c9c70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  rotationOffset: {x: 0, y: 0, z: 0}
