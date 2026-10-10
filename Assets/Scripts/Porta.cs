@@ -15,7 +15,10 @@ public class Porta : MonoBehaviour
     [SerializeField] bool bloquearQuandoFechada = true;
     [SerializeField] Collider colisor;         
 
+    [SerializeField] float searchInterval = 0.25f;
+
     Transform player;
+    float searchTimer;
     Vector3 centro;         
     Vector3 frenteFechada;  
     Vector3 ladoFechado;   
@@ -33,11 +36,28 @@ public class Porta : MonoBehaviour
 
         if (colisor == null && filho != null) colisor = filho.GetComponentInChildren<Collider>();
 
-        // acha pelo componente Player em vez de tag: o prefab do player
-        // esta Untagged, so tem a LAYER Player configurada
-        Player p = FindFirstObjectByType<Player>();
-        if (p != null) player = p.transform;
-        else Debug.LogWarning("Porta: nenhum Player encontrado na cena.", this);
+    }
+
+    // acha pelo componente Player em vez de tag: o prefab do player
+    // esta Untagged, so tem a LAYER Player configurada.
+    // os players entram depois do Awake, entao busca o mais proximo a cada intervalo
+    void FindClosestPlayer()
+    {
+        searchTimer -= Time.deltaTime;
+        if (searchTimer > 0f) return;
+        searchTimer = searchInterval;
+
+        player = null;
+        float best = float.MaxValue;
+        foreach (Player p in FindObjectsByType<Player>(FindObjectsSortMode.None))
+        {
+            float d = (p.transform.position - centro).sqrMagnitude;
+            if (d < best)
+            {
+                best = d;
+                player = p.transform;
+            }
+        }
     }
 
     // centro visual da folha: usa os bounds do renderer, porque a origem
@@ -57,6 +77,7 @@ public class Porta : MonoBehaviour
 
     void Update()
     {
+        FindClosestPlayer();
         float alvo = 0f;
 
         if (player != null)
