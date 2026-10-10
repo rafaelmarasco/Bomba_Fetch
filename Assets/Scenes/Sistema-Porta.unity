@@ -184,17 +184,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51f73729398da6140b90046856c71575, type: 3}
---- !u!114 &197161684 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5250326518140069164, guid: 62831564f39ab2e43895d4e7e535127e, type: 3}
-  m_PrefabInstance: {fileID: 863612871}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineCamera
 --- !u!1001 &225851688
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -676,22 +665,6 @@ PrefabInstance:
       value: Camera Manager
       objectReference: {fileID: 0}
     - target: {fileID: 9167809991006219780, guid: cf7f4b029667da54fa189238ac47e8d8, type: 3}
-      propertyPath: bomb
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 9167809991006219780, guid: cf7f4b029667da54fa189238ac47e8d8, type: 3}
-      propertyPath: head
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 9167809991006219780, guid: cf7f4b029667da54fa189238ac47e8d8, type: 3}
-      propertyPath: padding
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 9167809991006219780, guid: cf7f4b029667da54fa189238ac47e8d8, type: 3}
-      propertyPath: bombCamera
-      value: 
-      objectReference: {fileID: 197161684}
-    - target: {fileID: 9167809991006219780, guid: cf7f4b029667da54fa189238ac47e8d8, type: 3}
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 1120325542}
@@ -699,10 +672,6 @@ PrefabInstance:
       propertyPath: outputCamera
       value: 
       objectReference: {fileID: 951038692}
-    - target: {fileID: 9167809991006219780, guid: cf7f4b029667da54fa189238ac47e8d8, type: 3}
-      propertyPath: propInteract
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
