@@ -76,6 +76,7 @@ public class PlayerAnimator : MonoBehaviour
     }
     private void AnimateKnockdown(float stunTime)
     {
+        Debug.Log($"Animaçao de cair iniciada, com duraçao de {stunTime}");
         playerEventManager.StopInputingMovement(true);
         StartCoroutine(KnockdownAnimation(stunTime));
     }
@@ -83,6 +84,7 @@ public class PlayerAnimator : MonoBehaviour
     {
         ragdoll.EnableRagDoll(out _);
         yield return new WaitForSeconds(knockdownTime);
+        Debug.Log("Animaçao de cair finalizada");
         ragdoll.DisableRagDoll();
     }
 }

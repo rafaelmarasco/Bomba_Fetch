@@ -64,7 +64,7 @@ public class Hazard : MonoBehaviour
 
     private void TryToEletrocute(Collider other)
     {
-        if (!isOn || !other.gameObject.GetComponent<PlayerAnimator>())
+        if (!isOn || !other.gameObject.GetComponentInParent<Player>())
             return;
 
         PlayerHarmHandler playerHarmHandler = other.gameObject.GetComponentInParent<PlayerHarmHandler>();
@@ -77,7 +77,7 @@ public class Hazard : MonoBehaviour
         if (playerEventManager == null)
             return;
 
-        playerHarmHandler.StartKnockableColldownTimer(cooldown);
+        playerHarmHandler.StartKnockableCooldownTimer(cooldown);
         playerEventManager.Eletrocute(flyDirection, propFlyDirection, flyForce, stunTime);
     }
 

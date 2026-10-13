@@ -36,7 +36,7 @@ public class PlayerHarmHandler : MonoBehaviour
 
     private void OnEnable()
     {
-        playerEventManager.OnEletrocuted += GetYonked;
+        playerEventManager.OnEletrocuted += GetEletrocuted;
         playerEventManager.OnBurned += GetBurned;
     }
     private void FixedUpdate()
@@ -44,7 +44,7 @@ public class PlayerHarmHandler : MonoBehaviour
         if (IsOnFire)
             RunOnFire(dangerPos);
     }
-    private void GetYonked(Vector3 flyDirection, Vector3 propFlyDirection, float flyForce, float stunTime)
+    private void GetEletrocuted(Vector3 flyDirection, Vector3 propFlyDirection, float flyForce, float stunTime)
     {
         ragdoll.EnableRagDoll(out Rigidbody heldItem);
 
@@ -57,8 +57,9 @@ public class PlayerHarmHandler : MonoBehaviour
         HipsRb.AddForce(flyDirection * flyForce, ForceMode.Impulse);
         playerEventManager.KnockedDown(stunTime);
     }
-    public void StartKnockableColldownTimer(float duration)
+    public void StartKnockableCooldownTimer(float duration)
     {
+        Debug.Log($"Começou timer de {duration} cooldown");
         CanGetPushed = false;
         CancelInvoke(nameof(ResetKnockableColldown));
         Invoke(nameof(ResetKnockableColldown), duration);

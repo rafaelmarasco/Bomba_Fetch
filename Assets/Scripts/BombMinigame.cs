@@ -27,7 +27,6 @@ public class BombMinigame : MonoBehaviour
     [Header("Display Settings")]
     [SerializeField] private TextMeshProUGUI[] displayTexts;
     private int position = 0;
-    //private int valueButton = 1;
 
 
     private void OnEnable()
