@@ -2525,6 +2525,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: LivingRoom
       objectReference: {fileID: 0}
+    - target: {fileID: 3845079300955816685, guid: 0a49312922dd4e24ba986978376b78ca, type: 3}
+      propertyPath: defaultLinearDampingValue
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5124241574752236907, guid: 0a49312922dd4e24ba986978376b78ca, type: 3}
+      propertyPath: m_LinearDamping
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7873475607510802662, guid: 0a49312922dd4e24ba986978376b78ca, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.30339
