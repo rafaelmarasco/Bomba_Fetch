@@ -1044,7 +1044,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af112e46b6135ab4e8cc4f7e50bf009e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
-  propSize: 1
+  propSize: 2
 --- !u!1001 &3495826232171920627
 PrefabInstance:
   m_ObjectHideFlags: 0

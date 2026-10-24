@@ -4,7 +4,6 @@ using UnityEngine.InputSystem;
 
 public class PropInteract : MonoBehaviour
 {
-    private PlayerEventManager playerEventManager;
     private PropPickupHandler propPickupHandler;
     private PlayerPushHandler playerPushHandler;
     private PlayerInput playerInput;
@@ -23,7 +22,6 @@ public class PropInteract : MonoBehaviour
     [Header("Prop Holding Points")]
     [SerializeField] public Transform holdPointSmall;
     [SerializeField] public Transform holdPointMedium;
-    [SerializeField] private Transform holdPointLarge;
     [SerializeField] public Transform holdPointInteract;
 
     [Header("BoxCastConfigs")]
@@ -45,7 +43,6 @@ public class PropInteract : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         propPickupHandler = GetComponent<PropPickupHandler>();
         playerPushHandler = GetComponent<PlayerPushHandler>();
-        playerEventManager = GetComponent<PlayerEventManager>();
 
         playerInput.actions["Grab"].performed += Grab_performed;
         playerInput.actions["Push"].performed += Push_performed;

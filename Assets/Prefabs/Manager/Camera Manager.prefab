@@ -45,3 +45,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   mainCamera: {fileID: 0}
+  outputCamera: {fileID: 0}
+  maxPlayers: 4
+  minZoom: 7
+  maxZoom: 20
+  padding: 8
+  zoomSmoothTime: 0.35
+  moveSmoothTime: 0.25
+  searchInterval: 0.5
