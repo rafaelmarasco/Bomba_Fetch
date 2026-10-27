@@ -31,11 +31,32 @@ public class Prop : MonoBehaviour
 
     private FixedJoint joint;
 
-    private bool isFlying = false;
+    private Rigidbody rb;
+
+    private bool isBeingPushed = false;
+
+    [SerializeField] private float defaultLinearDampingValue;
 
     private const int PROP_IN_HAND_LAYER = 7;
     private const int DEFAULT_LAYER = 0;
     private const int FLOOR_LAYER = 10;
+
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
+
+    private void Update()
+    {
+        if (rb.position.y > 0.0f)
+        {
+            rb.linearDamping = 0;
+        }
+        else
+        {
+            rb.linearDamping = defaultLinearDampingValue;
+        }
+    }
 
     public void EnableReposition(PropInteract playerInteracting)
     {
@@ -91,7 +112,6 @@ public class Prop : MonoBehaviour
         joint = gameObject.AddComponent<FixedJoint>();
         joint.connectedBody = playerRb;
     }
-
     public void DisableReposition()
     {
         gameObject.layer = DEFAULT_LAYER;
@@ -110,11 +130,11 @@ public class Prop : MonoBehaviour
             joint = null;
         }
     }
-    public void SetFlyingState(bool state) => isFlying = state;
+    public void SetPushingState(bool state) => isBeingPushed = state;
     private void HandlePropToPlayerContact(Collision collision)
     {
         if (collision.gameObject.layer == FLOOR_LAYER)
-            SetFlyingState(false);
+            SetPushingState(false);
 
         if (!collision.gameObject.GetComponent<Player>()) return;
 
@@ -123,12 +143,23 @@ public class Prop : MonoBehaviour
         //PlayerHarmHandler target = collision.gameObject.GetComponentInParent<PlayerHarmHandler>();
 
         targetEventManager.KnockedDown(stunTime);
-        SetFlyingState(false);
+        SetPushingState(false);
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (isFlying)
+
+
+        if (isBeingPushed)
             HandlePropToPlayerContact(collision);
         else return;
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.layer == FLOOR_LAYER && rb.position.y != 0)
+        {
+            transform.position = new(rb.position.x, 0, rb.position.z);
+        }
+        else return; 
     }
 }

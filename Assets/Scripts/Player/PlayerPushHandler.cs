@@ -64,7 +64,7 @@ public class PlayerPushHandler : MonoBehaviour
             propInRange.TryGetComponent<Rigidbody>(out Rigidbody propRb);
             if (propRb == null) return;
 
-            propBeingThrown.SetFlyingState(true);
+            propBeingThrown.SetPushingState(true);
 
             propRb.AddForce(pushForce * transform.forward, ForceMode.Impulse);
         }
@@ -72,7 +72,7 @@ public class PlayerPushHandler : MonoBehaviour
         {
             propPickupHandler.HeldItem.TryGetComponent<Rigidbody>(out Rigidbody propRb);
 
-            propBeingThrown.SetFlyingState(true);
+            propBeingThrown.SetPushingState(true);
 
             propPickupHandler.DropProp();
             propRb.AddForce(pushForce * transform.forward, ForceMode.Impulse);
