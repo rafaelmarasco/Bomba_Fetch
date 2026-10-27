@@ -16,8 +16,8 @@ public class EventManager : MonoBehaviour
 
     private void Awake() => _instance = this;
 
-    public event Action<Transform, GameObject> OnBombInteracted;
-    //public void BombInteracted(Transform cameraPos, GameObject prop) => OnBombInteracted?.Invoke(cameraPos, prop);
+    public event Action OnBombInteracted;
+    public void BombInteracted() => OnBombInteracted?.Invoke();
 
     public event Action<Prop> OnItemPickedUp;
     public void ItemPickedUp(Prop prop) => OnItemPickedUp?.Invoke(prop);
