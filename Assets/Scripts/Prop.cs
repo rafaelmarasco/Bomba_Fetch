@@ -77,7 +77,7 @@ public class Prop : MonoBehaviour
                 break;
         }
 
-        Physics.IgnoreCollision(GetComponent<Collider>(), PlayerInteracting.GetComponentInChildren<Collider>());
+        //Physics.IgnoreCollision(GetComponent<Collider>(), PlayerInteracting.GetComponentInChildren<Collider>());
     }
     private void RepositionSmallProp()
     {
@@ -88,9 +88,12 @@ public class Prop : MonoBehaviour
         GetComponent<Rigidbody>().isKinematic = true;
 
         gameObject.layer = PROP_IN_HAND_LAYER;
+        
+        Physics.IgnoreCollision(GetComponent<Collider>(), PlayerInteracting.GetComponentInChildren<Collider>());
 
         transform.SetParent(holdPoint);
         transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+
     }
     private void RepositionMediumProp()
     {
@@ -98,12 +101,15 @@ public class Prop : MonoBehaviour
 
         holdPoint = PlayerInteracting.holdPointMedium;
 
+        gameObject.layer = PROP_IN_HAND_LAYER;
+
         transform.SetPositionAndRotation(holdPoint.position, holdPoint.rotation);
 
         Rigidbody holdPointRb = holdPoint.GetComponent<Rigidbody>();
 
         joint = gameObject.AddComponent<FixedJoint>();
         joint.connectedBody = holdPointRb;
+        joint.enableCollision = true;
     }
     private void RepositionLargeProp()
     {
@@ -147,8 +153,6 @@ public class Prop : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-
-
         if (isBeingPushed)
             HandlePropToPlayerContact(collision);
         else return;
