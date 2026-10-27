@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Old Scenes/MainMenu.unity
     guid: 0421ba3a6109cfb42872e661bb9297f3
   - enabled: 1
+    path: Assets/Scenes/Old Scenes/Sistema-Porta.unity
+    guid: 15d8662bd12ecea40bceb12667b92271
+  - enabled: 1
     path: Assets/Scenes/Old Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
