@@ -8372,11 +8372,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2230432029308799391, guid: 0a49312922dd4e24ba986978376b78ca, type: 3}
       propertyPath: m_Interpolate
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2230432029308799391, guid: 0a49312922dd4e24ba986978376b78ca, type: 3}
       propertyPath: m_CollisionDetection
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7873475607510802662, guid: 0a49312922dd4e24ba986978376b78ca, type: 3}
       propertyPath: m_LocalPosition.x
