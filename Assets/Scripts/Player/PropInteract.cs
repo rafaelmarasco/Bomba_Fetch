@@ -29,7 +29,8 @@ public class PropInteract : MonoBehaviour
     [SerializeField] private float interactDistance = .8f;
 
     [Header("Minigame")]
-    public Canvas minigameCanvas { get; private set; }
+    public Canvas minigameCanvas;
+    private bool isBombInteracting = false;
 
     public event Action OnPropDropped;
 
@@ -62,11 +63,7 @@ public class PropInteract : MonoBehaviour
 
     private void Interact_performed(InputAction.CallbackContext obj)
     {
-        if (isPasswordInteracting)
-        {
-            passwordCanvas.gameObject.SetActive(true);
-            return;
-        }
+        EnableCanvas();
 
         toolInHand?.Use();
     }
@@ -82,18 +79,14 @@ public class PropInteract : MonoBehaviour
             Debug.Log("Pegou");
             propPickupHandler.PickUpProp(prop);
             SetToolInHand(prop);
-            isPasswordInteracting = prop.name == "Password";
+            CheckIsBombOrPassoword(prop);
         }
         else if (HasItem)
         {
             toolInHand?.Drop();
             toolInHand = null;
 
-            if (isPasswordInteracting)
-            {
-                passwordCanvas.gameObject.SetActive(false);
-                isPasswordInteracting = false;
-            }
+            DisableCanvas();
 
             propPickupHandler.DropProp();
             OnPropDropped?.Invoke();
@@ -144,6 +137,40 @@ public class PropInteract : MonoBehaviour
         prop = objectInRange;
 
         return isProp;
+    }
+
+    private void CheckIsBombOrPassoword(GameObject prop)
+    {
+        isPasswordInteracting = prop.name == "Password";
+        isBombInteracting = prop.name == "Bomb";
+    }
+
+    private void EnableCanvas()
+    {
+        if (isPasswordInteracting)
+        {
+            passwordCanvas.gameObject.SetActive(true);
+            return;
+        }
+        else if (isBombInteracting)
+        {
+            minigameCanvas.gameObject.SetActive(true);
+            return;
+        }
+    }
+
+    public void DisableCanvas()
+    {
+        if (isPasswordInteracting)
+        {
+            passwordCanvas.gameObject.SetActive(false);
+            isPasswordInteracting = false;
+        }
+        else if (isBombInteracting)
+        {
+            minigameCanvas.gameObject.SetActive(false);
+            isBombInteracting = false;
+        }
     }
 
     private void OnDestroy()

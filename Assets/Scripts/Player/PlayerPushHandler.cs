@@ -78,6 +78,8 @@ public class PlayerPushHandler : MonoBehaviour
             propRb.AddForce(pushForce * transform.forward, ForceMode.Impulse);
         }
 
+        propInteract.DisableCanvas();
+
     }
 
     private void PushPlayer(GameObject player)
