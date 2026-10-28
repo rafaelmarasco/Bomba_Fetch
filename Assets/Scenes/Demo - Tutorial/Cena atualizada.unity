@@ -776,6 +776,65 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 6d0f261ef69c7a545b3c36779584b9a1, type: 3}
   m_PrefabInstance: {fileID: 293687224}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &148566630
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 4e145a7c8a8c9c748baf0f2419faabe0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 18.864737
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4e145a7c8a8c9c748baf0f2419faabe0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.000000060977186
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4e145a7c8a8c9c748baf0f2419faabe0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.80554086
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4e145a7c8a8c9c748baf0f2419faabe0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4e145a7c8a8c9c748baf0f2419faabe0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4e145a7c8a8c9c748baf0f2419faabe0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4e145a7c8a8c9c748baf0f2419faabe0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4e145a7c8a8c9c748baf0f2419faabe0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4e145a7c8a8c9c748baf0f2419faabe0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4e145a7c8a8c9c748baf0f2419faabe0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4e145a7c8a8c9c748baf0f2419faabe0, type: 3}
+      propertyPath: m_Name
+      value: bomb
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects:
+    - {fileID: -8700617353114198275, guid: 4e145a7c8a8c9c748baf0f2419faabe0, type: 3}
+    - {fileID: 65702495048144492, guid: 4e145a7c8a8c9c748baf0f2419faabe0, type: 3}
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4e145a7c8a8c9c748baf0f2419faabe0, type: 3}
 --- !u!1 &210363902 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: a35d9993d82a527498f823eb55ffc6f0, type: 3}
@@ -794,6 +853,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 2
+  defaultLinearDampingValue: 0
 --- !u!65 &210363907
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1346,6 +1406,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 1
+  defaultLinearDampingValue: 0
 --- !u!65 &293687229
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1883,6 +1944,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 0
+  defaultLinearDampingValue: 0
 --- !u!1 &384364059 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: d44d99079b6be4745b280c43f7ce2c34, type: 3}
@@ -1901,6 +1963,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 0
+  defaultLinearDampingValue: 0
 --- !u!65 &384364064
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2129,6 +2192,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 0
+  defaultLinearDampingValue: 0
 --- !u!65 &393058422
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2304,6 +2368,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 0
+  defaultLinearDampingValue: 0
 --- !u!65 &449685330
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3076,6 +3141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 2
+  defaultLinearDampingValue: 0
 --- !u!65 &662128312
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3410,6 +3476,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 0
+  defaultLinearDampingValue: 0
 --- !u!1001 &768487342
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3556,6 +3623,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 1
+  defaultLinearDampingValue: 0
 --- !u!65 &776215650
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4244,6 +4312,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 1
+  defaultLinearDampingValue: 0
 --- !u!65 &891513299
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4762,6 +4831,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 0
+  defaultLinearDampingValue: 0
 --- !u!65 &1040399007
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4828,6 +4898,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 1
+  defaultLinearDampingValue: 0
 --- !u!65 &1057920011
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5134,6 +5205,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 1
+  defaultLinearDampingValue: 0
 --- !u!65 &1127067688
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5452,6 +5524,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 0
+  defaultLinearDampingValue: 0
 --- !u!65 &1245863302
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5803,6 +5876,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 0
+  defaultLinearDampingValue: 0
 --- !u!1001 &1366001873
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6144,6 +6218,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 1
+  defaultLinearDampingValue: 0
 --- !u!65 &1531166811
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7087,6 +7162,96 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.15809639, y: 0.5481398, z: 0.15809639}
   m_Center: {x: 0, y: 0.2740699, z: 0}
+--- !u!1 &1784555030
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1784555033}
+  - component: {fileID: 1784555032}
+  - component: {fileID: 1784555031}
+  m_Layer: 0
+  m_Name: Canister
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!23 &1784555031
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1784555030}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 923e97d0fb1095046a3997bf31bf4749, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1784555032
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1784555030}
+  m_Mesh: {fileID: -773595138661535808, guid: d195413e0a231a9498eff880094a6f6a, type: 3}
+--- !u!4 &1784555033
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1784555030}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 20.35, y: 4.65, z: 1.203389}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1797454230 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 7014b2d2286b39a4693f7f31b7a32fba, type: 3}
@@ -7197,6 +7362,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 1
+  defaultLinearDampingValue: 0
 --- !u!65 &1891831507
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7865,6 +8031,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 1
+  defaultLinearDampingValue: 0
 --- !u!65 &2071044390
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8445,3 +8612,5 @@ SceneRoots:
   - {fileID: 114665386}
   - {fileID: 300057305}
   - {fileID: 249922607}
+  - {fileID: 1784555033}
+  - {fileID: 148566630}
