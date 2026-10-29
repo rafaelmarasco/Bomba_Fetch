@@ -268,6 +268,23 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 520368303}
   m_SourcePrefab: {fileID: 100100000, guid: 7014b2d2286b39a4693f7f31b7a32fba, type: 3}
+--- !u!1 &74798449 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1969801659941127974, guid: 275bdce0c5a85f44496a4c893626c908, type: 3}
+  m_PrefabInstance: {fileID: 2004803770}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &74798453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 74798449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a3c417dfb1585c409476752001faaf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PauseSystem
 --- !u!1001 &84287926
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7624,7 +7641,10 @@ PrefabInstance:
     - {fileID: 8361708609832705581, guid: 275bdce0c5a85f44496a4c893626c908, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1969801659941127974, guid: 275bdce0c5a85f44496a4c893626c908, type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 74798453}
   m_SourcePrefab: {fileID: 100100000, guid: 275bdce0c5a85f44496a4c893626c908, type: 3}
 --- !u!1001 &2055951800
 PrefabInstance:
@@ -8288,6 +8308,10 @@ PrefabInstance:
     - target: {fileID: 172543298424950189, guid: 0a49312922dd4e24ba986978376b78ca, type: 3}
       propertyPath: m_Name
       value: LivingRoom
+      objectReference: {fileID: 0}
+    - target: {fileID: 4015903302955149956, guid: 0a49312922dd4e24ba986978376b78ca, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.19
       objectReference: {fileID: 0}
     - target: {fileID: 7873475607510802662, guid: 0a49312922dd4e24ba986978376b78ca, type: 3}
       propertyPath: m_LocalPosition.x
