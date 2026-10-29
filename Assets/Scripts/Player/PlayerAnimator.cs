@@ -9,6 +9,7 @@ public class PlayerAnimator : MonoBehaviour
     [SerializeField] private PropPickupHandler propPickupHandler;
     [SerializeField] private Player player;
     private Animator animator;
+    private PropInteract propInteract;
 
     [Header("Ragdoll Field")]
     [SerializeField] private Transform playerTransform;
@@ -19,6 +20,7 @@ public class PlayerAnimator : MonoBehaviour
     [SerializeField] private Rig grabRig;
     [SerializeField] private Rig pushRig;
 
+    [SerializeField] private Transform headCamPos;
 
     private readonly int upperBody = 1;
 
@@ -28,15 +30,16 @@ public class PlayerAnimator : MonoBehaviour
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        propInteract = GetComponentInParent<PropInteract>();
     }
 
     private void OnEnable()
     {
+        playerEventManager.OnBombInteracted += BringBombUp;
         playerEventManager.OnItemPickedUp += UpdateGrabWeigth;
         playerEventManager.OnItemDroped += UpdateGrabWeigth;
-        playerEventManager.OnPropPush += AnimatePush;
-        playerEventManager.OnBombInteracted += BringBombUp;
         playerEventManager.OnKnockDown += AnimateKnockdown;
+        playerEventManager.OnPropPush += AnimatePush;
     }
     private void Update()
     {
@@ -69,10 +72,19 @@ public class PlayerAnimator : MonoBehaviour
         else
             grabRig.weight = 0f;
     }
-    private void BringBombUp(Transform cameraPos, GameObject bomb)
+    private void BringBombUp(GameObject bomb)
     {
         grabRig.weight = 1f;
-        bomb.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+        bomb.transform.SetParent(propInteract.holdPointInteract);
+
+        bomb.transform.localPosition = Vector3.zero;
+
+        Vector3 toFaceDirecetion = headCamPos.position - bomb.transform.position;
+
+        bomb.transform.localRotation = Quaternion.Euler(50.0000114f, 0f, 0f);
+
+        // Quaternion.LookRotation(-toFaceDirecetion, Vector3.up) * 
+
     }
     private void AnimateKnockdown(float stunTime)
     {

@@ -160,10 +160,12 @@ public class Prop : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
+        /*
         if (collision.gameObject.layer == FLOOR_LAYER && rb.position.y != 0)
         {
             transform.position = new(rb.position.x, 0, rb.position.z);
         }
         else return; 
+    */
     }
 }

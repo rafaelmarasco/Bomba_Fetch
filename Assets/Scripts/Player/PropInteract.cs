@@ -11,7 +11,6 @@ public class PropInteract : MonoBehaviour
 
     [SerializeField] private Transform checkPos;
     [SerializeField] private Transform headPos;
-    public bool IsBombInteracting { get; private set; } = false;
 
     private Vector3 lastMoveDir;
     private GameObject HeldItem => propPickupHandler.HeldItem;
@@ -29,7 +28,9 @@ public class PropInteract : MonoBehaviour
     [SerializeField] private float interactDistance = .8f;
 
     [Header("Minigame")]
-    public Canvas minigameCanvas { get; private set; }
+    public Canvas minigameCanvas;
+    private bool isBombInteracting = false;
+    public bool IsBombInteracting => isBombInteracting;
 
     public event Action OnPropDropped;
 
@@ -44,7 +45,7 @@ public class PropInteract : MonoBehaviour
         propPickupHandler = GetComponent<PropPickupHandler>();
         playerPushHandler = GetComponent<PlayerPushHandler>();
 
-        playerInput.actions["Grab"].performed += Grab_performed;
+        playerInput.actions["Grab"].performed += PickUp_performed;
         playerInput.actions["Push"].performed += Push_performed;
         playerInput.actions["Interact"].performed += Interact_performed;
         playerInput.actions["Interact"].canceled += Interact_canceled;
@@ -62,11 +63,7 @@ public class PropInteract : MonoBehaviour
 
     private void Interact_performed(InputAction.CallbackContext obj)
     {
-        if (isPasswordInteracting)
-        {
-            passwordCanvas.gameObject.SetActive(true);
-            return;
-        }
+        EnableCanvas();
 
         toolInHand?.Use();
     }
@@ -75,32 +72,28 @@ public class PropInteract : MonoBehaviour
 
     private void Push_performed(InputAction.CallbackContext obj) => playerPushHandler.Push();
 
-    private void Grab_performed(InputAction.CallbackContext obj)
+    private void PickUp_performed(InputAction.CallbackContext obj)
     {
         if (!HasItem && CheckForProps(out GameObject prop))
         {
             Debug.Log("Pegou");
             propPickupHandler.PickUpProp(prop);
             SetToolInHand(prop);
-            isPasswordInteracting = prop.name == "Password";
+            CheckIsBombOrPassoword();
         }
         else if (HasItem)
         {
             toolInHand?.Drop();
             toolInHand = null;
 
-            if (isPasswordInteracting)
-            {
-                passwordCanvas.gameObject.SetActive(false);
-                isPasswordInteracting = false;
-            }
+            DisableCanvas();
 
             propPickupHandler.DropProp();
             OnPropDropped?.Invoke();
         }
     }
 
-    private void SetToolInHand(GameObject prop)
+    public void SetToolInHand(GameObject prop)
     {
         if (!prop.TryGetComponent(out IHeldTool tool)) return;
 
@@ -146,9 +139,43 @@ public class PropInteract : MonoBehaviour
         return isProp;
     }
 
+    public void CheckIsBombOrPassoword()
+    {
+        //isPasswordInteracting = toolInHand is Password;
+        isBombInteracting = toolInHand is Bomb;
+    }
+
+    private void EnableCanvas()
+    {
+        if (isPasswordInteracting)
+        {
+            passwordCanvas.gameObject.SetActive(true);
+            return;
+        }
+        else if (isBombInteracting)
+        {
+            minigameCanvas.gameObject.SetActive(true);
+            return;
+        }
+    }
+
+    public void DisableCanvas()
+    {
+        if (isPasswordInteracting)
+        {
+            passwordCanvas.gameObject.SetActive(false);
+            isPasswordInteracting = false;
+        }
+        else if (isBombInteracting)
+        {
+            minigameCanvas.gameObject.SetActive(false);
+            isBombInteracting = false;
+        }
+    }
+
     private void OnDestroy()
     {
-        playerInput.actions["Grab"].performed -= Grab_performed;
+        playerInput.actions["Grab"].performed -= PickUp_performed;
         playerInput.actions["Push"].performed -= Push_performed;
         playerInput.actions["Interact"].performed -= Interact_performed;
         playerInput.actions["Interact"].canceled -= Interact_canceled;
