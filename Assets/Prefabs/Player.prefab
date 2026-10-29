@@ -900,7 +900,7 @@ Transform:
   m_GameObject: {fileID: 5128010380814423194}
   serializedVersion: 2
   m_LocalRotation: {x: 0.31730464, y: -0, z: -0, w: 0.94832367}
-  m_LocalPosition: {x: 0, y: -0.218, z: 0.391}
+  m_LocalPosition: {x: 0, y: -0.103, z: 0.078}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -945,7 +945,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 8191
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: e1ef00886495a8c468aea988ee2df448, type: 2}
   m_TargetDisplay: 0
@@ -1553,7 +1553,7 @@ Transform:
   m_GameObject: {fileID: 8613230953075802679}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0.55}
+  m_LocalPosition: {x: 0, y: 0.462, z: 0.506}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1812,7 +1812,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9058748949814621766, guid: efd331d4b11709f40b82377af7a18459, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2757,6 +2757,7 @@ MonoBehaviour:
   ragdoll: {fileID: 6126682385651391774}
   grabRig: {fileID: 1373606130983098565}
   pushRig: {fileID: 6979180523339886510}
+  headCamPos: {fileID: 3676503904832708410}
 --- !u!114 &4325470239247425070
 MonoBehaviour:
   m_ObjectHideFlags: 0

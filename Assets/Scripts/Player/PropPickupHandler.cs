@@ -4,21 +4,11 @@ public class PropPickupHandler : MonoBehaviour
 {
     private PropInteract propInteract;
     private PlayerEventManager playerEventManager;
-
-    [SerializeField] private Transform dropPoint;
     public GameObject HeldItem { get; private set; } = null;
     public bool HasItem => HeldItem != null;
-    public bool HasBomb { get; private set; } = false;
     public bool IsBombInteracting { get; private set; } = false;
 
-    private void OnEnable()
-    {
-        propInteract.OnPropDropped += SetBombState;
-    }
-    private void OnDisable()
-    {
-        propInteract.OnPropDropped -= SetBombState;
-    }
+    [SerializeField] private Transform dropPoint;
 
     private void Awake()
     {
@@ -30,12 +20,10 @@ public class PropPickupHandler : MonoBehaviour
     {
         HeldItem = prop;
 
-        Collider gfxCollider = GetComponentInChildren<Collider>();
-        Collider propCollider = prop.GetComponent<Collider>();
+        //Collider gfxCollider = GetComponentInChildren<Collider>();
+        //Collider propCollider = prop.GetComponent<Collider>();
 
         prop.TryGetComponent<Prop>(out Prop propInfo);
-
-        HasBomb = prop.name == "Bomb"; // Trocar para script quando a bomba tiver um script
 
         propInfo.EnableReposition(propInteract);
         playerEventManager.ItemPickedUp(propInfo);
@@ -64,12 +52,4 @@ public class PropPickupHandler : MonoBehaviour
         playerEventManager.ItemDroped(propInfo);
     }
 
-    private void SetBombState()
-    {
-        if (HasBomb)
-        {
-            HasBomb = false;
-            playerEventManager.BombDroped();
-        }
-    }
 }

@@ -11,7 +11,6 @@ public class PropInteract : MonoBehaviour
 
     [SerializeField] private Transform checkPos;
     [SerializeField] private Transform headPos;
-    public bool IsBombInteracting { get; private set; } = false;
 
     private Vector3 lastMoveDir;
     private GameObject HeldItem => propPickupHandler.HeldItem;
@@ -31,6 +30,7 @@ public class PropInteract : MonoBehaviour
     [Header("Minigame")]
     public Canvas minigameCanvas;
     private bool isBombInteracting = false;
+    public bool IsBombInteracting => isBombInteracting;
 
     public event Action OnPropDropped;
 
@@ -45,7 +45,7 @@ public class PropInteract : MonoBehaviour
         propPickupHandler = GetComponent<PropPickupHandler>();
         playerPushHandler = GetComponent<PlayerPushHandler>();
 
-        playerInput.actions["Grab"].performed += Grab_performed;
+        playerInput.actions["Grab"].performed += PickUp_performed;
         playerInput.actions["Push"].performed += Push_performed;
         playerInput.actions["Interact"].performed += Interact_performed;
         playerInput.actions["Interact"].canceled += Interact_canceled;
@@ -72,14 +72,14 @@ public class PropInteract : MonoBehaviour
 
     private void Push_performed(InputAction.CallbackContext obj) => playerPushHandler.Push();
 
-    private void Grab_performed(InputAction.CallbackContext obj)
+    private void PickUp_performed(InputAction.CallbackContext obj)
     {
         if (!HasItem && CheckForProps(out GameObject prop))
         {
             Debug.Log("Pegou");
             propPickupHandler.PickUpProp(prop);
             SetToolInHand(prop);
-            CheckIsBombOrPassoword(prop);
+            CheckIsBombOrPassoword();
         }
         else if (HasItem)
         {
@@ -93,7 +93,7 @@ public class PropInteract : MonoBehaviour
         }
     }
 
-    private void SetToolInHand(GameObject prop)
+    public void SetToolInHand(GameObject prop)
     {
         if (!prop.TryGetComponent(out IHeldTool tool)) return;
 
@@ -139,10 +139,10 @@ public class PropInteract : MonoBehaviour
         return isProp;
     }
 
-    private void CheckIsBombOrPassoword(GameObject prop)
+    public void CheckIsBombOrPassoword()
     {
-        isPasswordInteracting = prop.name == "Password";
-        isBombInteracting = prop.name == "Bomb";
+        //isPasswordInteracting = toolInHand is Password;
+        isBombInteracting = toolInHand is Bomb;
     }
 
     private void EnableCanvas()
@@ -175,7 +175,7 @@ public class PropInteract : MonoBehaviour
 
     private void OnDestroy()
     {
-        playerInput.actions["Grab"].performed -= Grab_performed;
+        playerInput.actions["Grab"].performed -= PickUp_performed;
         playerInput.actions["Push"].performed -= Push_performed;
         playerInput.actions["Interact"].performed -= Interact_performed;
         playerInput.actions["Interact"].canceled -= Interact_canceled;
