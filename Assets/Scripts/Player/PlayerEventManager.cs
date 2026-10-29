@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class PlayerEventManager : MonoBehaviour
 {
-    public event Action<Transform, GameObject> OnBombInteracted;
-    public void BombInteracted(Transform position, GameObject prop) => OnBombInteracted?.Invoke(position, prop);
+    public event Action<GameObject> OnBombInteracted;
+    public void BombInteracted(GameObject prop) => OnBombInteracted?.Invoke(prop);
 
     public event Action<Prop> OnItemPickedUp;
     public void ItemPickedUp(Prop prop) => OnItemPickedUp?.Invoke(prop);

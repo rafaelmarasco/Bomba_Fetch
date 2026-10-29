@@ -10,11 +10,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 4e145a7c8a8c9c748baf0f2419faabe0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.3549747
+      value: 2.05
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4e145a7c8a8c9c748baf0f2419faabe0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.00000028085447
+      value: 0.602
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4e145a7c8a8c9c748baf0f2419faabe0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -50,7 +50,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 4e145a7c8a8c9c748baf0f2419faabe0, type: 3}
       propertyPath: m_Name
-      value: bomb
+      value: Bomb
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -122,8 +122,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 0.39742357, z: 1}
+  m_Center: {x: 0, y: -0.006340474, z: 0}
 --- !u!114 &7519086127367530837
 MonoBehaviour:
   m_ObjectHideFlags: 0
