@@ -211,6 +211,7 @@ Transform:
   m_LocalScale: {x: 0.3949511, y: 0.29621333, z: 0.3949511}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2647898422681595148}
   - {fileID: 8713160453771477240}
   m_Father: {fileID: 1986657637598264699}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
@@ -425,6 +426,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 0
+  defaultLinearDampingValue: 0
 --- !u!1 &1716388856812781448
 GameObject:
   m_ObjectHideFlags: 0
@@ -895,6 +897,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 1
+  defaultLinearDampingValue: 0
 --- !u!1 &3162263600043274697
 GameObject:
   m_ObjectHideFlags: 0
@@ -1049,6 +1052,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 0
+  defaultLinearDampingValue: 0
 --- !u!1 &3354755830535340999
 GameObject:
   m_ObjectHideFlags: 0
@@ -1462,6 +1466,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 0
+  defaultLinearDampingValue: 0
 --- !u!1 &4347162859526123264
 GameObject:
   m_ObjectHideFlags: 0
@@ -1751,6 +1756,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 2
+  defaultLinearDampingValue: 0
 --- !u!1 &4423045620967985251
 GameObject:
   m_ObjectHideFlags: 0
@@ -1762,6 +1768,7 @@ GameObject:
   - component: {fileID: 2647898422681595148}
   - component: {fileID: -3862078752812840141}
   - component: {fileID: 9077926073120308842}
+  - component: {fileID: 7521111637583129731}
   m_Layer: 0
   m_Name: door
   m_TagString: Untagged
@@ -1777,12 +1784,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4423045620967985251}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.2835, y: 0, z: 0.4455}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.57, y: -0.033759445, z: 0.61}
+  m_LocalScale: {x: 0.96650374, y: 0.99486, z: 0.96650374}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8713160453771477240}
+  m_Father: {fileID: -8679921383154817045}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &-3862078752812840141
 MeshFilter:
@@ -1842,6 +1849,28 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &7521111637583129731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4423045620967985251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e74873e83619904693def1f2c0a6913, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Porta
+  filho: {fileID: 0}
+  maxAngle: 90
+  openSpeed: 360
+  closeSpeed: 180
+  alcanceFrente: 0.51
+  alcanceLado: 0.44
+  ajusteCentro: {x: 0.61, y: 1.06, z: 0}
+  bloquearQuandoFechada: 0
+  colisor: {fileID: 0}
+  searchInterval: 0.25
 --- !u!1 &4899323017535436873
 GameObject:
   m_ObjectHideFlags: 0
@@ -1860,7 +1889,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8713160453771477240
 Transform:
   m_ObjectHideFlags: 0
@@ -1870,11 +1899,10 @@ Transform:
   m_GameObject: {fileID: 4899323017535436873}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.29890406, y: -0.033759445, z: 0.24242754}
+  m_LocalPosition: {x: 0.3, y: -0.033759445, z: 9.88}
   m_LocalScale: {x: 0.96650374, y: 0.9948601, z: 0.96650374}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2647898422681595148}
+  m_Children: []
   m_Father: {fileID: -8679921383154817045}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!33 &1942306085231381616
@@ -2484,6 +2512,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 0
+  defaultLinearDampingValue: 0
 --- !u!1 &8287819103639272396
 GameObject:
   m_ObjectHideFlags: 0
@@ -2638,6 +2667,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 1
+  defaultLinearDampingValue: 0
 --- !u!1 &8433710089260078501
 GameObject:
   m_ObjectHideFlags: 0
@@ -2823,6 +2853,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 0
+  defaultLinearDampingValue: 0
 --- !u!1 &8677831026044171439
 GameObject:
   m_ObjectHideFlags: 0
@@ -2977,6 +3008,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 0
+  defaultLinearDampingValue: 0
 --- !u!1 &8849700870228279321
 GameObject:
   m_ObjectHideFlags: 0
