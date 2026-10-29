@@ -14,8 +14,7 @@ public class PropInteract : MonoBehaviour
 
     private Vector3 lastMoveDir;
     private GameObject HeldItem => propPickupHandler.HeldItem;
-
-    private IHeldTool toolInHand;
+    public IHeldTool ToolInHand { get; private set; }
     public bool HasItem => HeldItem != null;
 
     [Header("Prop Holding Points")]
@@ -26,17 +25,8 @@ public class PropInteract : MonoBehaviour
     [Header("BoxCastConfigs")]
     [SerializeField] private Vector3 halfExtends = new(.5f, 0.1f, .4f);
     [SerializeField] private float interactDistance = .8f;
-
-    [Header("Minigame")]
-    public Canvas minigameCanvas;
-    private bool isBombInteracting = false;
-    public bool IsBombInteracting => isBombInteracting;
-
+  
     public event Action OnPropDropped;
-
-    [Header("Password")]
-    [SerializeField] private Canvas passwordCanvas;
-    private bool isPasswordInteracting = false;
 
     private void Awake()
     {
@@ -50,28 +40,13 @@ public class PropInteract : MonoBehaviour
         playerInput.actions["Interact"].performed += Interact_performed;
         playerInput.actions["Interact"].canceled += Interact_canceled;
     }
-
-    private void Start()
-    {
-        passwordCanvas.gameObject.SetActive(false);
-    }
-
     private void Update()
     {
         lastMoveDir = player.LastMoveDir;
     }
-
-    private void Interact_performed(InputAction.CallbackContext obj)
-    {
-        EnableCanvas();
-
-        toolInHand?.Use();
-    }
-
-    private void Interact_canceled(InputAction.CallbackContext context) => toolInHand?.StopUsing();
-
+    private void Interact_performed(InputAction.CallbackContext obj) => ToolInHand?.Use();
+    private void Interact_canceled(InputAction.CallbackContext context) => ToolInHand?.StopUsing();
     private void Push_performed(InputAction.CallbackContext obj) => playerPushHandler.Push();
-
     private void PickUp_performed(InputAction.CallbackContext obj)
     {
         if (!HasItem && CheckForProps(out GameObject prop))
@@ -79,30 +54,25 @@ public class PropInteract : MonoBehaviour
             Debug.Log("Pegou");
             propPickupHandler.PickUpProp(prop);
             SetToolInHand(prop);
-            CheckIsBombOrPassoword();
         }
         else if (HasItem)
         {
-            toolInHand?.Drop();
-            toolInHand = null;
-
-            DisableCanvas();
+            ToolInHand?.Drop();
+            ToolInHand = null;
 
             propPickupHandler.DropProp();
             OnPropDropped?.Invoke();
         }
     }
-
     public void SetToolInHand(GameObject prop)
     {
         if (!prop.TryGetComponent(out IHeldTool tool)) return;
 
         Debug.Log("Item pego!!");
 
-        toolInHand = tool;
-        toolInHand.Pickup();
+        ToolInHand = tool;
+        ToolInHand.Pickup();
     }
-
     public bool CheckForPlayer(out GameObject player)
     {
         player = null;
@@ -121,7 +91,6 @@ public class PropInteract : MonoBehaviour
 
         return true;
     }
-
     public bool CheckForProps(out GameObject prop) // Check if theres an object in front of the player
     {
         GameObject objectInRange = null;
@@ -138,41 +107,6 @@ public class PropInteract : MonoBehaviour
 
         return isProp;
     }
-
-    public void CheckIsBombOrPassoword()
-    {
-        //isPasswordInteracting = toolInHand is Password;
-        isBombInteracting = toolInHand is Bomb;
-    }
-
-    private void EnableCanvas()
-    {
-        if (isPasswordInteracting)
-        {
-            passwordCanvas.gameObject.SetActive(true);
-            return;
-        }
-        else if (isBombInteracting)
-        {
-            minigameCanvas.gameObject.SetActive(true);
-            return;
-        }
-    }
-
-    public void DisableCanvas()
-    {
-        if (isPasswordInteracting)
-        {
-            passwordCanvas.gameObject.SetActive(false);
-            isPasswordInteracting = false;
-        }
-        else if (isBombInteracting)
-        {
-            minigameCanvas.gameObject.SetActive(false);
-            isBombInteracting = false;
-        }
-    }
-
     private void OnDestroy()
     {
         playerInput.actions["Grab"].performed -= PickUp_performed;
