@@ -307,6 +307,7 @@ Transform:
   - {fileID: 1773608212948747235}
   - {fileID: 1923363285936777387}
   - {fileID: 325730920530608951}
+  - {fileID: 1887015802121193001}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &187543532278264873
@@ -747,6 +748,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 0
+  defaultLinearDampingValue: 0
 --- !u!1 &919132149155446097
 GameObject:
   m_ObjectHideFlags: 0
@@ -902,6 +904,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 1
+  defaultLinearDampingValue: 0
 --- !u!1 &1180108867904976334
 GameObject:
   m_ObjectHideFlags: 0
@@ -1067,11 +1070,11 @@ Transform:
   m_GameObject: {fileID: 1196624692626810608}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 2.1252003, y: 1.0979999, z: -8.5739}
+  m_LocalPosition: {x: -0.17426586, y: -0.035000086, z: 0.34328973}
   m_LocalScale: {x: 0.11127023, y: 0.11127023, z: 0.11127023}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6677430993615339071}
+  m_Father: {fileID: 1887015802121193001}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!33 &8506202751942704770
 MeshFilter:
@@ -4041,6 +4044,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 2
+  defaultLinearDampingValue: 0
 --- !u!1 &4423045620967985251
 GameObject:
   m_ObjectHideFlags: 0
@@ -5638,7 +5642,6 @@ Transform:
   - {fileID: 4689523517309522557}
   - {fileID: -8679921383154817045}
   - {fileID: 6197099249075450731}
-  - {fileID: 8343857130444641239}
   - {fileID: 5167465718961338946}
   - {fileID: 3727878774301139044}
   - {fileID: 3204581857262680930}
@@ -6049,6 +6052,38 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 10.000002, y: 12.89532, z: 0.50000006}
   m_Center: {x: 5.000001, y: 6.44766, z: 0.25000003}
+--- !u!1 &8274794305211129573
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1887015802121193001}
+  m_Layer: 0
+  m_Name: Laptop
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1887015802121193001
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8274794305211129573}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 7.441, y: 1.133, z: -1.743}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8343857130444641239}
+  m_Father: {fileID: 7873475607510802662}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8287819103639272396
 GameObject:
   m_ObjectHideFlags: 0
@@ -6203,6 +6238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 1
+  defaultLinearDampingValue: 0
 --- !u!1 &8433710089260078501
 GameObject:
   m_ObjectHideFlags: 0
@@ -6529,6 +6565,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 0
+  defaultLinearDampingValue: 0
 --- !u!1 &8756040188530395269
 GameObject:
   m_ObjectHideFlags: 0
