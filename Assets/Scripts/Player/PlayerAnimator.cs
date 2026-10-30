@@ -35,7 +35,7 @@ public class PlayerAnimator : MonoBehaviour
 
     private void OnEnable()
     {
-        playerEventManager.OnBombInteracted += BringBombUp;
+        playerEventManager.OnToolInteracted += BringToolUp;
         playerEventManager.OnItemPickedUp += UpdateGrabWeigth;
         playerEventManager.OnItemDroped += UpdateGrabWeigth;
         playerEventManager.OnKnockDown += AnimateKnockdown;
@@ -72,19 +72,20 @@ public class PlayerAnimator : MonoBehaviour
         else
             grabRig.weight = 0f;
     }
-    private void BringBombUp(GameObject bomb)
+    private void BringToolUp(GameObject tool)
     {
         grabRig.weight = 1f;
-        bomb.transform.SetParent(propInteract.holdPointInteract);
+        tool.transform.SetParent(propInteract.holdPointInteract);
 
-        bomb.transform.localPosition = Vector3.zero;
+        tool.transform.localPosition = Vector3.zero;
 
-        Vector3 toFaceDirecetion = headCamPos.position - bomb.transform.position;
+        //Vector3 toFaceDirecetion = headCamPos.position - tool.transform.position;
 
-        bomb.transform.localRotation = Quaternion.Euler(50.0000114f, 0f, 0f);
-
-        // Quaternion.LookRotation(-toFaceDirecetion, Vector3.up) * 
-
+        tool.transform.localRotation = Quaternion.Euler(50.0000114f, 0f, 0f);
+    }
+    public void BringToolDown(GameObject tool)
+    {
+        UpdateGrabWeigth(tool.GetComponent<Prop>());
     }
     private void AnimateKnockdown(float stunTime)
     {
