@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public interface IUsable
 {
     public abstract void Use();
@@ -19,6 +21,6 @@ public interface ICanvasTool : IHeldTool
 
 public interface IHideable
 {
-    public abstract void Hide();
+    public abstract void Hide(GameObject atLocal);
     public abstract void Reveal();
 }

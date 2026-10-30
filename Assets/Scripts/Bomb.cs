@@ -1,10 +1,17 @@
 using UnityEngine;
 
-public class Bomb : MonoBehaviour, ICanvasTool
+public class Bomb : MonoBehaviour, ICanvasTool, IHideable
 {
-    private Prop prop;
     private PlayerEventManager playerEventManager;
     private PlayerAnimator playerAnimator;
+    private Prop prop;
+
+    [Header ("Bomb Parts")]
+    [SerializeField] private GameObject BombBody;
+    [SerializeField] private GameObject Keyboard;
+
+    private GameObject hidingPlace;
+
     private Canvas bombCanvas;
     public bool IsBeingHeld { get; private set; }
 
@@ -44,5 +51,46 @@ public class Bomb : MonoBehaviour, ICanvasTool
     }
 
     public void DisableCanvas() => bombCanvas.gameObject.SetActive(false);
+
+    public void Hide(GameObject hidingSpot)
+    {
+        BoxCollider collider = GetComponent<BoxCollider>();
+        Rigidbody rb = GetComponent<Rigidbody>();
+        hidingPlace = hidingSpot;
+
+        rb.isKinematic = true;
+        rb.useGravity = false;
+        collider.isTrigger = true;
+
+        transform.position = new(hidingSpot.transform.position.x, 0f, hidingSpot.transform.position.z);
+
+        //transform.SetParent(atLocal);
+        //transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+
+        BombBody.SetActive(false);
+        Keyboard.SetActive(false);
+    }
+
+    public void Reveal()
+    {
+        BoxCollider collider = GetComponent<BoxCollider>();
+        Rigidbody rb = GetComponent<Rigidbody>();
+
+        rb.isKinematic = false;
+        rb.useGravity = true;
+        collider.isTrigger = false;
+
+        //transform.SetParent(null);
+        //transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+
+        BombBody.SetActive(true);
+        Keyboard.SetActive(true);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject == hidingPlace)
+            Reveal();
+    }
 
 }

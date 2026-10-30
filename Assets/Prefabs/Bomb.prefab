@@ -184,4 +184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10937bab618a90544994360f12a953f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnAtRandomLocation
-  locals: []
+  locals:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
