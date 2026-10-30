@@ -9,6 +9,7 @@ public class PlayerAnimator : MonoBehaviour
     [SerializeField] private PropPickupHandler propPickupHandler;
     [SerializeField] private Player player;
     private Animator animator;
+    private PropInteract propInteract;
 
     [Header("Ragdoll Field")]
     [SerializeField] private Transform playerTransform;
@@ -19,6 +20,7 @@ public class PlayerAnimator : MonoBehaviour
     [SerializeField] private Rig grabRig;
     [SerializeField] private Rig pushRig;
 
+    [SerializeField] private Transform headCamPos;
 
     private readonly int upperBody = 1;
 
@@ -28,15 +30,16 @@ public class PlayerAnimator : MonoBehaviour
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        propInteract = GetComponentInParent<PropInteract>();
     }
 
     private void OnEnable()
     {
+        playerEventManager.OnToolInteracted += BringToolUp;
         playerEventManager.OnItemPickedUp += UpdateGrabWeigth;
         playerEventManager.OnItemDroped += UpdateGrabWeigth;
-        playerEventManager.OnPropPush += AnimatePush;
-        playerEventManager.OnBombInteracted += BringBombUp;
         playerEventManager.OnKnockDown += AnimateKnockdown;
+        playerEventManager.OnPropPush += AnimatePush;
     }
     private void Update()
     {
@@ -69,10 +72,20 @@ public class PlayerAnimator : MonoBehaviour
         else
             grabRig.weight = 0f;
     }
-    private void BringBombUp(Transform cameraPos, GameObject bomb)
+    private void BringToolUp(GameObject tool)
     {
         grabRig.weight = 1f;
-        bomb.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+        tool.transform.SetParent(propInteract.holdPointInteract);
+
+        tool.transform.localPosition = Vector3.zero;
+
+        //Vector3 toFaceDirecetion = headCamPos.position - tool.transform.position;
+
+        tool.transform.localRotation = Quaternion.Euler(50.0000114f, 0f, 0f);
+    }
+    public void BringToolDown(GameObject tool)
+    {
+        UpdateGrabWeigth(tool.GetComponent<Prop>());
     }
     private void AnimateKnockdown(float stunTime)
     {

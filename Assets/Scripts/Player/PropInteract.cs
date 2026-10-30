@@ -11,12 +11,10 @@ public class PropInteract : MonoBehaviour
 
     [SerializeField] private Transform checkPos;
     [SerializeField] private Transform headPos;
-    public bool IsBombInteracting { get; private set; } = false;
 
     private Vector3 lastMoveDir;
     private GameObject HeldItem => propPickupHandler.HeldItem;
-
-    private IHeldTool toolInHand;
+    public IHeldTool ToolInHand { get; private set; }
     public bool HasItem => HeldItem != null;
 
     [Header("Prop Holding Points")]
@@ -27,15 +25,8 @@ public class PropInteract : MonoBehaviour
     [Header("BoxCastConfigs")]
     [SerializeField] private Vector3 halfExtends = new(.5f, 0.1f, .4f);
     [SerializeField] private float interactDistance = .8f;
-
-    [Header("Minigame")]
-    public Canvas minigameCanvas { get; private set; }
-
+  
     public event Action OnPropDropped;
-
-    [Header("Password")]
-    [SerializeField] private Canvas passwordCanvas;
-    private bool isPasswordInteracting = false;
 
     private void Awake()
     {
@@ -44,72 +35,44 @@ public class PropInteract : MonoBehaviour
         propPickupHandler = GetComponent<PropPickupHandler>();
         playerPushHandler = GetComponent<PlayerPushHandler>();
 
-        playerInput.actions["Grab"].performed += Grab_performed;
+        playerInput.actions["Grab"].performed += PickUp_performed;
         playerInput.actions["Push"].performed += Push_performed;
         playerInput.actions["Interact"].performed += Interact_performed;
         playerInput.actions["Interact"].canceled += Interact_canceled;
     }
-
-    private void Start()
-    {
-        passwordCanvas.gameObject.SetActive(false);
-    }
-
     private void Update()
     {
         lastMoveDir = player.LastMoveDir;
     }
-
-    private void Interact_performed(InputAction.CallbackContext obj)
-    {
-        if (isPasswordInteracting)
-        {
-            passwordCanvas.gameObject.SetActive(true);
-            return;
-        }
-
-        toolInHand?.Use();
-    }
-
-    private void Interact_canceled(InputAction.CallbackContext context) => toolInHand?.StopUsing();
-
+    private void Interact_performed(InputAction.CallbackContext obj) => ToolInHand?.Use();
+    private void Interact_canceled(InputAction.CallbackContext context) => ToolInHand?.StopUsing();
     private void Push_performed(InputAction.CallbackContext obj) => playerPushHandler.Push();
-
-    private void Grab_performed(InputAction.CallbackContext obj)
+    private void PickUp_performed(InputAction.CallbackContext obj)
     {
         if (!HasItem && CheckForProps(out GameObject prop))
         {
             Debug.Log("Pegou");
             propPickupHandler.PickUpProp(prop);
             SetToolInHand(prop);
-            isPasswordInteracting = prop.name == "Password";
         }
         else if (HasItem)
         {
-            toolInHand?.Drop();
-            toolInHand = null;
-
-            if (isPasswordInteracting)
-            {
-                passwordCanvas.gameObject.SetActive(false);
-                isPasswordInteracting = false;
-            }
+            ToolInHand?.Drop();
+            ToolInHand = null;
 
             propPickupHandler.DropProp();
             OnPropDropped?.Invoke();
         }
     }
-
-    private void SetToolInHand(GameObject prop)
+    public void SetToolInHand(GameObject prop)
     {
         if (!prop.TryGetComponent(out IHeldTool tool)) return;
 
         Debug.Log("Item pego!!");
 
-        toolInHand = tool;
-        toolInHand.Pickup();
+        ToolInHand = tool;
+        ToolInHand.Pickup();
     }
-
     public bool CheckForPlayer(out GameObject player)
     {
         player = null;
@@ -128,7 +91,6 @@ public class PropInteract : MonoBehaviour
 
         return true;
     }
-
     public bool CheckForProps(out GameObject prop) // Check if theres an object in front of the player
     {
         GameObject objectInRange = null;
@@ -145,10 +107,9 @@ public class PropInteract : MonoBehaviour
 
         return isProp;
     }
-
     private void OnDestroy()
     {
-        playerInput.actions["Grab"].performed -= Grab_performed;
+        playerInput.actions["Grab"].performed -= PickUp_performed;
         playerInput.actions["Push"].performed -= Push_performed;
         playerInput.actions["Interact"].performed -= Interact_performed;
         playerInput.actions["Interact"].canceled -= Interact_canceled;

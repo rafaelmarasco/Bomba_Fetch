@@ -31,7 +31,7 @@ public class PlayerPushHandler : MonoBehaviour
         playerEventManager.PropPush();
 
         bool hasPropInRange = propInteract.CheckForProps(out GameObject prop);
-        bool isInteractingWithBomb = propInteract.IsBombInteracting;
+        bool isInteractingWithBomb = propInteract.ToolInHand is Bomb; // --- Problema
         bool hasPlayerInRange = propInteract.CheckForPlayer(out GameObject player);
 
         // atualmente o player nao consegue empurrar outro player se estiver carregando algum item
@@ -49,19 +49,19 @@ public class PlayerPushHandler : MonoBehaviour
         }
     }
 
-    private void PushProp(GameObject propInRange)
+    private void PushProp(GameObject prop)
     {
-        Debug.Log(propInRange.name);
+        Debug.Log($"Acabo de arremessar um {prop.name}");
 
         Prop propBeingThrown;
 
-        propInRange.TryGetComponent(out propBeingThrown);
+        prop.TryGetComponent(out propBeingThrown);
 
         if (propBeingThrown == null) Debug.LogWarning($"somehow {propBeingThrown.name} is not a prop!");
 
         if (!IsHoldingItem)
         {
-            propInRange.TryGetComponent<Rigidbody>(out Rigidbody propRb);
+            prop.TryGetComponent<Rigidbody>(out Rigidbody propRb);
             if (propRb == null) return;
 
             propBeingThrown.SetPushingState(true);
@@ -77,6 +77,9 @@ public class PlayerPushHandler : MonoBehaviour
             propPickupHandler.DropProp();
             propRb.AddForce(pushForce * transform.forward, ForceMode.Impulse);
         }
+
+        if (propInteract.ToolInHand is ICanvasTool canvasTool)
+            canvasTool.DisableCanvas();
 
     }
 
