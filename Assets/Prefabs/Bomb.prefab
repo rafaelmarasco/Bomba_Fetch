@@ -10,11 +10,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 4e145a7c8a8c9c748baf0f2419faabe0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.05
+      value: 6.3549747
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4e145a7c8a8c9c748baf0f2419faabe0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.602
+      value: 0.353
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4e145a7c8a8c9c748baf0f2419faabe0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -70,6 +70,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4e145a7c8a8c9c748baf0f2419faabe0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6385519254403943809}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4e145a7c8a8c9c748baf0f2419faabe0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7577992854581486350}
   m_SourcePrefab: {fileID: 100100000, guid: 4e145a7c8a8c9c748baf0f2419faabe0, type: 3}
 --- !u!1 &4750609313683605751 stripped
 GameObject:
@@ -122,8 +125,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 0.39742357, z: 1}
-  m_Center: {x: 0, y: -0.006340474, z: 0}
+  m_Size: {x: 0.40639305, y: 0.37762707, z: 0.6133976}
+  m_Center: {x: 0.008119106, y: 0.016119033, z: 0.0022759438}
 --- !u!114 &7519086127367530837
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,3 +157,15 @@ MonoBehaviour:
   radiusExplosion: 0
   explosionForce: 0
   upwardsModifier: 0
+--- !u!114 &7577992854581486350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4750609313683605751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cca86df291bcda24388e0ed5d7aac8b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Bomb
