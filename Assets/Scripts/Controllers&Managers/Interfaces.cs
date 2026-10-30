@@ -12,4 +12,9 @@ public interface IPickable //Provavelmente desnecessario mas vou deixar aqui sla
     public abstract void Drop();
 }
 
+public interface ICanvasTool : IHeldTool
+{
+    public abstract void DisableCanvas();
+}
+
 public interface IHeldTool : IUsable, IPickable { }

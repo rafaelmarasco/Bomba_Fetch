@@ -6,7 +6,6 @@ public class PropPickupHandler : MonoBehaviour
     private PlayerEventManager playerEventManager;
     public GameObject HeldItem { get; private set; } = null;
     public bool HasItem => HeldItem != null;
-    public bool IsBombInteracting { get; private set; } = false;
 
     [SerializeField] private Transform dropPoint;
 
@@ -41,15 +40,10 @@ public class PropPickupHandler : MonoBehaviour
         HeldItem.transform.SetParent(null);
         HeldItem = null;
 
-        if (IsBombInteracting)
-        {
-            propInteract.minigameCanvas.gameObject.SetActive(false);
+        if (propInteract.ToolInHand is Bomb)
             playerEventManager.BombDroped();
-            IsBombInteracting = false;
-        }
 
         propInfo.DisableReposition();
         playerEventManager.ItemDroped(propInfo);
     }
-
 }
