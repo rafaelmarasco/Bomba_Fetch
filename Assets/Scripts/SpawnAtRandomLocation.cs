@@ -2,18 +2,31 @@ using UnityEngine;
 
 public class SpawnAtRandomLocation : MonoBehaviour
 {
-    [SerializeField] private Transform[] locals;
+    [SerializeField] private GameObject[] locals;
     public bool Randomized { get; private set; } = false;
 
-    void Start() => SetRandomLocation();
+    public GameObject HidingSpot { get; private set; } = null;
 
-    private void SetRandomLocation()
+    IHideable hideable;
+
+    void Awake()
     {
+        hideable = GetComponent<IHideable>();
+        SetRandomHidingLocation();
+        hideable.Hide(HidingSpot);
+    } 
+
+    private void SetRandomHidingLocation()
+    {
+        if (locals.Length == 0) return;
+
         int randomIndex = Random.Range(0, locals.Length);
 
-        transform.position = locals[randomIndex].position;
+        HidingSpot = locals[randomIndex];
 
-        Debug.Log(locals[randomIndex].name);
+        transform.position = HidingSpot.transform.position;
+
+        Debug.Log(HidingSpot.name);
 
         Randomized = true;
     }

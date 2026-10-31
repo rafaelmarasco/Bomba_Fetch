@@ -1,12 +1,18 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class Password : MonoBehaviour, ICanvasTool
+public class Password : MonoBehaviour, ICanvasTool, IHideable
 {
-    private Prop prop;
     private PlayerEventManager playerEventManager;
     private PlayerAnimator playerAnimator;
+    private Prop prop;
+
     private Canvas passwordCanvas;
     public bool IsBeingHeld { get; private set; }
+
+    private GameObject hidingPlace;
+
+    [SerializeField] private MeshRenderer passwordMash; 
 
     private void Start() => prop = GetComponent<Prop>();
 
@@ -45,4 +51,36 @@ public class Password : MonoBehaviour, ICanvasTool
 
     public void DisableCanvas() => passwordCanvas.gameObject.SetActive(false);
 
+    public void Hide(GameObject hidingSpot)
+    {
+        BoxCollider collider = GetComponent<BoxCollider>();
+        Rigidbody rb = GetComponent<Rigidbody>();
+        hidingPlace = hidingSpot;
+
+        rb.isKinematic = true;
+        rb.useGravity = false;
+        collider.isTrigger = true;
+
+        passwordMash.enabled = false;
+
+        transform.position = new(hidingSpot.transform.position.x, 0f, hidingSpot.transform.position.z);
+    }
+
+    public void Reveal()
+    {
+        BoxCollider collider = GetComponent<BoxCollider>();
+        Rigidbody rb = GetComponent<Rigidbody>();
+
+        rb.isKinematic = false;
+        rb.useGravity = true;
+        collider.isTrigger = false;
+
+        passwordMash.enabled = true;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject == hidingPlace)
+            Reveal();
+    }
 }
