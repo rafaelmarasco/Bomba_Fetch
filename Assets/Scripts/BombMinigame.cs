@@ -22,7 +22,9 @@ public class BombMinigame : MonoBehaviour
     [Header("Minigame Settings")]
     [SerializeField] private Button[] buttons;
     [SerializeField] private int column = 3;
+    [SerializeField] private ValidatePassword validatePassword;
     private int id = 0;
+    private string result;
 
     [Header("Display Settings")]
     [SerializeField] private TextMeshProUGUI[] displayTexts;
@@ -136,11 +138,16 @@ public class BombMinigame : MonoBehaviour
 
     private void SubmitResult()
     {
-        string result = "";
+        result = "";
         for (int i = 0; i < displayTexts.Length; i++)
         {
             result += displayTexts[i].text;
         }
         Debug.Log("Submit Result: " + result);
+
+        validatePassword.SetSubmitPassword(result);
+
+        validatePassword.CheckPassword();
     }
+
 }

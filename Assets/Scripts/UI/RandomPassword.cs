@@ -35,5 +35,10 @@ public class RandomPassword : MonoBehaviour
         }
         
     }
+
+    public string GetPassword()
+    {
+        return passwordText.text;
+    }
     
 }
