@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public interface IUsable
 {
     public abstract void Use();
@@ -11,10 +13,14 @@ public interface IPickable //Provavelmente desnecessario mas vou deixar aqui sla
 
     public abstract void Drop();
 }
-
+public interface IHeldTool : IUsable, IPickable { }
 public interface ICanvasTool : IHeldTool
 {
     public abstract void DisableCanvas();
 }
 
-public interface IHeldTool : IUsable, IPickable { }
+public interface IHideable
+{
+    public abstract void Hide(GameObject atLocal);
+    public abstract void Reveal();
+}
