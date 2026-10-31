@@ -22,9 +22,11 @@ public class Player : MonoBehaviour
     private bool stopMoving;
 
     [SerializeField] private float rotationSpeed;
+    [Header ("Movement Variables")]
     [SerializeField] private float moveSpeed = 7f;
     [SerializeField] private float acceleration = 12f;
     [SerializeField] private float maxForce = 1000f;
+    [SerializeField] private float brakeMaxForce = 2500f;
 
     private void Awake()
     {
@@ -64,7 +66,10 @@ public class Player : MonoBehaviour
 
         Vector3 velocityDiff = nextVelocity - new Vector3(currentVelocity.x, 0f, currentVelocity.z);
 
-        Vector3 walkingForce = Vector3.ClampMagnitude(velocityDiff * acceleration * playerRb.mass, maxForce);
+        bool isBraking = MoveDir == Vector3.zero || Vector3.Dot(currentVelocity, nextVelocity) < .3f;
+        float limit = isBraking ? brakeMaxForce : maxForce;
+
+        Vector3 walkingForce = Vector3.ClampMagnitude(velocityDiff * acceleration * playerRb.mass, limit);
 
         playerRb.AddForce(walkingForce, ForceMode.Force);
 

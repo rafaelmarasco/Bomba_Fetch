@@ -4518,7 +4518,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2230432029308799391, guid: 0a49312922dd4e24ba986978376b78ca, type: 3}
       propertyPath: m_Mass
-      value: 50
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 2230432029308799391, guid: 0a49312922dd4e24ba986978376b78ca, type: 3}
       propertyPath: m_LinearDamping
@@ -4547,6 +4547,10 @@ PrefabInstance:
     - target: {fileID: 4027390196733393155, guid: 0a49312922dd4e24ba986978376b78ca, type: 3}
       propertyPath: m_LinearDamping
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4027390196733393155, guid: 0a49312922dd4e24ba986978376b78ca, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7521111637583129731, guid: 0a49312922dd4e24ba986978376b78ca, type: 3}
       propertyPath: m_Enabled
@@ -4607,6 +4611,10 @@ PrefabInstance:
     - target: {fileID: 7873475607510802662, guid: 0a49312922dd4e24ba986978376b78ca, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8218312590011992055, guid: 0a49312922dd4e24ba986978376b78ca, type: 3}
+      propertyPath: jumpForce
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8343857130444641239, guid: 0a49312922dd4e24ba986978376b78ca, type: 3}
       propertyPath: m_LocalPosition.x

@@ -22,8 +22,8 @@ public class Prop : MonoBehaviour
             return PropSize switch
             {
                 Size.small => 2f,
-                Size.medium => 3f,
-                Size.large => 30f,
+                Size.medium => 15f,
+                Size.large => 100f,
                 _ => ThrowForce,
             };
         }
