@@ -21,6 +21,7 @@ public interface ICanvasTool : IHeldTool
 
 public interface IHideable
 {
+    public bool IsHidden { get; }
     public abstract void Hide(GameObject atLocal);
     public abstract void Reveal();
 }
