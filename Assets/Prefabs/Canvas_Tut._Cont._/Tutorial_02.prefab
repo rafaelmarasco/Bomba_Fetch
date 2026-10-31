@@ -10,7 +10,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4670721214807853545, guid: a1a2512eabb71804f89cd9f89ef3c663, type: 3}
       propertyPath: m_Name
-      value: Tutorial_02 Variant
+      value: Tutorial_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4670721214807853545, guid: a1a2512eabb71804f89cd9f89ef3c663, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5192394912262265721, guid: a1a2512eabb71804f89cd9f89ef3c663, type: 3}
       propertyPath: m_LocalPosition.x
