@@ -24,7 +24,7 @@ public class Prop : MonoBehaviour
                 Size.small => 10f,
                 Size.medium => 6f,
                 Size.large => 4f,
-                _ => ThrowForce,
+                _ => 0f,
             };
         }
     }
@@ -32,11 +32,12 @@ public class Prop : MonoBehaviour
     private FixedJoint joint;
 
     private Rigidbody rb;
+    private Collider throwerCollider;
 
     private bool isBeingPushed = false;
     public bool IsHiddingSpot { get; private set; } = false;
 
-    public IHideable hiddenProp {  get; private set; }
+    public IHideable hiddenProp { get; private set; }
 
     [SerializeField] private float defaultLinearDampingValue;
 
@@ -53,22 +54,10 @@ public class Prop : MonoBehaviour
         SetPropMass();
     }
 
-    private void Update()
-    {/*
-        if (rb.position.y > 0.0f)
-        {
-            rb.linearDamping = 0;
-        }
-        else
-        {
-            rb.linearDamping = defaultLinearDampingValue;
-        }
-        */
-    }
-
     public void EnableReposition(PropInteract playerInteracting)
     {
         this.PlayerInteracting = playerInteracting;
+        throwerCollider = PlayerInteracting.GetComponentInChildren<Collider>();
 
         switch (PropSize)
         {
@@ -85,7 +74,6 @@ public class Prop : MonoBehaviour
                 break;
         }
 
-        //Physics.IgnoreCollision(GetComponent<Collider>(), PlayerInteracting.GetComponentInChildren<Collider>());
     }
     private void RepositionSmallProp()
     {
@@ -97,7 +85,7 @@ public class Prop : MonoBehaviour
 
         gameObject.layer = PROP_IN_HAND_LAYER;
 
-        Physics.IgnoreCollision(GetComponent<Collider>(), PlayerInteracting.GetComponentInChildren<Collider>());
+        Physics.IgnoreCollision(GetComponent<Collider>(), throwerCollider);
 
         transform.SetParent(holdPoint);
         transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
@@ -137,8 +125,10 @@ public class Prop : MonoBehaviour
 
         GetComponent<Rigidbody>().isKinematic = false;
 
+        if(!isBeingPushed)
+            Physics.IgnoreCollision(GetComponent<Collider>(), throwerCollider, false);
+
         DestroyJoints();
-        Physics.IgnoreCollision(GetComponent<Collider>(), PlayerInteracting.GetComponentInChildren<Collider>(), false);
         PlayerInteracting = null;
     }
     private void DestroyJoints()
@@ -149,26 +139,46 @@ public class Prop : MonoBehaviour
             joint = null;
         }
     }
-    public void SetPushingState(bool state) => isBeingPushed = state;
+    public void SetPushingState(bool state)
+    {
+        isBeingPushed = state;
+        if (state == false && throwerCollider != null)
+        {
+            Physics.IgnoreCollision(GetComponent<Collider>(), throwerCollider, false);
+            throwerCollider = null;
+
+        }
+    }
+
+
     private void HandlePropToPlayerContact(Collision collision)
     {
         if (collision.gameObject.layer == FLOOR_LAYER)
+        {
             SetPushingState(false);
+            return;
+        }
+
+        if (throwerCollider != null)
+            Physics.IgnoreCollision(GetComponent<Collider>(), throwerCollider);
+        else
+            Debug.Log("O colisor do jogador nao foi pego");
 
         if (!collision.gameObject.GetComponent<Player>()) return;
 
-        float stunTime = 2f;
         PlayerEventManager targetEventManager = collision.gameObject.GetComponentInParent<PlayerEventManager>();
-        //PlayerHarmHandler target = collision.gameObject.GetComponentInParent<PlayerHarmHandler>();
+        if (targetEventManager == null) return;
+
+        float stunTime = 2f;
 
         targetEventManager.KnockedDown(stunTime);
         SetPushingState(false);
     }
-    private void OnCollisionEnter(Collision collision)
+
+    private void OnCollisionStay(Collision collision)
     {
-        if (isBeingPushed)
-            HandlePropToPlayerContact(collision);
-        else return;
+        if (!isBeingPushed) return;
+        HandlePropToPlayerContact(collision);
     }
 
     private void SetPropMass()
@@ -191,5 +201,5 @@ public class Prop : MonoBehaviour
         IsHiddingSpot = state;
         hiddenProp = hideable;
     }
-        
+
 }

@@ -107,14 +107,14 @@ public class PlayerPushHandler : MonoBehaviour
                 playerRb.AddForce((PVPpushForce) * transform.forward, ForceMode.Impulse);
 
                 firstPush = true;
-                firstPushState = StartCoroutine(ResetPushState(nameof(firstPush)));
+                firstPushState = StartCoroutine(CoroutineResetPushState(nameof(firstPush)));
             }
             else if (!secondPush)
             {
                 playerRb.AddForce((PVPpushForce * 1.5f) * transform.forward, ForceMode.Impulse);
 
                 secondPush = true;
-                secondPushState = StartCoroutine(ResetPushState(nameof(secondPush)));
+                secondPushState = StartCoroutine(CoroutineResetPushState(nameof(secondPush)));
             }
             else if (!finalPush)
             {
@@ -131,7 +131,7 @@ public class PlayerPushHandler : MonoBehaviour
         }
     }
 
-    private IEnumerator ResetPushState(string stateName)
+    private IEnumerator CoroutineResetPushState(string stateName)
     {
 
         float cooldownTime = stateName switch

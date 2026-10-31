@@ -40,7 +40,7 @@ public class Extinguisher : MonoBehaviour, IHeldTool
 
         if (HolderInput != null)
         {
-            Debug.LogWarning($"O player: {Holder.name} já esta equipado com esse item");
+            Debug.LogWarning($"O player: {Holder.name} já esta equipado com esse item");    
             return;
         }
 
