@@ -988,8 +988,8 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8453428288632691985}
   serializedVersion: 5
-  m_Mass: 15
-  m_LinearDamping: 5
+  m_Mass: 70
+  m_LinearDamping: 1
   m_AngularDamping: 9999
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -1045,8 +1045,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   animator: {fileID: 2258011675586492718}
   hipsRb: {fileID: 7304537807111367421}
-  moveSpeed: 7
   rotationSpeed: 800
+  moveSpeed: 7
+  acceleration: 25
+  maxForce: 1000
 --- !u!114 &7330877714380932613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1135,6 +1137,7 @@ MonoBehaviour:
   GFX: {fileID: 4827275921164204526}
   hipsRb: {fileID: 7304537807111367421}
   playerRb: {fileID: 7772503601804982951}
+  playerMainCollider: {fileID: 3664144837459909734}
 --- !u!114 &1866220012186243286
 MonoBehaviour:
   m_ObjectHideFlags: 0

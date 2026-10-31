@@ -82,13 +82,17 @@ public class PlayerHarmHandler : MonoBehaviour
 
         playerEventManager.StopInputingMovement(true);
 
+        playerRb.linearVelocity = Vector3.zero;
+
         player.RotateOnMove(directionToTarget);
-        playerRb.AddForce(jumpDirection * jumpForce, ForceMode.Impulse);
+        playerRb.AddForce(jumpDirection * jumpForce, ForceMode.VelocityChange);
 
         if (propPickupHandler.HeldItem != null)
             playerPushHandler.Push();
 
         yield return new WaitForSeconds(jumpTime);
+
+        playerRb.linearVelocity = new(0f, playerRb.linearVelocity.y, 0f);
 
         IsOnFire = true;
 
