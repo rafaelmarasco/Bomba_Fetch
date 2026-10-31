@@ -14,6 +14,8 @@ public class Prop : MonoBehaviour
 {
     private PropManager manager;
     [SerializeField] private Size propSize;
+    [SerializeField] private Vector3 repositionOffset;
+    [SerializeField] private Vector3 rotationOffset;
     public Size PropSize => propSize;
     public PropInteract PlayerInteracting { get; private set; }
     public float ThrowForce
@@ -45,10 +47,10 @@ public class Prop : MonoBehaviour
     private const int PROP_IN_HAND_LAYER = 7;
     private const int DEFAULT_LAYER = 0;
     private const int FLOOR_LAYER = 10;
+    private const int WALLS_LAYER = 6;
 
     private void Start()
     {
-        //manager = transform.Find("PropManager").GetComponent<PropManager>();
         manager = FindFirstObjectByType<PropManager>();
         propCollider = GetComponent<Collider>();
         rb = GetComponent<Rigidbody>();
@@ -93,7 +95,7 @@ public class Prop : MonoBehaviour
         Physics.IgnoreCollision(propCollider, throwerCollider);
 
         transform.SetParent(holdPoint);
-        transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+        transform.SetLocalPositionAndRotation(Vector3.zero + repositionOffset, Quaternion.identity * Quaternion.Euler(rotationOffset));
 
     }
     private void RepositionMediumProp()
@@ -104,7 +106,7 @@ public class Prop : MonoBehaviour
 
         gameObject.layer = PROP_IN_HAND_LAYER;
 
-        transform.SetPositionAndRotation(holdPoint.position, holdPoint.rotation);
+        transform.SetPositionAndRotation(holdPoint.TransformPoint(repositionOffset), holdPoint.rotation * Quaternion.Euler(repositionOffset));
 
         Rigidbody holdPointRb = holdPoint.GetComponent<Rigidbody>();
 
@@ -130,7 +132,7 @@ public class Prop : MonoBehaviour
 
         GetComponent<Rigidbody>().isKinematic = false;
 
-        if(!isBeingPushed)
+        if (!isBeingPushed)
             Physics.IgnoreCollision(propCollider, throwerCollider, false);
 
         DestroyJoints();
@@ -181,8 +183,8 @@ public class Prop : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
-        if (!isBeingPushed) return;
-        HandlePropToPlayerContact(collision);
+        if (isBeingPushed)
+            HandlePropToPlayerContact(collision);
     }
 
     private void SetPropMass()
