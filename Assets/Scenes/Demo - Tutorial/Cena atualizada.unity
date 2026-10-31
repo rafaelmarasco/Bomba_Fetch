@@ -828,6 +828,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Game Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 1969801659941127974, guid: 275bdce0c5a85f44496a4c893626c908, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 7474738964020847209, guid: 275bdce0c5a85f44496a4c893626c908, type: 3}
       propertyPath: m_PlayerJoinedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -876,8 +880,29 @@ PrefabInstance:
     - {fileID: 8361708609832705581, guid: 275bdce0c5a85f44496a4c893626c908, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1969801659941127974, guid: 275bdce0c5a85f44496a4c893626c908, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2004803772}
   m_SourcePrefab: {fileID: 100100000, guid: 275bdce0c5a85f44496a4c893626c908, type: 3}
+--- !u!1 &2004803771 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1969801659941127974, guid: 275bdce0c5a85f44496a4c893626c908, type: 3}
+  m_PrefabInstance: {fileID: 2004803770}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2004803772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2004803771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a3c417dfb1585c409476752001faaf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PauseSystem
+  prefabPauseScreen: {fileID: 9193507470703088726, guid: a4085daf45efb9244843a0c99d2a6acf, type: 3}
 --- !u!1 &2105937936
 GameObject:
   m_ObjectHideFlags: 0

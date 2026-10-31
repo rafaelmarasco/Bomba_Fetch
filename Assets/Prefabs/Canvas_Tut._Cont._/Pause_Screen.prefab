@@ -824,7 +824,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8071164910482777459, guid: ad95ac2e5d8a84842a1305882f798010, type: 3}
       propertyPath: m_Name
-      value: Pause_Screen 1
+      value: Pause_Screen
       objectReference: {fileID: 0}
     - target: {fileID: 8708873310590253027, guid: ad95ac2e5d8a84842a1305882f798010, type: 3}
       propertyPath: m_LocalPosition.x
@@ -878,10 +878,46 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 599147857794232166, guid: ad95ac2e5d8a84842a1305882f798010, type: 3}
       insertIndex: -1
       addedObject: {fileID: 155909876031399856}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8071164910482777459, guid: ad95ac2e5d8a84842a1305882f798010, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5192780960282173910}
   m_SourcePrefab: {fileID: 100100000, guid: ad95ac2e5d8a84842a1305882f798010, type: 3}
+--- !u!114 &486285110162397688 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 660004221706217693, guid: ad95ac2e5d8a84842a1305882f798010, type: 3}
+  m_PrefabInstance: {fileID: 1123489695544914213}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!224 &560687303111401027 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 599147857794232166, guid: ad95ac2e5d8a84842a1305882f798010, type: 3}
   m_PrefabInstance: {fileID: 1123489695544914213}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &9193507470703088726 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8071164910482777459, guid: ad95ac2e5d8a84842a1305882f798010, type: 3}
+  m_PrefabInstance: {fileID: 1123489695544914213}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5192780960282173910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9193507470703088726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fb15dd6e71dfe941b05a8fc1b82867e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PauseButtonSettings
+  controlButton: {fileID: 9107506995423461252}
+  continueButton: {fileID: 5953941164951488029}
+  mainMenuButton: {fileID: 486285110162397688}
+  quitButton: {fileID: 8371456856466429434}
+  pauseCanvas: {fileID: 9193507470703088726}
