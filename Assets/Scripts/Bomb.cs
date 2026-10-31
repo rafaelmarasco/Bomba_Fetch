@@ -64,9 +64,6 @@ public class Bomb : MonoBehaviour, ICanvasTool, IHideable
 
         transform.position = new(hidingSpot.transform.position.x, 0f, hidingSpot.transform.position.z);
 
-        //transform.SetParent(atLocal);
-        //transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
-
         BombBody.SetActive(false);
         Keyboard.SetActive(false);
     }
@@ -79,9 +76,6 @@ public class Bomb : MonoBehaviour, ICanvasTool, IHideable
         rb.isKinematic = false;
         rb.useGravity = true;
         collider.isTrigger = false;
-
-        //transform.SetParent(null);
-        //transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
 
         BombBody.SetActive(true);
         Keyboard.SetActive(true);
