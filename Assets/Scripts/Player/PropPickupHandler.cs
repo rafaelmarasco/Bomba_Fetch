@@ -34,7 +34,7 @@ public class PropPickupHandler : MonoBehaviour
         if (propInfo.PropSize == Size.small)
         {
             HeldItem.transform.SetParent(dropPoint);
-            HeldItem.transform.SetLocalPositionAndRotation(Vector3.zero, HeldItem.transform.rotation);
+            HeldItem.transform.localPosition = Vector3.zero;
         }
 
         HeldItem.transform.SetParent(null);
@@ -42,6 +42,8 @@ public class PropPickupHandler : MonoBehaviour
 
         if (propInteract.ToolInHand is Bomb)
             playerEventManager.BombDroped();
+
+        propInteract.ToolInHand?.Drop();
 
         propInfo.DisableReposition();
         playerEventManager.ItemDroped(propInfo);
