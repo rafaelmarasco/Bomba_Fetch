@@ -15,6 +15,8 @@ public class Bomb : MonoBehaviour, ICanvasTool, IHideable
     private Canvas bombCanvas;
     public bool IsBeingHeld { get; private set; }
 
+    public bool IsHidden => hidingPlace != null;
+
     private void Start() => prop = GetComponent<Prop>();
 
     public void Drop()
@@ -64,18 +66,26 @@ public class Bomb : MonoBehaviour, ICanvasTool, IHideable
 
         transform.position = new(hidingSpot.transform.position.x, 0f, hidingSpot.transform.position.z);
 
+        hidingPlace.GetComponent<Prop>().SetAsHiddingSpot(true, this);
+
         BombBody.SetActive(false);
         Keyboard.SetActive(false);
     }
 
     public void Reveal()
     {
+        if (!IsHidden) return;
+        
         BoxCollider collider = GetComponent<BoxCollider>();
         Rigidbody rb = GetComponent<Rigidbody>();
 
         rb.isKinematic = false;
         rb.useGravity = true;
         collider.isTrigger = false;
+
+        hidingPlace.GetComponent<Prop>().SetAsHiddingSpot(false, this);
+
+        hidingPlace = null;
 
         BombBody.SetActive(true);
         Keyboard.SetActive(true);

@@ -34,6 +34,9 @@ public class Prop : MonoBehaviour
     private Rigidbody rb;
 
     private bool isBeingPushed = false;
+    public bool IsHiddingSpot { get; private set; } = false;
+
+    public IHideable hiddenProp {  get; private set; }
 
     [SerializeField] private float defaultLinearDampingValue;
 
@@ -183,15 +186,10 @@ public class Prop : MonoBehaviour
                 break;
         }
     }
-
-    private void OnCollisionStay(Collision collision)
+    public void SetAsHiddingSpot(bool state, IHideable hideable)
     {
-        /*
-        if (collision.gameObject.layer == FLOOR_LAYER && rb.position.y != 0)
-        {
-            transform.position = new(rb.position.x, 0, rb.position.z);
-        }
-        else return; 
-    */
+        IsHiddingSpot = state;
+        hiddenProp = hideable;
     }
+        
 }

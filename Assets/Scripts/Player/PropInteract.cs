@@ -6,6 +6,7 @@ public class PropInteract : MonoBehaviour
 {
     private PropPickupHandler propPickupHandler;
     private PlayerPushHandler playerPushHandler;
+    private PlayerSearchHandler playerSearchHandler;
     private PlayerInput playerInput;
     private Player player;
 
@@ -34,11 +35,13 @@ public class PropInteract : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         propPickupHandler = GetComponent<PropPickupHandler>();
         playerPushHandler = GetComponent<PlayerPushHandler>();
+        playerSearchHandler = GetComponent<PlayerSearchHandler>();
 
         playerInput.actions["Grab"].performed += PickUp_performed;
         playerInput.actions["Push"].performed += Push_performed;
         playerInput.actions["Interact"].performed += Interact_performed;
         playerInput.actions["Interact"].canceled += Interact_canceled;
+        playerInput.actions["Search"].performed += Search_performed;
     }
     private void Update()
     {
@@ -64,6 +67,7 @@ public class PropInteract : MonoBehaviour
             OnPropDropped?.Invoke();
         }
     }
+    private void Search_performed(InputAction.CallbackContext obj) => playerSearchHandler.Search();
     public void SetToolInHand(GameObject prop)
     {
         if (!prop.TryGetComponent(out IHeldTool tool)) return;

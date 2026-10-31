@@ -947,6 +947,7 @@ GameObject:
   - component: {fileID: -4724053277055469795}
   - component: {fileID: 4305581562573399872}
   - component: {fileID: 3644667998650854834}
+  - component: {fileID: 1465998642376773984}
   - component: {fileID: 6126682385651391774}
   - component: {fileID: 1866220012186243286}
   m_Layer: 3
@@ -1108,6 +1109,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ReciveHarm
   jumpTime: 1.25
   onFireMoveSpeed: 4
+--- !u!114 &1465998642376773984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8453428288632691985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1df428673e551594891a3ee1c575d123, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerSearchHandler
 --- !u!114 &6126682385651391774
 MonoBehaviour:
   m_ObjectHideFlags: 0
