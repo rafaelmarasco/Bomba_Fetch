@@ -22,7 +22,7 @@ public class Prop : MonoBehaviour
             return PropSize switch
             {
                 Size.small => 2f,
-                Size.medium => 15f,
+                Size.medium => 100f,
                 Size.large => 100f,
                 _ => ThrowForce,
             };
@@ -44,6 +44,10 @@ public class Prop : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        rb.maxDepenetrationVelocity = 2f;
+        rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+
+        SetPropMass();
     }
 
     private void Update()
@@ -89,7 +93,7 @@ public class Prop : MonoBehaviour
         GetComponent<Rigidbody>().isKinematic = true;
 
         gameObject.layer = PROP_IN_HAND_LAYER;
-        
+
         Physics.IgnoreCollision(GetComponent<Collider>(), PlayerInteracting.GetComponentInChildren<Collider>());
 
         transform.SetParent(holdPoint);
@@ -108,6 +112,8 @@ public class Prop : MonoBehaviour
 
         Rigidbody holdPointRb = holdPoint.GetComponent<Rigidbody>();
 
+        rb.mass = 2f;
+
         joint = gameObject.AddComponent<FixedJoint>();
         joint.connectedBody = holdPointRb;
         joint.enableCollision = true;
@@ -116,11 +122,14 @@ public class Prop : MonoBehaviour
     {
         Rigidbody playerRb = PlayerInteracting.GetComponent<Rigidbody>();
 
+
         joint = gameObject.AddComponent<FixedJoint>();
         joint.connectedBody = playerRb;
     }
     public void DisableReposition()
     {
+        SetPropMass();
+
         gameObject.layer = DEFAULT_LAYER;
 
         GetComponent<Rigidbody>().isKinematic = false;
@@ -157,6 +166,22 @@ public class Prop : MonoBehaviour
         if (isBeingPushed)
             HandlePropToPlayerContact(collision);
         else return;
+    }
+
+    private void SetPropMass()
+    {
+        switch (this.propSize)
+        {
+            case Size.small:
+                rb.mass = 20;
+                break;
+            case Size.medium:
+                rb.mass = 70;
+                break;
+            case Size.large:
+                rb.mass = 100;
+                break;
+        }
     }
 
     private void OnCollisionStay(Collision collision)
