@@ -4,6 +4,9 @@ using UnityEngine.InputSystem;
 public class Extinguisher : MonoBehaviour, IHeldTool
 {
     private Prop extinguisherProp;
+
+    private PlayerAnimator playerAnimator;
+    private PlayerEventManager playerEventManager;
     private PropInteract Holder => extinguisherProp.PlayerInteracting;
 
     private PlayerInput HolderInput;
@@ -12,7 +15,8 @@ public class Extinguisher : MonoBehaviour, IHeldTool
 
     private bool isEquipped;
 
-    private Vector3 rotationOffset = new(0f, -90f, -10f);
+    [SerializeField] private Vector3 rotationOffset = new(0f, -90f, -10f);
+    [SerializeField] private Vector3 positionOffset = new(0f, 0f, 0f);
 
     private void Awake()
     {
@@ -24,14 +28,16 @@ public class Extinguisher : MonoBehaviour, IHeldTool
         if (!isEquipped || smoke.IsSpewing) return;
 
         smoke.StartSpewing();
+        playerEventManager.ToolInteracted(this.gameObject);
         transform.SetParent(Holder.holdPointInteract);
-        transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(rotationOffset));
+        transform.SetLocalPositionAndRotation(Vector3.zero + positionOffset, Quaternion.Euler(rotationOffset));
     }
     public void StopUsing()
     {
         if (!smoke.IsSpewing) return;
 
         smoke.StopSpewing();
+        playerAnimator.BringToolDown(this.gameObject);
         extinguisherProp.EnableReposition(Holder);
     }
     public void Pickup()
@@ -45,6 +51,8 @@ public class Extinguisher : MonoBehaviour, IHeldTool
         }
 
         HolderInput = Holder.GetComponent<PlayerInput>();
+        playerAnimator = Holder.GetComponentInChildren<PlayerAnimator>();
+        playerEventManager = Holder.GetComponent<PlayerEventManager>();
     }
     public void Drop()
     {
@@ -53,5 +61,7 @@ public class Extinguisher : MonoBehaviour, IHeldTool
 
         isEquipped = false;
         HolderInput = null;
+        playerAnimator = null;
+        playerEventManager = null;
     }
 }

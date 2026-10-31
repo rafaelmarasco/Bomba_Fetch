@@ -4181,7 +4181,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6702539883630324886, guid: 620f01132b72eb24fbaf66314277b4d1, type: 3}
       propertyPath: m_Name
-      value: PropManager
+      value: Prop Manager
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4466,6 +4466,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6613903396089583436, guid: 14a2aeccd64c9904da050ddd2a5d22b4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2841049369924875908, guid: dcebde3fbe3fe24478ac4e740128598c, type: 3}
+      propertyPath: positionOffset.y
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2841049369924875908, guid: dcebde3fbe3fe24478ac4e740128598c, type: 3}
+      propertyPath: rotationOffset.x
+      value: -15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2841049369924875908, guid: dcebde3fbe3fe24478ac4e740128598c, type: 3}
+      propertyPath: rotationOffset.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2841049369924875908, guid: dcebde3fbe3fe24478ac4e740128598c, type: 3}
+      propertyPath: rotationOffset.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4607353391296474770, guid: dcebde3fbe3fe24478ac4e740128598c, type: 3}

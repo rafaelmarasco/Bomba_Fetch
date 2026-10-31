@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2534269054636200358}
   - component: {fileID: 5946889862976411336}
   m_Layer: 0
-  m_Name: PropManager
+  m_Name: Prop Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
