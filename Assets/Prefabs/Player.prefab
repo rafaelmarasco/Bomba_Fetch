@@ -987,8 +987,8 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8453428288632691985}
   serializedVersion: 5
-  m_Mass: 15
-  m_LinearDamping: 5
+  m_Mass: 70
+  m_LinearDamping: 1
   m_AngularDamping: 9999
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -1044,8 +1044,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   animator: {fileID: 2258011675586492718}
   hipsRb: {fileID: 7304537807111367421}
-  moveSpeed: 7
   rotationSpeed: 800
+  moveSpeed: 7
+  acceleration: 25
+  maxForce: 1000
 --- !u!114 &7330877714380932613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1065,7 +1067,6 @@ MonoBehaviour:
   holdPointInteract: {fileID: 3738903463864646001}
   halfExtends: {x: 0.45, y: 0.1, z: 0.4}
   interactDistance: 0.5
-  minigameCanvas: {fileID: 6210116270891400645}
 --- !u!114 &-4724053277055469795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1123,6 +1124,7 @@ MonoBehaviour:
   GFX: {fileID: 4827275921164204526}
   hipsRb: {fileID: 7304537807111367421}
   playerRb: {fileID: 7772503601804982951}
+  playerMainCollider: {fileID: 3664144837459909734}
 --- !u!114 &1866220012186243286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3473,10 +3475,5 @@ MonoBehaviour:
 --- !u!224 &4073491926273667057 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5733991578517482024, guid: b98125e947ba94341adcb456075e1720, type: 3}
-  m_PrefabInstance: {fileID: 8580704908916491737}
-  m_PrefabAsset: {fileID: 0}
---- !u!223 &6210116270891400645 stripped
-Canvas:
-  m_CorrespondingSourceObject: {fileID: 2394237690165983260, guid: b98125e947ba94341adcb456075e1720, type: 3}
   m_PrefabInstance: {fileID: 8580704908916491737}
   m_PrefabAsset: {fileID: 0}

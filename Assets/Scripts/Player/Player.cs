@@ -13,7 +13,6 @@ public class Player : MonoBehaviour
     [SerializeField] private Rigidbody hipsRb;
     public Rigidbody HipsRb => hipsRb;
 
-    [SerializeField] private float moveSpeed = 7f;
 
     private Vector3 rawInput;
     public Vector3 MoveDir { get; private set; }
@@ -23,6 +22,9 @@ public class Player : MonoBehaviour
     private bool stopMoving;
 
     [SerializeField] private float rotationSpeed;
+    [SerializeField] private float moveSpeed = 7f;
+    [SerializeField] private float acceleration = 12f;
+    [SerializeField] private float maxForce = 1000f;
 
     private void Awake()
     {
@@ -57,7 +59,15 @@ public class Player : MonoBehaviour
     private void BasicMove()
     {
         MoveDir = rawInput;
-        playerRb.MovePosition(playerRb.position + moveSpeed * Time.fixedDeltaTime * MoveDir);
+        Vector3 nextVelocity = moveSpeed * MoveDir;
+        Vector3 currentVelocity = playerRb.linearVelocity;
+
+        Vector3 velocityDiff = nextVelocity - new Vector3(currentVelocity.x, 0f, currentVelocity.z);
+
+        Vector3 walkingForce = Vector3.ClampMagnitude(velocityDiff * acceleration * playerRb.mass, maxForce);
+
+        playerRb.AddForce(walkingForce, ForceMode.Force);
+
     }
     public void RotateOnMove(Vector3 input)
     {

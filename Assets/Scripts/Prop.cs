@@ -21,9 +21,9 @@ public class Prop : MonoBehaviour
         {
             return PropSize switch
             {
-                Size.small => 8f,
-                Size.medium => 10f,
-                Size.large => 15f,
+                Size.small => 2f,
+                Size.medium => 3f,
+                Size.large => 30f,
                 _ => ThrowForce,
             };
         }
@@ -47,7 +47,7 @@ public class Prop : MonoBehaviour
     }
 
     private void Update()
-    {
+    {/*
         if (rb.position.y > 0.0f)
         {
             rb.linearDamping = 0;
@@ -56,6 +56,7 @@ public class Prop : MonoBehaviour
         {
             rb.linearDamping = defaultLinearDampingValue;
         }
+        */
     }
 
     public void EnableReposition(PropInteract playerInteracting)
