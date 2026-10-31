@@ -7,12 +7,15 @@ public class Password : MonoBehaviour, ICanvasTool, IHideable
     private PlayerAnimator playerAnimator;
     private Prop prop;
 
-    private Canvas passwordCanvas;
-    public bool IsBeingHeld { get; private set; }
+    [Header ("Password Visual")]
+    [SerializeField] private MeshRenderer passwordMash; 
 
     private GameObject hidingPlace;
 
-    [SerializeField] private MeshRenderer passwordMash; 
+    private Canvas passwordCanvas;
+    public bool IsBeingHeld { get; private set; }
+
+    public bool IsHidden => hidingPlace != null;
 
     private void Start() => prop = GetComponent<Prop>();
 
@@ -61,19 +64,27 @@ public class Password : MonoBehaviour, ICanvasTool, IHideable
         rb.useGravity = false;
         collider.isTrigger = true;
 
-        passwordMash.enabled = false;
-
         transform.position = new(hidingSpot.transform.position.x, 0f, hidingSpot.transform.position.z);
+
+        hidingPlace.GetComponent<Prop>().SetAsHiddingSpot(true, this);
+
+        passwordMash.enabled = false;
     }
 
     public void Reveal()
     {
+        if (!IsHidden) return;
+
         BoxCollider collider = GetComponent<BoxCollider>();
         Rigidbody rb = GetComponent<Rigidbody>();
 
         rb.isKinematic = false;
         rb.useGravity = true;
         collider.isTrigger = false;
+
+        hidingPlace.GetComponent<Prop>().SetAsHiddingSpot(false, this);
+
+        hidingPlace = null;
 
         passwordMash.enabled = true;
     }

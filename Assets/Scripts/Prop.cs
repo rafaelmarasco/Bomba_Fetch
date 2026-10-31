@@ -21,9 +21,9 @@ public class Prop : MonoBehaviour
         {
             return PropSize switch
             {
-                Size.small => 8f,
-                Size.medium => 10f,
-                Size.large => 15f,
+                Size.small => 10f,
+                Size.medium => 6f,
+                Size.large => 4f,
                 _ => ThrowForce,
             };
         }
@@ -34,6 +34,9 @@ public class Prop : MonoBehaviour
     private Rigidbody rb;
 
     private bool isBeingPushed = false;
+    public bool IsHiddingSpot { get; private set; } = false;
+
+    public IHideable hiddenProp {  get; private set; }
 
     [SerializeField] private float defaultLinearDampingValue;
 
@@ -44,10 +47,14 @@ public class Prop : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        rb.maxDepenetrationVelocity = 2f;
+        rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+
+        SetPropMass();
     }
 
     private void Update()
-    {
+    {/*
         if (rb.position.y > 0.0f)
         {
             rb.linearDamping = 0;
@@ -56,6 +63,7 @@ public class Prop : MonoBehaviour
         {
             rb.linearDamping = defaultLinearDampingValue;
         }
+        */
     }
 
     public void EnableReposition(PropInteract playerInteracting)
@@ -88,7 +96,7 @@ public class Prop : MonoBehaviour
         GetComponent<Rigidbody>().isKinematic = true;
 
         gameObject.layer = PROP_IN_HAND_LAYER;
-        
+
         Physics.IgnoreCollision(GetComponent<Collider>(), PlayerInteracting.GetComponentInChildren<Collider>());
 
         transform.SetParent(holdPoint);
@@ -107,6 +115,8 @@ public class Prop : MonoBehaviour
 
         Rigidbody holdPointRb = holdPoint.GetComponent<Rigidbody>();
 
+        rb.mass = 2f;
+
         joint = gameObject.AddComponent<FixedJoint>();
         joint.connectedBody = holdPointRb;
         joint.enableCollision = true;
@@ -115,11 +125,14 @@ public class Prop : MonoBehaviour
     {
         Rigidbody playerRb = PlayerInteracting.GetComponent<Rigidbody>();
 
+
         joint = gameObject.AddComponent<FixedJoint>();
         joint.connectedBody = playerRb;
     }
     public void DisableReposition()
     {
+        SetPropMass();
+
         gameObject.layer = DEFAULT_LAYER;
 
         GetComponent<Rigidbody>().isKinematic = false;
@@ -158,14 +171,25 @@ public class Prop : MonoBehaviour
         else return;
     }
 
-    private void OnCollisionStay(Collision collision)
+    private void SetPropMass()
     {
-        /*
-        if (collision.gameObject.layer == FLOOR_LAYER && rb.position.y != 0)
+        switch (this.propSize)
         {
-            transform.position = new(rb.position.x, 0, rb.position.z);
+            case Size.small:
+                rb.mass = 20;
+                break;
+            case Size.medium:
+                rb.mass = 70;
+                break;
+            case Size.large:
+                rb.mass = 100;
+                break;
         }
-        else return; 
-    */
     }
+    public void SetAsHiddingSpot(bool state, IHideable hideable)
+    {
+        IsHiddingSpot = state;
+        hiddenProp = hideable;
+    }
+        
 }

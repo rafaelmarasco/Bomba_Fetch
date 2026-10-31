@@ -10,6 +10,7 @@ public class Ragdoll : MonoBehaviour
     [SerializeField] private GameObject GFX;
     [SerializeField] private Rigidbody hipsRb;
     [SerializeField] private Rigidbody playerRb;
+    [SerializeField] private Collider playerMainCollider;
     public bool IsRagDoll { get; private set; } = false;
 
     private Rigidbody[] bonesRb;
@@ -41,6 +42,12 @@ public class Ragdoll : MonoBehaviour
             bone.useGravity = true;
         }
 
+        foreach (var collider in GetComponentsInChildren<Collider>())
+        {
+            if (collider == playerMainCollider) continue;
+            collider.enabled = true;
+        }
+
         GFX.layer = RAGDOLL_LAYER;
 
         playerRb.useGravity = false;
@@ -64,6 +71,12 @@ public class Ragdoll : MonoBehaviour
             bone.useGravity = false;
         }
 
+        foreach (var collider in GetComponentsInChildren<Collider>())
+        {
+            if (collider == playerMainCollider) continue;
+            collider.enabled = false;
+        }
+
         GFX.layer = PLAYER_LAYER;
         playerRb.useGravity = true;
         animator.enabled = true;
@@ -72,12 +85,12 @@ public class Ragdoll : MonoBehaviour
     }
     private void UntangleBones() // Makes the player collider and bone colliders ignore each other
     {
-        Collider playerCollider = GetComponentInChildren<Collider>();
+        //Collider playerCollider = GetComponentInChildren<Collider>();
 
         foreach (Rigidbody bone in bonesRb)
         {
             if (bone.TryGetComponent<Collider>(out Collider boneCollider))
-                Physics.IgnoreCollision(playerCollider, boneCollider);
+                Physics.IgnoreCollision(playerMainCollider, boneCollider);
         }
 
         DisableRagDoll();
