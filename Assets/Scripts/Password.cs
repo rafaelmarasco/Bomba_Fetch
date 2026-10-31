@@ -10,6 +10,8 @@ public class Password : MonoBehaviour, ICanvasTool, IHideable
     private Canvas passwordCanvas;
     public bool IsBeingHeld { get; private set; }
 
+    public bool IsHidden => hidingPlace != null;
+
     private GameObject hidingPlace;
 
     [SerializeField] private MeshRenderer passwordMash; 

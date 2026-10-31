@@ -77,6 +77,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 5541535227122450001}
   m_SourcePrefab: {fileID: 100100000, guid: 4e145a7c8a8c9c748baf0f2419faabe0, type: 3}
+--- !u!1 &4597167260232923967 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8277770689033146009, guid: 4e145a7c8a8c9c748baf0f2419faabe0, type: 3}
+  m_PrefabInstance: {fileID: 5561074527494682022}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &4750609313683605751 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 4e145a7c8a8c9c748baf0f2419faabe0, type: 3}
@@ -172,6 +177,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cca86df291bcda24388e0ed5d7aac8b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bomb
+  BombBody: {fileID: 4597167260232923967}
+  Keyboard: {fileID: 6477934277453986782}
 --- !u!114 &5541535227122450001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,3 +195,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+--- !u!1 &6477934277453986782 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1498248656186478200, guid: 4e145a7c8a8c9c748baf0f2419faabe0, type: 3}
+  m_PrefabInstance: {fileID: 5561074527494682022}
+  m_PrefabAsset: {fileID: 0}
