@@ -875,6 +875,7 @@ GameObject:
   - component: {fileID: -4724053277055469795}
   - component: {fileID: 4305581562573399872}
   - component: {fileID: 3644667998650854834}
+  - component: {fileID: 1465998642376773984}
   - component: {fileID: 6126682385651391774}
   - component: {fileID: 1866220012186243286}
   m_Layer: 3
@@ -915,8 +916,8 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8453428288632691985}
   serializedVersion: 5
-  m_Mass: 15
-  m_LinearDamping: 5
+  m_Mass: 70
+  m_LinearDamping: 1
   m_AngularDamping: 9999
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -972,8 +973,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   animator: {fileID: 2258011675586492718}
   hipsRb: {fileID: 7304537807111367421}
-  moveSpeed: 7
   rotationSpeed: 800
+  moveSpeed: 7
+  acceleration: 25
+  maxForce: 1000
 --- !u!114 &7330877714380932613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1034,6 +1037,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ReciveHarm
   jumpTime: 1.25
   onFireMoveSpeed: 4
+--- !u!114 &1465998642376773984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8453428288632691985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1df428673e551594891a3ee1c575d123, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerSearchHandler
 --- !u!114 &6126682385651391774
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1050,6 +1065,7 @@ MonoBehaviour:
   GFX: {fileID: 4827275921164204526}
   hipsRb: {fileID: 7304537807111367421}
   playerRb: {fileID: 7772503601804982951}
+  playerMainCollider: {fileID: 3664144837459909734}
 --- !u!114 &1866220012186243286
 MonoBehaviour:
   m_ObjectHideFlags: 0

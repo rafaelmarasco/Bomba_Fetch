@@ -19,7 +19,7 @@ public class Hazard : MonoBehaviour
 
     [Header("Fire Hazzard")]
     [SerializeField] private Transform onFireRunDirection;
-    private Vector3 jumpDirection => onFireRunDirection.position.normalized + Vector3.up;
+    private Vector3 jumpDirection => (onFireRunDirection.position - transform.position).normalized + Vector3.up;
     [SerializeField] private float jumpForce;
     [SerializeField] private float onFireTime;
 

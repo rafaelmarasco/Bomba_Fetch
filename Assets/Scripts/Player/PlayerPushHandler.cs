@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerPushHandler : MonoBehaviour
 {
 
-    [SerializeField] private float pushForce;
+    [SerializeField] private float PVPpushForce;
 
     public bool instantPlayerPushMode;
     private bool firstPush = false;
@@ -53,6 +53,8 @@ public class PlayerPushHandler : MonoBehaviour
     {
         Debug.Log($"Acabo de arremessar um {prop.name}");
 
+        float pushForce = prop.GetComponent<Prop>().ThrowForce;
+
         Prop propBeingThrown;
 
         prop.TryGetComponent(out propBeingThrown);
@@ -66,7 +68,7 @@ public class PlayerPushHandler : MonoBehaviour
 
             propBeingThrown.SetPushingState(true);
 
-            propRb.AddForce(pushForce * transform.forward, ForceMode.Impulse);
+            propRb.AddForce(pushForce * transform.forward, ForceMode.VelocityChange);
         }
         else
         {
@@ -75,7 +77,7 @@ public class PlayerPushHandler : MonoBehaviour
             propBeingThrown.SetPushingState(true);
 
             propPickupHandler.DropProp();
-            propRb.AddForce(pushForce * transform.forward, ForceMode.Impulse);
+            propRb.AddForce(pushForce * transform.forward, ForceMode.VelocityChange);
         }
 
         if (propInteract.ToolInHand is ICanvasTool canvasTool)
@@ -92,7 +94,7 @@ public class PlayerPushHandler : MonoBehaviour
         {
             float knockdownTime = 2f;
             targetPlayerEventManager.KnockedDown(knockdownTime);
-            hipsRb.AddForce(pushForce * transform.forward, ForceMode.Impulse);
+            hipsRb.AddForce(PVPpushForce * transform.forward, ForceMode.Impulse);
         }
 
         else
@@ -102,14 +104,14 @@ public class PlayerPushHandler : MonoBehaviour
 
             if (!firstPush)
             {
-                playerRb.AddForce((pushForce) * transform.forward, ForceMode.Impulse);
+                playerRb.AddForce((PVPpushForce) * transform.forward, ForceMode.Impulse);
 
                 firstPush = true;
                 firstPushState = StartCoroutine(ResetPushState(nameof(firstPush)));
             }
             else if (!secondPush)
             {
-                playerRb.AddForce((pushForce * 1.5f) * transform.forward, ForceMode.Impulse);
+                playerRb.AddForce((PVPpushForce * 1.5f) * transform.forward, ForceMode.Impulse);
 
                 secondPush = true;
                 secondPushState = StartCoroutine(ResetPushState(nameof(secondPush)));
@@ -118,7 +120,7 @@ public class PlayerPushHandler : MonoBehaviour
             {
                 targetPlayerEventManager.KnockedDown(knockdownTime);
 
-                hipsRb.AddForce(pushForce * transform.forward, ForceMode.Impulse);
+                hipsRb.AddForce(PVPpushForce * transform.forward, ForceMode.Impulse);
 
                 finalPush = true;
                 if (firstPushState != null) StopCoroutine(firstPushState);
