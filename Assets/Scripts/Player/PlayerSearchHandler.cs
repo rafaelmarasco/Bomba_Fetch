@@ -18,7 +18,7 @@ public class PlayerSearchHandler : MonoBehaviour
 
         if (!propBeingSearch.IsHiddingSpot) return;
 
-        propBeingSearch.hiddenProp?.Reveal();
+        propBeingSearch.HiddenProp?.Reveal();
 
     }
 }

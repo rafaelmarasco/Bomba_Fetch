@@ -12,6 +12,7 @@ public enum Size
 
 public class Prop : MonoBehaviour
 {
+    private PropManager manager;
     [SerializeField] private Size propSize;
     public Size PropSize => propSize;
     public PropInteract PlayerInteracting { get; private set; }
@@ -32,14 +33,14 @@ public class Prop : MonoBehaviour
     private FixedJoint joint;
 
     private Rigidbody rb;
+    private Collider propCollider;
     private Collider throwerCollider;
 
     private bool isBeingPushed = false;
     public bool IsHiddingSpot { get; private set; } = false;
 
-    public IHideable hiddenProp { get; private set; }
-
-    [SerializeField] private float defaultLinearDampingValue;
+    private PhysicsMaterial CarryMaterialFix => manager.PhysicsMaterial;
+    public IHideable HiddenProp { get; private set; }
 
     private const int PROP_IN_HAND_LAYER = 7;
     private const int DEFAULT_LAYER = 0;
@@ -47,11 +48,15 @@ public class Prop : MonoBehaviour
 
     private void Start()
     {
+        //manager = transform.Find("PropManager").GetComponent<PropManager>();
+        manager = FindFirstObjectByType<PropManager>();
+        propCollider = GetComponent<Collider>();
         rb = GetComponent<Rigidbody>();
         rb.maxDepenetrationVelocity = 2f;
         rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
 
         SetPropMass();
+        SetPhysicsMaterial();
     }
 
     public void EnableReposition(PropInteract playerInteracting)
@@ -85,7 +90,7 @@ public class Prop : MonoBehaviour
 
         gameObject.layer = PROP_IN_HAND_LAYER;
 
-        Physics.IgnoreCollision(GetComponent<Collider>(), throwerCollider);
+        Physics.IgnoreCollision(propCollider, throwerCollider);
 
         transform.SetParent(holdPoint);
         transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
@@ -126,7 +131,7 @@ public class Prop : MonoBehaviour
         GetComponent<Rigidbody>().isKinematic = false;
 
         if(!isBeingPushed)
-            Physics.IgnoreCollision(GetComponent<Collider>(), throwerCollider, false);
+            Physics.IgnoreCollision(propCollider, throwerCollider, false);
 
         DestroyJoints();
         PlayerInteracting = null;
@@ -144,9 +149,8 @@ public class Prop : MonoBehaviour
         isBeingPushed = state;
         if (state == false && throwerCollider != null)
         {
-            Physics.IgnoreCollision(GetComponent<Collider>(), throwerCollider, false);
+            Physics.IgnoreCollision(propCollider, throwerCollider, false);
             throwerCollider = null;
-
         }
     }
 
@@ -160,7 +164,7 @@ public class Prop : MonoBehaviour
         }
 
         if (throwerCollider != null)
-            Physics.IgnoreCollision(GetComponent<Collider>(), throwerCollider);
+            Physics.IgnoreCollision(propCollider, throwerCollider);
         else
             Debug.Log("O colisor do jogador nao foi pego");
 
@@ -196,10 +200,16 @@ public class Prop : MonoBehaviour
                 break;
         }
     }
+
+    private void SetPhysicsMaterial()
+    {
+        if (this.propSize != Size.medium) return;
+        propCollider.material = CarryMaterialFix;
+    }
     public void SetAsHiddingSpot(bool state, IHideable hideable)
     {
         IsHiddingSpot = state;
-        hiddenProp = hideable;
+        HiddenProp = hideable;
     }
 
 }
