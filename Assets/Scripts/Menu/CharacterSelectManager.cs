@@ -15,7 +15,7 @@ public class CharacterSelectManager : MonoBehaviour
 
     [Header("Inicio do jogo")]
     [Tooltip("Nome da cena do jogo a carregar (precisa estar no Build Settings).")]
-    [SerializeField] private string gameSceneName = "Sistema-Porta";
+    [SerializeField] private string gameSceneName = "Cena atualizada";
 
     [Tooltip("Minimo de jogadores para liberar o inicio.")]
     [SerializeField] private int minPlayersToStart = 1;

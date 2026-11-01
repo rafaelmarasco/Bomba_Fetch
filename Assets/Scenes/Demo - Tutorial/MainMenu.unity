@@ -1578,7 +1578,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2000002000}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 74b792f8d5b14a34795cd3fc0070c375, type: 3}
   m_Name: 
@@ -1588,8 +1588,8 @@ MonoBehaviour:
   - {fileID: 2002000002}
   - {fileID: 2003000002}
   - {fileID: 2004000002}
-  selectionDataPrefab: {fileID: 0}
-  gameSceneName: Sistema-Porta
+  selectionDataPrefab: {fileID: 2000001002}
+  gameSceneName: Cena atualizada
   minPlayersToStart: 1
 --- !u!1 &2000003000
 GameObject:
@@ -2585,7 +2585,16 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 4.43
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2523812849035125796, guid: 2dd84ab505e333541a8dfb40657158c1, type: 3}
+    - {fileID: 6275614923935175481, guid: 2dd84ab505e333541a8dfb40657158c1, type: 3}
+    - {fileID: 7010861302309462592, guid: 2dd84ab505e333541a8dfb40657158c1, type: 3}
+    - {fileID: 8640715777028042986, guid: 2dd84ab505e333541a8dfb40657158c1, type: 3}
+    - {fileID: 1856243016170201212, guid: 2dd84ab505e333541a8dfb40657158c1, type: 3}
+    - {fileID: 4297614616383431214, guid: 2dd84ab505e333541a8dfb40657158c1, type: 3}
+    - {fileID: 1776677353520447692, guid: 2dd84ab505e333541a8dfb40657158c1, type: 3}
+    - {fileID: 9196222511814969362, guid: 2dd84ab505e333541a8dfb40657158c1, type: 3}
+    - {fileID: 6147264788264119540, guid: 2dd84ab505e333541a8dfb40657158c1, type: 3}
     m_RemovedGameObjects:
     - {fileID: 199814007821792901, guid: 2dd84ab505e333541a8dfb40657158c1, type: 3}
     - {fileID: 8637325238861107620, guid: 2dd84ab505e333541a8dfb40657158c1, type: 3}
