@@ -995,6 +995,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8a45e3ece717f3d40bcdc747e0b7fd8f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6176467891533633665}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8a45e3ece717f3d40bcdc747e0b7fd8f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8224813190857985882}
   m_SourcePrefab: {fileID: 100100000, guid: 8a45e3ece717f3d40bcdc747e0b7fd8f, type: 3}
 --- !u!1 &7133447860496141236 stripped
 GameObject:
@@ -1049,6 +1052,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8224813190857985882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7133447860496141236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af112e46b6135ab4e8cc4f7e50bf009e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Prop
+  propSize: 1
+  repositionOffset: {x: 0, y: 0, z: -0.35}
+  rotationOffset: {x: 0, y: 0, z: 0}
 --- !u!4 &7616934577312157966 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8a45e3ece717f3d40bcdc747e0b7fd8f, type: 3}
@@ -1109,37 +1127,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2f0e04da01fa05542b9a017b90363a5f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2076221081407400428}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f0e04da01fa05542b9a017b90363a5f, type: 3}
---- !u!1 &8377203875271407528 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 2f0e04da01fa05542b9a017b90363a5f, type: 3}
-  m_PrefabInstance: {fileID: 8683124093683157753}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &2076221081407400428
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8377203875271407528}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2, y: 0.40000063, z: 0.50000006}
-  m_Center: {x: -0.000000059604645, y: 0.099999964, z: 0.25000003}
 --- !u!4 &9154162344734207250 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2f0e04da01fa05542b9a017b90363a5f, type: 3}

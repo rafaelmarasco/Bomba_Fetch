@@ -4339,7 +4339,7 @@ GameObject:
   - component: {fileID: 4985537053079802206}
   - component: {fileID: 6523206955288864622}
   - component: {fileID: 5967707434586087726}
-  - component: {fileID: 4873551740384569521}
+  - component: {fileID: 2350442964423926582}
   m_Layer: 0
   m_Name: trashcan
   m_TagString: Untagged
@@ -4468,7 +4468,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &4873551740384569521
+--- !u!114 &2350442964423926582
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4481,7 +4481,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 1
-  repositionOffset: {x: 0, y: 0, z: 0}
+  repositionOffset: {x: 0, y: 0, z: -0.35}
   rotationOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &8544020593093821270
 GameObject:

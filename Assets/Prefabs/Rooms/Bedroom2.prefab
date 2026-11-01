@@ -2064,7 +2064,7 @@ PrefabInstance:
       addedObject: {fileID: 4649927554369920841}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8a45e3ece717f3d40bcdc747e0b7fd8f, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5125262364898274798}
+      addedObject: {fileID: 5582743322835610763}
   m_SourcePrefab: {fileID: 100100000, guid: 8a45e3ece717f3d40bcdc747e0b7fd8f, type: 3}
 --- !u!4 &1569823896395277438 stripped
 Transform:
@@ -2124,7 +2124,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &5125262364898274798
+--- !u!114 &5582743322835610763
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2137,7 +2137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 1
-  repositionOffset: {x: 0, y: 0, z: 0}
+  repositionOffset: {x: 0, y: 0, z: -0.35}
   rotationOffset: {x: 0, y: 0, z: 0}
 --- !u!1001 &6476137697754174185
 PrefabInstance:

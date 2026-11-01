@@ -551,7 +551,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2480937243939121679
 RectTransform:
   m_ObjectHideFlags: 0
@@ -656,7 +656,8 @@ MonoBehaviour:
   timerTextFinal: {fileID: 6616731882196774769}
   gameOverScreen: {fileID: 8066179247379130221}
   restartButton: {fileID: 5150657803713622253}
-  setTimer: 10
+  isExploded: 0
+  setTimer: 180
 --- !u!1 &7521996007769378845
 GameObject:
   m_ObjectHideFlags: 0
@@ -672,7 +673,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2735169558963010912
 RectTransform:
   m_ObjectHideFlags: 0
@@ -920,7 +921,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4607144816403169766
 RectTransform:
   m_ObjectHideFlags: 0

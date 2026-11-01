@@ -675,7 +675,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 1
-  repositionOffset: {x: 0, y: 0, z: 0}
+  repositionOffset: {x: -0.3, y: 0, z: -0.7}
   rotationOffset: {x: 0, y: 0, z: 0}
 --- !u!4 &3385397016306002530 stripped
 Transform:
