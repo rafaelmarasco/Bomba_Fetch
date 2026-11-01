@@ -85,12 +85,11 @@ public class Prop : MonoBehaviour
     private void RepositionSmallProp()
     {
         Transform holdPoint;
-
         holdPoint = PlayerInteracting.holdPointSmall;
 
-        GetComponent<Rigidbody>().isKinematic = true;
-
         gameObject.layer = PROP_IN_HAND_LAYER;
+
+        GetComponent<Rigidbody>().isKinematic = true;
 
         Physics.IgnoreCollision(propCollider, throwerCollider);
 
@@ -101,7 +100,6 @@ public class Prop : MonoBehaviour
     private void RepositionMediumProp()
     {
         Transform holdPoint;
-
         holdPoint = PlayerInteracting.holdPointMedium;
 
         gameObject.layer = PROP_IN_HAND_LAYER;
@@ -205,7 +203,7 @@ public class Prop : MonoBehaviour
 
     private void SetPhysicsMaterial()
     {
-        if (this.propSize != Size.medium) return;
+        if (this.propSize == Size.small) return;
         propCollider.material = CarryMaterialFix;
     }
     public void SetAsHiddingSpot(bool state, IHideable hideable)
