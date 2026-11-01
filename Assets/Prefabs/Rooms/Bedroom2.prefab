@@ -1980,7 +1980,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af112e46b6135ab4e8cc4f7e50bf009e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
-  propSize: 1
+  propSize: 2
   repositionOffset: {x: 0, y: 0, z: 0}
   rotationOffset: {x: 0, y: 0, z: 0}
 --- !u!4 &586115335209455378 stripped
@@ -2364,6 +2364,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 90d0cb9176eed4143bbf936f2cefc34c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5619427879912568587}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 90d0cb9176eed4143bbf936f2cefc34c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3193623575017007948}
   m_SourcePrefab: {fileID: 100100000, guid: 90d0cb9176eed4143bbf936f2cefc34c, type: 3}
 --- !u!4 &7249512457510127916 stripped
 Transform:
@@ -2394,8 +2397,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.728, y: 7.7, z: 2.728}
-  m_Center: {x: 0, y: 3.85, z: 0}
+  m_Size: {x: 1.414125, y: 7.7, z: 1.670769}
+  m_Center: {x: -0.034698118, y: 3.85, z: -0.0058178576}
 --- !u!54 &5619427879912568587
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2423,6 +2426,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3193623575017007948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8057117335398994838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af112e46b6135ab4e8cc4f7e50bf009e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Prop
+  propSize: 1
+  repositionOffset: {x: 0, y: -0.3, z: -0.4}
+  rotationOffset: {x: 0, y: 0, z: 0}
 --- !u!1001 &8912952071948227735
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2497,6 +2515,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f9e22e2796093d94780fe4648f439982, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3889442994376564946}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f9e22e2796093d94780fe4648f439982, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2353268204000595718}
   m_SourcePrefab: {fileID: 100100000, guid: f9e22e2796093d94780fe4648f439982, type: 3}
 --- !u!1 &8606453096895441350 stripped
 GameObject:
@@ -2551,6 +2572,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2353268204000595718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8606453096895441350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af112e46b6135ab4e8cc4f7e50bf009e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Prop
+  propSize: 1
+  repositionOffset: {x: 0, y: 0, z: -0.45}
+  rotationOffset: {x: 0, y: 0, z: 0}
 --- !u!4 &8951911217605325692 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f9e22e2796093d94780fe4648f439982, type: 3}
