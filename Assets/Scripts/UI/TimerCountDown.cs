@@ -25,7 +25,7 @@ public class TimerCountDown : MonoBehaviour
     [Header("Controllers")]
     [SerializeField] private SceneController sceneController = new();
 
-    private bool isExploded = false;
+    [SerializeField] private bool isExploded = false;
 
 
     private float timer;
@@ -34,6 +34,7 @@ public class TimerCountDown : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        Debug.Log("EventManager id: " + eventManager.GetInstanceID(), eventManager);
         StartCountDown();
     }
 
@@ -74,6 +75,7 @@ public class TimerCountDown : MonoBehaviour
             if (!isExploded)
             {
                 eventManager.BombExploded();
+                Debug.Log(eventManager);
                 isExploded = true;
             }
             timerScreenFinal.SetActive(false);

@@ -146,6 +146,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1582358493238432615}
+  - component: {fileID: 5932109831435487625}
   m_Layer: 0
   m_Name: Victory_Screen
   m_TagString: Untagged
@@ -169,6 +170,19 @@ Transform:
   - {fileID: 2353034732199759943}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5932109831435487625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 488418970762821831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb59670e2b3a90040aa022e1ea5cee73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VictoryScreen
+  tryAgain: {fileID: 1598206093398463878}
 --- !u!1 &1779224844825855827
 GameObject:
   m_ObjectHideFlags: 0

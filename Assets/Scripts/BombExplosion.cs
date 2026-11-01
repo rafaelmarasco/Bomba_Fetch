@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class BombExplosion : MonoBehaviour
@@ -12,21 +11,26 @@ public class BombExplosion : MonoBehaviour
     [SerializeField] private float explosionForce;
     [SerializeField] private float upwardsModifier;//How tall the explosion will push the object
 
+    [SerializeField] private GameObject bomb;
+
     // Esse start é só para teste, o original provavelmente ele vai ser instanciado
     private void Start()
     {
-        eventManager.OnBombExploded += ExplodeBomb;
+        //eventManager.OnBombExploded += ExplodeBomb;
+        Debug.Log("Start EventManager id: " + eventManager.GetInstanceID(), eventManager);
     }
 
-    
+
     private void OnEnable()
     {
+        Debug.Log("OnEnable EventManager id: " + eventManager.GetInstanceID(), eventManager);
         eventManager.OnBombExploded += ExplodeBomb;
     }
 
     private void OnDisable()
     {
         eventManager.OnBombExploded -= ExplodeBomb;
+        Time.timeScale = 0f;
     }
 
     public void ExplodeBomb()
@@ -36,13 +40,26 @@ public class BombExplosion : MonoBehaviour
 
         foreach (Collider hit in nearColliders)
         {
-            Rigidbody rb = hit.attachedRigidbody; 
+            Rigidbody rb = hit.attachedRigidbody;
             if (rb != null)// Verify if the collider has a Rigidbody attached to it
             {
                 rb.AddExplosionForce(explosionForce, transform.position, radiusExplosion, upwardsModifier, ForceMode.Impulse);
             }
         }
 
-        Destroy(gameObject); // Destroy the bomb object after the explosion
+        CancelInvoke(nameof(DestroyBomb));
+        Invoke(nameof(DestroyBomb), 2f);
+        
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(bomb != null ? bomb.transform.position : transform.position, radiusExplosion);
+    }
+
+    private void DestroyBomb()
+    {
+        Destroy(bomb);
     }
 }
