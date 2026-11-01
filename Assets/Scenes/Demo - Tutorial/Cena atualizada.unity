@@ -127,6 +127,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
     - target: {fileID: 1016268789375806324, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
       propertyPath: m_Name
       value: PortaDobradeca (4)
@@ -595,6 +623,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
     - target: {fileID: 1016268789375806324, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
       propertyPath: m_Name
       value: PortaDobradeca (6)
@@ -1163,6 +1219,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TimerCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 5801070788091245506, guid: 797d6f00a63fbae4a865c1877e728010, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7521996007769378845, guid: 797d6f00a63fbae4a865c1877e728010, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -1458,6 +1518,38 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
     - target: {fileID: 1016268789375806324, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
       propertyPath: m_Name
       value: PortaDobradeca
@@ -1685,6 +1777,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
     - target: {fileID: 1016268789375806324, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
       propertyPath: m_Name
       value: PortaDobradeca (5)
@@ -2163,6 +2283,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
     - target: {fileID: 1016268789375806324, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
       propertyPath: m_Name
       value: PortaDobradeca (7)
@@ -2286,6 +2434,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
     - target: {fileID: 1016268789375806324, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
       propertyPath: m_Name
       value: PortaDobradeca (8)
@@ -2343,6 +2519,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
     - target: {fileID: 1016268789375806324, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
       propertyPath: m_Name
       value: PortaDobradeca (2)
@@ -2655,13 +2859,49 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
     - target: {fileID: 1016268789375806324, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
       propertyPath: m_Name
       value: PortaDobradeca (1)
       objectReference: {fileID: 0}
     - target: {fileID: 7462458163493657120, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7462458163493657120, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.945
+      value: 7.94
       objectReference: {fileID: 0}
     - target: {fileID: 7462458163493657120, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2669,7 +2909,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7462458163493657120, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.756
+      value: -2.793
       objectReference: {fileID: 0}
     - target: {fileID: 7462458163493657120, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2697,6 +2937,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7462458163493657120, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7462458163493657120, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -2802,6 +3046,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 942440075308572151, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
     - target: {fileID: 1016268789375806324, guid: f448b5a574b0c4b40b949a3f8f009ffd, type: 3}
       propertyPath: m_Name
       value: PortaDobradeca (3)
