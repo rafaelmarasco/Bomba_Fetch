@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 public class HazardInterface : MonoBehaviour
 {
     [SerializeField] private Hazard hazard;
+    [SerializeField] private VFXAudio vfxAudio;
 
     public float radius;
 
@@ -28,6 +29,7 @@ public class HazardInterface : MonoBehaviour
 
     private void TurnHazzardOff(InputAction.CallbackContext obj)
     {
+        vfxAudio.PlayVFX();
         hazard.isOn = !hazard.isOn;
     }
 
