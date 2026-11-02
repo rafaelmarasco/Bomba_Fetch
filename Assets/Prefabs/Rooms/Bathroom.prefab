@@ -369,6 +369,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f9e22e2796093d94780fe4648f439982, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4543382950030473366}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f9e22e2796093d94780fe4648f439982, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1422702878799297775}
   m_SourcePrefab: {fileID: 100100000, guid: f9e22e2796093d94780fe4648f439982, type: 3}
 --- !u!4 &144353735988806015 stripped
 Transform:
@@ -428,6 +431,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1422702878799297775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669638151583390661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af112e46b6135ab4e8cc4f7e50bf009e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Prop
+  propSize: 1
+  repositionOffset: {x: 0, y: 0, z: -0.45}
+  rotationOffset: {x: 0, y: 0, z: 0}
 --- !u!1001 &2413327534144293606
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1396,7 +1414,7 @@ PrefabInstance:
       addedObject: {fileID: 4207131484692174984}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7cdca3d350d08404a944854615336b75, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6260651657285334990}
+      addedObject: {fileID: 8079257157937854376}
   m_SourcePrefab: {fileID: 100100000, guid: 7cdca3d350d08404a944854615336b75, type: 3}
 --- !u!1 &7317176830071429254 stripped
 GameObject:
@@ -1451,7 +1469,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.0000001, y: 0.9629195, z: 1.0015588}
   m_Center: {x: -2.4213305e-18, y: 0.51854026, z: 0.0007792785}
---- !u!114 &6260651657285334990
+--- !u!114 &8079257157937854376
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1463,8 +1481,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af112e46b6135ab4e8cc4f7e50bf009e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
-  propSize: 0
-  repositionOffset: {x: 0, y: 0, z: 0}
+  propSize: 1
+  repositionOffset: {x: 0, y: 0, z: -0.3}
   rotationOffset: {x: 0, y: 0, z: 0}
 --- !u!4 &7980384189890429500 stripped
 Transform:

@@ -2114,6 +2114,7 @@ GameObject:
   - component: {fileID: 4636938239155747644}
   - component: {fileID: 2866440546777022745}
   - component: {fileID: 975478401890404006}
+  - component: {fileID: 5199137326713376363}
   m_Layer: 0
   m_Name: coatRackStanding
   m_TagString: Untagged
@@ -2212,8 +2213,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.728, y: 7.7, z: 2.728}
-  m_Center: {x: 0, y: 3.85, z: 0}
+  m_Size: {x: 1.414125, y: 7.7, z: 1.670769}
+  m_Center: {x: -0.034698118, y: 3.85, z: -0.0058178576}
 --- !u!54 &975478401890404006
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2241,6 +2242,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &5199137326713376363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2564200469198012004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af112e46b6135ab4e8cc4f7e50bf009e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Prop
+  propSize: 1
+  repositionOffset: {x: 0, y: -0.3, z: -0.4}
+  rotationOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &2664112737680882377
 GameObject:
   m_ObjectHideFlags: 0

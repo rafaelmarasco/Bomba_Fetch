@@ -1099,6 +1099,7 @@ GameObject:
   - component: {fileID: 5532271168877838954}
   - component: {fileID: 4682174797996019423}
   - component: {fileID: 1329288460140056313}
+  - component: {fileID: 8978644592533479885}
   m_Layer: 0
   m_Name: coatRackStanding
   m_TagString: Untagged
@@ -1197,8 +1198,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.728, y: 7.7, z: 2.728}
-  m_Center: {x: 0, y: 3.85, z: 0}
+  m_Size: {x: 1.414125, y: 7.7, z: 1.670769}
+  m_Center: {x: -0.034698118, y: 3.85, z: -0.0058178576}
 --- !u!54 &1329288460140056313
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1226,6 +1227,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8978644592533479885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1009835880067468160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af112e46b6135ab4e8cc4f7e50bf009e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Prop
+  propSize: 1
+  repositionOffset: {x: 0, y: -0.3, z: -0.4}
+  rotationOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &1385384110231052134
 GameObject:
   m_ObjectHideFlags: 0
@@ -3975,7 +3991,6 @@ GameObject:
   - component: {fileID: 4319271766533958424}
   - component: {fileID: 8141550549542571791}
   - component: {fileID: 8685926249790232133}
-  - component: {fileID: 7195843481024698758}
   m_Layer: 0
   m_Name: pictureframe_large_B
   m_TagString: Untagged
@@ -4055,27 +4070,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &7195843481024698758
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7940764586239699223}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2, y: 1.2000002, z: 0.20000014}
-  m_Center: {x: -0.000000059604645, y: 0, z: 0.10000001}
 --- !u!1 &8003803012075147831
 GameObject:
   m_ObjectHideFlags: 0
@@ -4806,9 +4800,9 @@ GameObject:
   - component: {fileID: 8628911023303227806}
   - component: {fileID: 4643166474347738683}
   - component: {fileID: 7461092423086572273}
-  - component: {fileID: 7815332659885797868}
   - component: {fileID: 6225215921413805953}
   - component: {fileID: 2040182379335561831}
+  - component: {fileID: 1388743780731331209}
   m_Layer: 0
   m_Name: cabinet_small
   m_TagString: Untagged
@@ -4888,21 +4882,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &7815332659885797868
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8974509086339015460}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af112e46b6135ab4e8cc4f7e50bf009e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Prop
-  propSize: 1
-  repositionOffset: {x: 0, y: 0, z: 0}
-  rotationOffset: {x: 0, y: 0, z: 0}
 --- !u!54 &6225215921413805953
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4951,6 +4930,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.0000002, y: 1, z: 1.0015589}
   m_Center: {x: -1.3877788e-17, y: 0.5000001, z: 0.0007792713}
+--- !u!114 &1388743780731331209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8974509086339015460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af112e46b6135ab4e8cc4f7e50bf009e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Prop
+  propSize: 1
+  repositionOffset: {x: 0, y: 0, z: -0.3}
+  rotationOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &9014059410015688522
 GameObject:
   m_ObjectHideFlags: 0
@@ -5234,7 +5228,6 @@ GameObject:
   - component: {fileID: 4365630918219566940}
   - component: {fileID: 8691654574412593301}
   - component: {fileID: 7526805511004384646}
-  - component: {fileID: 5143658196661579721}
   m_Layer: 0
   m_Name: rug_oval_B
   m_TagString: Untagged
@@ -5314,24 +5307,3 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &5143658196661579721
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9211106806208580626}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.0000007, y: 0.10000005, z: 2.0000005}
-  m_Center: {x: 0, y: 0.049999982, z: 0}
