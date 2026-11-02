@@ -60,7 +60,6 @@ public class Prop : MonoBehaviour
         SetPropMass();
         SetPhysicsMaterial();
     }
-
     public void EnableReposition(PropInteract playerInteracting)
     {
         this.PlayerInteracting = playerInteracting;
