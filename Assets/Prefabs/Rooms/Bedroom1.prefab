@@ -1166,6 +1166,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b97ca8bf1995a0348a0e69a5ebdae691, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8310299584485619531}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b97ca8bf1995a0348a0e69a5ebdae691, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5479285569353237962}
   m_SourcePrefab: {fileID: 100100000, guid: b97ca8bf1995a0348a0e69a5ebdae691, type: 3}
 --- !u!1 &434136345090609489 stripped
 GameObject:
@@ -1220,6 +1223,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2, y: 4.7, z: 2}
   m_Center: {x: 1, y: 2.35, z: 1}
+--- !u!114 &5479285569353237962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 434136345090609489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af112e46b6135ab4e8cc4f7e50bf009e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Prop
+  propSize: 1
+  repositionOffset: {x: -0.3, y: -0.2, z: -0.73}
+  rotationOffset: {x: 0, y: 0, z: 0}
 --- !u!4 &958576331271310315 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b97ca8bf1995a0348a0e69a5ebdae691, type: 3}
@@ -1809,6 +1827,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b97ca8bf1995a0348a0e69a5ebdae691, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7206839518935788117}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b97ca8bf1995a0348a0e69a5ebdae691, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2850495215706042125}
   m_SourcePrefab: {fileID: 100100000, guid: b97ca8bf1995a0348a0e69a5ebdae691, type: 3}
 --- !u!1 &2330888039162653375 stripped
 GameObject:
@@ -1863,6 +1884,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2, y: 4.7, z: 2}
   m_Center: {x: 1, y: 2.35, z: 1}
+--- !u!114 &2850495215706042125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2330888039162653375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af112e46b6135ab4e8cc4f7e50bf009e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Prop
+  propSize: 1
+  repositionOffset: {x: -0.3, y: -0.2, z: -0.73}
+  rotationOffset: {x: 0, y: 0, z: 0}
 --- !u!4 &3103871842554703877 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b97ca8bf1995a0348a0e69a5ebdae691, type: 3}
@@ -2526,6 +2562,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -3302846988610623841, guid: 3a83e1b8546ddf54a85a2aad9163b755, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.68
+      objectReference: {fileID: 0}
+    - target: {fileID: -3302846988610623841, guid: 3a83e1b8546ddf54a85a2aad9163b755, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 10.57
+      objectReference: {fileID: 0}
+    - target: {fileID: 399044594209910748, guid: 3a83e1b8546ddf54a85a2aad9163b755, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 7.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 399044594209910748, guid: 3a83e1b8546ddf54a85a2aad9163b755, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 10.63
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3a83e1b8546ddf54a85a2aad9163b755, type: 3}
       propertyPath: m_Name
       value: bedBunk
@@ -2845,6 +2897,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a82d3be4e25f57b4aa8f1ddc51261197, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1091514226333197284}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a82d3be4e25f57b4aa8f1ddc51261197, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 887710844533372524}
   m_SourcePrefab: {fileID: 100100000, guid: a82d3be4e25f57b4aa8f1ddc51261197, type: 3}
 --- !u!4 &7148861612770485413 stripped
 Transform:
@@ -2904,6 +2959,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.0476707, y: 1.6175151, z: 1.1038828}
   m_Center: {x: 0.020590007, y: 0.80875754, z: 0.051941335}
+--- !u!114 &887710844533372524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7529468194808675871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af112e46b6135ab4e8cc4f7e50bf009e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Prop
+  propSize: 1
+  repositionOffset: {x: 0, y: 0, z: -0.3}
+  rotationOffset: {x: 0, y: 0, z: 0}
 --- !u!1001 &8117998582868360023
 PrefabInstance:
   m_ObjectHideFlags: 0
