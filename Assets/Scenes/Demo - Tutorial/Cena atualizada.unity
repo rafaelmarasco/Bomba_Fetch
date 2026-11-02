@@ -1191,7 +1191,7 @@ PrefabInstance:
     - target: {fileID: 1045021505225193925, guid: 85859a58ece38104280a55cbf253dd22, type: 3}
       propertyPath: 'locals.Array.data[0]'
       value: 
-      objectReference: {fileID: 8463481101821521788}
+      objectReference: {fileID: 0}
     - target: {fileID: 1045021505225193925, guid: 85859a58ece38104280a55cbf253dd22, type: 3}
       propertyPath: 'locals.Array.data[1]'
       value: 
@@ -2673,7 +2673,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VFXAudio
   vfxSound: {fileID: 8300000, guid: 9d1846c9c9e88834597b125248a7cdab, type: 3}
-  isLooping: 0
+  isLooping: 1
 --- !u!1 &1711922023
 GameObject:
   m_ObjectHideFlags: 0
@@ -2768,7 +2768,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VFXAudio
   vfxSound: {fileID: 8300000, guid: 29b8ff729fb103a458d2d59a11e4f0d3, type: 3}
-  isLooping: 0
+  isLooping: 1
 --- !u!82 &1711922028
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4637,7 +4637,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VFXAudio
   vfxSound: {fileID: 8300000, guid: 29b8ff729fb103a458d2d59a11e4f0d3, type: 3}
-  isLooping: 0
+  isLooping: 1
 --- !u!82 &8463481101821521790
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4856,3 +4856,4 @@ SceneRoots:
   - {fileID: 1256306984}
   - {fileID: 1408127197}
   - {fileID: 714233688}
+  - {fileID: 628066221}
