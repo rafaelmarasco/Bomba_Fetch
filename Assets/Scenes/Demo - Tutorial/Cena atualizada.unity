@@ -10666,7 +10666,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2525449030523755470, guid: 797d6f00a63fbae4a865c1877e728010, type: 3}
       propertyPath: setTimer
-      value: 10
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 2525449030523755470, guid: 797d6f00a63fbae4a865c1877e728010, type: 3}
       propertyPath: eventManager

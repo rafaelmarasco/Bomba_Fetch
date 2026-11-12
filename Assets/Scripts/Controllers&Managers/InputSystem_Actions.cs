@@ -1084,15 +1084,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Cancel"",
-                    ""type"": ""Button"",
-                    ""id"": ""d8531148-ed7e-450b-a445-06fa630a3823"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -1275,22 +1266,22 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""afd0fc25-4559-4775-a33b-f58c0271be6d"",
-                    ""path"": ""*/{Submit}"",
+                    ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse;Gamepad;Touch;Joystick;XR"",
+                    ""groups"": ""Keyboard&Mouse;Touch;Joystick;XR;Gamepad"",
                     ""action"": ""Submit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""5f0e2b9a-5532-4115-adea-7a7098329146"",
-                    ""path"": ""*/{Cancel}"",
+                    ""id"": ""7da3a7c3-8c3f-40fe-a7c9-b662b4a90077"",
+                    ""path"": ""<XInputController>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse;Gamepad;Touch;Joystick;XR"",
-                    ""action"": ""Cancel"",
+                    ""groups"": """",
+                    ""action"": ""Submit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1389,7 +1380,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Bomb = asset.FindActionMap("Bomb", throwIfNotFound: true);
         m_Bomb_Navigate = m_Bomb.FindAction("Navigate", throwIfNotFound: true);
         m_Bomb_Submit = m_Bomb.FindAction("Submit", throwIfNotFound: true);
-        m_Bomb_Cancel = m_Bomb.FindAction("Cancel", throwIfNotFound: true);
     }
 
     ~@InputSystem_Actions()
@@ -1875,7 +1865,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private List<IBombActions> m_BombActionsCallbackInterfaces = new List<IBombActions>();
     private readonly InputAction m_Bomb_Navigate;
     private readonly InputAction m_Bomb_Submit;
-    private readonly InputAction m_Bomb_Cancel;
     /// <summary>
     /// Provides access to input actions defined in input action map "Bomb".
     /// </summary>
@@ -1895,10 +1884,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Bomb/Submit".
         /// </summary>
         public InputAction @Submit => m_Wrapper.m_Bomb_Submit;
-        /// <summary>
-        /// Provides access to the underlying input action "Bomb/Cancel".
-        /// </summary>
-        public InputAction @Cancel => m_Wrapper.m_Bomb_Cancel;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1931,9 +1916,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Submit.started += instance.OnSubmit;
             @Submit.performed += instance.OnSubmit;
             @Submit.canceled += instance.OnSubmit;
-            @Cancel.started += instance.OnCancel;
-            @Cancel.performed += instance.OnCancel;
-            @Cancel.canceled += instance.OnCancel;
         }
 
         /// <summary>
@@ -1951,9 +1933,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Submit.started -= instance.OnSubmit;
             @Submit.performed -= instance.OnSubmit;
             @Submit.canceled -= instance.OnSubmit;
-            @Cancel.started -= instance.OnCancel;
-            @Cancel.performed -= instance.OnCancel;
-            @Cancel.canceled -= instance.OnCancel;
         }
 
         /// <summary>
@@ -2236,12 +2215,5 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSubmit(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "Cancel" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnCancel(InputAction.CallbackContext context);
     }
 }
