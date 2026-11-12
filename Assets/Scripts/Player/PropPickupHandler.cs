@@ -19,9 +19,6 @@ public class PropPickupHandler : MonoBehaviour
     {
         HeldItem = prop;
 
-        //Collider gfxCollider = GetComponentInChildren<Collider>();
-        //Collider propCollider = prop.GetComponent<Collider>();
-
         prop.TryGetComponent<Prop>(out Prop propInfo);
 
         propInfo.EnableReposition(propInteract);
