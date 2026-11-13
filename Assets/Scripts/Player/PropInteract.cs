@@ -42,7 +42,14 @@ public class PropInteract : MonoBehaviour
         playerInput.actions["Interact"].performed += Interact_performed;
         playerInput.actions["Interact"].canceled += Interact_canceled;
         playerInput.actions["Search"].performed += Search_performed;
+        playerInput.actions["Pause"].performed += Pause_performed;
     }
+
+    private void Pause_performed(InputAction.CallbackContext obj)
+    {
+        throw new NotImplementedException();
+    }
+
     private void Update()
     {
         lastMoveDir = player.LastMoveDir;

@@ -8,7 +8,7 @@ public class PauseSystem : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetButtonDown("Pause") || Input.GetKeyDown(KeyCode.Escape))
             AlternatePauseState();
     }
 
