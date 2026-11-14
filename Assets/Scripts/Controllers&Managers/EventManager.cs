@@ -45,4 +45,7 @@ public class EventManager : MonoBehaviour
 
     public event Action OnBombExploded;
     public void BombExploded() => OnBombExploded?.Invoke();
+
+    public Action OnPause;
+    public void Pause() => OnPause?.Invoke();
 }

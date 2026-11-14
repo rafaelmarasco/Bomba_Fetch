@@ -9,7 +9,7 @@ public class PlayerAnimator : MonoBehaviour
     [SerializeField] private PropPickupHandler propPickupHandler;
     [SerializeField] private Player player;
     private Animator animator;
-    private PropInteract propInteract;
+    private PlayerInputHendler propInteract;
 
     [Header("Ragdoll Field")]
     [SerializeField] private Transform playerTransform;
@@ -30,7 +30,7 @@ public class PlayerAnimator : MonoBehaviour
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        propInteract = GetComponentInParent<PropInteract>();
+        propInteract = GetComponentInParent<PlayerInputHendler>();
     }
 
     private void OnEnable()

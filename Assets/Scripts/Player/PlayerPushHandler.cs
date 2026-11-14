@@ -13,7 +13,7 @@ public class PlayerPushHandler : MonoBehaviour
 
     private PlayerEventManager playerEventManager;
     private PropPickupHandler propPickupHandler;
-    private PropInteract propInteract;
+    private PlayerInputHendler propInteract;
 
     private Coroutine firstPushState;
     private Coroutine secondPushState;
@@ -24,7 +24,7 @@ public class PlayerPushHandler : MonoBehaviour
     {
         playerEventManager = GetComponent<PlayerEventManager>();
         propPickupHandler = GetComponent<PropPickupHandler>();
-        propInteract = GetComponent<PropInteract>();
+        propInteract = GetComponent<PlayerInputHendler>();
     }
     public void Push()
     {

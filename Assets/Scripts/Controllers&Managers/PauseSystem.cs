@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PauseSystem : MonoBehaviour
 {
@@ -6,11 +7,7 @@ public class PauseSystem : MonoBehaviour
     [SerializeField] private GameObject prefabPauseScreen;
     private GameObject pauseScreen;
 
-    private void Update()
-    {
-        if (Input.GetButtonDown("Pause") || Input.GetKeyDown(KeyCode.Escape))
-            AlternatePauseState();
-    }
+    private void OnEnable() => EventManager.Instance.OnPause += AlternatePauseState;
 
     private void AlternatePauseState()
     {
