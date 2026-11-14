@@ -10,8 +10,13 @@ public class BombExplosion : MonoBehaviour
     [SerializeField] private float radiusExplosion;
     [SerializeField] private float explosionForce;
     [SerializeField] private float upwardsModifier;//How tall the explosion will push the object
+    [SerializeField] private GameObject vfxExplosion;
+    [SerializeField] private GameObject vfxFireExplosion;
+    [SerializeField] private VFXAudio vfxAudioExplosion;
 
     [SerializeField] private GameObject bomb;
+    [SerializeField] private GameObject bombProp;
+    [SerializeField] private GameObject bombKey;
 
     // Esse start é só para teste, o original provavelmente ele vai ser instanciado
     private void Start()
@@ -47,6 +52,9 @@ public class BombExplosion : MonoBehaviour
             }
         }
 
+        vfxExplosion.SetActive(true);
+        vfxAudioExplosion.PlayVFX();
+
         CancelInvoke(nameof(DestroyBomb));
         Invoke(nameof(DestroyBomb), 2f);
         
@@ -60,6 +68,8 @@ public class BombExplosion : MonoBehaviour
 
     private void DestroyBomb()
     {
-        Destroy(bomb);
+        bombProp.SetActive(false);
+        bombKey.SetActive(false);
+        vfxFireExplosion.SetActive(true);
     }
 }
