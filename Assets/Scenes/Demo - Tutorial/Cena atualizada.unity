@@ -41936,6 +41936,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kitchen
       objectReference: {fileID: 0}
+    - target: {fileID: 4737962415789572258, guid: 950f6521cc4b376459d6900af9b34272, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6590ccfc80472114faaa70e97879e77a, type: 2}
+    - target: {fileID: 4737962415789572258, guid: 950f6521cc4b376459d6900af9b34272, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 42e065146af7be04d83ebd67095f0064, type: 2}
+    - target: {fileID: 4737962415789572258, guid: 950f6521cc4b376459d6900af9b34272, type: 3}
+      propertyPath: 'm_Materials.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 42e065146af7be04d83ebd67095f0064, type: 2}
     - target: {fileID: 4778954658151090259, guid: 950f6521cc4b376459d6900af9b34272, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.86982
@@ -42060,6 +42072,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: LivingRoom
       objectReference: {fileID: 0}
+    - target: {fileID: 6900127206905226039, guid: 0a49312922dd4e24ba986978376b78ca, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6900127206905226039, guid: 0a49312922dd4e24ba986978376b78ca, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 42e065146af7be04d83ebd67095f0064, type: 2}
+    - target: {fileID: 6900127206905226039, guid: 0a49312922dd4e24ba986978376b78ca, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 3f1105ae03d02f24ca94616e02ea88cd, type: 2}
+    - target: {fileID: 6900127206905226039, guid: 0a49312922dd4e24ba986978376b78ca, type: 3}
+      propertyPath: 'm_Materials.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6590ccfc80472114faaa70e97879e77a, type: 2}
+    - target: {fileID: 6900127206905226039, guid: 0a49312922dd4e24ba986978376b78ca, type: 3}
+      propertyPath: 'm_Materials.Array.data[3]'
+      value: 
+      objectReference: {fileID: 2100000, guid: dfb4a7761d895134c9967ee10f97fca9, type: 2}
     - target: {fileID: 7873475607510802662, guid: 0a49312922dd4e24ba986978376b78ca, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.30339
