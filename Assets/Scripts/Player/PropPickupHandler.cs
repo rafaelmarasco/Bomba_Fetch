@@ -14,16 +14,6 @@ public class PropPickupHandler : MonoBehaviour
         playerInputs = GetComponent<PlayerInputHendler>();
         playerEventManager = GetComponent<PlayerEventManager>();
     }
-    public void TryPickUpProp(bool hasItem)
-    {
-        if (hasItem)
-            DropProp();
-        else
-        {
-            if (!playerInputs.CheckForProps(out GameObject prop)) return;
-            PickUpProp();
-        }
-    }
     public void PickUpProp()
     {
         if (!playerInputs.CheckForProps(out GameObject prop)) return;
@@ -39,6 +29,8 @@ public class PropPickupHandler : MonoBehaviour
     }
     public void DropProp()
     {
+        if (!HasItem) return;
+
         playerInputs.ToolInHand?.Drop();
         playerInputs.SetToolInHand(null);
 

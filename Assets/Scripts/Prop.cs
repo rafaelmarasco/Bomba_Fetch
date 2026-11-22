@@ -32,7 +32,7 @@ public class Prop : MonoBehaviour
         }
     }
 
-    private FixedJoint joint;
+    private Joint joint;
 
     private Rigidbody rb;
     private Collider propCollider;
@@ -103,12 +103,13 @@ public class Prop : MonoBehaviour
 
         gameObject.layer = PROP_IN_HAND_LAYER;
 
-        transform.SetPositionAndRotation(holdPoint.TransformPoint(repositionOffset), holdPoint.rotation * Quaternion.Euler(repositionOffset));
+        transform.SetPositionAndRotation(holdPoint.TransformPoint(repositionOffset),
+            holdPoint.rotation * Quaternion.Euler(repositionOffset));
 
         Rigidbody holdPointRb = holdPoint.GetComponent<Rigidbody>();
 
         rb.mass = 2f;
-
+        
         joint = gameObject.AddComponent<FixedJoint>();
         joint.connectedBody = holdPointRb;
         joint.enableCollision = true;
@@ -152,8 +153,6 @@ public class Prop : MonoBehaviour
             throwerCollider = null;
         }
     }
-
-
     private void HandlePropToPlayerContact(Collision collision)
     {
         if (collision.gameObject.layer == FLOOR_LAYER)
