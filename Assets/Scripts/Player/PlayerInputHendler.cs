@@ -38,6 +38,7 @@ public class PlayerInputHendler : MonoBehaviour
         playerSearchHandler = GetComponent<PlayerSearchHandler>();
 
         playerInput.actions["Grab"].performed += PickUp_performed;
+        playerInput.actions["Grab"].canceled += PickUp_canceled;
         playerInput.actions["Push"].performed += Push_performed;
         playerInput.actions["Interact"].performed += Interact_performed;
         playerInput.actions["Interact"].canceled += Interact_canceled;
@@ -53,7 +54,8 @@ public class PlayerInputHendler : MonoBehaviour
     private void Interact_performed(InputAction.CallbackContext obj) => ToolInHand?.Use();
     private void Interact_canceled(InputAction.CallbackContext context) => ToolInHand?.StopUsing();
     private void Push_performed(InputAction.CallbackContext obj) => playerPushHandler.Push();
-    private void PickUp_performed(InputAction.CallbackContext obj) => propPickupHandler.TryPickUpProp(HasItem);
+    private void PickUp_performed(InputAction.CallbackContext obj) => propPickupHandler.PickUpProp();
+    private void PickUp_canceled(InputAction.CallbackContext obj) => propPickupHandler.DropProp();
     /*{
         if (!HasItem && CheckForProps(out GameObject prop))
         {

@@ -21,15 +21,16 @@ public class PropPickupHandler : MonoBehaviour
         else
         {
             if (!playerInputs.CheckForProps(out GameObject prop)) return;
-            PickUpProp(prop);
+            PickUpProp();
         }
     }
-    public void PickUpProp(GameObject prop)
+    public void PickUpProp()
     {
+        if (!playerInputs.CheckForProps(out GameObject prop)) return;
+
         HeldItem = prop;
 
-        prop.TryGetComponent<Prop>(out Prop propInfo);
-
+        prop.TryGetComponent(out Prop propInfo);
 
         propInfo.EnableReposition(playerInputs);
         playerEventManager.ItemPickedUp(propInfo);
@@ -54,8 +55,6 @@ public class PropPickupHandler : MonoBehaviour
 
         if (playerInputs.ToolInHand is Bomb)
             playerEventManager.BombDroped();
-
-        playerInputs.ToolInHand?.Drop();
 
         playerInputs.PropDropped();
 
