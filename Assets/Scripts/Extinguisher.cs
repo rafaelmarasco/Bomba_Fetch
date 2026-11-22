@@ -13,6 +13,8 @@ public class Extinguisher : MonoBehaviour, IHeldTool
 
     private FireExtinguisherSmoke smoke;
 
+    [SerializeField] private VFXAudio vfxExtintor;
+
     private bool isEquipped;
 
     [SerializeField] private Vector3 rotationOffset = new(0f, -90f, -10f);
@@ -28,6 +30,7 @@ public class Extinguisher : MonoBehaviour, IHeldTool
         if (!isEquipped || smoke.IsSpewing) return;
 
         smoke.StartSpewing();
+        vfxExtintor.PlayVFX();
         playerEventManager.ToolInteracted(this.gameObject);
         transform.SetParent(Holder.holdPointInteract);
         transform.SetLocalPositionAndRotation(Vector3.zero + positionOffset, Quaternion.Euler(rotationOffset));

@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class FireExtinguisherSmoke : MonoBehaviour
 {
+    [SerializeField]
+    private ParticleSystem smokeParticule;
+
     private CapsuleCollider smokeArea;
     public bool IsSpewing => smokeArea.enabled;
 
@@ -22,11 +25,13 @@ public class FireExtinguisherSmoke : MonoBehaviour
     public void StartSpewing()
     {
         smokeArea.enabled = true;
-        Debug.Log($"Estado da fumaçao {smokeArea.enabled}");
+        smokeParticule.Play();
+        //Debug.Log($"Estado da fumaçao {smokeArea.enabled}");
     }
 
     public void StopSpewing()
     {
+        smokeParticule.Stop();
         smokeArea.enabled = false;
     }
 }
