@@ -64,7 +64,7 @@ public class Bomb : MonoBehaviour, ICanvasTool, IHideable
         rb.useGravity = false;
         collider.isTrigger = true;
 
-        transform.position = new(hidingSpot.transform.position.x, 0f, hidingSpot.transform.position.z);
+        transform.position = hidingSpot.GetComponent<Collider>().bounds.center;
 
         hidingPlace.GetComponent<Prop>().SetAsHiddingSpot(true, this);
 

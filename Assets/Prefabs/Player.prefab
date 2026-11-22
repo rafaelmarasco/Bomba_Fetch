@@ -1140,7 +1140,7 @@ GameObject:
   - component: {fileID: -1590304100679889594}
   - component: {fileID: 8924093834654390410}
   - component: {fileID: 891634052499106268}
-  - component: {fileID: 7330877714380932613}
+  - component: {fileID: 7255414631256699065}
   - component: {fileID: -4724053277055469795}
   - component: {fileID: 4305581562573399872}
   - component: {fileID: 3644667998650854834}
@@ -1148,6 +1148,7 @@ GameObject:
   - component: {fileID: 6126682385651391774}
   - component: {fileID: 1866220012186243286}
   - component: {fileID: 8869084596049528949}
+  - component: {fileID: -5540230798112297337}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -1251,7 +1252,7 @@ MonoBehaviour:
   acceleration: 25
   maxForce: 1000
   brakeMaxForce: 2500
---- !u!114 &7330877714380932613
+--- !u!114 &7255414631256699065
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1260,16 +1261,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 8453428288632691985}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd9cb806a83d5cd42b559d81166775d8, type: 3}
+  m_Script: {fileID: 11500000, guid: be82871f69cd8b743b1001cbb3d8f75a, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PropInteract
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInputHendler
   checkPos: {fileID: 6898398441086987612}
-  headPos: {fileID: 812812312897300744}
+  headPos: {fileID: 6690569601993461167}
   holdPointSmall: {fileID: 976878721399896485}
   holdPointMedium: {fileID: 1446536034587759466}
   holdPointInteract: {fileID: 3738903463864646001}
-  halfExtends: {x: 0.45, y: 0.1, z: 0.4}
-  interactDistance: 0.5
+  halfExtends: {x: 0.5, y: 0.1, z: 0.4}
+  interactDistance: 0.8
 --- !u!114 &-4724053277055469795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1378,6 +1379,18 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8453428288632691985}
   m_Enabled: 1
+--- !u!114 &-5540230798112297337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8453428288632691985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37880f7a5af67984788deeca27c30b2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1 &8571362815078099395
 GameObject:
   m_ObjectHideFlags: 0
@@ -2855,6 +2868,11 @@ Transform:
 --- !u!1 &6677659362123095202 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -7883749328917080035, guid: efd331d4b11709f40b82377af7a18459, type: 3}
+  m_PrefabInstance: {fileID: 5637526030127514815}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6690569601993461167 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -7861831855079945968, guid: efd331d4b11709f40b82377af7a18459, type: 3}
   m_PrefabInstance: {fileID: 5637526030127514815}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &8313624441865403735 stripped
