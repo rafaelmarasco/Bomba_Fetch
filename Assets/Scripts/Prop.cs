@@ -17,7 +17,7 @@ public class Prop : MonoBehaviour
     [SerializeField] private Vector3 repositionOffset;
     [SerializeField] private Vector3 rotationOffset;
     public Size PropSize => propSize;
-    public PropInteract PlayerInteracting { get; private set; }
+    public PlayerInputHendler PlayerInteracting { get; private set; }
     public float ThrowForce
     {
         get
@@ -60,7 +60,7 @@ public class Prop : MonoBehaviour
         SetPropMass();
         SetPhysicsMaterial();
     }
-    public void EnableReposition(PropInteract playerInteracting)
+    public void EnableReposition(PlayerInputHendler playerInteracting)
     {
         this.PlayerInteracting = playerInteracting;
         throwerCollider = PlayerInteracting.GetComponentInChildren<Collider>();
