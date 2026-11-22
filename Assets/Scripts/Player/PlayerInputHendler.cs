@@ -26,7 +26,7 @@ public class PlayerInputHendler : MonoBehaviour
     [Header("BoxCastConfigs")]
     [SerializeField] private Vector3 halfExtends = new(.5f, 0.1f, .4f);
     [SerializeField] private float interactDistance = .8f;
-  
+
     public event Action OnPropDropped;
 
     private void Awake()
@@ -53,8 +53,8 @@ public class PlayerInputHendler : MonoBehaviour
     private void Interact_performed(InputAction.CallbackContext obj) => ToolInHand?.Use();
     private void Interact_canceled(InputAction.CallbackContext context) => ToolInHand?.StopUsing();
     private void Push_performed(InputAction.CallbackContext obj) => playerPushHandler.Push();
-    private void PickUp_performed(InputAction.CallbackContext obj)
-    {
+    private void PickUp_performed(InputAction.CallbackContext obj) => propPickupHandler.TryPickUpProp(HasItem);
+    /*{
         if (!HasItem && CheckForProps(out GameObject prop))
         {
             Debug.Log("Pegou");
@@ -69,15 +69,19 @@ public class PlayerInputHendler : MonoBehaviour
             propPickupHandler.DropProp();
             OnPropDropped?.Invoke();
         }
-    }
+    }*/
     private void Search_performed(InputAction.CallbackContext obj) => playerSearchHandler.Search();
-    
+
     public void SetToolInHand(GameObject prop)
     {
-        if (!prop.TryGetComponent(out IHeldTool tool)) return;
+        if (prop == null || !prop.TryGetComponent(out IHeldTool tool))
+        {
+            ToolInHand?.Drop();
+            ToolInHand = null;
+            return;
+        }
 
         Debug.Log("Item pego!!");
-
         ToolInHand = tool;
         ToolInHand.Pickup();
     }
@@ -115,6 +119,8 @@ public class PlayerInputHendler : MonoBehaviour
 
         return isProp;
     }
+
+    public void PropDropped() => OnPropDropped?.Invoke();
     private void OnDestroy()
     {
         playerInput.actions["Grab"].performed -= PickUp_performed;
