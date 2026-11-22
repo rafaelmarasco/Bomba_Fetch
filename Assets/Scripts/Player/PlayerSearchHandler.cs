@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class PlayerSearchHandler : MonoBehaviour
 {
-    private PropInteract propInteract;
+    private PlayerInputHendler propInteract;
 
     private void Start()
     {
-        propInteract = GetComponent<PropInteract>();
+        propInteract = GetComponent<PlayerInputHendler>();
     }
 
     public void Search()

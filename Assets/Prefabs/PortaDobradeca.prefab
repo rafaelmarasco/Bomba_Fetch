@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7462458163493657120}
   - component: {fileID: 2925357748745584435}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PortaDobradeca
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,8 +122,8 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -8067726398312463513, guid: db0656d0317bfee4b98e85bc15d3e456, type: 3}
-  - {fileID: -8896051167825165466, guid: db0656d0317bfee4b98e85bc15d3e456, type: 3}
+  - {fileID: -8067726398312463513, guid: 8b6e1fd1513590b4188ea542961a9b67, type: 3}
+  - {fileID: -6867524174320841699, guid: eb9707005f602f144a26ca758c7aa166, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -166,5 +166,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3, y: 3, z: 0.23661576}
-  m_Center: {x: -1.5, y: 1.5, z: 0.018304683}
+  m_Size: {x: 11.000001, y: 11.40336, z: 0.23661578}
+  m_Center: {x: 2.5000026, y: 5.70168, z: 0.018304674}

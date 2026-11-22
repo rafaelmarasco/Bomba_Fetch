@@ -64,11 +64,13 @@ public class Password : MonoBehaviour, ICanvasTool, IHideable
         rb.useGravity = false;
         collider.isTrigger = true;
 
-        transform.position = new(hidingSpot.transform.position.x, 0f, hidingSpot.transform.position.z);
+        transform.position = hidingSpot.GetComponent<Collider>().bounds.center;
+            //new(hidingSpot.transform.position.x, 0f, hidingSpot.transform.position.z);
 
         hidingPlace.GetComponent<Prop>().SetAsHiddingSpot(true, this);
 
         passwordMash.enabled = false;
+        this.prop.enabled = false;
     }
 
     public void Reveal()
@@ -81,6 +83,7 @@ public class Password : MonoBehaviour, ICanvasTool, IHideable
         rb.isKinematic = false;
         rb.useGravity = true;
         collider.isTrigger = false;
+        this.prop.enabled = true;
 
         hidingPlace.GetComponent<Prop>().SetAsHiddingSpot(false, this);
 

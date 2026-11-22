@@ -7,7 +7,7 @@ public class Extinguisher : MonoBehaviour, IHeldTool
 
     private PlayerAnimator playerAnimator;
     private PlayerEventManager playerEventManager;
-    private PropInteract Holder => extinguisherProp.PlayerInteracting;
+    private PlayerInputHendler Holder => extinguisherProp.PlayerInteracting;
 
     private PlayerInput HolderInput;
 

@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PropInteract : MonoBehaviour
+public class PlayerInputHendler : MonoBehaviour
 {
     private PropPickupHandler propPickupHandler;
     private PlayerPushHandler playerPushHandler;
@@ -42,11 +42,14 @@ public class PropInteract : MonoBehaviour
         playerInput.actions["Interact"].performed += Interact_performed;
         playerInput.actions["Interact"].canceled += Interact_canceled;
         playerInput.actions["Search"].performed += Search_performed;
+        playerInput.actions["Pause"].performed += Pause_performed;
     }
+
     private void Update()
     {
         lastMoveDir = player.LastMoveDir;
     }
+    private void Pause_performed(InputAction.CallbackContext obj) => EventManager.Instance.Pause();
     private void Interact_performed(InputAction.CallbackContext obj) => ToolInHand?.Use();
     private void Interact_canceled(InputAction.CallbackContext context) => ToolInHand?.StopUsing();
     private void Push_performed(InputAction.CallbackContext obj) => playerPushHandler.Push();
@@ -68,6 +71,7 @@ public class PropInteract : MonoBehaviour
         }
     }
     private void Search_performed(InputAction.CallbackContext obj) => playerSearchHandler.Search();
+    
     public void SetToolInHand(GameObject prop)
     {
         if (!prop.TryGetComponent(out IHeldTool tool)) return;

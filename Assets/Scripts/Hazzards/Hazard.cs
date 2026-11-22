@@ -64,9 +64,11 @@ public class Hazard : MonoBehaviour
 
     private void TryToEletrocute(Collider other)
     {
+        Debug.Log("tentando eletrocutar");
+
         if (!isOn || !other.gameObject.GetComponentInParent<Player>())
             return;
-
+        Debug.Log("Esta ligado e detectou o player");
         PlayerHarmHandler playerHarmHandler = other.gameObject.GetComponentInParent<PlayerHarmHandler>();
 
         if (playerHarmHandler == null || !playerHarmHandler.CanGetPushed)

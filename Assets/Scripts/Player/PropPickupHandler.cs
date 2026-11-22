@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PropPickupHandler : MonoBehaviour
 {
-    private PropInteract propInteract;
+    private PlayerInputHendler propInteract;
     private PlayerEventManager playerEventManager;
     public GameObject HeldItem { get; private set; } = null;
     public bool HasItem => HeldItem != null;
@@ -11,16 +11,13 @@ public class PropPickupHandler : MonoBehaviour
 
     private void Awake()
     {
-        propInteract = GetComponent<PropInteract>();
+        propInteract = GetComponent<PlayerInputHendler>();
         playerEventManager = GetComponent<PlayerEventManager>();
     }
 
     public void PickUpProp(GameObject prop)
     {
         HeldItem = prop;
-
-        //Collider gfxCollider = GetComponentInChildren<Collider>();
-        //Collider propCollider = prop.GetComponent<Collider>();
 
         prop.TryGetComponent<Prop>(out Prop propInfo);
 
