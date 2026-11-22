@@ -5,6 +5,7 @@ public class Password : MonoBehaviour, ICanvasTool, IHideable
 {
     private PlayerEventManager playerEventManager;
     private PlayerAnimator playerAnimator;
+    private ItemGlow itemGlow;
     private Prop prop;
 
     [Header ("Password Visual")]
@@ -17,11 +18,15 @@ public class Password : MonoBehaviour, ICanvasTool, IHideable
 
     public bool IsHidden => hidingPlace != null;
 
-    private void Start() => prop = GetComponent<Prop>();
-
+    private void Start()
+    {
+        prop = GetComponent<Prop>();
+        itemGlow = GetComponent<ItemGlow>();
+    }
     public void Drop()
     {
         passwordCanvas.gameObject.SetActive(false);
+        itemGlow.TurnOn();
 
         playerEventManager = null;
         playerAnimator = null;
@@ -31,6 +36,8 @@ public class Password : MonoBehaviour, ICanvasTool, IHideable
 
     public void Pickup()
     {
+        itemGlow.TurnOff();
+
         playerEventManager = prop.PlayerInteracting.GetComponent<PlayerEventManager>();
         playerAnimator = prop.PlayerInteracting.GetComponentInChildren<PlayerAnimator>();
         passwordCanvas = prop.PlayerInteracting.transform.Find("PasswordCanvas").GetComponent<Canvas>();
@@ -76,6 +83,8 @@ public class Password : MonoBehaviour, ICanvasTool, IHideable
     public void Reveal()
     {
         if (!IsHidden) return;
+
+        itemGlow.TurnOn();
 
         BoxCollider collider = GetComponent<BoxCollider>();
         Rigidbody rb = GetComponent<Rigidbody>();

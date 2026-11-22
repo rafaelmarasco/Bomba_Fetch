@@ -4,9 +4,10 @@ public class Bomb : MonoBehaviour, ICanvasTool, IHideable
 {
     private PlayerEventManager playerEventManager;
     private PlayerAnimator playerAnimator;
+    private ItemGlow itemGlow;
     private Prop prop;
 
-    [Header ("Bomb Parts")]
+    [Header("Bomb Parts")]
     [SerializeField] private GameObject BombBody;
     [SerializeField] private GameObject Keyboard;
 
@@ -17,11 +18,17 @@ public class Bomb : MonoBehaviour, ICanvasTool, IHideable
 
     public bool IsHidden => hidingPlace != null;
 
-    private void Start() => prop = GetComponent<Prop>();
+    private void Start()
+    {
+        prop = GetComponent<Prop>();
+        itemGlow = GetComponent<ItemGlow>();
+    }
+
 
     public void Drop()
     {
         bombCanvas.gameObject.SetActive(false);
+        itemGlow.TurnOn();
 
         playerEventManager = null;
         playerAnimator = null;
@@ -31,6 +38,8 @@ public class Bomb : MonoBehaviour, ICanvasTool, IHideable
 
     public void Pickup()
     {
+        itemGlow.TurnOff();
+
         playerEventManager = prop.PlayerInteracting.GetComponent<PlayerEventManager>();
         playerAnimator = prop.PlayerInteracting.GetComponentInChildren<PlayerAnimator>();
         bombCanvas = prop.PlayerInteracting.transform.Find("BombCanvas").GetComponent<Canvas>();
@@ -75,7 +84,9 @@ public class Bomb : MonoBehaviour, ICanvasTool, IHideable
     public void Reveal()
     {
         if (!IsHidden) return;
-        
+
+        itemGlow.TurnOn();
+
         BoxCollider collider = GetComponent<BoxCollider>();
         Rigidbody rb = GetComponent<Rigidbody>();
 
