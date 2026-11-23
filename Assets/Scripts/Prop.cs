@@ -204,7 +204,7 @@ public class Prop : MonoBehaviour
                 rb.mass = 70;
                 break;
             case Size.large:
-                rb.mass = 80;
+                rb.mass = 100;
                 break;
         }
     }
