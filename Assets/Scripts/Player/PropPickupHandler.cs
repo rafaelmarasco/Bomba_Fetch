@@ -33,6 +33,7 @@ public class PropPickupHandler : MonoBehaviour
 
         playerInputs.ToolInHand?.Drop();
         playerInputs.SetToolInHand(null);
+        playerInputs.SetIsUsingTool(false);
 
         Prop propInfo = HeldItem.GetComponent<Prop>();
         
