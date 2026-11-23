@@ -41,6 +41,7 @@ public class Prop : MonoBehaviour
     private Collider throwerCollider;
 
     private Player holder;
+    private Player thrower;
 
     private bool isBeingPushed = false;
     public bool IsHiddingSpot { get; private set; } = false;
@@ -151,13 +152,18 @@ public class Prop : MonoBehaviour
             joint = null;
         }
     }
-    public void SetPushingState(bool state)
+    public void SetPushingState(bool state, Player lastThrower)
     {
         isBeingPushed = state;
         if (state == false && throwerCollider != null)
         {
             Physics.IgnoreCollision(propCollider, throwerCollider, false);
             throwerCollider = null;
+            thrower = null;
+        }
+        else
+        {
+            thrower = lastThrower;
         }
     }
     private void HandlePropToPlayerContact(Player target, Collision collision)
@@ -165,7 +171,7 @@ public class Prop : MonoBehaviour
         //if (throwerCollider != null)
         //  Physics.IgnoreCollision(propCollider, throwerCollider);
 
-        if (target == null || target == holder) return;
+        if (target == null || target == holder || target == thrower) return;
 
         var targetEventManager = target.GetComponent<PlayerEventManager>();
         if (targetEventManager == null) return;
@@ -173,7 +179,7 @@ public class Prop : MonoBehaviour
         float stunTime = 2f;
 
         targetEventManager.KnockedDown(stunTime);
-        SetPushingState(false);
+        SetPushingState(false, null);
     }
 
     private void OnCollisionStay(Collision collision)
@@ -181,7 +187,7 @@ public class Prop : MonoBehaviour
         if (isBeingPushed)
         {
             if (rb.linearVelocity.sqrMagnitude < minPushSpeed * minPushSpeed)
-                SetPushingState(false);
+                SetPushingState(false, null);
             else
                 HandlePropToPlayerContact(collision.gameObject.GetComponentInParent<Player>(), collision);
         }

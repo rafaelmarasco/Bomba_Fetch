@@ -81,13 +81,13 @@ public class PlayerPushHandler : MonoBehaviour
 
             propRb.AddForce(pushForce * transform.forward, ForceMode.VelocityChange);
 
-            propBeingThrown.SetPushingState(true);
+            propBeingThrown.SetPushingState(true, this.gameObject.GetComponent<Player>());
         }
         else if (!playerInteract.IsUsingTool)
         {
             propPickupHandler.HeldItem.TryGetComponent<Rigidbody>(out Rigidbody propRb);
 
-            propBeingThrown.SetPushingState(true);
+            propBeingThrown.SetPushingState(true, this.gameObject.GetComponent<Player>());
 
             propPickupHandler.DropProp();
             propRb.AddForce(pushForce * transform.forward, ForceMode.VelocityChange);
