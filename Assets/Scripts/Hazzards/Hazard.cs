@@ -6,8 +6,6 @@ public enum HazardType
 }
 public class Hazard : MonoBehaviour
 {
-
-
     [SerializeField] private HazardType hazzardType;
     public HazardType Type => hazzardType;
 
@@ -26,6 +24,10 @@ public class Hazard : MonoBehaviour
     [Header("Hazzard Field")]
     [SerializeField] private float stunTime;
     public bool isOn;
+
+    public ItemGlow Glow { get; private set; }
+
+    private void Start() => Glow = GetComponent<ItemGlow>();
 
     private void OnTriggerEnter(Collider other)
     {

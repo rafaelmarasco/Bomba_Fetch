@@ -31,6 +31,7 @@ public class HazardInterface : MonoBehaviour
     {
         vfxAudio.PlayVFX();
         hazard.isOn = !hazard.isOn;
+        hazard.Glow.TurnOff();
     }
 
     private void OnDrawGizmosSelected()
