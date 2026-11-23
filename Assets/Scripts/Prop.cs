@@ -38,6 +38,8 @@ public class Prop : MonoBehaviour
     private Collider propCollider;
     private Collider throwerCollider;
 
+    private Player playerRef;
+
     private bool isBeingPushed = false;
     public bool IsHiddingSpot { get; private set; } = false;
 
@@ -64,6 +66,8 @@ public class Prop : MonoBehaviour
     {
         this.PlayerInteracting = playerInteracting;
         throwerCollider = PlayerInteracting.GetComponentInChildren<Collider>();
+
+        playerRef = playerInteracting.GetComponent<Player>();
 
         switch (PropSize)
         {
@@ -101,7 +105,7 @@ public class Prop : MonoBehaviour
         Transform holdPoint;
         holdPoint = PlayerInteracting.holdPointMedium;
 
-        gameObject.layer = PROP_IN_HAND_LAYER;
+       // gameObject.layer = PROP_IN_HAND_LAYER;
 
         transform.SetPositionAndRotation(holdPoint.TransformPoint(repositionOffset),
             holdPoint.rotation * Quaternion.Euler(repositionOffset));
@@ -135,6 +139,7 @@ public class Prop : MonoBehaviour
 
         DestroyJoints();
         PlayerInteracting = null;
+        playerRef = null;
     }
     private void DestroyJoints()
     {
@@ -181,6 +186,9 @@ public class Prop : MonoBehaviour
     {
         if (isBeingPushed)
             HandlePropToPlayerContact(collision);
+
+        if (playerRef != null && collision.gameObject.layer == WALLS_LAYER)
+            playerRef.BlockAgainst(collision.GetContact(0).normal);
     }
 
     private void SetPropMass()

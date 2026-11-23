@@ -18,6 +18,8 @@ public class PlayerInputHendler : MonoBehaviour
     public IHeldTool ToolInHand { get; private set; }
     public bool HasItem => HeldItem != null;
 
+
+
     [Header("Prop Holding Points")]
     [SerializeField] public Transform holdPointSmall;
     [SerializeField] public Transform holdPointMedium;
@@ -56,24 +58,7 @@ public class PlayerInputHendler : MonoBehaviour
     private void Push_performed(InputAction.CallbackContext obj) => playerPushHandler.Push();
     private void PickUp_performed(InputAction.CallbackContext obj) => propPickupHandler.PickUpProp();
     private void PickUp_canceled(InputAction.CallbackContext obj) => propPickupHandler.DropProp();
-    /*{
-        if (!HasItem && CheckForProps(out GameObject prop))
-        {
-            Debug.Log("Pegou");
-            propPickupHandler.PickUpProp(prop);
-            SetToolInHand(prop);
-        }
-        else if (HasItem)
-        {
-            ToolInHand?.Drop();
-            ToolInHand = null;
-
-            propPickupHandler.DropProp();
-            OnPropDropped?.Invoke();
-        }
-    }*/
     private void Search_performed(InputAction.CallbackContext obj) => playerSearchHandler.Search();
-
     public void SetToolInHand(GameObject prop)
     {
         if (prop == null || !prop.TryGetComponent(out IHeldTool tool))

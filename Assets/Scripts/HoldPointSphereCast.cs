@@ -24,5 +24,15 @@ public class HoldPointSphereCast : MonoBehaviour
         Vector3 origin = player.position + originHeight * Vector3.up;
         Vector3 target = player.TransformPoint(localOffset);
         Vector3 dir = target - origin;
+        float dist = dir.magnitude;
+        dir /= dist;
+
+        Vector3 pos = target;
+
+        if (Physics.SphereCast(origin, radius, dir, out RaycastHit hit, dist, wallMask, QueryTriggerInteraction.Ignore))
+            pos = origin + dir * Mathf.Clamp(hit.distance, minDistance, dist);
+
+        rb.MovePosition(pos);
+        rb.MoveRotation(player.rotation);
     }
 }
