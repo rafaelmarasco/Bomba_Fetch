@@ -168,9 +168,6 @@ public class Prop : MonoBehaviour
     }
     private void HandlePropToPlayerContact(Player target, Collision collision)
     {
-        //if (throwerCollider != null)
-        //  Physics.IgnoreCollision(propCollider, throwerCollider);
-
         if (target == null || target == holder || target == thrower) return;
 
         var targetEventManager = target.GetComponent<PlayerEventManager>();
@@ -207,7 +204,7 @@ public class Prop : MonoBehaviour
                 rb.mass = 70;
                 break;
             case Size.large:
-                rb.mass = 100;
+                rb.mass = 80;
                 break;
         }
     }
