@@ -32,11 +32,16 @@ public class Prop : MonoBehaviour
         }
     }
 
-    private FixedJoint joint;
+    private float minPushSpeed = 0.2f;
+
+    private Joint joint;
 
     private Rigidbody rb;
     private Collider propCollider;
     private Collider throwerCollider;
+
+    private Player holder;
+    private Player thrower;
 
     private bool isBeingPushed = false;
     public bool IsHiddingSpot { get; private set; } = false;
@@ -64,6 +69,7 @@ public class Prop : MonoBehaviour
     {
         this.PlayerInteracting = playerInteracting;
         throwerCollider = PlayerInteracting.GetComponentInChildren<Collider>();
+        holder = playerInteracting.GetComponent<Player>();
 
         switch (PropSize)
         {
@@ -101,9 +107,10 @@ public class Prop : MonoBehaviour
         Transform holdPoint;
         holdPoint = PlayerInteracting.holdPointMedium;
 
-        gameObject.layer = PROP_IN_HAND_LAYER;
+        // gameObject.layer = PROP_IN_HAND_LAYER;
 
-        transform.SetPositionAndRotation(holdPoint.TransformPoint(repositionOffset), holdPoint.rotation * Quaternion.Euler(repositionOffset));
+        transform.SetPositionAndRotation(holdPoint.TransformPoint(repositionOffset),
+            holdPoint.rotation * Quaternion.Euler(repositionOffset));
 
         Rigidbody holdPointRb = holdPoint.GetComponent<Rigidbody>();
 
@@ -134,6 +141,8 @@ public class Prop : MonoBehaviour
 
         DestroyJoints();
         PlayerInteracting = null;
+        holder = null;
+        throwerCollider = null;
     }
     private void DestroyJoints()
     {
@@ -143,45 +152,48 @@ public class Prop : MonoBehaviour
             joint = null;
         }
     }
-    public void SetPushingState(bool state)
+    public void SetPushingState(bool state, Player lastThrower)
     {
         isBeingPushed = state;
         if (state == false && throwerCollider != null)
         {
             Physics.IgnoreCollision(propCollider, throwerCollider, false);
             throwerCollider = null;
+            thrower = null;
+        }
+        else
+        {
+            thrower = lastThrower;
         }
     }
-
-
-    private void HandlePropToPlayerContact(Collision collision)
+    private void HandlePropToPlayerContact(Player target, Collision collision)
     {
-        if (collision.gameObject.layer == FLOOR_LAYER)
-        {
-            SetPushingState(false);
-            return;
-        }
+        //if (throwerCollider != null)
+        //  Physics.IgnoreCollision(propCollider, throwerCollider);
 
-        if (throwerCollider != null)
-            Physics.IgnoreCollision(propCollider, throwerCollider);
-        else
-            Debug.Log("O colisor do jogador nao foi pego");
+        if (target == null || target == holder || target == thrower) return;
 
-        if (!collision.gameObject.GetComponent<Player>()) return;
-
-        PlayerEventManager targetEventManager = collision.gameObject.GetComponentInParent<PlayerEventManager>();
+        var targetEventManager = target.GetComponent<PlayerEventManager>();
         if (targetEventManager == null) return;
 
         float stunTime = 2f;
 
         targetEventManager.KnockedDown(stunTime);
-        SetPushingState(false);
+        SetPushingState(false, null);
     }
 
     private void OnCollisionStay(Collision collision)
     {
         if (isBeingPushed)
-            HandlePropToPlayerContact(collision);
+        {
+            if (rb.linearVelocity.sqrMagnitude < minPushSpeed * minPushSpeed)
+                SetPushingState(false, null);
+            else
+                HandlePropToPlayerContact(collision.gameObject.GetComponentInParent<Player>(), collision);
+        }
+
+        if (holder != null && collision.gameObject.layer == WALLS_LAYER)
+            holder.BlockAgainst(collision.GetContact(0).normal);
     }
 
     private void SetPropMass()

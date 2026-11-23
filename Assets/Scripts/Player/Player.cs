@@ -21,6 +21,9 @@ public class Player : MonoBehaviour
     public bool IsMoving => MoveDir != Vector3.zero;
     private bool stopMoving;
 
+    private Vector3 blockNormal;
+    private float blockUntil;
+
     [SerializeField] private float rotationSpeed;
     [Header ("Movement Variables")]
     [SerializeField] private float moveSpeed = 7f;
@@ -62,6 +65,14 @@ public class Player : MonoBehaviour
     {
         MoveDir = rawInput;
         Vector3 nextVelocity = moveSpeed * MoveDir;
+
+        if (Time.time < blockUntil)
+        {
+            float into = Vector3.Dot(nextVelocity, blockNormal);
+            if (into < 0f)
+                nextVelocity -= blockNormal * into;   // continua deslizando pela parede
+        }
+
         Vector3 currentVelocity = playerRb.linearVelocity;
 
         Vector3 velocityDiff = nextVelocity - new Vector3(currentVelocity.x, 0f, currentVelocity.z);
@@ -85,5 +96,14 @@ public class Player : MonoBehaviour
     private void StopMoving(bool stopMoving)
     {
         this.stopMoving = stopMoving;
+    }
+
+    public void BlockAgainst(Vector3 normal)
+    {
+        normal.y = 0f;
+        if (normal == Vector3.zero) return;
+
+        blockNormal = normal.normalized;
+        blockUntil = Time.time + 0.1f;
     }
 }
