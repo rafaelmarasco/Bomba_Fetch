@@ -32,6 +32,8 @@ public class Prop : MonoBehaviour
         }
     }
 
+    private float minPushSpeed = 0.2f;
+
     private Joint joint;
 
     private Rigidbody rb;
@@ -178,7 +180,7 @@ public class Prop : MonoBehaviour
     {
         if (isBeingPushed)
         {
-            if (collision.gameObject.layer == FLOOR_LAYER)
+            if (rb.linearVelocity.sqrMagnitude < minPushSpeed * minPushSpeed)
                 SetPushingState(false);
             else
                 HandlePropToPlayerContact(collision.gameObject.GetComponentInParent<Player>(), collision);

@@ -32,18 +32,20 @@ public class PlayerPushHandler : MonoBehaviour
         playerEventManager.PropPush();
 
         bool hasPropInRange = playerInteract.CheckForProps(out GameObject prop);
-        bool isInteractingWithBomb = playerInteract.ToolInHand is Bomb; // --- Problema
+        bool isInteractingWithTool = playerInteract.IsUsingTool; // --- Problema
         bool hasPlayerInRange = playerInteract.CheckForPlayer(out GameObject player);
 
         // atualmente o player nao consegue empurrar outro player se estiver carregando algum item
 
-        if ((hasPropInRange || IsHoldingItem) || (!isInteractingWithBomb && hasPlayerInRange))
+        if ((hasPropInRange || IsHoldingItem) || (!isInteractingWithTool && hasPlayerInRange))
         {
-            if (IsHoldingItem && playerInteract.HeldItem.TryGetComponent(out Prop itemInHand)
-                && itemInHand.PropSize != Size.large)
-                Hit(player, itemInHand);
+            if (IsHoldingItem)
+            {
+                if (playerInteract.HeldItem.TryGetComponent(out Prop itemInHand) && itemInHand.PropSize != Size.large)
+                    Hit(player, itemInHand);
+            }
 
-            else if (prop != null && !playerInteract.IsUsingTool)
+            else if (prop != null && !isInteractingWithTool)
                 PushProp(prop);
 
             else if (player != null)
@@ -77,9 +79,9 @@ public class PlayerPushHandler : MonoBehaviour
             prop.TryGetComponent<Rigidbody>(out Rigidbody propRb);
             if (propRb == null) return;
 
-            propBeingThrown.SetPushingState(true);
-
             propRb.AddForce(pushForce * transform.forward, ForceMode.VelocityChange);
+
+            propBeingThrown.SetPushingState(true);
         }
         else if (!playerInteract.IsUsingTool)
         {
@@ -98,7 +100,7 @@ public class PlayerPushHandler : MonoBehaviour
 
     private void PushPlayer(GameObject target)
     {
-        if (target == null) return;
+        if (target == null || target == this.gameObject) return;
 
         Rigidbody hipsRb = target.GetComponent<Player>().HipsRb;
 
