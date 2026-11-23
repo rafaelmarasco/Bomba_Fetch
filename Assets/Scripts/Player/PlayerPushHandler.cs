@@ -81,7 +81,7 @@ public class PlayerPushHandler : MonoBehaviour
 
             propRb.AddForce(pushForce * transform.forward, ForceMode.VelocityChange);
         }
-        else
+        else if (!playerInteract.IsUsingTool)
         {
             propPickupHandler.HeldItem.TryGetComponent<Rigidbody>(out Rigidbody propRb);
 

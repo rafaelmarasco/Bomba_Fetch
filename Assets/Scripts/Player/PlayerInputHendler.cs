@@ -16,7 +16,7 @@ public class PlayerInputHendler : MonoBehaviour
     private Vector3 lastMoveDir;
     public GameObject HeldItem => propPickupHandler.HeldItem; 
     public IHeldTool ToolInHand { get; private set; }
-    public bool IsUsingTool { get; private set; }
+    public bool IsUsingTool; // privar
     public bool HasItem => HeldItem != null;
 
 

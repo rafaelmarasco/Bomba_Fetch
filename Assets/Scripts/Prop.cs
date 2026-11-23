@@ -38,7 +38,7 @@ public class Prop : MonoBehaviour
     private Collider propCollider;
     private Collider throwerCollider;
 
-    private Player playerRef;
+    private Player holder;
 
     private bool isBeingPushed = false;
     public bool IsHiddingSpot { get; private set; } = false;
@@ -66,8 +66,7 @@ public class Prop : MonoBehaviour
     {
         this.PlayerInteracting = playerInteracting;
         throwerCollider = PlayerInteracting.GetComponentInChildren<Collider>();
-
-        playerRef = playerInteracting.GetComponent<Player>();
+        holder = playerInteracting.GetComponent<Player>();
 
         switch (PropSize)
         {
@@ -105,7 +104,7 @@ public class Prop : MonoBehaviour
         Transform holdPoint;
         holdPoint = PlayerInteracting.holdPointMedium;
 
-       // gameObject.layer = PROP_IN_HAND_LAYER;
+        // gameObject.layer = PROP_IN_HAND_LAYER;
 
         transform.SetPositionAndRotation(holdPoint.TransformPoint(repositionOffset),
             holdPoint.rotation * Quaternion.Euler(repositionOffset));
@@ -113,7 +112,7 @@ public class Prop : MonoBehaviour
         Rigidbody holdPointRb = holdPoint.GetComponent<Rigidbody>();
 
         rb.mass = 2f;
-        
+
         joint = gameObject.AddComponent<FixedJoint>();
         joint.connectedBody = holdPointRb;
         joint.enableCollision = true;
@@ -139,7 +138,8 @@ public class Prop : MonoBehaviour
 
         DestroyJoints();
         PlayerInteracting = null;
-        playerRef = null;
+        holder = null;
+        throwerCollider = null;
     }
     private void DestroyJoints()
     {
@@ -158,22 +158,14 @@ public class Prop : MonoBehaviour
             throwerCollider = null;
         }
     }
-    private void HandlePropToPlayerContact(Collision collision)
+    private void HandlePropToPlayerContact(Player target, Collision collision)
     {
-        if (collision.gameObject.layer == FLOOR_LAYER)
-        {
-            SetPushingState(false);
-            return;
-        }
+        //if (throwerCollider != null)
+        //  Physics.IgnoreCollision(propCollider, throwerCollider);
 
-        if (throwerCollider != null)
-            Physics.IgnoreCollision(propCollider, throwerCollider);
-        else
-            Debug.Log("O colisor do jogador nao foi pego");
+        if (target == null || target == holder) return;
 
-        if (!collision.gameObject.GetComponent<Player>()) return;
-
-        PlayerEventManager targetEventManager = collision.gameObject.GetComponentInParent<PlayerEventManager>();
+        var targetEventManager = target.GetComponent<PlayerEventManager>();
         if (targetEventManager == null) return;
 
         float stunTime = 2f;
@@ -185,10 +177,15 @@ public class Prop : MonoBehaviour
     private void OnCollisionStay(Collision collision)
     {
         if (isBeingPushed)
-            HandlePropToPlayerContact(collision);
+        {
+            if (collision.gameObject.layer == FLOOR_LAYER)
+                SetPushingState(false);
+            else
+                HandlePropToPlayerContact(collision.gameObject.GetComponentInParent<Player>(), collision);
+        }
 
-        if (playerRef != null && collision.gameObject.layer == WALLS_LAYER)
-            playerRef.BlockAgainst(collision.GetContact(0).normal);
+        if (holder != null && collision.gameObject.layer == WALLS_LAYER)
+            holder.BlockAgainst(collision.GetContact(0).normal);
     }
 
     private void SetPropMass()
