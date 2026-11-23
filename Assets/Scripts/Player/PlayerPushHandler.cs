@@ -29,8 +29,6 @@ public class PlayerPushHandler : MonoBehaviour
     }
     public void Push()
     {
-        playerEventManager.PropPush();
-
         bool hasPropInRange = playerInteract.CheckForProps(out GameObject prop);
         bool isInteractingWithTool = playerInteract.IsUsingTool; // --- Problema
         bool hasPlayerInRange = playerInteract.CheckForPlayer(out GameObject player);
@@ -64,6 +62,8 @@ public class PlayerPushHandler : MonoBehaviour
 
     private void PushProp(GameObject prop)
     {
+        playerEventManager.PropPush();
+
         Debug.Log($"Acabo de arremessar um {prop.name}");
 
         float pushForce = prop.GetComponent<Prop>().ThrowForce;
@@ -101,6 +101,8 @@ public class PlayerPushHandler : MonoBehaviour
     private void PushPlayer(GameObject target)
     {
         if (target == null || target == this.gameObject) return;
+
+        playerEventManager.PropPush();
 
         Rigidbody hipsRb = target.GetComponent<Player>().HipsRb;
 
