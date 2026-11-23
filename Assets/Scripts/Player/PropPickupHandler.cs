@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PropPickupHandler : MonoBehaviour
 {
-    private PlayerInputHendler propInteract;
+    private PlayerInputHendler playerInputs;
     private PlayerEventManager playerEventManager;
     public GameObject HeldItem { get; private set; } = null;
     public bool HasItem => HeldItem != null;
@@ -11,21 +11,30 @@ public class PropPickupHandler : MonoBehaviour
 
     private void Awake()
     {
-        propInteract = GetComponent<PlayerInputHendler>();
+        playerInputs = GetComponent<PlayerInputHendler>();
         playerEventManager = GetComponent<PlayerEventManager>();
     }
-
-    public void PickUpProp(GameObject prop)
+    public void PickUpProp()
     {
+        if (!playerInputs.CheckForProps(out GameObject prop)) return;
+
         HeldItem = prop;
 
-        prop.TryGetComponent<Prop>(out Prop propInfo);
+        prop.TryGetComponent(out Prop propInfo);
 
-        propInfo.EnableReposition(propInteract);
+        propInfo.EnableReposition(playerInputs);
         playerEventManager.ItemPickedUp(propInfo);
+
+        playerInputs.SetToolInHand(prop);
     }
     public void DropProp()
     {
+        if (!HasItem) return;
+
+        playerInputs.ToolInHand?.Drop();
+        playerInputs.SetToolInHand(null);
+        playerInputs.SetIsUsingTool(false);
+
         Prop propInfo = HeldItem.GetComponent<Prop>();
         
         if (propInfo.PropSize == Size.small)
@@ -37,10 +46,10 @@ public class PropPickupHandler : MonoBehaviour
         HeldItem.transform.SetParent(null);
         HeldItem = null;
 
-        if (propInteract.ToolInHand is Bomb)
+        if (playerInputs.ToolInHand is Bomb)
             playerEventManager.BombDroped();
 
-        propInteract.ToolInHand?.Drop();
+        playerInputs.PropDropped();
 
         propInfo.DisableReposition();
         playerEventManager.ItemDroped(propInfo);
