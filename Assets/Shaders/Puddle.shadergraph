@@ -941,7 +941,7 @@
     "m_ObjectId": "3a630ba365f84cbfbbb12260791c6c90",
     "m_Title": "Wave",
     "m_Position": {
-        "x": -1833.5999755859375,
+        "x": -1833.599853515625,
         "y": -1103.2000732421875
     }
 }
@@ -1395,7 +1395,7 @@
     "m_Hidden": false,
     "m_ShaderOutputName": "Scale",
     "m_StageCapability": 3,
-    "m_Value": 7.5,
+    "m_Value": 5.199999809265137,
     "m_DefaultValue": 10.0,
     "m_Labels": [],
     "m_LiteralMode": false
@@ -2847,8 +2847,8 @@
     "m_ObjectId": "f08876b9c0d642a4a3b3d5d0d19c49a1",
     "m_Title": "edgeFade",
     "m_Position": {
-        "x": -2177.60009765625,
-        "y": -17.5999755859375
+        "x": -2177.599853515625,
+        "y": -17.600006103515626
     }
 }
 
@@ -2861,7 +2861,7 @@
         "m_Id": "dfd62ec879d04bcab26e2d7a0c479a33"
     },
     "m_AllowMaterialOverride": false,
-    "m_SurfaceType": 1,
+    "m_SurfaceType": 0,
     "m_ZTestMode": 4,
     "m_ZWriteControl": 0,
     "m_AlphaMode": 0,
