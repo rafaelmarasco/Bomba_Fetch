@@ -41589,6 +41589,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 727846974156573923, guid: 275bdce0c5a85f44496a4c893626c908, type: 3}
+      propertyPath: prefabPauseScreen
+      value: 
+      objectReference: {fileID: 8121890121969070249, guid: a4085daf45efb9244843a0c99d2a6acf, type: 3}
     - target: {fileID: 1969801659941127974, guid: 275bdce0c5a85f44496a4c893626c908, type: 3}
       propertyPath: m_Name
       value: Game Manager
