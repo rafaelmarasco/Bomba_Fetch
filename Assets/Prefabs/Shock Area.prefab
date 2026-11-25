@@ -127,15 +127,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Hazzard
   hazzardType: 1
-  flyDirection: {x: 0, y: 0, z: 0}
-  propFlyDirection: {x: 0, y: 0, z: 0}
-  flyForce: 0
-  cooldown: 0
+  flyDirection: {x: 0, y: 5, z: -4.5}
+  propFlyDirection: {x: 0, y: 3, z: -3}
+  flyForce: 20
+  cooldown: 1.5
   onFireRunDirection: {fileID: 0}
   jumpForce: 0
   onFireTime: 0
-  stunTime: 0
-  isOn: 0
+  stunTime: 2
+  isOn: 1
 --- !u!1001 &7742070066507928267
 PrefabInstance:
   m_ObjectHideFlags: 0

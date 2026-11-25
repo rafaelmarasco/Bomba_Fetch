@@ -1160,31 +1160,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6b7022399f47f6340a0263b31dedc5d8, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.99999976
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6b7022399f47f6340a0263b31dedc5d8, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0.000045503035
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6b7022399f47f6340a0263b31dedc5d8, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0.0005615895
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6b7022399f47f6340a0263b31dedc5d8, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: -0.0003991655
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6b7022399f47f6340a0263b31dedc5d8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: 0.005
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6b7022399f47f6340a0263b31dedc5d8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 0.064
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6b7022399f47f6340a0263b31dedc5d8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: -0.046
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6b7022399f47f6340a0263b31dedc5d8, type: 3}
       propertyPath: m_ConstrainProportionsScale
@@ -1573,7 +1573,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 1
-  defaultLinearDampingValue: 0
+  repositionOffset: {x: 0, y: 0, z: 0}
+  rotationOffset: {x: 0, y: 0, z: 0}
 --- !u!1001 &439890218732133646
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2925,7 +2926,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 2
-  defaultLinearDampingValue: 0
+  repositionOffset: {x: 0, y: 0, z: 0}
+  rotationOffset: {x: 0, y: 0, z: 0}
 --- !u!4 &898124379661821515 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9b53c37dce3fd774cb552cf8a73dde24, type: 3}
@@ -3821,7 +3823,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 0
-  defaultLinearDampingValue: 0
+  repositionOffset: {x: 0, y: 0, z: 0}
+  rotationOffset: {x: 0, y: 0, z: 0}
 --- !u!4 &671755073666287860 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c2b21b5f55810444c8ecb29f418ad23c, type: 3}
@@ -6848,7 +6851,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 1
-  defaultLinearDampingValue: 0
+  repositionOffset: {x: 0, y: 0, z: 0}
+  rotationOffset: {x: 0, y: 0, z: 0}
 --- !u!4 &1904010133328586304 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7881cd50fd1bfa6468fd4bcd4676c116, type: 3}
@@ -9380,7 +9384,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 2
-  defaultLinearDampingValue: 0
+  repositionOffset: {x: 0, y: 0, z: 0}
+  rotationOffset: {x: 0, y: 0, z: 0}
 --- !u!1001 &3533995721884441641
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12155,7 +12160,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 0
-  defaultLinearDampingValue: 0
+  repositionOffset: {x: 0, y: 0, z: 0}
+  rotationOffset: {x: 0, y: 0, z: 0}
 --- !u!4 &4303543345461201748 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5984a9c7207ad834d9f7fead7bb5fefb, type: 3}
@@ -15151,7 +15157,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 0
-  defaultLinearDampingValue: 0
+  repositionOffset: {x: 0, y: 0, z: 0}
+  rotationOffset: {x: 0, y: 0, z: 0}
 --- !u!1001 &5176125952769497371
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15917,7 +15924,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 1
-  defaultLinearDampingValue: 0
+  repositionOffset: {x: 0, y: 0, z: 0}
+  rotationOffset: {x: 0, y: 0, z: 0}
 --- !u!4 &5519689000053470643 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7881cd50fd1bfa6468fd4bcd4676c116, type: 3}
@@ -19485,7 +19493,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 2
-  defaultLinearDampingValue: 0
+  repositionOffset: {x: 0, y: 0, z: 0}
+  rotationOffset: {x: 0, y: 0, z: 0}
 --- !u!4 &6656606335834146243 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9b53c37dce3fd774cb552cf8a73dde24, type: 3}
@@ -20926,7 +20935,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 0
-  defaultLinearDampingValue: 0
+  repositionOffset: {x: 0, y: 0, z: 0}
+  rotationOffset: {x: 0, y: 0, z: 0}
 --- !u!1001 &7150733083936236919
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25191,7 +25201,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 2
-  defaultLinearDampingValue: 0
+  repositionOffset: {x: 0, y: 0, z: 0}
+  rotationOffset: {x: 0, y: 0, z: 0}
 --- !u!1001 &8377471835955593217
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26867,7 +26878,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prop
   propSize: 1
-  defaultLinearDampingValue: 0
+  repositionOffset: {x: 0, y: 0, z: 0}
+  rotationOffset: {x: 0, y: 0, z: 0}
 --- !u!4 &8892335455656661211 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: bed9f68d3824cbb42a6fcd42c827ebe2, type: 3}

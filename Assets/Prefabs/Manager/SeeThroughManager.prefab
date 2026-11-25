@@ -46,3 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   cam: {fileID: 0}
   offSet: {x: 0, y: 1, z: 0}
+  occluderMask:
+    serializedVersion: 2
+    m_Bits: 64
