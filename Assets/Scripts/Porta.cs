@@ -96,6 +96,8 @@ public class Porta : MonoBehaviour
                 {
                     sinal = dFrente > 0f ? -1f : 1f;
                     jogadorPerto = true;
+
+                    Debug.Log($"{name}: player={player.name} dFrente={dFrente:F2} sinal={sinal} angulo={currentAngle:F1}");
                 }
 
                 float t = Mathf.SmoothStep(0f, 1f,
