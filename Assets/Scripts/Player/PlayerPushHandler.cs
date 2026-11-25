@@ -49,6 +49,9 @@ public class PlayerPushHandler : MonoBehaviour
             else if (player != null)
                 PushPlayer(player);
         }
+
+        else
+            playerEventManager.PropPush();
     }
 
     private void Hit(GameObject player, Prop itemInHand)

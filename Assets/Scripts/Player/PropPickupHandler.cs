@@ -31,7 +31,6 @@ public class PropPickupHandler : MonoBehaviour
     {
         if (!HasItem) return;
 
-        playerInputs.ToolInHand?.Drop();
         playerInputs.SetToolInHand(null);
         playerInputs.SetIsUsingTool(false);
 

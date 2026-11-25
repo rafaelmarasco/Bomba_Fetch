@@ -25,6 +25,9 @@ public class Password : MonoBehaviour, ICanvasTool, IHideable
     }
     public void Drop()
     {
+        if (!IsBeingHeld) return;
+        IsBeingHeld = false;
+
         passwordCanvas.gameObject.SetActive(false);
         itemGlow.TurnOn();
 

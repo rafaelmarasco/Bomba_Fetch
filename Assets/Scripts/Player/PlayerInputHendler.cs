@@ -62,12 +62,15 @@ public class PlayerInputHendler : MonoBehaviour
     private void Search_performed(InputAction.CallbackContext obj) => playerSearchHandler.Search();
     public void SetToolInHand(GameObject prop)
     {
-        if (prop == null || !prop.TryGetComponent(out IHeldTool tool))
+        if(ToolInHand != null)
         {
-            ToolInHand?.Drop();
+            ToolInHand.Drop();
             ToolInHand = null;
-            return;
+            IsUsingTool = false;
         }
+
+        if (prop == null || !prop.TryGetComponent(out IHeldTool tool))
+            return;
 
         Debug.Log("Item pego!!");
         ToolInHand = tool;
@@ -114,8 +117,11 @@ public class PlayerInputHendler : MonoBehaviour
     private void OnDestroy()
     {
         playerInput.actions["Grab"].performed -= PickUp_performed;
+        playerInput.actions["Grab"].canceled -= PickUp_canceled;
         playerInput.actions["Push"].performed -= Push_performed;
         playerInput.actions["Interact"].performed -= Interact_performed;
         playerInput.actions["Interact"].canceled -= Interact_canceled;
+        playerInput.actions["Search"].performed -= Search_performed;
+        playerInput.actions["Pause"].performed -= Pause_performed;
     }
 }

@@ -27,6 +27,9 @@ public class Bomb : MonoBehaviour, ICanvasTool, IHideable
 
     public void Drop()
     {
+        if (!IsBeingHeld) return;
+        IsBeingHeld = false;
+
         bombCanvas.gameObject.SetActive(false);
         itemGlow.TurnOn();
 
