@@ -1231,6 +1231,74 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Slot_Genereic",
+            "id": "c599d854-5d6d-4496-b67b-d925ceb50392",
+            "actions": [
+                {
+                    "name": "Move",
+                    "type": "Button",
+                    "id": "68418c1f-6bb6-400c-a61b-7ea979f7c12c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Action",
+                    "type": "Button",
+                    "id": "aabfd99c-3848-4394-94b1-6fea1904e240",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Submit",
+                    "type": "Button",
+                    "id": "dfebba9a-0ed3-4460-a4f0-8ed265a8e9b1",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "7c3446ea-692b-49da-ba10-9653252ddfaf",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Generic",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1ca1711b-aa89-47f3-80ea-31c323736c8a",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Generic",
+                    "action": "Action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fb0a6303-3e9c-4142-a0fb-b77aea1604c8",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Generic",
+                    "action": "Submit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [
@@ -1289,6 +1357,17 @@
             "devices": [
                 {
                     "devicePath": "<XRController>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Generic",
+            "bindingGroup": "Generic",
+            "devices": [
+                {
+                    "devicePath": "<Joystick>",
                     "isOptional": false,
                     "isOR": false
                 }
