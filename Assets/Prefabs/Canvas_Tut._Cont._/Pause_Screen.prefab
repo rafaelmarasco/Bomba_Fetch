@@ -1598,6 +1598,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1095720030497523207}
   - component: {fileID: 3595542032578510272}
+  - component: {fileID: 3147259933517223801}
   m_Layer: 0
   m_Name: Pause_Screen
   m_TagString: Untagged
@@ -1638,6 +1639,19 @@ MonoBehaviour:
   mainMenuButton: {fileID: 2718402898758098767}
   quitButton: {fileID: 7773293258412739781}
   pauseCanvas: {fileID: 8121890121969070249}
+--- !u!114 &3147259933517223801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8121890121969070249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e220d0939e79cf443ab3e5be0792d17e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SwitchInputUI
+  firstButton: {fileID: 1963241689322947436}
 --- !u!1 &8789696523124043956
 GameObject:
   m_ObjectHideFlags: 0

@@ -48,7 +48,7 @@ MonoBehaviour:
   outputCamera: {fileID: 0}
   maxPlayers: 4
   minZoom: 7
-  maxZoom: 20
+  maxZoom: 15
   padding: 8
   zoomSmoothTime: 0.35
   moveSmoothTime: 0.25
