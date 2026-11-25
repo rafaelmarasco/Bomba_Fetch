@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 8850517154302733240}
   - component: {fileID: 3735922622168637018}
   - component: {fileID: 6797527088939105109}
+  - component: {fileID: 6241007558460867064}
+  - component: {fileID: 8921438336681694406}
   m_Layer: 9
   m_Name: Fire Area
   m_TagString: Untagged
@@ -130,14 +132,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Hazard
   hazzardType: 0
   flyDirection: {x: 0, y: 0, z: 0}
-  propFlyDirection: {x: 0, y: 0, z: 0}
+  propFlyDirection: {x: 0, y: 0, z: 2}
   flyForce: 0
   cooldown: 0
   onFireRunDirection: {fileID: 4468470570266524412}
-  jumpForce: 4
+  jumpForce: 0.5
   onFireTime: 2
   stunTime: 2
   isOn: 1
+--- !u!114 &6241007558460867064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3481203709008427183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 877e3d0e68a68574797c57242863dffc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ItemGlow
+  neonGlow: {fileID: 3728479547888100582}
+--- !u!114 &8921438336681694406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3481203709008427183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 877e3d0e68a68574797c57242863dffc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ItemGlow
+  neonGlow: {fileID: 3728479547888100582}
 --- !u!1 &3728479547888100582
 GameObject:
   m_ObjectHideFlags: 0
@@ -181,7 +209,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 12
   m_Type: 2
-  m_Color: {r: 0.87169814, g: 0.44841096, b: 0.16282657, a: 1}
+  m_Color: {r: 0.554717, g: 0.20801891, b: 0, a: 1}
   m_Intensity: 3
   m_Range: 1
   m_SpotAngle: 30
@@ -290,7 +318,7 @@ Transform:
   m_GameObject: {fileID: 6436325260643002631}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.99, y: 0, z: -2.07}
+  m_LocalPosition: {x: -2.16, y: 0, z: -3.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -304,6 +332,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7624223037403749587}
     m_Modifications:
+    - target: {fileID: 794129739496319751, guid: 311cc6be6bd20374abac96cd282834ed, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: -876546973899608171, guid: b95b01959b447794dbff4f77ff949664, type: 3}
+    - target: {fileID: 2183225731859463154, guid: 311cc6be6bd20374abac96cd282834ed, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: -876546973899608171, guid: b95b01959b447794dbff4f77ff949664, type: 3}
+    - target: {fileID: 2215468295434840087, guid: 311cc6be6bd20374abac96cd282834ed, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.9829
+      objectReference: {fileID: 0}
+    - target: {fileID: 2215468295434840087, guid: 311cc6be6bd20374abac96cd282834ed, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.9829
+      objectReference: {fileID: 0}
+    - target: {fileID: 2215468295434840087, guid: 311cc6be6bd20374abac96cd282834ed, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.9829
+      objectReference: {fileID: 0}
+    - target: {fileID: 3710558103771696402, guid: 311cc6be6bd20374abac96cd282834ed, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: -876546973899608171, guid: b95b01959b447794dbff4f77ff949664, type: 3}
     - target: {fileID: 6504812378939430067, guid: 311cc6be6bd20374abac96cd282834ed, type: 3}
       propertyPath: m_Name
       value: CartoonFire
