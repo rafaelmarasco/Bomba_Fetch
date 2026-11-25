@@ -13,7 +13,7 @@ public class Bomb : MonoBehaviour, ICanvasTool, IHideable
 
     private GameObject hidingPlace;
 
-    private Canvas bombCanvas;
+    [SerializeField] private Canvas bombCanvas;
     public bool IsBeingHeld { get; private set; }
 
     public bool IsHidden => hidingPlace != null;
