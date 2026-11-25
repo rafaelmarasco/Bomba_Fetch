@@ -40,6 +40,7 @@ public class Extinguisher : MonoBehaviour, IHeldTool
         if (!smoke.IsSpewing) return;
 
         smoke.StopSpewing();
+        vfxExtintor.StopVFX();
         playerAnimator.BringToolDown(this.gameObject);
         extinguisherProp.EnableReposition(Holder);
     }
