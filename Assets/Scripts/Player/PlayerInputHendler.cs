@@ -14,12 +14,10 @@ public class PlayerInputHendler : MonoBehaviour
     [SerializeField] private Transform headPos;
 
     private Vector3 lastMoveDir;
-    public GameObject HeldItem => propPickupHandler.HeldItem; 
+    public GameObject HeldItem => propPickupHandler.HeldItem;
     public IHeldTool ToolInHand { get; private set; }
     public bool IsUsingTool; // privar
     public bool HasItem => HeldItem != null;
-
-
 
     [Header("Prop Holding Points")]
     [SerializeField] public Transform holdPointSmall;
@@ -40,29 +38,28 @@ public class PlayerInputHendler : MonoBehaviour
         playerPushHandler = GetComponent<PlayerPushHandler>();
         playerSearchHandler = GetComponent<PlayerSearchHandler>();
 
-        playerInput.actions["Grab"].performed += PickUp_performed;
         playerInput.actions["Grab"].canceled += PickUp_canceled;
         playerInput.actions["Push"].performed += Push_performed;
-        playerInput.actions["Interact"].performed += Interact_performed;
-        playerInput.actions["Interact"].canceled += Interact_canceled;
-        playerInput.actions["Search"].performed += Search_performed;
+        playerInput.actions["Grab"].performed += PickUp_performed;
+        playerInput.actions["Throw"].performed += Throw_performed;
         playerInput.actions["Pause"].performed += Pause_performed;
+        playerInput.actions["Search"].performed += Search_performed;
+        playerInput.actions["Interact"].canceled += Interact_canceled;
+        playerInput.actions["Interact"].performed += Interact_performed;
     }
 
-    private void Update()
-    {
-        lastMoveDir = player.LastMoveDir;
-    }
-    private void Pause_performed(InputAction.CallbackContext obj) => EventManager.Instance.Pause();
-    private void Interact_performed(InputAction.CallbackContext obj) { ToolInHand?.Use(); IsUsingTool = true; } 
-    private void Interact_canceled(InputAction.CallbackContext context) { ToolInHand?.StopUsing(); IsUsingTool = false; }
+    private void Update() => lastMoveDir = player.LastMoveDir;
     private void Push_performed(InputAction.CallbackContext obj) => playerPushHandler.Push();
-    private void PickUp_performed(InputAction.CallbackContext obj) => propPickupHandler.PickUpProp();
+    private void Throw_performed(InputAction.CallbackContext obj) => playerPushHandler.Throw();
     private void PickUp_canceled(InputAction.CallbackContext obj) => propPickupHandler.DropProp();
+    private void Pause_performed(InputAction.CallbackContext obj) => EventManager.Instance.Pause();
     private void Search_performed(InputAction.CallbackContext obj) => playerSearchHandler.Search();
+    private void PickUp_performed(InputAction.CallbackContext obj) => propPickupHandler.PickUpProp();
+    private void Interact_performed(InputAction.CallbackContext obj) { ToolInHand?.Use(); IsUsingTool = true; }
+    private void Interact_canceled(InputAction.CallbackContext context) { ToolInHand?.StopUsing(); IsUsingTool = false; }
     public void SetToolInHand(GameObject prop)
     {
-        if(ToolInHand != null)
+        if (ToolInHand != null)
         {
             ToolInHand.Drop();
             ToolInHand = null;
@@ -97,12 +94,11 @@ public class PlayerInputHendler : MonoBehaviour
     public bool CheckForProps(out GameObject prop) // Check if theres an object in front of the player
     {
         prop = null;
-
-        //bool findAnyObject 
+        
         RaycastHit[] hits = Physics.BoxCastAll
             (checkPos.position - lastMoveDir * .2f, halfExtends, lastMoveDir, checkPos.rotation, interactDistance);
 
-        Array.Sort(hits, (a,b) => a.distance.CompareTo(b.distance));
+        Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
 
         foreach (RaycastHit hit in hits)
         {
@@ -114,30 +110,18 @@ public class PlayerInputHendler : MonoBehaviour
         }
 
         return false;
-
-        /*
-        bool isProp = findAnyObject && hit.collider.gameObject.TryGetComponent<Prop>(out _);
-
-        if (isProp)
-            objectInRange = hit.collider.gameObject;
-
-        prop = objectInRange;
-
-        return isProp;
-        */
     }
-
     public void PropDropped() => OnPropDropped?.Invoke();
-
     public void SetIsUsingTool(bool state) => IsUsingTool = state;
     private void OnDestroy()
     {
-        playerInput.actions["Grab"].performed -= PickUp_performed;
         playerInput.actions["Grab"].canceled -= PickUp_canceled;
         playerInput.actions["Push"].performed -= Push_performed;
-        playerInput.actions["Interact"].performed -= Interact_performed;
-        playerInput.actions["Interact"].canceled -= Interact_canceled;
-        playerInput.actions["Search"].performed -= Search_performed;
+        playerInput.actions["Grab"].performed -= PickUp_performed;
+        playerInput.actions["Throw"].performed -= Throw_performed;
         playerInput.actions["Pause"].performed -= Pause_performed;
+        playerInput.actions["Search"].performed -= Search_performed;
+        playerInput.actions["Interact"].canceled -= Interact_canceled;
+        playerInput.actions["Interact"].performed -= Interact_performed;
     }
 }
