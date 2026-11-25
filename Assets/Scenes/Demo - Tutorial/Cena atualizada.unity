@@ -911,27 +911,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7190404241649772224, guid: 797d6f00a63fbae4a865c1877e728010, type: 3}
       propertyPath: m_fontColorGradient.bottomLeft.b
-      value: 0
+      value: 0.472
       objectReference: {fileID: 0}
     - target: {fileID: 7190404241649772224, guid: 797d6f00a63fbae4a865c1877e728010, type: 3}
       propertyPath: m_fontColorGradient.bottomLeft.g
-      value: 0.38141876
+      value: 0.227
       objectReference: {fileID: 0}
     - target: {fileID: 7190404241649772224, guid: 797d6f00a63fbae4a865c1877e728010, type: 3}
       propertyPath: m_fontColorGradient.bottomLeft.r
-      value: 1
+      value: 0.449
       objectReference: {fileID: 0}
     - target: {fileID: 7190404241649772224, guid: 797d6f00a63fbae4a865c1877e728010, type: 3}
       propertyPath: m_fontColorGradient.bottomRight.b
-      value: 0
+      value: 0.472
       objectReference: {fileID: 0}
     - target: {fileID: 7190404241649772224, guid: 797d6f00a63fbae4a865c1877e728010, type: 3}
       propertyPath: m_fontColorGradient.bottomRight.g
-      value: 0.38141876
+      value: 0.227
       objectReference: {fileID: 0}
     - target: {fileID: 7190404241649772224, guid: 797d6f00a63fbae4a865c1877e728010, type: 3}
       propertyPath: m_fontColorGradient.bottomRight.r
-      value: 1
+      value: 0.449
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
