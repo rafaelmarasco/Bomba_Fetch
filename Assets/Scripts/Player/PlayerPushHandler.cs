@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerPushHandler : MonoBehaviour
@@ -27,13 +26,19 @@ public class PlayerPushHandler : MonoBehaviour
         propPickupHandler = GetComponent<PropPickupHandler>();
         playerInteract = GetComponent<PlayerInputHendler>();
     }
-    public void Push()
+    public void Push() // Empurra algo no mundo, um prop que nao esteja sendo caregado pro ngm ou um player
     {
         bool hasPropInRange = playerInteract.CheckForProps(out GameObject prop);
-        bool isInteractingWithTool = playerInteract.IsUsingTool; // --- Problema
         bool hasPlayerInRange = playerInteract.CheckForPlayer(out GameObject player);
 
-        // atualmente o player nao consegue empurrar outro player se estiver carregando algum item
+        if (hasPropInRange && playerInteract.HeldItem == null)
+            TryPushProp(prop);
+
+        else if (hasPlayerInRange)
+            PushPlayer(player);
+
+        /*
+        bool isInteractingWithTool = playerInteract.IsUsingTool; // --- Problema
 
         if ((hasPropInRange || IsHoldingItem) || (!isInteractingWithTool && hasPlayerInRange))
         {
@@ -52,9 +57,16 @@ public class PlayerPushHandler : MonoBehaviour
 
         else
             playerEventManager.PropPush();
+        */
     }
 
-    private void Hit(GameObject player, Prop itemInHand)
+    public void Throw() // Arremessar um prop, que o player esteja carregando
+    {
+        if (IsHoldingItem)
+            TryPushProp(playerInteract.HeldItem);
+    }
+
+    public void Hit(GameObject player, Prop itemInHand) // Bater em um player quando estiver carregando um iten
     {
         if (itemInHand == null) return;
 
@@ -63,42 +75,42 @@ public class PlayerPushHandler : MonoBehaviour
         PushPlayer(player);
     }
 
-    private void PushProp(GameObject prop)
+    private void TryPushProp(GameObject prop)
     {
-        playerEventManager.PropPush();
-
+        if (!prop.TryGetComponent(out Prop propBeingThrown)) return;
         Debug.Log($"Acabo de arremessar um {prop.name}");
 
-        float pushForce = prop.GetComponent<Prop>().ThrowForce;
+        float pushForce = propBeingThrown.ThrowForce;
 
-        Prop propBeingThrown;
-
-        prop.TryGetComponent(out propBeingThrown);
-
-        if (propBeingThrown == null) Debug.LogWarning($"somehow {propBeingThrown.name} is not a prop!");
+        playerEventManager.PropPush();
 
         if (!IsHoldingItem)
-        {
-            prop.TryGetComponent<Rigidbody>(out Rigidbody propRb);
-            if (propRb == null) return;
+            PushPropNotBeingHeld(propBeingThrown, pushForce);
 
-            propRb.AddForce(pushForce * transform.forward, ForceMode.VelocityChange);
-
-            propBeingThrown.SetPushingState(true, this.gameObject.GetComponent<Player>());
-        }
         else if (!playerInteract.IsUsingTool)
-        {
-            propPickupHandler.HeldItem.TryGetComponent<Rigidbody>(out Rigidbody propRb);
-
-            propBeingThrown.SetPushingState(true, this.gameObject.GetComponent<Player>());
-
-            propPickupHandler.DropProp();
-            propRb.AddForce(pushForce * transform.forward, ForceMode.VelocityChange);
-        }
+            PushPropBeingHeld(propBeingThrown, pushForce);
 
         if (playerInteract.ToolInHand is ICanvasTool canvasTool)
             canvasTool.DisableCanvas();
+    }
 
+    private void PushPropNotBeingHeld(Prop prop, float pushForce)
+    {
+        if (!prop.TryGetComponent<Rigidbody>(out Rigidbody propRb)) return;
+
+        propRb.AddForce(pushForce * transform.forward, ForceMode.VelocityChange);
+
+        prop.SetPushingState(true, this.gameObject.GetComponent<Player>());
+    }
+
+    private void PushPropBeingHeld(Prop prop, float pushForce)
+    {
+        if (!prop.TryGetComponent<Rigidbody>(out Rigidbody propRb)) return;
+
+        prop.SetPushingState(true, this.gameObject.GetComponent<Player>());
+
+        propPickupHandler.DropProp();
+        propRb.AddForce(pushForce * transform.forward, ForceMode.VelocityChange);
     }
 
     private void PushPlayer(GameObject target)
@@ -108,8 +120,8 @@ public class PlayerPushHandler : MonoBehaviour
         playerEventManager.PropPush();
 
         Rigidbody hipsRb = target.GetComponent<Player>().HipsRb;
-
         PlayerEventManager targetPlayerEventManager = target.GetComponent<PlayerEventManager>();
+
 
         if (target.GetComponent<PlayerPushHandler>().instantPlayerPushMode) // TROCAR SE FOR PERMANENTE
         {
