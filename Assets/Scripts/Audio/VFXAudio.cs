@@ -31,10 +31,5 @@ public class VFXAudio : MonoBehaviour
         audioSource.clip = vfxSound;
         audioSource.Play();
     }
-
-    public void StopVFX()
-    {
-        audioSource.Stop();
-    }
-
+        
 }
