@@ -1116,74 +1116,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
-        },
-        {
-            ""name"": ""Slot_Genereic"",
-            ""id"": ""c599d854-5d6d-4496-b67b-d925ceb50392"",
-            ""actions"": [
-                {
-                    ""name"": ""Move"",
-                    ""type"": ""Button"",
-                    ""id"": ""68418c1f-6bb6-400c-a61b-7ea979f7c12c"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Action"",
-                    ""type"": ""Button"",
-                    ""id"": ""aabfd99c-3848-4394-94b1-6fea1904e240"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Submit"",
-                    ""type"": ""Button"",
-                    ""id"": ""dfebba9a-0ed3-4460-a4f0-8ed265a8e9b1"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""7c3446ea-692b-49da-ba10-9653252ddfaf"",
-                    ""path"": """",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Generic"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""1ca1711b-aa89-47f3-80ea-31c323736c8a"",
-                    ""path"": """",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Generic"",
-                    ""action"": ""Action"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""fb0a6303-3e9c-4142-a0fb-b77aea1604c8"",
-                    ""path"": """",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Generic"",
-                    ""action"": ""Submit"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
         }
     ],
     ""controlSchemes"": [
@@ -1286,11 +1218,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Bomb_Navigate = m_Bomb.FindAction("Navigate", throwIfNotFound: true);
         m_Bomb_Submit = m_Bomb.FindAction("Submit", throwIfNotFound: true);
         m_Bomb_Cancel = m_Bomb.FindAction("Cancel", throwIfNotFound: true);
-        // Slot_Genereic
-        m_Slot_Genereic = asset.FindActionMap("Slot_Genereic", throwIfNotFound: true);
-        m_Slot_Genereic_Move = m_Slot_Genereic.FindAction("Move", throwIfNotFound: true);
-        m_Slot_Genereic_Action = m_Slot_Genereic.FindAction("Action", throwIfNotFound: true);
-        m_Slot_Genereic_Submit = m_Slot_Genereic.FindAction("Submit", throwIfNotFound: true);
     }
 
     ~@InputSystem_Actions()
@@ -1298,7 +1225,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, InputSystem_Actions.Player.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_UI.enabled, "This will cause a leak and performance issues, InputSystem_Actions.UI.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_Bomb.enabled, "This will cause a leak and performance issues, InputSystem_Actions.Bomb.Disable() has not been called.");
-        UnityEngine.Debug.Assert(!m_Slot_Genereic.enabled, "This will cause a leak and performance issues, InputSystem_Actions.Slot_Genereic.Disable() has not been called.");
     }
 
     /// <summary>
@@ -1845,124 +1771,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     /// Provides a new <see cref="BombActions" /> instance referencing this action map.
     /// </summary>
     public BombActions @Bomb => new BombActions(this);
-
-    // Slot_Genereic
-    private readonly InputActionMap m_Slot_Genereic;
-    private List<ISlot_GenereicActions> m_Slot_GenereicActionsCallbackInterfaces = new List<ISlot_GenereicActions>();
-    private readonly InputAction m_Slot_Genereic_Move;
-    private readonly InputAction m_Slot_Genereic_Action;
-    private readonly InputAction m_Slot_Genereic_Submit;
-    /// <summary>
-    /// Provides access to input actions defined in input action map "Slot_Genereic".
-    /// </summary>
-    public struct Slot_GenereicActions
-    {
-        private @InputSystem_Actions m_Wrapper;
-
-        /// <summary>
-        /// Construct a new instance of the input action map wrapper class.
-        /// </summary>
-        public Slot_GenereicActions(@InputSystem_Actions wrapper) { m_Wrapper = wrapper; }
-        /// <summary>
-        /// Provides access to the underlying input action "Slot_Genereic/Move".
-        /// </summary>
-        public InputAction @Move => m_Wrapper.m_Slot_Genereic_Move;
-        /// <summary>
-        /// Provides access to the underlying input action "Slot_Genereic/Action".
-        /// </summary>
-        public InputAction @Action => m_Wrapper.m_Slot_Genereic_Action;
-        /// <summary>
-        /// Provides access to the underlying input action "Slot_Genereic/Submit".
-        /// </summary>
-        public InputAction @Submit => m_Wrapper.m_Slot_Genereic_Submit;
-        /// <summary>
-        /// Provides access to the underlying input action map instance.
-        /// </summary>
-        public InputActionMap Get() { return m_Wrapper.m_Slot_Genereic; }
-        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
-        public void Enable() { Get().Enable(); }
-        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
-        public void Disable() { Get().Disable(); }
-        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
-        public bool enabled => Get().enabled;
-        /// <summary>
-        /// Implicitly converts an <see ref="Slot_GenereicActions" /> to an <see ref="InputActionMap" /> instance.
-        /// </summary>
-        public static implicit operator InputActionMap(Slot_GenereicActions set) { return set.Get(); }
-        /// <summary>
-        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
-        /// </summary>
-        /// <param name="instance">Callback instance.</param>
-        /// <remarks>
-        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
-        /// </remarks>
-        /// <seealso cref="Slot_GenereicActions" />
-        public void AddCallbacks(ISlot_GenereicActions instance)
-        {
-            if (instance == null || m_Wrapper.m_Slot_GenereicActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_Slot_GenereicActionsCallbackInterfaces.Add(instance);
-            @Move.started += instance.OnMove;
-            @Move.performed += instance.OnMove;
-            @Move.canceled += instance.OnMove;
-            @Action.started += instance.OnAction;
-            @Action.performed += instance.OnAction;
-            @Action.canceled += instance.OnAction;
-            @Submit.started += instance.OnSubmit;
-            @Submit.performed += instance.OnSubmit;
-            @Submit.canceled += instance.OnSubmit;
-        }
-
-        /// <summary>
-        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
-        /// </summary>
-        /// <remarks>
-        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
-        /// </remarks>
-        /// <seealso cref="Slot_GenereicActions" />
-        private void UnregisterCallbacks(ISlot_GenereicActions instance)
-        {
-            @Move.started -= instance.OnMove;
-            @Move.performed -= instance.OnMove;
-            @Move.canceled -= instance.OnMove;
-            @Action.started -= instance.OnAction;
-            @Action.performed -= instance.OnAction;
-            @Action.canceled -= instance.OnAction;
-            @Submit.started -= instance.OnSubmit;
-            @Submit.performed -= instance.OnSubmit;
-            @Submit.canceled -= instance.OnSubmit;
-        }
-
-        /// <summary>
-        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="Slot_GenereicActions.UnregisterCallbacks(ISlot_GenereicActions)" />.
-        /// </summary>
-        /// <seealso cref="Slot_GenereicActions.UnregisterCallbacks(ISlot_GenereicActions)" />
-        public void RemoveCallbacks(ISlot_GenereicActions instance)
-        {
-            if (m_Wrapper.m_Slot_GenereicActionsCallbackInterfaces.Remove(instance))
-                UnregisterCallbacks(instance);
-        }
-
-        /// <summary>
-        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
-        /// </summary>
-        /// <remarks>
-        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
-        /// </remarks>
-        /// <seealso cref="Slot_GenereicActions.AddCallbacks(ISlot_GenereicActions)" />
-        /// <seealso cref="Slot_GenereicActions.RemoveCallbacks(ISlot_GenereicActions)" />
-        /// <seealso cref="Slot_GenereicActions.UnregisterCallbacks(ISlot_GenereicActions)" />
-        public void SetCallbacks(ISlot_GenereicActions instance)
-        {
-            foreach (var item in m_Wrapper.m_Slot_GenereicActionsCallbackInterfaces)
-                UnregisterCallbacks(item);
-            m_Wrapper.m_Slot_GenereicActionsCallbackInterfaces.Clear();
-            AddCallbacks(instance);
-        }
-    }
-    /// <summary>
-    /// Provides a new <see cref="Slot_GenereicActions" /> instance referencing this action map.
-    /// </summary>
-    public Slot_GenereicActions @Slot_Genereic => new Slot_GenereicActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     /// <summary>
     /// Provides access to the input control scheme.
@@ -2204,34 +2012,5 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnCancel(InputAction.CallbackContext context);
-    }
-    /// <summary>
-    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Slot_Genereic" which allows adding and removing callbacks.
-    /// </summary>
-    /// <seealso cref="Slot_GenereicActions.AddCallbacks(ISlot_GenereicActions)" />
-    /// <seealso cref="Slot_GenereicActions.RemoveCallbacks(ISlot_GenereicActions)" />
-    public interface ISlot_GenereicActions
-    {
-        /// <summary>
-        /// Method invoked when associated input action "Move" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnMove(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "Action" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnAction(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "Submit" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnSubmit(InputAction.CallbackContext context);
     }
 }
