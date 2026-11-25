@@ -12,7 +12,7 @@ public class Porta : MonoBehaviour
     [SerializeField] float alcanceFrente = 1.2f;
     [SerializeField] float alcanceLado = 1.0f;   
     [SerializeField] Vector3 ajusteCentro;       
-    [SerializeField] bool bloquearQuandoFechada = true;
+    public bool Aberta { get; set; } = true;
     [SerializeField] Collider colisor;         
 
     [SerializeField] float searchInterval = 0.25f;
@@ -77,7 +77,10 @@ public class Porta : MonoBehaviour
 
     void Update()
     {
-        FindClosestPlayer();
+        if (!Aberta) maxAngle = 0f;
+        else maxAngle = 90f;
+
+            FindClosestPlayer();
         float alvo = 0f;
 
         if (player != null)
@@ -113,7 +116,7 @@ public class Porta : MonoBehaviour
         // o Player anda por raycast contra a layer Walls e trava a 0.8 de distancia.
         // enquanto ele esta na zona de empurrar a porta para de bloquear, senao
         // ele nunca chegaria perto o bastante para abri-la.
-        if (bloquearQuandoFechada && colisor != null)
+        if (Aberta && colisor != null)
             colisor.enabled = !jogadorPerto;
 
         float vel = Mathf.Abs(alvo) > Mathf.Abs(currentAngle) ? openSpeed : closeSpeed;

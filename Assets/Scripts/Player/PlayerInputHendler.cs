@@ -96,11 +96,26 @@ public class PlayerInputHendler : MonoBehaviour
     }
     public bool CheckForProps(out GameObject prop) // Check if theres an object in front of the player
     {
-        GameObject objectInRange = null;
+        prop = null;
 
-        bool findAnyObject = Physics.BoxCast
-            (checkPos.position - lastMoveDir * .2f, halfExtends, lastMoveDir, out RaycastHit hit, checkPos.rotation, interactDistance);
+        //bool findAnyObject 
+        RaycastHit[] hits = Physics.BoxCastAll
+            (checkPos.position - lastMoveDir * .2f, halfExtends, lastMoveDir, checkPos.rotation, interactDistance);
 
+        Array.Sort(hits, (a,b) => a.distance.CompareTo(b.distance));
+
+        foreach (RaycastHit hit in hits)
+        {
+            if (hit.collider.TryGetComponent<Prop>(out _))
+            {
+                prop = hit.collider.gameObject;
+                return true;
+            }
+        }
+
+        return false;
+
+        /*
         bool isProp = findAnyObject && hit.collider.gameObject.TryGetComponent<Prop>(out _);
 
         if (isProp)
@@ -109,6 +124,7 @@ public class PlayerInputHendler : MonoBehaviour
         prop = objectInRange;
 
         return isProp;
+        */
     }
 
     public void PropDropped() => OnPropDropped?.Invoke();
