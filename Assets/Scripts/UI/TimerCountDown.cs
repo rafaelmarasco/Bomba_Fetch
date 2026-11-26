@@ -57,7 +57,8 @@ public class TimerCountDown : MonoBehaviour
         if (timer > 6)
         {
             timer -= Time.deltaTime;
-            timerTextStart.text = timer.ToString("0.00");
+            timerTextStart.text = FormatTime(timer);
+                //timer.ToString("0.00");
         }
         else if (timer < 6 && timer > 0)
         {
@@ -68,7 +69,8 @@ public class TimerCountDown : MonoBehaviour
             }
 
             timer -= Time.deltaTime;
-            timerTextFinal.text = timer.ToString("0");
+            timerTextFinal.text = FormatTime(timer);
+            //timer.ToString("0");
         }
         else
         {
@@ -83,6 +85,17 @@ public class TimerCountDown : MonoBehaviour
             restartButton.onClick.RemoveAllListeners();
             restartButton.onClick.AddListener(() => sceneController.LoadScene(0));
         }
+    }
+
+    private string FormatTime(float time)
+    {
+        if (time < 0) time = 0;
+
+        int minutes = Mathf.FloorToInt(time / 60f);
+        int seconds = Mathf.FloorToInt(time % 60f);
+        int centis = Mathf.FloorToInt((time * 100f) % 100f);
+
+        return $"<size=120%>{minutes:00}<size=110%>:{seconds:00}<size=70%>.{centis:00}";
     }
 }
 
